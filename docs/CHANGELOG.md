@@ -2,6 +2,30 @@
 
 All notable changes to My Dashboard will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- Persistent local storage for work weeks using Dexie and IndexedDB.
+- Versioned database schema for work-week records.
+- Reactive work-week queries using `dexie-react-hooks`.
+- Transaction-based work-week updates.
+- Automatic database initialization when no work data exists.
+- Loading, saving and database-error states in the Work module.
+- Weekly goal model prepared for Dashboard quick actions.
+- Confirmation before resetting persistent work data.
+
+### Changed
+
+- Work module now reads its current week from IndexedDB.
+- Work-day edits are written automatically to the database.
+- Work-session edits are written automatically to the database.
+- Weekly settings are written automatically to the database.
+- Financial-plan edits are written automatically to the database.
+- Work data is no longer stored only in React component state.
+- Example work data is now used only to initialize an empty database.
+- Work-week records now include ISO creation and update timestamps.
+
 ## [0.3.0-beta.2] - 2026-07-25
 
 ### Added
@@ -13,16 +37,41 @@ All notable changes to My Dashboard will be documented in this file.
 - Editable EUR/PLN exchange rate.
 - Editable weekly financial plan.
 - Reset option for example work-week data.
+- Decimal work ratings from 0.0 to 10.0.
+- Color-coded work-rating indicators.
+- Color-coded alcohol indicators.
 
 ### Changed
 
 - Work-day table now supports selecting days for editing.
 - Work summary reacts immediately to user input.
+- Default work rating is represented as 8.5.
+- Work ratings and beer counts are visually emphasized.
 
 ### Known limitations
 
 - Work data remains in memory and is reset after a page refresh.
 - Permanent Dexie storage is not yet connected.
+
+## [0.3.0-beta.1] - 2026-07-25
+
+### Added
+
+- Initial responsive Work module interface.
+- Weekly message and time summary.
+- Message-rate thresholds.
+- Held-message earnings.
+- Payout-fee calculation.
+- EUR and PLN earnings calculation.
+- Weekly progress toward the next message threshold.
+- Work-day table with mobile presentation.
+- Weekly financial-plan summary.
+- Example work-week data.
+
+### Known limitations
+
+- The Work module uses example data.
+- Editing and persistent storage are not available.
 
 ## [0.2.1] - 2026-07-25
 
@@ -38,9 +87,10 @@ All notable changes to My Dashboard will be documented in this file.
 
 ### Changed
 
-- Improved global dark theme styles.
+- Improved global dark-theme styles.
 - Updated application navigation styling.
 - Added responsive mobile behavior.
+- Reinitialized the Git repository at the correct project root.
 
 ## [0.1.0] - 2026-07-24
 
@@ -50,4 +100,7 @@ All notable changes to My Dashboard will be documented in this file.
 - React Router configuration.
 - Tailwind CSS configuration.
 - Oxlint and Prettier configuration.
+- Import aliases.
 - Initial project structure.
+- Initial documentation.
+- Git repository and GitHub remote.

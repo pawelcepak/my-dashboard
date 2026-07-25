@@ -19,6 +19,12 @@ export type FinancialPlanItem = {
   plannedAmountPln: number;
 };
 
+export type WorkWeekGoals = {
+  dailyMessagesTarget: number | null;
+  weeklyMessagesTarget: number | null;
+  dailyHoursTarget: number | null;
+};
+
 export type WorkWeek = {
   id: string;
   year: number;
@@ -27,8 +33,11 @@ export type WorkWeek = {
   endDate: string;
   heldMessages: number;
   exchangeRateEurPln: number;
+  goals: WorkWeekGoals;
   days: WorkDay[];
   financialPlan: FinancialPlanItem[];
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type MessageRateTier = {

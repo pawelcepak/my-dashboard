@@ -1,5 +1,7 @@
 import type { WorkWeek } from '@/modules/work/types/work.types';
 
+const INITIAL_CREATED_AT = '2026-07-25T00:00:00.000Z';
+
 export const currentWorkWeek: WorkWeek = {
   id: 'work-week-2026-30',
   year: 2026,
@@ -8,6 +10,11 @@ export const currentWorkWeek: WorkWeek = {
   endDate: '2026-07-26',
   heldMessages: 9,
   exchangeRateEurPln: 4.2,
+  goals: {
+    dailyMessagesTarget: null,
+    weeklyMessagesTarget: 1576,
+    dailyHoursTarget: null,
+  },
   financialPlan: [
     {
       id: 'financial-plan-life',
@@ -143,4 +150,10 @@ export const currentWorkWeek: WorkWeek = {
       sessions: [],
     },
   ],
+  createdAt: INITIAL_CREATED_AT,
+  updatedAt: INITIAL_CREATED_AT,
 };
+
+export function createInitialWorkWeek(): WorkWeek {
+  return structuredClone(currentWorkWeek);
+}

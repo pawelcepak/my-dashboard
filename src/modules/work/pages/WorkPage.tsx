@@ -1,5 +1,5 @@
+import { CalendarDays, Database, LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
-import { CalendarDays, Info } from 'lucide-react';
 
 import FinancialPlanSummary from '@/modules/work/components/FinancialPlanSummary';
 import WorkDayEditor from '@/modules/work/components/WorkDayEditor';
@@ -7,8 +7,8 @@ import WorkDaysTable from '@/modules/work/components/WorkDaysTable';
 import WorkProgressCard from '@/modules/work/components/WorkProgressCard';
 import WorkSummaryGrid from '@/modules/work/components/WorkSummaryGrid';
 import WorkWeekSettings from '@/modules/work/components/WorkWeekSettings';
-import { currentWorkWeek } from '@/modules/work/data/workMockData';
-import type { FinancialPlanItem, WorkDay, WorkWeek } from '@/modules/work/types/work.types';
+import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
+import type { FinancialPlanItem, WorkDay } from '@/modules/work/types/work.types';
 import {
   calculateWorkProgress,
   calculateWorkWeekSummary,
@@ -17,13 +17,49 @@ import {
 } from '@/modules/work/utils/workCalculations';
 import PageHeader from '@/shared/components/PageHeader';
 
-function createInitialWeek(): WorkWeek {
-  return structuredClone(currentWorkWeek);
+function WorkPageLoading() {
+  return (
+    <div className="flex min-h-[28rem] items-center justify-center">
+      <div className="text-center">
+        <LoaderCircle aria-hidden="true" className="mx-auto size-8 animate-spin text-zinc-500" />
+
+        <p className="mt-4 text-sm font-medium text-zinc-300">Wczytywanie danych pracy</p>
+
+        <p className="mt-1 text-sm text-zinc-600">Otwieranie lokalnej bazy danych.</p>
+      </div>
+    </div>
+  );
+}
+
+function WorkPageError({ message }: { message: string }) {
+  return (
+    <div className="rounded-2xl border border-red-900/60 bg-red-950/30 p-6">
+      <h1 className="text-lg font-semibold text-red-200">Nie udało się wczytać danych</h1>
+
+      <p className="mt-2 text-sm leading-6 text-red-300/80">{message}</p>
+
+      <p className="mt-4 text-sm text-zinc-500">
+        Odśwież stronę. Jeżeli problem będzie się powtarzał, sprawdzimy bazę IndexedDB w narzędziach
+        przeglądarki.
+      </p>
+    </div>
+  );
 }
 
 export default function WorkPage() {
-  const [week, setWeek] = useState<WorkWeek>(createInitialWeek);
+  const { week, isLoading, isSaving, error, updateWeek, resetWeek } = useCurrentWorkWeek();
+
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
+
+  if (isLoading) {
+    return <WorkPageLoading />;
+  }
+
+  if (!week) {
+    return (
+      <WorkPageError message={error ?? 'W bazie danych nie znaleziono bieżącego tygodnia pracy.'} />
+    );
+  }
 
   const summary = calculateWorkWeekSummary(week);
   const progress = calculateWorkProgress(week, summary.totalMessages);
@@ -31,22 +67,30 @@ export default function WorkPage() {
   const selectedDay = week.days.find((day) => day.id === selectedDayId) ?? null;
 
   function updateDay(updatedDay: WorkDay) {
-    setWeek((currentWeek) => ({
+    void updateWeek((currentWeek) => ({
       ...currentWeek,
       days: currentWeek.days.map((day) => (day.id === updatedDay.id ? updatedDay : day)),
     }));
   }
 
   function updateFinancialPlan(items: FinancialPlanItem[]) {
-    setWeek((currentWeek) => ({
+    void updateWeek((currentWeek) => ({
       ...currentWeek,
       financialPlan: items,
     }));
   }
 
-  function resetExampleData() {
-    setWeek(createInitialWeek());
+  function handleReset() {
+    const shouldReset = window.confirm(
+      'Czy na pewno przywrócić dane przykładowe? Obecne zmiany tego tygodnia zostaną zastąpione.'
+    );
+
+    if (!shouldReset) {
+      return;
+    }
+
     setSelectedDayId(null);
+    void resetWeek();
   }
 
   return (
@@ -65,14 +109,26 @@ export default function WorkPage() {
         }
       />
 
-      <div className="flex items-start gap-3 rounded-xl border border-amber-900/50 bg-amber-950/20 px-4 py-3 text-sm text-amber-200">
-        <Info aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-amber-400" />
+      <div className="flex flex-col gap-3 rounded-xl border border-emerald-900/50 bg-emerald-950/20 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-start gap-3 text-emerald-200">
+          <Database aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-emerald-400" />
 
-        <p className="leading-6">
-          Edycja działa, ale dane nie są jeszcze zapisywane na dysku. Odświeżenie strony przywróci
-          dane przykładowe. Trwały zapis zostanie dodany w następnym sprincie.
-        </p>
+          <p className="leading-6">
+            Dane są zapisywane automatycznie w lokalnej bazie przeglądarki i pozostaną po
+            odświeżeniu strony.
+          </p>
+        </div>
+
+        <span className="shrink-0 text-xs font-medium text-emerald-400">
+          {isSaving ? 'Zapisywanie…' : 'Zapisano lokalnie'}
+        </span>
       </div>
+
+      {error && (
+        <div className="rounded-xl border border-red-900/60 bg-red-950/30 px-4 py-3 text-sm text-red-300">
+          {error}
+        </div>
+      )}
 
       <div className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 p-5 sm:p-6">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
@@ -111,19 +167,19 @@ export default function WorkPage() {
         <WorkWeekSettings
           heldMessages={week.heldMessages}
           exchangeRateEurPln={week.exchangeRateEurPln}
-          onHeldMessagesChange={(heldMessages) =>
-            setWeek((currentWeek) => ({
+          onHeldMessagesChange={(heldMessages) => {
+            void updateWeek((currentWeek) => ({
               ...currentWeek,
               heldMessages,
-            }))
-          }
-          onExchangeRateChange={(exchangeRateEurPln) =>
-            setWeek((currentWeek) => ({
+            }));
+          }}
+          onExchangeRateChange={(exchangeRateEurPln) => {
+            void updateWeek((currentWeek) => ({
               ...currentWeek,
               exchangeRateEurPln,
-            }))
-          }
-          onReset={resetExampleData}
+            }));
+          }}
+          onReset={handleReset}
         />
       </div>
 
