@@ -1,5 +1,5 @@
 {
-  "name": "my-dasboard",
+  "name": "my-dashboard",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,13 +7,18 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "dexie": "^4.4.4",
+    "lucide-react": "^1.26.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router-dom": "^7.18.1"
+    "react-router-dom": "^7.18.1",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",
@@ -21,6 +26,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
+    "prettier": "^3.9.6",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
   }
