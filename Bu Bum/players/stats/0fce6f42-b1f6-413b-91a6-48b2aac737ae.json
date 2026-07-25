@@ -1,0 +1,36 @@
+{
+  "stats": {
+    "minecraft:used": {
+      "minecraft:grass_block": 542,
+      "minecraft:gravel": 34,
+      "minecraft:torch": 65,
+      "minecraft:tnt": 4658,
+      "minecraft:cherry_wood": 86
+    },
+    "minecraft:dropped": {
+      "minecraft:cherry_wood": 1,
+      "minecraft:tnt": 2,
+      "minecraft:gravel": 14
+    },
+    "minecraft:custom": {
+      "minecraft:sprint_one_cm": 38899,
+      "minecraft:time_since_rest": 82657,
+      "minecraft:walk_one_cm": 602350,
+      "minecraft:total_world_time": 85804,
+      "minecraft:leave_game": 4,
+      "minecraft:fly_one_cm": 97600,
+      "minecraft:crouch_one_cm": 877,
+      "minecraft:sneak_time": 1148,
+      "minecraft:play_time": 82657,
+      "minecraft:jump": 223,
+      "minecraft:time_since_death": 82657,
+      "minecraft:drop": 4
+    },
+    "minecraft:picked_up": {
+      "minecraft:gravel": 52,
+      "minecraft:tnt": 2,
+      "minecraft:torch": 2
+    }
+  },
+  "DataVersion": 4903
+}

@@ -1,0 +1,85 @@
+{
+  "categories": [
+    {
+      "name": "Logbook 1",
+      "buttons": [
+        {
+          "label": "Zdjęcie twarzy",
+          "text": "Klient wysłał zdjęcie swojej twarzy."
+        },
+        {
+          "label": "Zdjęcie kutasa",
+          "text": "Klient wysłał zdjęcie swojego penisa."
+        },
+        {
+          "label": "Zdjęcie klienta",
+          "text": "Klient wysłał zdjęcie swojej całej sylwetki."
+        },
+        {
+          "label": "Zdjęcie klienta nago",
+          "text": "Klient wysłał swoje zdjęcie nago."
+        },
+        {
+          "label": "Zdjęcie klienta pół nago",
+          "text": "Klient wysłał swoje zdjęcie pół nago."
+        },
+        {
+          "label": "Zdjęcie kartka",
+          "text": "Klient wysłał zdjęcie jakieś kartki z internetu."
+        },
+        {
+          "label": "Obrazek z internetów",
+          "text": "Klient wysłał obrazek z internetu."
+        },
+        {
+          "label": "Zdjęcie widok",
+          "text": "Klient wysłał zdjęcie jakichś widoków."
+        },
+        {
+          "label": "Zdjęcie GIF",
+          "text": "Klient wysłał GIF'a."
+        }
+      ]
+    },
+    {
+      "name": "Logbook 2",
+      "buttons": [
+        {
+          "label": "Adres klienta",
+          "text": "Klient wysłał swój adres zamieszkania."
+        },
+        {
+          "label": "Telefon klienta",
+          "text": "Klient wysłał numer telefonu."
+        },
+        {
+          "label": "Klient kłamca",
+          "text": "Klient skłamał na temat ilości swoich kredytów."
+        },
+        {
+          "label": "Sugestia spotkania",
+          "text": "Klient zaproponował spotkanie."
+        }
+
+
+      ]
+    },
+    {
+      "name": "Zgłoszenia",
+      "buttons": [
+        {
+          "label": "Lokalizacja playerki",
+          "text": "Nie wpisano do logbooka lokalizacji playerki, a zostało podane w poke."
+        },
+        {
+          "label": "Telefon klienta",
+          "text": "Klient podał numer telefonu, nie wpisano tego w logbooku."
+        },
+        {
+          "label": "Zdjęcie klienta",
+          "text": "Klient wysłał zdjecie, brak notatki o tym w logbooku."
+        }
+      ]
+    }
+  ]
+}
