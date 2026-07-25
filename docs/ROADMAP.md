@@ -26,12 +26,19 @@
 
 ## v0.3.x — Work Module
 
-- [ ] Work module requirements
-- [ ] Current work week
+- [x] Work module requirements
+- [x] Current work week interface
+- [x] Weekly earnings calculation
+- [x] Message-rate thresholds
+- [x] Payout-fee thresholds
+- [x] Daily work statistics
+- [x] Editable work days
+- [x] Editable work sessions
+- [x] Editable weekly financial plan
+- [ ] Persistent Dexie storage
+- [ ] Creating new weeks
 - [ ] Weekly history
-- [ ] Work sessions
-- [ ] Hour calculations
-- [ ] Earnings calculations
+- [ ] Editing previous weeks
 - [ ] Work statistics
 - [ ] Work charts
 

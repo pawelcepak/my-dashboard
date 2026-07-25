@@ -25,7 +25,7 @@ export const currentWorkWeek: WorkWeek = {
       id: 'work-day-2026-07-20',
       date: '2026-07-20',
       beers: 2,
-      workRating: 7,
+      workRating: 8.5,
       messages: 188,
       sessions: [
         {
@@ -38,8 +38,8 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-21',
       date: '2026-07-21',
-      beers: 2,
-      workRating: 6,
+      beers: 0,
+      workRating: 8.7,
       messages: 216,
       sessions: [
         {
@@ -53,7 +53,7 @@ export const currentWorkWeek: WorkWeek = {
       id: 'work-day-2026-07-22',
       date: '2026-07-22',
       beers: 3,
-      workRating: 6,
+      workRating: 8.6,
       messages: 155,
       sessions: [
         {
@@ -66,8 +66,8 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-23',
       date: '2026-07-23',
-      beers: 3,
-      workRating: 6,
+      beers: 1,
+      workRating: 8.8,
       messages: 146,
       sessions: [
         {
@@ -80,8 +80,8 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-24',
       date: '2026-07-24',
-      beers: 3,
-      workRating: 6,
+      beers: 0,
+      workRating: 9,
       messages: 138,
       sessions: [
         {
@@ -130,7 +130,7 @@ export const currentWorkWeek: WorkWeek = {
       id: 'work-day-2026-07-25',
       date: '2026-07-25',
       beers: 0,
-      workRating: null,
+      workRating: 8.5,
       messages: 0,
       sessions: [],
     },
@@ -138,7 +138,7 @@ export const currentWorkWeek: WorkWeek = {
       id: 'work-day-2026-07-26',
       date: '2026-07-26',
       beers: 0,
-      workRating: null,
+      workRating: 8.5,
       messages: 0,
       sessions: [],
     },
