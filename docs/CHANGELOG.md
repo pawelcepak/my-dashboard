@@ -6,6 +6,39 @@ All notable changes to My Dashboard will be documented in this file.
 
 ### Added
 
+- Automatic local-date detection on the Dashboard.
+- Automatic matching of the current date with a work-day record.
+- Current-day work summary on the Dashboard.
+- Quick editing of daily messages from the Dashboard.
+- Quick editing of daily work rating from the Dashboard.
+- Quick editing of daily beer count from the Dashboard.
+- Quick work-session creation from the Dashboard.
+- Editable daily message target.
+- Editable weekly message target.
+- Editable daily hours target.
+- Weekly work overview on the Dashboard.
+- Weekly goal-progress presentation.
+- Work-threshold progress on the Dashboard.
+- Editable weekly financial plan on the Dashboard.
+- Live synchronization between Dashboard and Work module through Dexie.
+- Graceful state for dates outside the active work week.
+- Graceful state for missing current-day records.
+- Reusable local-date utilities.
+
+### Changed
+
+- Dashboard Work card now displays real data from IndexedDB.
+- Dashboard Work card now displays total worked hours.
+- Dashboard Work card now displays message count and net PLN earnings.
+- Dashboard is now an active daily-work interface rather than a static overview.
+- Dashboard and Work module use the same reactive work-week record.
+- Financial-plan changes made on the Dashboard are immediately visible in the Work module.
+- Goals are now persisted as part of the active work week.
+
+## [0.3.0-beta.3] - 2026-07-25
+
+### Added
+
 - Persistent local storage for work weeks using Dexie and IndexedDB.
 - Versioned database schema for work-week records.
 - Reactive work-week queries using `dexie-react-hooks`.

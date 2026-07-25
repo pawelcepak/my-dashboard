@@ -6,6 +6,8 @@ My Dashboard is a personal, offline-first application designed to manage work, e
 
 The application is developed incrementally. Each module owns its business logic while shared infrastructure provides navigation, storage, presentation and future synchronization.
 
+The Dashboard serves as the central daily interface. Module pages provide detailed editing, history and advanced statistics.
+
 ## v0.1.x — Foundation
 
 - [x] React
@@ -77,6 +79,7 @@ The application is developed incrementally. Each module owns its business logic 
 - [x] Transaction-based week updates
 - [x] Automatic initial-data seeding
 - [x] ISO creation and update timestamps
+- [x] Shared reactive data between Dashboard and Work module
 - [ ] Database migrations beyond schema version 1
 - [ ] Data-integrity validation
 - [ ] Recovery from corrupted work records
@@ -84,16 +87,24 @@ The application is developed incrementally. Each module owns its business logic 
 ### Goals and daily workflow
 
 - [x] Weekly-goal data model
-- [ ] Editable daily message target
-- [ ] Editable weekly message target
-- [ ] Editable daily hours target
-- [ ] Automatic current-day detection
-- [ ] Current-day summary
-- [ ] Quick message editing from Dashboard
-- [ ] Quick work-session creation from Dashboard
-- [ ] Quick rating editing from Dashboard
-- [ ] Quick beer-count editing from Dashboard
-- [ ] Quick financial-plan editing from Dashboard
+- [x] Editable daily message target
+- [x] Editable weekly message target
+- [x] Editable daily hours target
+- [x] Automatic current-day detection
+- [x] Current-day summary
+- [x] Quick message editing from Dashboard
+- [x] Quick work-session creation from Dashboard
+- [x] Quick rating editing from Dashboard
+- [x] Quick beer-count editing from Dashboard
+- [x] Quick financial-plan editing from Dashboard
+- [x] Weekly summary on Dashboard
+- [x] Goal progress on Dashboard
+- [x] Work-threshold progress on Dashboard
+- [ ] Quick removal of work sessions from Dashboard
+- [ ] One-click work-session timer
+- [ ] Configurable default work rating
+- [ ] Configurable default exchange rate
+- [ ] Configurable default goals
 
 ### Week management
 
@@ -106,6 +117,8 @@ The application is developed incrementally. Each module owns its business logic 
 - [ ] Deleting weeks
 - [ ] Duplicating selected week settings
 - [ ] Week-close workflow
+- [ ] Automatic creation of the next week
+- [ ] Protection against duplicate ISO weeks
 
 ### Statistics
 
@@ -118,6 +131,8 @@ The application is developed incrementally. Each module owns its business logic 
 - [ ] Earnings charts
 - [ ] Rating charts
 - [ ] Alcohol-count statistics
+- [ ] Daily-goal completion statistics
+- [ ] Weekly-goal completion statistics
 
 ## v0.4.x — Expenses Module
 
@@ -130,6 +145,8 @@ The application is developed incrementally. Each module owns its business logic 
 - [ ] Expense statistics
 - [ ] Expense charts
 - [ ] Persistent expense storage
+- [ ] Dashboard expense summary
+- [ ] Dashboard quick expense entry
 
 ## v0.5.x — Debts Module
 
@@ -141,6 +158,8 @@ The application is developed incrementally. Each module owns its business logic 
 - [ ] Debt statistics
 - [ ] Debt charts
 - [ ] Persistent debt storage
+- [ ] Dashboard debt summary
+- [ ] Dashboard quick repayment entry
 
 ## v0.6.x — Portfolio Module
 
@@ -152,6 +171,7 @@ The application is developed incrementally. Each module owns its business logic 
 - [ ] Portfolio history
 - [ ] Portfolio statistics
 - [ ] Persistent portfolio storage
+- [ ] Dashboard portfolio summary
 
 ## v0.7.x — Cross-module Statistics
 
