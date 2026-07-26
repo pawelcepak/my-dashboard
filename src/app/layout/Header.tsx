@@ -1,6 +1,8 @@
-import { Database } from 'lucide-react';
+import { Database, LoaderCircle, LogOut, UserRound } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { useAuth } from '@/app/auth/useAuth';
 import ThemeToggle from '@/app/layout/ThemeToggle';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
 import { formatShortIsoDate } from '@/modules/work/utils/workCalculations';
@@ -23,16 +25,32 @@ function capitalizeFirstLetter(value: string): string {
 }
 
 export default function Header() {
+  const { user, signOut } = useAuth();
+
   const { week, isLoading } = useCurrentWorkWeek();
+
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   const formattedDate = capitalizeFirstLetter(getFormattedDate());
 
   const weekLabel =
     !isLoading && week
-      ? `Tydzień ${week.weekNumber} (${formatShortIsoDate(
-          week.startDate
-        )}–${formatShortIsoDate(week.endDate)})`
+      ? `Tydzień ${week.weekNumber} (${formatShortIsoDate(week.startDate)}–${formatShortIsoDate(
+          week.endDate
+        )})`
       : 'Wczytywanie tygodnia…';
+
+  async function handleSignOut() {
+    setIsSigningOut(true);
+
+    try {
+      await signOut();
+    } catch (error) {
+      console.error('Nie udało się wylogować.', error);
+    } finally {
+      setIsSigningOut(false);
+    }
+  }
 
   return (
     <header className="sticky top-0 z-30 border-b border-zinc-700 bg-zinc-950/96 backdrop-blur-xl">
@@ -62,6 +80,15 @@ export default function Header() {
 
         <div className="flex shrink-0 items-center gap-2">
           <div
+            title={`Zalogowano jako ${user?.email ?? 'użytkownik CHB'}`}
+            className="hidden h-9 max-w-52 items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900 px-3 text-xs font-semibold text-zinc-500 lg:flex"
+          >
+            <UserRound aria-hidden="true" className="size-3.5 shrink-0" strokeWidth={1.9} />
+
+            <span className="truncate">{user?.email}</span>
+          </div>
+
+          <div
             title="Dane zapisywane lokalnie w tej przeglądarce"
             className="hidden h-9 items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900 px-3 text-xs font-semibold text-zinc-500 sm:flex"
           >
@@ -70,6 +97,23 @@ export default function Header() {
           </div>
 
           <ThemeToggle />
+
+          <button
+            type="button"
+            disabled={isSigningOut}
+            onClick={() => {
+              void handleSignOut();
+            }}
+            aria-label="Wyloguj się"
+            title="Wyloguj się"
+            className="flex size-9 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900 text-zinc-500 transition hover:border-red-900/70 hover:bg-red-950/30 hover:text-red-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {isSigningOut ? (
+              <LoaderCircle aria-hidden="true" className="size-4 animate-spin" />
+            ) : (
+              <LogOut aria-hidden="true" className="size-4" strokeWidth={1.9} />
+            )}
+          </button>
         </div>
       </div>
     </header>
