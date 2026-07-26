@@ -8,14 +8,14 @@ type SectionCardProps = {
 
 export default function SectionCard({ title, description, children }: SectionCardProps) {
   return (
-    <section className="rounded-2xl border border-zinc-800 bg-zinc-900/50">
-      <div className="border-b border-zinc-800 px-5 py-4 sm:px-6">
-        <h2 className="text-base font-semibold text-zinc-100">{title}</h2>
+    <section className="app-panel overflow-hidden">
+      <div className="border-b border-zinc-700 px-4 py-3 sm:px-5">
+        <h2 className="text-sm font-semibold text-zinc-100 sm:text-base">{title}</h2>
 
-        {description && <p className="mt-1 text-sm text-zinc-500">{description}</p>}
+        {description && <p className="mt-1 text-sm leading-5 text-zinc-500">{description}</p>}
       </div>
 
-      <div className="p-5 sm:p-6">{children}</div>
+      <div className="p-4 sm:p-5">{children}</div>
     </section>
   );
 }

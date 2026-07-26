@@ -17,12 +17,13 @@ type QuickWorkActionsProps = {
 };
 
 const inputClasses =
-  'h-9 w-full rounded-lg border border-zinc-800 bg-zinc-950 px-2.5 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-700 focus:border-zinc-600 focus:ring-1 focus:ring-zinc-700';
+  'h-9 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-2.5 text-sm font-medium text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-[var(--app-accent)] focus:ring-1 focus:ring-[var(--app-accent)]';
 
-const labelClasses = 'mb-1.5 block text-[11px] font-medium uppercase tracking-wide text-zinc-600';
+const labelClasses =
+  'mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500';
 
 const buttonClasses =
-  'flex h-9 items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-3 text-xs font-medium text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50';
+  'flex h-9 items-center justify-center gap-2 rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] px-3 text-xs font-semibold text-[var(--app-accent)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50';
 
 function parseNonNegativeInteger(value: string): number {
   const parsedValue = Number.parseInt(value, 10);
@@ -66,9 +67,11 @@ export default function QuickWorkActions({
   onUpdateGoals,
 }: QuickWorkActionsProps) {
   const [messages, setMessages] = useState(String(day.messages));
+
   const [workRating, setWorkRating] = useState(
     day.workRating === null ? '' : String(day.workRating)
   );
+
   const [beers, setBeers] = useState(String(day.beers));
 
   const [sessionStart, setSessionStart] = useState('08:00');
@@ -88,7 +91,9 @@ export default function QuickWorkActions({
 
   useEffect(() => {
     setMessages(String(day.messages));
+
     setWorkRating(day.workRating === null ? '' : String(day.workRating));
+
     setBeers(String(day.beers));
   }, [day.id, day.messages, day.workRating, day.beers]);
 
@@ -147,63 +152,71 @@ export default function QuickWorkActions({
   }
 
   return (
-    <section className="rounded-xl border border-zinc-800 bg-zinc-900/50">
-      <div className="border-b border-zinc-800 px-4 py-3">
-        <h2 className="text-sm font-semibold text-zinc-100">Szybka edycja</h2>
+    <section className="rounded-xl border border-zinc-700 bg-zinc-900/65 shadow-sm">
+      <div className="border-b border-zinc-700 px-4 py-3">
+        <h2 className="text-sm font-semibold text-zinc-100">Szybki wpis</h2>
 
-        <p className="mt-0.5 text-xs text-zinc-500">Najczęściej używane dane</p>
+        <p className="mt-0.5 text-xs text-zinc-500">Najczęściej zmieniane dane dnia i tygodnia</p>
       </div>
 
-      <div className="space-y-3 p-4">
+      <div className="grid gap-3 p-4 lg:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
         <form
           onSubmit={(event) => {
             void handleDaySubmit(event);
           }}
-          className="grid gap-2 sm:grid-cols-[1fr_1fr_1fr_auto]"
+          className="rounded-xl border border-zinc-700 bg-zinc-950/40 p-3"
         >
-          <label>
-            <span className={labelClasses}>Wiadomości</span>
+          <div className="mb-3 flex items-center justify-between">
+            <h3 className="text-xs font-semibold text-zinc-300">Dzisiejsze dane</h3>
 
-            <input
-              type="number"
-              min="0"
-              step="1"
-              value={messages}
-              onChange={(event) => setMessages(event.target.value)}
-              className={inputClasses}
-            />
-          </label>
+            <Save aria-hidden="true" className="size-4 text-zinc-500" />
+          </div>
 
-          <label>
-            <span className={labelClasses}>Ocena</span>
+          <div className="grid grid-cols-3 gap-2">
+            <label>
+              <span className={labelClasses}>Wiadomości</span>
 
-            <input
-              type="number"
-              min="0"
-              max="10"
-              step="0.1"
-              value={workRating}
-              onChange={(event) => setWorkRating(event.target.value)}
-              className={inputClasses}
-            />
-          </label>
+              <input
+                type="number"
+                min="0"
+                step="1"
+                value={messages}
+                onChange={(event) => setMessages(event.target.value)}
+                className={inputClasses}
+              />
+            </label>
 
-          <label>
-            <span className={labelClasses}>Piwa</span>
+            <label>
+              <span className={labelClasses}>Ocena</span>
 
-            <input
-              type="number"
-              min="0"
-              step="1"
-              value={beers}
-              onChange={(event) => setBeers(event.target.value)}
-              className={inputClasses}
-            />
-          </label>
+              <input
+                type="number"
+                min="0"
+                max="10"
+                step="0.1"
+                value={workRating}
+                onChange={(event) => setWorkRating(event.target.value)}
+                className={inputClasses}
+              />
+            </label>
 
-          <button type="submit" disabled={isSaving} className={`${buttonClasses} self-end`}>
+            <label>
+              <span className={labelClasses}>Piwa</span>
+
+              <input
+                type="number"
+                min="0"
+                step="1"
+                value={beers}
+                onChange={(event) => setBeers(event.target.value)}
+                className={inputClasses}
+              />
+            </label>
+          </div>
+
+          <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
             <Save aria-hidden="true" className="size-3.5" />
-            Zapisz
+            Zapisz dzień
           </button>
         </form>
 
@@ -211,31 +224,39 @@ export default function QuickWorkActions({
           onSubmit={(event) => {
             void handleSessionSubmit(event);
           }}
-          className="grid gap-2 border-t border-zinc-800 pt-3 sm:grid-cols-[1fr_1fr_auto]"
+          className="rounded-xl border border-zinc-700 bg-zinc-950/40 p-3"
         >
-          <label>
-            <span className={labelClasses}>Początek bloku</span>
+          <div className="mb-3 flex items-center justify-between">
+            <h3 className="text-xs font-semibold text-zinc-300">Nowy blok pracy</h3>
 
-            <input
-              type="time"
-              value={sessionStart}
-              onChange={(event) => setSessionStart(event.target.value)}
-              className={inputClasses}
-            />
-          </label>
+            <Clock3 aria-hidden="true" className="size-4 text-zinc-500" />
+          </div>
 
-          <label>
-            <span className={labelClasses}>Koniec bloku</span>
+          <div className="grid grid-cols-2 gap-2">
+            <label>
+              <span className={labelClasses}>Początek</span>
 
-            <input
-              type="time"
-              value={sessionEnd}
-              onChange={(event) => setSessionEnd(event.target.value)}
-              className={inputClasses}
-            />
-          </label>
+              <input
+                type="time"
+                value={sessionStart}
+                onChange={(event) => setSessionStart(event.target.value)}
+                className={inputClasses}
+              />
+            </label>
 
-          <button type="submit" disabled={isSaving} className={`${buttonClasses} self-end`}>
+            <label>
+              <span className={labelClasses}>Koniec</span>
+
+              <input
+                type="time"
+                value={sessionEnd}
+                onChange={(event) => setSessionEnd(event.target.value)}
+                className={inputClasses}
+              />
+            </label>
+          </div>
+
+          <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
             <Clock3 aria-hidden="true" className="size-3.5" />
             Dodaj blok
           </button>
@@ -245,53 +266,61 @@ export default function QuickWorkActions({
           onSubmit={(event) => {
             void handleGoalsSubmit(event);
           }}
-          className="grid gap-2 border-t border-zinc-800 pt-3 sm:grid-cols-[1fr_1fr_1fr_auto]"
+          className="rounded-xl border border-zinc-700 bg-zinc-950/40 p-3"
         >
-          <label>
-            <span className={labelClasses}>Cel dzienny</span>
+          <div className="mb-3 flex items-center justify-between">
+            <h3 className="text-xs font-semibold text-zinc-300">Cele pracy</h3>
 
-            <input
-              type="number"
-              min="0"
-              step="1"
-              value={dailyMessagesTarget}
-              placeholder="—"
-              onChange={(event) => setDailyMessagesTarget(event.target.value)}
-              className={inputClasses}
-            />
-          </label>
+            <Target aria-hidden="true" className="size-4 text-zinc-500" />
+          </div>
 
-          <label>
-            <span className={labelClasses}>Cel tygodniowy</span>
+          <div className="grid grid-cols-3 gap-2">
+            <label>
+              <span className={labelClasses}>Dzienny</span>
 
-            <input
-              type="number"
-              min="0"
-              step="1"
-              value={weeklyMessagesTarget}
-              placeholder="—"
-              onChange={(event) => setWeeklyMessagesTarget(event.target.value)}
-              className={inputClasses}
-            />
-          </label>
+              <input
+                type="number"
+                min="0"
+                step="1"
+                value={dailyMessagesTarget}
+                placeholder="—"
+                onChange={(event) => setDailyMessagesTarget(event.target.value)}
+                className={inputClasses}
+              />
+            </label>
 
-          <label>
-            <span className={labelClasses}>Godziny dziennie</span>
+            <label>
+              <span className={labelClasses}>Tygodniowy</span>
 
-            <input
-              type="number"
-              min="0"
-              step="0.1"
-              value={dailyHoursTarget}
-              placeholder="—"
-              onChange={(event) => setDailyHoursTarget(event.target.value)}
-              className={inputClasses}
-            />
-          </label>
+              <input
+                type="number"
+                min="0"
+                step="1"
+                value={weeklyMessagesTarget}
+                placeholder="—"
+                onChange={(event) => setWeeklyMessagesTarget(event.target.value)}
+                className={inputClasses}
+              />
+            </label>
 
-          <button type="submit" disabled={isSaving} className={`${buttonClasses} self-end`}>
+            <label>
+              <span className={labelClasses}>Godziny</span>
+
+              <input
+                type="number"
+                min="0"
+                step="0.1"
+                value={dailyHoursTarget}
+                placeholder="—"
+                onChange={(event) => setDailyHoursTarget(event.target.value)}
+                className={inputClasses}
+              />
+            </label>
+          </div>
+
+          <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
             <Target aria-hidden="true" className="size-3.5" />
-            Cele
+            Zapisz cele
           </button>
         </form>
       </div>

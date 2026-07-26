@@ -6,31 +6,73 @@
   color-scheme: light;
 
   /*
-   * Główne kolory wizualne aplikacji.
+   * Główny akcent CHB.
    */
 
   --app-accent: #dc143c;
-  --app-accent-soft: rgb(220 20 60 / 12%);
-  --app-accent-border: rgb(220 20 60 / 42%);
+  --app-accent-hover: #bc1032;
+  --app-accent-soft: rgb(220 20 60 / 10%);
+  --app-accent-border: rgb(220 20 60 / 48%);
+  --app-accent-shadow: rgb(220 20 60 / 14%);
 
   /*
-   * Jasny motyw.
+   * Jasny motyw — główny motyw użytkowy.
    *
-   * Tło pozostaje jasne, ale powierzchnie oraz obramowania mają
-   * większy kontrast niż w poprzedniej wersji.
+   * Układ poziomów:
+   * zinc-950 — tło aplikacji,
+   * zinc-900 — karty,
+   * zinc-800 — mocniejsze powierzchnie,
+   * zinc-700 — obramowania,
+   * zinc-100 — tekst główny.
    */
 
-  --color-zinc-50: #111318;
-  --color-zinc-100: #181b21;
-  --color-zinc-200: #292d35;
-  --color-zinc-300: #3d424c;
-  --color-zinc-400: #565d69;
-  --color-zinc-500: #666e7a;
-  --color-zinc-600: #7d8591;
-  --color-zinc-700: #9aa1ab;
-  --color-zinc-800: #c1c5cc;
-  --color-zinc-900: #e1e3e7;
+  --color-zinc-50: #0f1115;
+  --color-zinc-100: #17191e;
+  --color-zinc-200: #252931;
+  --color-zinc-300: #373c46;
+  --color-zinc-400: #4c5360;
+  --color-zinc-500: #5e6673;
+  --color-zinc-600: #747d8a;
+  --color-zinc-700: #959da8;
+  --color-zinc-800: #c2c7cf;
+  --color-zinc-900: #e2e5e9;
   --color-zinc-950: #f2f3f5;
+
+  /*
+   * Komunikaty — jasny motyw.
+   */
+
+  --color-amber-200: #704000;
+  --color-amber-300: #704000;
+  --color-amber-400: #875000;
+  --color-amber-700: #bb740f;
+  --color-amber-800: #a86408;
+  --color-amber-900: #915204;
+  --color-amber-950: #fff2d6;
+
+  --color-red-200: #82172d;
+  --color-red-300: #921a33;
+  --color-red-400: #a51635;
+  --color-red-700: #bd2948;
+  --color-red-800: #a6203b;
+  --color-red-900: #8c1932;
+  --color-red-950: #ffe5ea;
+
+  --color-emerald-200: #07573f;
+  --color-emerald-300: #076147;
+  --color-emerald-400: #087252;
+  --color-emerald-700: #178664;
+  --color-emerald-800: #127354;
+  --color-emerald-900: #0d6046;
+  --color-emerald-950: #daf7ec;
+
+  --color-blue-300: #174f9f;
+  --color-blue-400: #155bb8;
+  --color-blue-500: #1769cf;
+  --color-blue-700: #1558aa;
+  --color-blue-800: #13498c;
+  --color-blue-900: #103d76;
+  --color-blue-950: #e2edff;
 
   font-family:
     Inter,
@@ -51,27 +93,58 @@
   color-scheme: dark;
 
   /*
-   * Ciemny motyw nie jest już niemal czarny.
-   *
-   * Główne tło bazuje na #545454, natomiast karty i pola mają
-   * nieco ciemniejsze powierzchnie, aby zachować hierarchię.
+   * Ciemny motyw — ciemnoszary, ale nie czarny.
    */
 
   --color-zinc-50: #ffffff;
-  --color-zinc-100: #f4f4f5;
-  --color-zinc-200: #e7e7e8;
-  --color-zinc-300: #d0d0d2;
-  --color-zinc-400: #b5b5b8;
-  --color-zinc-500: #a0a0a4;
-  --color-zinc-600: #858589;
-  --color-zinc-700: #707074;
-  --color-zinc-800: #616165;
-  --color-zinc-900: #5a5a5a;
-  --color-zinc-950: #545454;
+  --color-zinc-100: #f5f5f6;
+  --color-zinc-200: #e6e6e9;
+  --color-zinc-300: #d0d0d4;
+  --color-zinc-400: #adaeb5;
+  --color-zinc-500: #909198;
+  --color-zinc-600: #74757c;
+  --color-zinc-700: #56575e;
+  --color-zinc-800: #404147;
+  --color-zinc-900: #323338;
+  --color-zinc-950: #28292e;
 
   --app-accent: #ff315d;
-  --app-accent-soft: rgb(220 20 60 / 22%);
-  --app-accent-border: rgb(255 49 93 / 58%);
+  --app-accent-hover: #ff5577;
+  --app-accent-soft: rgb(255 49 93 / 18%);
+  --app-accent-border: rgb(255 49 93 / 60%);
+  --app-accent-shadow: rgb(255 49 93 / 20%);
+
+  --color-amber-200: #ffe6ad;
+  --color-amber-300: #f7d17e;
+  --color-amber-400: #efb846;
+  --color-amber-700: #ad6c13;
+  --color-amber-800: #85500d;
+  --color-amber-900: #613a0a;
+  --color-amber-950: #3d260a;
+
+  --color-red-200: #ffc1ce;
+  --color-red-300: #f7a2b5;
+  --color-red-400: #ff718e;
+  --color-red-700: #bc3452;
+  --color-red-800: #90253f;
+  --color-red-900: #671b30;
+  --color-red-950: #42101e;
+
+  --color-emerald-200: #b1f2d9;
+  --color-emerald-300: #88e5c1;
+  --color-emerald-400: #43d39e;
+  --color-emerald-700: #1b8a65;
+  --color-emerald-800: #156c50;
+  --color-emerald-900: #104e3b;
+  --color-emerald-950: #0a3528;
+
+  --color-blue-300: #a8caff;
+  --color-blue-400: #78aaff;
+  --color-blue-500: #4b8fff;
+  --color-blue-700: #2868c7;
+  --color-blue-800: #20519a;
+  --color-blue-900: #183c72;
+  --color-blue-950: #102745;
 }
 
 * {
@@ -109,9 +182,29 @@ a {
   cursor: pointer;
 }
 
+input,
+textarea,
+select {
+  color-scheme: light;
+}
+
+:root.dark input,
+:root.dark textarea,
+:root.dark select {
+  color-scheme: dark;
+}
+
+::placeholder {
+  opacity: 1;
+}
+
 ::selection {
   color: #ffffff;
   background: var(--app-accent);
+}
+
+:focus-visible {
+  scroll-margin-block: 6rem;
 }
 
 ::-webkit-scrollbar {
@@ -131,4 +224,60 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-zinc-600);
+}
+
+/*
+ * Wspólne klasy prezentacyjne.
+ */
+
+.app-panel {
+  border: 1px solid var(--color-zinc-700);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--color-zinc-900) 88%, transparent);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 5%),
+    0 5px 18px rgb(0 0 0 / 4%);
+}
+
+.app-panel-muted {
+  border: 1px solid var(--color-zinc-700);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--color-zinc-950) 62%, var(--color-zinc-900));
+}
+
+.app-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+}
+
+.app-notice-info {
+  border-color: var(--color-blue-700);
+  color: var(--color-blue-300);
+  background: var(--color-blue-950);
+}
+
+.app-notice-success {
+  border-color: var(--color-emerald-700);
+  color: var(--color-emerald-300);
+  background: var(--color-emerald-950);
+}
+
+.app-notice-warning {
+  border-color: var(--color-amber-700);
+  color: var(--color-amber-300);
+  background: var(--color-amber-950);
+}
+
+.app-notice-error {
+  border-color: var(--color-red-700);
+  color: var(--color-red-300);
+  background: var(--color-red-950);
 }

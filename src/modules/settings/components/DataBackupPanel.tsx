@@ -129,7 +129,7 @@ export default function DataBackupPanel() {
   return (
     <div className="space-y-4">
       {error && (
-        <div className="flex items-start gap-3 rounded-xl border border-red-800 bg-red-950/30 px-4 py-3 text-sm text-red-300">
+        <div className="app-notice app-notice-error">
           <AlertTriangle aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
 
           <p>{error}</p>
@@ -137,7 +137,7 @@ export default function DataBackupPanel() {
       )}
 
       {success && (
-        <div className="flex items-start gap-3 rounded-xl border border-emerald-800 bg-emerald-950/30 px-4 py-3 text-sm text-emerald-300">
+        <div className="app-notice app-notice-success">
           <CheckCircle2 aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
 
           <p>{success}</p>
@@ -145,7 +145,7 @@ export default function DataBackupPanel() {
       )}
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="rounded-2xl border border-zinc-700 bg-zinc-900/60 p-5 sm:p-6">
+        <section className="app-panel p-5 sm:p-6">
           <div className="flex items-start gap-3">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 text-zinc-400">
               <Download aria-hidden="true" className="size-5" />
@@ -160,7 +160,7 @@ export default function DataBackupPanel() {
             </div>
           </div>
 
-          <dl className="mt-5 space-y-3 rounded-xl border border-zinc-700 bg-zinc-950/50 p-4 text-sm">
+          <dl className="app-panel-muted mt-5 space-y-3 p-4 text-sm">
             <div className="flex justify-between gap-4">
               <dt className="text-zinc-500">Tygodnie w bazie</dt>
 
@@ -196,7 +196,7 @@ export default function DataBackupPanel() {
           </button>
         </section>
 
-        <section className="rounded-2xl border border-zinc-700 bg-zinc-900/60 p-5 sm:p-6">
+        <section className="app-panel p-5 sm:p-6">
           <div className="flex items-start gap-3">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 text-zinc-400">
               <Upload aria-hidden="true" className="size-5" />
@@ -222,7 +222,7 @@ export default function DataBackupPanel() {
               onChange={(event) => {
                 void handleFileChange(event);
               }}
-              className="block w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-sm text-zinc-300 file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--app-accent-soft)] file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-[var(--app-accent)]"
+              className="block w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 py-2.5 text-sm font-medium text-zinc-300 outline-none transition file:mr-3 file:rounded-lg file:border-0 file:bg-[var(--app-accent-soft)] file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-[var(--app-accent)] focus:border-[var(--app-accent)] focus:ring-1 focus:ring-[var(--app-accent)] disabled:cursor-not-allowed disabled:opacity-60"
             />
           </label>
 
@@ -302,9 +302,17 @@ export default function DataBackupPanel() {
         </section>
       </div>
 
-      <div className="rounded-xl border border-amber-800 bg-amber-950/20 px-4 py-3 text-sm leading-6 text-amber-300">
-        Import zastępuje wszystkie lokalne tygodnie i ustawienia zapisane w tej przeglądarce. Przed
-        importem utwórz eksport obecnych danych.
+      <div className="app-notice app-notice-warning">
+        <AlertTriangle aria-hidden="true" className="mt-0.5 size-5 shrink-0" />
+
+        <div>
+          <p className="font-bold">Import zastępuje obecną lokalną bazę</p>
+
+          <p className="mt-1 font-medium">
+            Wszystkie tygodnie i ustawienia zapisane w tej przeglądarce zostaną zastąpione
+            zawartością wybranej kopii. Przed rozpoczęciem importu pobierz aktualny eksport danych.
+          </p>
+        </div>
       </div>
     </div>
   );

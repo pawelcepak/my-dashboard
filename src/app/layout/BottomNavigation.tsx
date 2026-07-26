@@ -6,10 +6,10 @@ import { navigationItems } from '@/app/layout/navigation';
 
 function getNavigationLinkClasses(isActive: boolean): string {
   const baseClasses =
-    'group flex min-w-0 items-center justify-center gap-2 rounded-lg border font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--app-accent)]';
+    'group flex min-w-0 items-center justify-center gap-2 rounded-lg border font-medium transition duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--app-accent)]';
 
   if (isActive) {
-    return `${baseClasses} border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] text-[var(--app-accent)]`;
+    return `${baseClasses} border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] text-[var(--app-accent)] shadow-sm shadow-[var(--app-accent-shadow)]`;
   }
 
   return `${baseClasses} border-transparent text-zinc-500 hover:border-zinc-700 hover:bg-zinc-900 hover:text-zinc-100`;
@@ -17,10 +17,10 @@ function getNavigationLinkClasses(isActive: boolean): string {
 
 function DesktopNavigation() {
   return (
-    <div className="mx-auto w-full max-w-[1920px] px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto w-full max-w-[1920px] px-3 sm:px-5 lg:px-6 xl:px-8">
       <nav
         aria-label="Główna nawigacja"
-        className="hidden h-14 items-center justify-end gap-1 md:flex"
+        className="hidden h-14 items-center justify-start gap-1 md:flex"
       >
         {navigationItems.map((item) => {
           const Icon = item.icon;
@@ -31,10 +31,10 @@ function DesktopNavigation() {
               to={item.path}
               end={item.path === '/'}
               className={({ isActive }) =>
-                `${getNavigationLinkClasses(isActive)} h-10 px-4 text-sm`
+                `${getNavigationLinkClasses(isActive)} h-10 px-3.5 text-sm`
               }
             >
-              <Icon aria-hidden="true" className="size-4 shrink-0" strokeWidth={1.8} />
+              <Icon aria-hidden="true" className="size-4 shrink-0" strokeWidth={1.9} />
 
               <span>{item.label}</span>
             </NavLink>
@@ -121,7 +121,7 @@ function MobileNavigation() {
                     `${getNavigationLinkClasses(isActive)} h-11 justify-start px-3 text-sm`
                   }
                 >
-                  <Icon aria-hidden="true" className="size-5 shrink-0" strokeWidth={1.8} />
+                  <Icon aria-hidden="true" className="size-5 shrink-0" strokeWidth={1.9} />
 
                   <span>{item.label}</span>
                 </NavLink>
@@ -147,7 +147,7 @@ function MobileNavigation() {
                 `${getNavigationLinkClasses(isActive)} my-1 flex-col gap-0.5 px-1 text-[10px]`
               }
             >
-              <Icon aria-hidden="true" className="size-5" strokeWidth={1.8} />
+              <Icon aria-hidden="true" className="size-5" strokeWidth={1.9} />
 
               <span className="max-w-full truncate">{item.shortLabel}</span>
             </NavLink>
@@ -163,7 +163,7 @@ function MobileNavigation() {
             hasActiveSecondaryItem || isMoreOpen
           )} my-1 flex-col gap-0.5 px-1 text-[10px]`}
         >
-          <MoreHorizontal aria-hidden="true" className="size-5" strokeWidth={1.8} />
+          <MoreHorizontal aria-hidden="true" className="size-5" strokeWidth={1.9} />
 
           <span>Więcej</span>
         </button>
@@ -174,7 +174,7 @@ function MobileNavigation() {
 
 export default function BottomNavigation() {
   return (
-    <footer className="fixed inset-x-0 bottom-0 z-40 border-t border-zinc-700 bg-zinc-950/95 backdrop-blur-xl">
+    <footer className="fixed inset-x-0 bottom-0 z-40 border-t border-zinc-700 bg-zinc-950/96 shadow-[0_-8px_24px_rgb(0_0_0_/_8%)] backdrop-blur-xl">
       <DesktopNavigation />
       <MobileNavigation />
     </footer>

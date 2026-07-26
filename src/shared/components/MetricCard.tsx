@@ -1,5 +1,4 @@
-import type { LucideIcon } from 'lucide-react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 type MetricCardProps = {
@@ -14,26 +13,26 @@ export default function MetricCard({ title, value, description, icon: Icon, to }
   return (
     <Link
       to={to}
-      className="group relative flex min-h-32 flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/70 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-700 hover:bg-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+      className="group flex min-w-0 items-center gap-3 rounded-xl border border-zinc-700 bg-zinc-950/40 px-3 py-3 transition hover:border-[var(--app-accent-border)] hover:bg-[var(--app-accent-soft)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--app-accent)]"
     >
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex size-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 text-zinc-300">
-          <Icon aria-hidden="true" className="size-5" strokeWidth={1.8} />
+      <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900 text-zinc-400 transition group-hover:border-[var(--app-accent-border)] group-hover:text-[var(--app-accent)]">
+        <Icon aria-hidden="true" className="size-4" strokeWidth={1.9} />
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center justify-between gap-2">
+          <p className="truncate text-sm font-semibold text-zinc-200">{title}</p>
+
+          <p className="shrink-0 text-sm font-bold text-zinc-100">{value}</p>
         </div>
 
-        <ArrowRight
-          aria-hidden="true"
-          className="size-5 -translate-x-1 text-zinc-600 opacity-0 transition group-hover:translate-x-0 group-hover:text-zinc-300 group-hover:opacity-100"
-        />
+        <p className="mt-0.5 truncate text-xs text-zinc-500">{description}</p>
       </div>
 
-      <div className="mt-4">
-        <p className="text-sm font-medium text-zinc-400">{title}</p>
-
-        <p className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50">{value}</p>
-
-        <p className="mt-2 text-sm leading-5 text-zinc-500">{description}</p>
-      </div>
+      <ArrowRight
+        aria-hidden="true"
+        className="size-4 shrink-0 text-zinc-600 transition group-hover:translate-x-0.5 group-hover:text-[var(--app-accent)]"
+      />
     </Link>
   );
 }
