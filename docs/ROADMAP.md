@@ -38,6 +38,8 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [x] Persistent theme preference
 - [x] Theme toggle
 - [x] CHB branding
+- [ ] Make the CHB header label navigate to the Dashboard
+- [ ] Align desktop bottom navigation tabs to the left
 - [ ] Shared empty state
 - [ ] Shared button system
 - [ ] Error route
@@ -128,8 +130,16 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [x] Copying goals from selected week
 - [x] Copying financial plan from selected week
 - [x] Empty daily records for new weeks
-- [ ] Dedicated weekly-history view
-- [ ] Grouping history by year and month
+- [x] Weekly-history view
+- [x] Grouping history by year
+- [x] Newest-to-oldest week sorting
+- [x] Active-week history-card indicator
+- [x] Weekly summary metrics in history
+- [x] Reusable shared history-card component
+- [ ] Grouping history by month
+- [ ] Year filter
+- [ ] Month filter
+- [ ] History search
 - [ ] Deleting weeks
 - [ ] Week-close workflow
 - [ ] Automatic next-week creation

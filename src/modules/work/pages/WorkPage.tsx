@@ -9,6 +9,7 @@ import WorkSummaryGrid from '@/modules/work/components/WorkSummaryGrid';
 import WorkWeekManager from '@/modules/work/components/WorkWeekManager';
 import WorkWeekSettings from '@/modules/work/components/WorkWeekSettings';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
+import WorkHistory from '@/modules/work/components/WorkHistory';
 import type { FinancialPlanItem, WorkDay } from '@/modules/work/types/work.types';
 import {
   calculateWorkProgress,
@@ -117,6 +118,13 @@ export default function WorkPage() {
         isSaving={isSaving}
         onSelectWeek={selectWeek}
         onCreateWeek={createWeek}
+      />
+
+      <WorkHistory
+        weeks={weeks}
+        activeWeekId={activeWeek.id}
+        isSaving={isSaving}
+        onSelectWeek={selectWeek}
       />
 
       <div className="flex flex-col gap-3 rounded-xl border border-emerald-900/50 bg-emerald-950/20 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">

@@ -25,6 +25,11 @@ All notable changes to CHB will be documented in this file.
 - Optional copying of exchange rate, goals and financial plan.
 - Empty daily records for newly created weeks.
 - Reactive week switching between Dashboard and Work module.
+- Weekly work-history section.
+- Work weeks grouped by year.
+- Reusable history-card component.
+- Weekly history metrics for messages, hours, performance, earnings, rating, beer count and goal completion.
+- Active-week information in the global application header.
 
 ### Changed
 
@@ -39,6 +44,15 @@ All notable changes to CHB will be documented in this file.
 - Dashboard automatically displays the selected active work week.
 - Work-week selector replaces the previous single-week workflow.
 - The work-week compound index is now unique.
+- Work history is ordered from the newest week to the oldest.
+- Selecting a history card changes the active week without reloading the application.
+- The application header displays the active week number and date range.
+
+### Planned visual corrections
+
+- Make the CHB header label navigate to the Dashboard.
+- Align desktop bottom navigation tabs to the left.
+- Continue refining Dashboard readability and theme contrast.
 
 ## [0.3.0-beta.3] - 2026-07-25
 
