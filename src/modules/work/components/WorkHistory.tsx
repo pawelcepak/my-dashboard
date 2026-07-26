@@ -1,5 +1,6 @@
-import { Banknote, Beer, CalendarDays, Clock3, Gauge, Mail, Star, Target } from 'lucide-react';
+import { Banknote, Beer, CalendarDays, Clock3, Mail, Star, Target } from 'lucide-react';
 
+import MessagesPerHourIndicator from '@/modules/work/components/MessagesPerHourIndicator';
 import type { WorkWeek } from '@/modules/work/types/work.types';
 import {
   calculateWorkWeekSummary,
@@ -16,6 +17,7 @@ type WorkHistoryProps = {
   weeks: WorkWeek[];
   activeWeekId: string;
   isSaving: boolean;
+  constrainedHeight?: boolean;
   onSelectWeek: (workWeekId: string) => Promise<void>;
 };
 
@@ -33,6 +35,10 @@ function calculateAverageRating(week: WorkWeek): number | null {
 
 function calculateTotalBeers(week: WorkWeek): number {
   return week.days.reduce((total, day) => total + day.beers, 0);
+}
+
+function calculateTotalSessions(week: WorkWeek): number {
+  return week.days.reduce((total, day) => total + day.sessions.length, 0);
 }
 
 function calculateGoalPercentage(week: WorkWeek, totalMessages: number): number | null {
@@ -67,25 +73,30 @@ export default function WorkHistory({
   weeks,
   activeWeekId,
   isSaving,
+  constrainedHeight = false,
   onSelectWeek,
 }: WorkHistoryProps) {
   const groupedWeeks = groupWeeksByYear(weeks);
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900/50">
-      <div className="flex flex-col gap-3 border-b border-zinc-700 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <section
+      className={`overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900/50 ${
+        constrainedHeight ? '2xl:flex 2xl:max-h-[50rem] 2xl:flex-col' : ''
+      }`}
+    >
+      <div className="flex shrink-0 flex-col gap-3 border-b border-zinc-700 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between 2xl:flex-col 2xl:items-stretch">
         <div>
-          <h2 className="text-base font-semibold text-zinc-100">Historia tygodni</h2>
+          <h2 className="text-sm font-semibold text-zinc-100">Historia tygodni</h2>
 
-          <p className="mt-1 text-sm text-zinc-500">
-            Porównuj wyniki i wybieraj tygodnie do edycji.
+          <p className="mt-0.5 text-xs text-zinc-500">
+            Najważniejsze wyniki i szybki wybór tygodnia.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-950/50 px-3 py-2">
-          <CalendarDays aria-hidden="true" className="size-4 text-zinc-500" />
+        <div className="flex w-fit items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-950/50 px-3 py-2">
+          <CalendarDays aria-hidden="true" className="size-3.5 text-zinc-500" />
 
-          <p className="text-xs font-semibold text-zinc-400">
+          <p className="text-[11px] font-semibold text-zinc-400">
             {weeks.length}{' '}
             {weeks.length === 1
               ? 'zapisany tydzień'
@@ -96,21 +107,27 @@ export default function WorkHistory({
         </div>
       </div>
 
-      <div className="space-y-7 p-4 sm:p-6">
+      <div
+        className={`space-y-5 p-3.5 sm:p-4 ${
+          constrainedHeight
+            ? '2xl:min-h-0 2xl:flex-1 2xl:overflow-y-auto 2xl:overscroll-contain'
+            : ''
+        }`}
+      >
         {groupedWeeks.map(([year, yearWeeks]) => (
           <section key={year}>
-            <div className="mb-3 flex items-center gap-3">
-              <h3 className="text-sm font-bold text-zinc-200">{year}</h3>
+            <div className="mb-2.5 flex items-center gap-3">
+              <h3 className="text-xs font-bold text-zinc-200">{year}</h3>
 
               <div className="h-px flex-1 bg-zinc-700" />
 
-              <span className="text-xs font-medium text-zinc-500">
+              <span className="text-[10px] font-medium text-zinc-500">
                 {yearWeeks.length}{' '}
                 {yearWeeks.length === 1 ? 'tydzień' : yearWeeks.length < 5 ? 'tygodnie' : 'tygodni'}
               </span>
             </div>
 
-            <div className="grid gap-3 xl:grid-cols-2">
+            <div className="grid gap-2.5">
               {yearWeeks.map((week) => {
                 const summary = calculateWorkWeekSummary(week);
 
@@ -120,6 +137,8 @@ export default function WorkHistory({
 
                 const totalBeers = calculateTotalBeers(week);
 
+                const totalSessions = calculateTotalSessions(week);
+
                 const goalPercentage = calculateGoalPercentage(week, summary.totalMessages);
 
                 const isActive = week.id === activeWeekId;
@@ -128,9 +147,9 @@ export default function WorkHistory({
                   <HistoryCard
                     key={week.id}
                     title={`Tydzień ${week.weekNumber}`}
-                    subtitle={`${formatShortIsoDate(week.startDate)}–${formatShortIsoDate(
-                      week.endDate
-                    )}`}
+                    subtitle={`${formatShortIsoDate(
+                      week.startDate
+                    )}–${formatShortIsoDate(week.endDate)}`}
                     isActive={isActive}
                     isDisabled={isSaving}
                     onClick={() => {
@@ -138,7 +157,7 @@ export default function WorkHistory({
                         void onSelectWeek(week.id);
                       }
                     }}
-                    metrics={[
+                    featuredMetrics={[
                       {
                         label: 'Wiadomości',
                         value: formatNumber(summary.totalMessages),
@@ -146,19 +165,14 @@ export default function WorkHistory({
                         accent: true,
                       },
                       {
-                        label: 'Godziny',
-                        value: `${formatHours(summary.totalHours)} h`,
-                        icon: Clock3,
-                      },
-                      {
                         label: 'Średnia / h',
-                        value: formatDecimal(summary.averageMessagesPerHour),
-                        icon: Gauge,
-                      },
-                      {
-                        label: 'Netto',
-                        value: formatCurrencyPln(summary.netEarningsPln),
-                        icon: Banknote,
+                        value: (
+                          <MessagesPerHourIndicator
+                            value={summary.totalHours > 0 ? summary.averageMessagesPerHour : null}
+                            compact
+                            className="text-base"
+                          />
+                        ),
                       },
                       {
                         label: 'Ocena',
@@ -166,6 +180,18 @@ export default function WorkHistory({
                         icon: Star,
                         valueClassName: averageRating === null ? 'text-zinc-500' : undefined,
                         valueColor: averageRating === null ? undefined : ratingPresentation.color,
+                      },
+                      {
+                        label: 'Netto',
+                        value: formatCurrencyPln(summary.netEarningsPln),
+                        icon: Banknote,
+                      },
+                    ]}
+                    metrics={[
+                      {
+                        label: 'Godziny',
+                        value: `${formatHours(summary.totalHours)} h`,
+                        icon: Clock3,
                       },
                       {
                         label: 'Piwa',
@@ -180,13 +206,11 @@ export default function WorkHistory({
                         valueClassName:
                           goalPercentage !== null && goalPercentage >= 100
                             ? 'text-emerald-400'
-                            : 'text-zinc-200',
+                            : 'text-zinc-300',
                       },
                       {
                         label: 'Bloki',
-                        value: formatNumber(
-                          week.days.reduce((total, day) => total + day.sessions.length, 0)
-                        ),
+                        value: formatNumber(totalSessions),
                         icon: CalendarDays,
                       },
                     ]}

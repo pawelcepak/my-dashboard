@@ -183,18 +183,21 @@ export default function WorkPage() {
 
         <div className="flex items-center gap-2 border-t border-zinc-700 bg-zinc-950/25 px-4 py-2.5 text-xs text-zinc-500 sm:px-5">
           <Database aria-hidden="true" className="size-3.5 shrink-0" />
-          Dane wszystkich tygodni są zapisywane lokalnie w tej przeglądarce.
+          Dane wszystkich tygodni są zapisywane lokalnie i synchronizowane z prywatną chmurą.
         </div>
       </section>
 
-      <div className="grid items-start gap-4 2xl:grid-cols-[minmax(0,1.45fr)_minmax(22rem,0.55fr)]">
-        <WorkDaysTable
-          days={activeWeek.days}
-          selectedDayId={selectedDayId}
-          onEditDay={setSelectedDayId}
-        />
+      <div className="grid items-start gap-4 2xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,1fr)_minmax(18rem,1fr)]">
+        <div className="min-w-0">
+          <WorkDaysTable
+            days={activeWeek.days}
+            heldMessages={activeWeek.heldMessages}
+            selectedDayId={selectedDayId}
+            onEditDay={setSelectedDayId}
+          />
+        </div>
 
-        <div className="space-y-4">
+        <div className="min-w-0 space-y-4">
           <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
 
           <WorkWeekSettings
@@ -215,6 +218,16 @@ export default function WorkPage() {
             onReset={handleReset}
           />
         </div>
+
+        <div className="min-w-0">
+          <WorkHistory
+            weeks={weeks}
+            activeWeekId={activeWeek.id}
+            isSaving={isSaving}
+            onSelectWeek={selectWeek}
+            constrainedHeight
+          />
+        </div>
       </div>
 
       {selectedDay && (
@@ -229,13 +242,6 @@ export default function WorkPage() {
         totalMessages={summary.totalMessages}
         progress={progress}
         goals={activeWeek.goals}
-      />
-
-      <WorkHistory
-        weeks={weeks}
-        activeWeekId={activeWeek.id}
-        isSaving={isSaving}
-        onSelectWeek={selectWeek}
       />
 
       <FinancialPlanSummary

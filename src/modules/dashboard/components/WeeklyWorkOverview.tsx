@@ -1,7 +1,8 @@
-import { Banknote, Clock3, Gauge, Mail, Target } from 'lucide-react';
+import { Banknote, Clock3, Mail, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import MessageRateThresholdBar from '@/modules/work/components/MessageRateThresholdBar';
+import MessagesPerHourIndicator from '@/modules/work/components/MessagesPerHourIndicator';
 import type { WorkProgress, WorkWeek, WorkWeekSummary } from '@/modules/work/types/work.types';
 import {
   formatCurrencyPln,
@@ -54,6 +55,20 @@ function InlineMetric({ label, value, icon: Icon, accent = false }: InlineMetric
         >
           {value}
         </p>
+      </div>
+    </div>
+  );
+}
+
+function InlineAverageMetric({ value }: { value: number }) {
+  return (
+    <div className="min-w-0">
+      <p className="truncate text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
+        Średnia / h
+      </p>
+
+      <div className="mt-1">
+        <MessagesPerHourIndicator value={value} compact />
       </div>
     </div>
   );
@@ -143,11 +158,7 @@ export default function WeeklyWorkOverview({ week, summary }: WeeklyWorkOverview
 
           <InlineMetric label="Godziny" value={formatHours(summary.totalHours)} icon={Clock3} />
 
-          <InlineMetric
-            label="Średnia / h"
-            value={formatDecimal(summary.averageMessagesPerHour)}
-            icon={Gauge}
-          />
+          <InlineAverageMetric value={summary.averageMessagesPerHour} />
 
           <InlineMetric
             label="Netto"

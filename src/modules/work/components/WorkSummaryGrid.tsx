@@ -1,5 +1,6 @@
-import { Banknote, Clock3, Gauge, Mail, MessageSquareMore, Percent, Target } from 'lucide-react';
+import { Banknote, Clock3, Mail, MessageSquareMore, Percent, Target } from 'lucide-react';
 
+import MessagesPerHourIndicator from '@/modules/work/components/MessagesPerHourIndicator';
 import type { WorkWeekGoals, WorkWeekSummary } from '@/modules/work/types/work.types';
 import {
   formatCurrencyEur,
@@ -69,6 +70,22 @@ function SummaryMetric({
   );
 }
 
+function AverageMetric({ value }: { value: number }) {
+  return (
+    <article className="rounded-xl border border-zinc-700 bg-zinc-950/45 p-3.5">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
+        Średnia / h
+      </p>
+
+      <div className="mt-2">
+        <MessagesPerHourIndicator value={value} showLabel />
+      </div>
+
+      <p className="mt-2 truncate text-[11px] text-zinc-500">Z całego aktywnego tygodnia</p>
+    </article>
+  );
+}
+
 type GoalValueProps = {
   label: string;
   value: number | null;
@@ -103,7 +120,7 @@ export default function WorkSummaryGrid({ summary, goals }: WorkSummaryGridProps
       </div>
 
       <div className="space-y-4 p-4">
-        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-2">
+        <div className="grid gap-2 sm:grid-cols-2">
           <SummaryMetric
             label="Wiadomości"
             value={formatNumber(summary.totalMessages)}
@@ -119,12 +136,7 @@ export default function WorkSummaryGrid({ summary, goals }: WorkSummaryGridProps
             icon={Clock3}
           />
 
-          <SummaryMetric
-            label="Średnia / h"
-            value={formatDecimal(summary.averageMessagesPerHour)}
-            description="Z całego tygodnia"
-            icon={Gauge}
-          />
+          <AverageMetric value={summary.averageMessagesPerHour} />
 
           <SummaryMetric
             label="Wiadomości ÷ 40"

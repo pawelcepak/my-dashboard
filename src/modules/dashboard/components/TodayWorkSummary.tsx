@@ -1,9 +1,9 @@
-import { Beer, Clock3, Gauge, Mail, MessageSquareText, Star } from 'lucide-react';
+import { Beer, Clock3, Mail, MessageSquareText, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import MessagesPerHourIndicator from '@/modules/work/components/MessagesPerHourIndicator';
 import type { WorkDay } from '@/modules/work/types/work.types';
 import {
-  formatDecimal,
   formatHours,
   formatNumber,
   getDayMessagesPerHour,
@@ -55,6 +55,20 @@ function MainMetric({ label, value, icon: Icon, accent = false }: MainMetricProp
       >
         {value}
       </p>
+    </div>
+  );
+}
+
+function AverageMetric({ value }: { value: number | null }) {
+  return (
+    <div className="rounded-xl border border-zinc-700 bg-zinc-950/55 px-4 py-3">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
+        Średnia / h
+      </p>
+
+      <div className="mt-2">
+        <MessagesPerHourIndicator value={value} showLabel />
+      </div>
     </div>
   );
 }
@@ -126,7 +140,8 @@ export default function TodayWorkSummary({
   }
 
   const workedHours = getDayWorkedHours(day);
-  const messagesPerHour = getDayMessagesPerHour(day);
+
+  const messagesPerHour = workedHours > 0 ? getDayMessagesPerHour(day) : null;
 
   const ratingPresentation = getWorkRatingPresentation(day.workRating);
 
@@ -149,77 +164,78 @@ export default function TodayWorkSummary({
         </Link>
       </div>
 
-      <div className="p-4">
+      <div className="space-y-3 p-4">
         <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
           <MainMetric label="Wiadomości" value={formatNumber(day.messages)} icon={Mail} accent />
 
           <MainMetric label="Czas pracy" value={`${formatHours(workedHours)} h`} icon={Clock3} />
 
-          <MainMetric
-            label="Średnia / h"
-            value={workedHours > 0 ? formatDecimal(messagesPerHour) : '—'}
-            icon={Gauge}
+          <AverageMetric value={messagesPerHour} />
+        </div>
+
+        <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
+          <div className="flex items-center justify-between gap-3 rounded-lg border border-zinc-700 bg-zinc-950/40 px-3 py-2.5">
+            <div className="flex min-w-0 items-center gap-2">
+              <Star aria-hidden="true" className="size-4 shrink-0 text-zinc-500" />
+
+              <span className="truncate text-xs font-medium text-zinc-500">Ocena</span>
+            </div>
+
+            <span
+              className="shrink-0 text-sm font-bold"
+              style={{ color: ratingPresentation.color }}
+            >
+              {formatWorkRating(day.workRating)}
+            </span>
+          </div>
+
+          <SecondaryMetric
+            label="Piwa"
+            value={String(day.beers)}
+            icon={Beer}
+            valueClassName={day.beers === 0 ? 'text-emerald-300' : 'text-red-300'}
+          />
+
+          <SecondaryMetric
+            label="Bloki"
+            value={String(day.sessions.length)}
+            icon={MessageSquareText}
           />
         </div>
 
-        <div className="flex items-center justify-between gap-3 rounded-lg border border-zinc-700 bg-zinc-950/40 px-3 py-2.5">
-          <div className="flex min-w-0 items-center gap-2">
-            <Star aria-hidden="true" className="size-4 shrink-0 text-zinc-500" />
+        <div className="flex flex-wrap gap-2">
+          <span
+            className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${ratingPresentation.className}`}
+          >
+            {ratingPresentation.label}
+          </span>
 
-            <span className="truncate text-xs font-medium text-zinc-500">Ocena</span>
-          </div>
-
-          <span className="shrink-0 text-sm font-bold" style={{ color: ratingPresentation.color }}>
-            {formatWorkRating(day.workRating)}
+          <span
+            className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${beerPresentation.className}`}
+          >
+            {day.beers === 0 ? 'Bez alkoholu' : `${day.beers} piw`}
           </span>
         </div>
 
-        <SecondaryMetric
-          label="Piwa"
-          value={String(day.beers)}
-          icon={Beer}
-          valueClassName={day.beers === 0 ? 'text-emerald-300' : 'text-red-300'}
-        />
+        {day.sessions.length > 0 && (
+          <div className="border-t border-zinc-700 pt-3">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
+              Bloki pracy
+            </p>
 
-        <SecondaryMetric
-          label="Bloki"
-          value={String(day.sessions.length)}
-          icon={MessageSquareText}
-        />
-      </div>
-
-      <div className="mt-3 flex flex-wrap gap-2">
-        <span
-          className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${ratingPresentation.className}`}
-        >
-          {ratingPresentation.label}
-        </span>
-
-        <span
-          className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${beerPresentation.className}`}
-        >
-          {day.beers === 0 ? 'Bez alkoholu' : `${day.beers} piw`}
-        </span>
-      </div>
-
-      {day.sessions.length > 0 && (
-        <div className="mt-3 border-t border-zinc-700 pt-3">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
-            Bloki pracy
-          </p>
-
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {day.sessions.map((session) => (
-              <span
-                key={session.id}
-                className="rounded-md border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[11px] font-medium text-zinc-400"
-              >
-                {session.startTime}–{session.endTime}
-              </span>
-            ))}
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {day.sessions.map((session) => (
+                <span
+                  key={session.id}
+                  className="rounded-md border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[11px] font-medium text-zinc-400"
+                >
+                  {session.startTime}–{session.endTime}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 }

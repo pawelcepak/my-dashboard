@@ -9,6 +9,19 @@ export type BeerPresentation = {
   className: string;
 };
 
+export type MessagesPerHourTrend = 'up' | 'neutral' | 'down' | 'empty';
+
+export type MessagesPerHourPresentation = {
+  trend: MessagesPerHourTrend;
+  label: string;
+  shortLabel: string;
+  symbol: string;
+  color: string;
+  textClassName: string;
+  badgeClassName: string;
+  iconClassName: string;
+};
+
 export function formatWorkRating(rating: number | null): string {
   if (rating === null) {
     return '—';
@@ -111,6 +124,60 @@ export function getWorkRatingPresentation(rating: number | null): WorkRatingPres
     label: 'Bardzo niska',
     color: '#6e0303',
     className: 'border-[#6e0303]/60 bg-[#6e0303]/15 text-[#6e0303] dark:text-[#d24b4b]',
+  };
+}
+
+export function getMessagesPerHourPresentation(
+  messagesPerHour: number | null
+): MessagesPerHourPresentation {
+  if (messagesPerHour === null || !Number.isFinite(messagesPerHour) || messagesPerHour <= 0) {
+    return {
+      trend: 'empty',
+      label: 'Brak danych',
+      shortLabel: 'Brak danych',
+      symbol: '—',
+      color: '#747d8a',
+      textClassName: 'text-zinc-500',
+      badgeClassName: 'border-zinc-700 bg-zinc-900 text-zinc-500',
+      iconClassName: 'text-zinc-500',
+    };
+  }
+
+  if (messagesPerHour >= 43) {
+    return {
+      trend: 'up',
+      label: 'Wysoka wydajność',
+      shortLabel: 'Wysoka',
+      symbol: '↑',
+      color: '#16a34a',
+      textClassName: 'text-green-600 dark:text-green-400',
+      badgeClassName: 'border-green-700/70 bg-green-950/20 text-green-700 dark:text-green-400',
+      iconClassName: 'text-green-600 dark:text-green-400',
+    };
+  }
+
+  if (messagesPerHour >= 36) {
+    return {
+      trend: 'neutral',
+      label: 'Stabilna wydajność',
+      shortLabel: 'Stabilna',
+      symbol: '=',
+      color: '#ca8a04',
+      textClassName: 'text-yellow-600 dark:text-yellow-400',
+      badgeClassName: 'border-yellow-700/70 bg-yellow-950/20 text-yellow-700 dark:text-yellow-400',
+      iconClassName: 'text-yellow-600 dark:text-yellow-400',
+    };
+  }
+
+  return {
+    trend: 'down',
+    label: 'Niska wydajność',
+    shortLabel: 'Niska',
+    symbol: '↓',
+    color: '#dc2626',
+    textClassName: 'text-red-600 dark:text-red-400',
+    badgeClassName: 'border-red-800/70 bg-red-950/25 text-red-600 dark:text-red-400',
+    iconClassName: 'text-red-600 dark:text-red-400',
   };
 }
 
