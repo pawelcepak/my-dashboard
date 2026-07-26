@@ -1,6 +1,37 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  color-scheme: light;
+
+  /*
+   * Główne kolory wizualne aplikacji.
+   */
+
+  --app-accent: #dc143c;
+  --app-accent-soft: rgb(220 20 60 / 12%);
+  --app-accent-border: rgb(220 20 60 / 42%);
+
+  /*
+   * Jasny motyw.
+   *
+   * Tło pozostaje jasne, ale powierzchnie oraz obramowania mają
+   * większy kontrast niż w poprzedniej wersji.
+   */
+
+  --color-zinc-50: #111318;
+  --color-zinc-100: #181b21;
+  --color-zinc-200: #292d35;
+  --color-zinc-300: #3d424c;
+  --color-zinc-400: #565d69;
+  --color-zinc-500: #666e7a;
+  --color-zinc-600: #7d8591;
+  --color-zinc-700: #9aa1ab;
+  --color-zinc-800: #c1c5cc;
+  --color-zinc-900: #e1e3e7;
+  --color-zinc-950: #f2f3f5;
+
   font-family:
     Inter,
     ui-sans-serif,
@@ -9,10 +40,38 @@
     BlinkMacSystemFont,
     'Segoe UI',
     sans-serif;
-  color: #f4f4f5;
-  background: #09090b;
+
+  color: var(--color-zinc-100);
+  background: var(--color-zinc-950);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+}
+
+:root.dark {
+  color-scheme: dark;
+
+  /*
+   * Ciemny motyw nie jest już niemal czarny.
+   *
+   * Główne tło bazuje na #545454, natomiast karty i pola mają
+   * nieco ciemniejsze powierzchnie, aby zachować hierarchię.
+   */
+
+  --color-zinc-50: #ffffff;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e7e7e8;
+  --color-zinc-300: #d0d0d2;
+  --color-zinc-400: #b5b5b8;
+  --color-zinc-500: #a0a0a4;
+  --color-zinc-600: #858589;
+  --color-zinc-700: #707074;
+  --color-zinc-800: #616165;
+  --color-zinc-900: #5a5a5a;
+  --color-zinc-950: #545454;
+
+  --app-accent: #ff315d;
+  --app-accent-soft: rgb(220 20 60 / 22%);
+  --app-accent-border: rgb(255 49 93 / 58%);
 }
 
 * {
@@ -22,14 +81,15 @@
 html {
   min-width: 320px;
   min-height: 100%;
-  background: #09090b;
+  background: var(--color-zinc-950);
 }
 
 body {
   min-width: 320px;
   min-height: 100%;
   margin: 0;
-  background: #09090b;
+  color: var(--color-zinc-100);
+  background: var(--color-zinc-950);
 }
 
 button,
@@ -44,9 +104,14 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+button:not(:disabled),
+a {
+  cursor: pointer;
+}
+
 ::selection {
-  color: #fafafa;
-  background: #3f3f46;
+  color: #ffffff;
+  background: var(--app-accent);
 }
 
 ::-webkit-scrollbar {
@@ -55,15 +120,15 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: var(--color-zinc-950);
 }
 
 ::-webkit-scrollbar-thumb {
-  border: 2px solid #09090b;
+  border: 2px solid var(--color-zinc-950);
   border-radius: 999px;
-  background: #3f3f46;
+  background: var(--color-zinc-700);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: var(--color-zinc-600);
 }

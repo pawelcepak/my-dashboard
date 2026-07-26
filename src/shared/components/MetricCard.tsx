@@ -14,7 +14,7 @@ export default function MetricCard({ title, value, description, icon: Icon, to }
   return (
     <Link
       to={to}
-      className="group relative flex min-h-44 flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/70 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-700 hover:bg-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+      className="group relative flex min-h-32 flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/70 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-zinc-700 hover:bg-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex size-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 text-zinc-300">
@@ -27,7 +27,7 @@ export default function MetricCard({ title, value, description, icon: Icon, to }
         />
       </div>
 
-      <div className="mt-6">
+      <div className="mt-4">
         <p className="text-sm font-medium text-zinc-400">{title}</p>
 
         <p className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50">{value}</p>
