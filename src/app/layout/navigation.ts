@@ -11,52 +11,60 @@ import {
 
 export type NavigationItem = {
   label: string;
+  shortLabel: string;
   path: string;
   icon: LucideIcon;
-  available: boolean;
+  mobilePrimary: boolean;
 };
 
 export const navigationItems: NavigationItem[] = [
   {
     label: 'Dashboard',
+    shortLabel: 'Start',
     path: '/',
     icon: LayoutDashboard,
-    available: true,
+    mobilePrimary: true,
   },
   {
     label: 'Praca',
+    shortLabel: 'Praca',
     path: '/work',
     icon: BriefcaseBusiness,
-    available: true,
+    mobilePrimary: true,
   },
   {
     label: 'Wydatki',
+    shortLabel: 'Wydatki',
     path: '/expenses',
     icon: CreditCard,
-    available: true,
+    mobilePrimary: true,
   },
   {
     label: 'Długi',
+    shortLabel: 'Długi',
     path: '/debts',
     icon: HandCoins,
-    available: true,
+    mobilePrimary: true,
   },
   {
     label: 'Portfel',
+    shortLabel: 'Portfel',
     path: '/portfolio',
     icon: WalletCards,
-    available: true,
+    mobilePrimary: false,
   },
   {
     label: 'Statystyki',
+    shortLabel: 'Statystyki',
     path: '/statistics',
     icon: BarChart3,
-    available: true,
+    mobilePrimary: false,
   },
   {
     label: 'Ustawienia',
+    shortLabel: 'Ustawienia',
     path: '/settings',
     icon: Settings,
-    available: true,
+    mobilePrimary: false,
   },
 ];

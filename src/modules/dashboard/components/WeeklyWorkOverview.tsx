@@ -15,162 +15,118 @@ type WeeklyWorkOverviewProps = {
   progress: WorkProgress;
 };
 
-type WeeklyMetricProps = {
+type InlineMetricProps = {
   label: string;
   value: string;
-  description: string;
   icon: typeof Mail;
 };
 
-function WeeklyMetric({ label, value, description, icon: Icon }: WeeklyMetricProps) {
+function InlineMetric({ label, value, icon: Icon }: InlineMetricProps) {
   return (
-    <div className="rounded-xl border border-zinc-800 bg-zinc-950/50 p-4">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-sm font-medium text-zinc-500">{label}</p>
+    <div className="flex items-center gap-2">
+      <Icon aria-hidden="true" className="size-4 shrink-0 text-zinc-600" />
 
-          <p className="mt-2 text-xl font-semibold tracking-tight text-zinc-100">{value}</p>
+      <div>
+        <p className="text-[10px] uppercase tracking-wide text-zinc-600">{label}</p>
 
-          <p className="mt-1 text-xs leading-5 text-zinc-600">{description}</p>
-        </div>
-
-        <Icon aria-hidden="true" className="size-5 shrink-0 text-zinc-600" />
+        <p className="text-sm font-semibold text-zinc-200">{value}</p>
       </div>
     </div>
   );
 }
 
-function calculateGoalPercentage(currentValue: number, target: number | null): number | null {
+function getGoalPercentage(current: number, target: number | null) {
   if (target === null || target <= 0) {
     return null;
   }
 
-  return Math.min(100, (currentValue / target) * 100);
+  return Math.min(100, (current / target) * 100);
 }
 
 export default function WeeklyWorkOverview({ week, summary, progress }: WeeklyWorkOverviewProps) {
-  const weeklyGoalPercentage = calculateGoalPercentage(
-    summary.totalMessages,
-    week.goals.weeklyMessagesTarget
-  );
+  const goalPercentage = getGoalPercentage(summary.totalMessages, week.goals.weeklyMessagesTarget);
 
   return (
-    <section className="rounded-2xl border border-zinc-800 bg-zinc-900/50">
-      <div className="flex flex-col gap-3 border-b border-zinc-800 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <div>
-          <h2 className="text-base font-semibold text-zinc-100">Bieżący tydzień</h2>
+    <section className="rounded-xl border border-zinc-800 bg-zinc-900/50">
+      <div className="flex flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center">
+        <div className="flex min-w-40 items-center justify-between gap-3 lg:block">
+          <div>
+            <h2 className="text-sm font-semibold text-zinc-100">Tydzień {week.weekNumber}</h2>
 
-          <p className="mt-1 text-sm text-zinc-500">
-            Tydzień {week.weekNumber}, {week.year}
-          </p>
+            <p className="mt-0.5 text-xs text-zinc-500">{week.year}</p>
+          </div>
+
+          <Link
+            to="/work"
+            className="text-xs font-medium text-zinc-500 transition hover:text-zinc-100"
+          >
+            Szczegóły
+          </Link>
         </div>
 
-        <Link
-          to="/work"
-          className="w-fit text-sm font-medium text-zinc-400 transition hover:text-zinc-100"
-        >
-          Otwórz moduł Praca
-        </Link>
-      </div>
+        <div className="hidden h-10 w-px bg-zinc-800 lg:block" />
 
-      <div className="p-5 sm:p-6">
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <WeeklyMetric
+        <div className="grid flex-1 grid-cols-2 gap-3 sm:grid-cols-4">
+          <InlineMetric
             label="Wiadomości"
             value={formatNumber(summary.totalMessages)}
-            description={`${summary.totalHeldMessages} zatrzymanych`}
             icon={Mail}
           />
 
-          <WeeklyMetric
-            label="Czas pracy"
-            value={`${formatHours(summary.totalHours)} godz.`}
-            description={`${summary.totalMinutes} minut`}
-            icon={Clock3}
-          />
+          <InlineMetric label="Godziny" value={formatHours(summary.totalHours)} icon={Clock3} />
 
-          <WeeklyMetric
-            label="Średnia"
+          <InlineMetric
+            label="Średnia/h"
             value={formatDecimal(summary.averageMessagesPerHour)}
-            description="Wiadomości na godzinę"
             icon={Gauge}
           />
 
-          <WeeklyMetric
-            label="Zarobek netto"
+          <InlineMetric
+            label="Netto"
             value={formatCurrencyPln(summary.netEarningsPln)}
-            description="Po odjęciu opłaty za wypłatę"
             icon={Banknote}
           />
         </div>
 
-        <div className="mt-5 rounded-xl border border-zinc-800 bg-zinc-950/40 p-4">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-start gap-3">
-              <div className="flex size-10 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-500">
-                <Target aria-hidden="true" className="size-5" />
-              </div>
+        <div className="hidden h-10 w-px bg-zinc-800 xl:block" />
 
-              <div>
-                <p className="text-sm font-medium text-zinc-300">Cel tygodniowy</p>
+        <div className="min-w-64 flex-1 xl:max-w-sm">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <Target aria-hidden="true" className="size-4 text-zinc-600" />
 
-                <p className="mt-1 text-sm text-zinc-500">
-                  {week.goals.weeklyMessagesTarget === null
-                    ? 'Nie ustawiono celu tygodniowego'
-                    : `${formatNumber(summary.totalMessages)} z ${formatNumber(
-                        week.goals.weeklyMessagesTarget
-                      )} wiadomości`}
-                </p>
-              </div>
+              <p className="text-xs text-zinc-500">
+                Cel:{' '}
+                {week.goals.weeklyMessagesTarget === null
+                  ? 'brak'
+                  : `${formatNumber(summary.totalMessages)} / ${formatNumber(
+                      week.goals.weeklyMessagesTarget
+                    )}`}
+              </p>
             </div>
 
-            {weeklyGoalPercentage !== null && (
-              <p className="text-sm font-semibold text-zinc-200">
-                {formatDecimal(weeklyGoalPercentage)}%
+            {goalPercentage !== null && (
+              <p className="text-xs font-semibold text-zinc-300">
+                {formatDecimal(goalPercentage)}%
               </p>
             )}
           </div>
 
-          {weeklyGoalPercentage !== null && (
-            <div className="mt-4 h-2 overflow-hidden rounded-full bg-zinc-800">
+          {goalPercentage !== null && (
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-800">
               <div
-                className="h-full rounded-full bg-blue-500 transition-all"
-                style={{ width: `${weeklyGoalPercentage}%` }}
+                className="h-full rounded-full bg-blue-500"
+                style={{ width: `${goalPercentage}%` }}
               />
             </div>
           )}
 
-          <div className="mt-4 grid gap-3 text-sm sm:grid-cols-3">
-            <div>
-              <p className="text-xs uppercase tracking-wide text-zinc-600">Następny próg</p>
-
-              <p className="mt-1 font-medium text-zinc-300">
-                {progress.nextThreshold === null
-                  ? 'Osiągnięto maksimum'
-                  : formatNumber(progress.nextThreshold)}
-              </p>
-            </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-zinc-600">Brakuje</p>
-
-              <p className="mt-1 font-medium text-zinc-300">
-                {formatNumber(progress.messagesMissing)}
-              </p>
-            </div>
-
-            <div>
-              <p className="text-xs uppercase tracking-wide text-zinc-600">Potrzebne dziennie</p>
-
-              <p className="mt-1 font-medium text-zinc-300">
-                {progress.remainingDays > 0
-                  ? `${formatNumber(
-                      progress.requiredMessagesPerDay
-                    )} przez ${progress.remainingDays} dni`
-                  : 'Brak pozostałych dni'}
-              </p>
-            </div>
-          </div>
+          <p className="mt-2 text-[11px] text-zinc-600">
+            Następny próg:{' '}
+            {progress.nextThreshold === null ? 'osiągnięty' : formatNumber(progress.nextThreshold)}
+            {' · '}
+            Brakuje: {formatNumber(progress.messagesMissing)}
+          </p>
         </div>
       </div>
     </section>

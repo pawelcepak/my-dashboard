@@ -1,4 +1,4 @@
-import { Beer, Clock3, Mail, Save, Star, Target } from 'lucide-react';
+import { Clock3, Save, Target } from 'lucide-react';
 import { useEffect, useState, type FormEvent } from 'react';
 
 import type {
@@ -17,9 +17,12 @@ type QuickWorkActionsProps = {
 };
 
 const inputClasses =
-  'h-11 w-full rounded-xl border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-700 focus:border-zinc-600 focus:ring-2 focus:ring-zinc-800';
+  'h-9 w-full rounded-lg border border-zinc-800 bg-zinc-950 px-2.5 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-700 focus:border-zinc-600 focus:ring-1 focus:ring-zinc-700';
 
-const labelClasses = 'mb-2 flex items-center gap-2 text-sm font-medium text-zinc-400';
+const labelClasses = 'mb-1.5 block text-[11px] font-medium uppercase tracking-wide text-zinc-600';
+
+const buttonClasses =
+  'flex h-9 items-center justify-center gap-2 rounded-lg border border-zinc-700 bg-zinc-800 px-3 text-xs font-medium text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50';
 
 function parseNonNegativeInteger(value: string): number {
   const parsedValue = Number.parseInt(value, 10);
@@ -31,7 +34,7 @@ function parseNonNegativeInteger(value: string): number {
   return parsedValue;
 }
 
-function parseNullableNonNegativeNumber(value: string): number | null {
+function parseNullableNumber(value: string): number | null {
   if (value.trim() === '') {
     return null;
   }
@@ -46,15 +49,13 @@ function parseNullableNonNegativeNumber(value: string): number | null {
 }
 
 function parseWorkRating(value: string): number | null {
-  const parsedValue = parseNullableNonNegativeNumber(value);
+  const parsedValue = parseNullableNumber(value);
 
   if (parsedValue === null) {
     return null;
   }
 
-  const limitedValue = Math.min(10, parsedValue);
-
-  return Math.round(limitedValue * 10) / 10;
+  return Math.round(Math.min(10, parsedValue) * 10) / 10;
 }
 
 export default function QuickWorkActions({
@@ -139,91 +140,70 @@ export default function QuickWorkActions({
     event.preventDefault();
 
     await onUpdateGoals({
-      dailyMessagesTarget: parseNullableNonNegativeNumber(dailyMessagesTarget),
-      weeklyMessagesTarget: parseNullableNonNegativeNumber(weeklyMessagesTarget),
-      dailyHoursTarget: parseNullableNonNegativeNumber(dailyHoursTarget),
+      dailyMessagesTarget: parseNullableNumber(dailyMessagesTarget),
+      weeklyMessagesTarget: parseNullableNumber(weeklyMessagesTarget),
+      dailyHoursTarget: parseNullableNumber(dailyHoursTarget),
     });
   }
 
   return (
-    <section className="rounded-2xl border border-zinc-800 bg-zinc-900/50">
-      <div className="border-b border-zinc-800 px-5 py-4 sm:px-6">
-        <h2 className="text-base font-semibold text-zinc-100">Szybkie akcje</h2>
+    <section className="rounded-xl border border-zinc-800 bg-zinc-900/50">
+      <div className="border-b border-zinc-800 px-4 py-3">
+        <h2 className="text-sm font-semibold text-zinc-100">Szybka edycja</h2>
 
-        <p className="mt-1 text-sm text-zinc-500">
-          Najczęściej zmieniane dane bieżącego dnia i tygodnia
-        </p>
+        <p className="mt-0.5 text-xs text-zinc-500">Najczęściej używane dane</p>
       </div>
 
-      <div className="divide-y divide-zinc-800">
+      <div className="space-y-3 p-4">
         <form
           onSubmit={(event) => {
             void handleDaySubmit(event);
           }}
-          className="p-5 sm:p-6"
+          className="grid gap-2 sm:grid-cols-[1fr_1fr_1fr_auto]"
         >
-          <h3 className="text-sm font-semibold text-zinc-200">Dzisiejsze dane</h3>
+          <label>
+            <span className={labelClasses}>Wiadomości</span>
 
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
-            <label>
-              <span className={labelClasses}>
-                <Mail aria-hidden="true" className="size-4" />
-                Wiadomości
-              </span>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              value={messages}
+              onChange={(event) => setMessages(event.target.value)}
+              className={inputClasses}
+            />
+          </label>
 
-              <input
-                type="number"
-                min="0"
-                step="1"
-                value={messages}
-                onChange={(event) => setMessages(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
+          <label>
+            <span className={labelClasses}>Ocena</span>
 
-            <label>
-              <span className={labelClasses}>
-                <Star aria-hidden="true" className="size-4" />
-                Ocena
-              </span>
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="0.1"
+              value={workRating}
+              onChange={(event) => setWorkRating(event.target.value)}
+              className={inputClasses}
+            />
+          </label>
 
-              <input
-                type="number"
-                min="0"
-                max="10"
-                step="0.1"
-                value={workRating}
-                placeholder="8,5"
-                onChange={(event) => setWorkRating(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
+          <label>
+            <span className={labelClasses}>Piwa</span>
 
-            <label>
-              <span className={labelClasses}>
-                <Beer aria-hidden="true" className="size-4" />
-                Piwa
-              </span>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              value={beers}
+              onChange={(event) => setBeers(event.target.value)}
+              className={inputClasses}
+            />
+          </label>
 
-              <input
-                type="number"
-                min="0"
-                step="1"
-                value={beers}
-                onChange={(event) => setBeers(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSaving}
-            className="mt-4 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 px-4 text-sm font-medium text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-          >
-            <Save aria-hidden="true" className="size-4" />
-
-            {isSaving ? 'Zapisywanie…' : 'Zapisz dane dnia'}
+          <button type="submit" disabled={isSaving} className={`${buttonClasses} self-end`}>
+            <Save aria-hidden="true" className="size-3.5" />
+            Zapisz
           </button>
         </form>
 
@@ -231,48 +211,33 @@ export default function QuickWorkActions({
           onSubmit={(event) => {
             void handleSessionSubmit(event);
           }}
-          className="p-5 sm:p-6"
+          className="grid gap-2 border-t border-zinc-800 pt-3 sm:grid-cols-[1fr_1fr_auto]"
         >
-          <h3 className="text-sm font-semibold text-zinc-200">Dodaj blok pracy</h3>
+          <label>
+            <span className={labelClasses}>Początek bloku</span>
 
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <label>
-              <span className={labelClasses}>
-                <Clock3 aria-hidden="true" className="size-4" />
-                Początek
-              </span>
+            <input
+              type="time"
+              value={sessionStart}
+              onChange={(event) => setSessionStart(event.target.value)}
+              className={inputClasses}
+            />
+          </label>
 
-              <input
-                type="time"
-                value={sessionStart}
-                onChange={(event) => setSessionStart(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
+          <label>
+            <span className={labelClasses}>Koniec bloku</span>
 
-            <label>
-              <span className={labelClasses}>
-                <Clock3 aria-hidden="true" className="size-4" />
-                Koniec
-              </span>
+            <input
+              type="time"
+              value={sessionEnd}
+              onChange={(event) => setSessionEnd(event.target.value)}
+              className={inputClasses}
+            />
+          </label>
 
-              <input
-                type="time"
-                value={sessionEnd}
-                onChange={(event) => setSessionEnd(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSaving}
-            className="mt-4 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 px-4 text-sm font-medium text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-          >
-            <Clock3 aria-hidden="true" className="size-4" />
-
-            {isSaving ? 'Zapisywanie…' : 'Dodaj blok'}
+          <button type="submit" disabled={isSaving} className={`${buttonClasses} self-end`}>
+            <Clock3 aria-hidden="true" className="size-3.5" />
+            Dodaj blok
           </button>
         </form>
 
@@ -280,71 +245,53 @@ export default function QuickWorkActions({
           onSubmit={(event) => {
             void handleGoalsSubmit(event);
           }}
-          className="p-5 sm:p-6"
+          className="grid gap-2 border-t border-zinc-800 pt-3 sm:grid-cols-[1fr_1fr_1fr_auto]"
         >
-          <h3 className="text-sm font-semibold text-zinc-200">Cele pracy</h3>
+          <label>
+            <span className={labelClasses}>Cel dzienny</span>
 
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
-            <label>
-              <span className={labelClasses}>
-                <Target aria-hidden="true" className="size-4" />
-                Wiadomości dziennie
-              </span>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              value={dailyMessagesTarget}
+              placeholder="—"
+              onChange={(event) => setDailyMessagesTarget(event.target.value)}
+              className={inputClasses}
+            />
+          </label>
 
-              <input
-                type="number"
-                min="0"
-                step="1"
-                value={dailyMessagesTarget}
-                placeholder="Brak celu"
-                onChange={(event) => setDailyMessagesTarget(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
+          <label>
+            <span className={labelClasses}>Cel tygodniowy</span>
 
-            <label>
-              <span className={labelClasses}>
-                <Target aria-hidden="true" className="size-4" />
-                Wiadomości tygodniowo
-              </span>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              value={weeklyMessagesTarget}
+              placeholder="—"
+              onChange={(event) => setWeeklyMessagesTarget(event.target.value)}
+              className={inputClasses}
+            />
+          </label>
 
-              <input
-                type="number"
-                min="0"
-                step="1"
-                value={weeklyMessagesTarget}
-                placeholder="Brak celu"
-                onChange={(event) => setWeeklyMessagesTarget(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
+          <label>
+            <span className={labelClasses}>Godziny dziennie</span>
 
-            <label>
-              <span className={labelClasses}>
-                <Target aria-hidden="true" className="size-4" />
-                Godziny dziennie
-              </span>
+            <input
+              type="number"
+              min="0"
+              step="0.1"
+              value={dailyHoursTarget}
+              placeholder="—"
+              onChange={(event) => setDailyHoursTarget(event.target.value)}
+              className={inputClasses}
+            />
+          </label>
 
-              <input
-                type="number"
-                min="0"
-                step="0.1"
-                value={dailyHoursTarget}
-                placeholder="Brak celu"
-                onChange={(event) => setDailyHoursTarget(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSaving}
-            className="mt-4 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 px-4 text-sm font-medium text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
-          >
-            <Save aria-hidden="true" className="size-4" />
-
-            {isSaving ? 'Zapisywanie…' : 'Zapisz cele'}
+          <button type="submit" disabled={isSaving} className={`${buttonClasses} self-end`}>
+            <Target aria-hidden="true" className="size-3.5" />
+            Cele
           </button>
         </form>
       </div>
