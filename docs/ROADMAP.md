@@ -14,6 +14,10 @@ Current completed sprint:
 
 - v0.3.2C — Smart Goal Synchronization
 
+Current completed visual refinement:
+
+- Work and Dashboard usability refinement after v0.3.2C
+
 Next planned sprint:
 
 - v0.3.2D — Dashboard Control Center
@@ -65,6 +69,8 @@ Following planned sprint:
 - [ ] Not-found page
 - [ ] Centralized application version display
 - [ ] Additional visual refinements based on long-term usage
+- [ ] Production bundle code splitting
+- [ ] Lazy loading for application modules
 
 ## v0.3.x — Work Module
 
@@ -86,6 +92,12 @@ Following planned sprint:
 - [x] Seven-day-to-daily goal calculation
 - [x] Five-day-to-daily goal calculation
 - [x] Goal-value rounding to two decimal places
+- [x] Full message-rate scale from 0 to 1,976 messages
+- [x] Fixed threshold markers for 776, 1,576 and 1,976 messages
+- [x] Current-message position on the full threshold scale
+- [x] Current-rate presentation
+- [x] Next-threshold calculation
+- [x] Messages-missing calculation
 
 ### Editing
 
@@ -157,6 +169,9 @@ Following planned sprint:
 - [x] Synchronized goal values preserved independently for every week
 - [x] Separate five-day and seven-day progress on the Work page
 - [x] Combined goal summary on the Work page
+- [x] Five-day goal visible on Dashboard
+- [x] Seven-day goal visible on Dashboard
+- [x] Fixed 1,976-message target visible on Dashboard
 - [ ] Remaining daily message target
 - [ ] Remaining weekly message target
 - [ ] Required daily pace based on remaining days
@@ -165,6 +180,27 @@ Following planned sprint:
 - [ ] Configurable default work rating
 - [ ] Configurable default exchange rate
 - [ ] Configurable default goals
+
+### Work-rating presentation
+
+- [x] Decimal work-rating values
+- [x] Default 8.5 rating
+- [x] Dedicated color for ratings above 9.0
+- [x] Dedicated color for rating 9.0
+- [x] Dedicated color for rating 8.9
+- [x] Dedicated color for rating 8.8
+- [x] Dedicated color for rating 8.7
+- [x] Dedicated color for rating 8.6
+- [x] Blue default color for rating 8.5
+- [x] Dedicated color for rating 8.4
+- [x] Dedicated color for rating 8.3
+- [x] Dedicated color for rating 8.2
+- [x] Dedicated color for ratings below 8.2
+- [x] Consistent rating colors on Dashboard
+- [x] Consistent rating colors in daily history
+- [x] Consistent rating colors in weekly history
+- [x] Consistent rating colors on mobile
+- [x] Weekly-average rating color
 
 ### Financial goals
 
@@ -210,6 +246,9 @@ Following planned sprint:
 - [x] Strong work-week deletion confirmation
 - [x] Protection against deleting the last week
 - [x] Automatic active-week recovery after deletion
+- [x] Weekly-history block count
+- [x] Weekly-average rating presentation
+- [x] Redesigned weekly-history cards
 - [ ] Grouping history by month
 - [ ] Year filter
 - [ ] Month filter
@@ -217,6 +256,26 @@ Following planned sprint:
 - [ ] Week-close workflow
 - [ ] Automatic next-week creation
 - [ ] Importing historical weeks from Google Sheets
+
+### Work-page usability
+
+- [x] Active-week header
+- [x] Integrated local-save status
+- [x] Active-week daily history shown near the top
+- [x] Active-week daily history on the left side
+- [x] Active-week summary on the right side
+- [x] Week settings grouped with active-week summary
+- [x] Responsive single-column layout on smaller screens
+- [x] Weekly progress below the active-week working area
+- [x] Long-term weekly history below weekly progress
+- [x] Financial plan at the bottom
+- [x] Reduced scrolling before daily editing
+- [x] Compact active-week summary cards
+- [x] Improved active-week visual hierarchy
+- [ ] Sticky daily-history header
+- [ ] Optional compact daily-history density
+- [ ] Keyboard navigation between days
+- [ ] Faster inline daily editing
 
 ### Statistics
 
@@ -289,11 +348,37 @@ Following planned sprint:
 - [x] Synchronized goal summary on Work page
 - [x] Updated tests and documentation
 
+## Post-v0.3.2C — Work and Dashboard Visual Refinement
+
+- [x] Exact user-defined work-rating colors
+- [x] Consistent rating colors across the application
+- [x] Shared full message-rate threshold bar
+- [x] Fixed 1,976-message maximum threshold
+- [x] Threshold markers for 776, 1,576 and 1,976
+- [x] Current-message position indicator
+- [x] Current-rate presentation
+- [x] Next-threshold presentation
+- [x] Message-rate bar on Work page
+- [x] Message-rate bar on Dashboard
+- [x] Simultaneous five-day and seven-day goals on Dashboard
+- [x] Fixed 1,976-message target on Dashboard
+- [x] Active-week daily history moved near the top
+- [x] Active-week summary moved next to daily history
+- [x] Weekly progress moved below active-week content
+- [x] Long-term history moved below weekly progress
+- [x] Financial plan remains last
+- [x] Redesigned weekly-history cards
+- [x] Weekly block count
+- [x] Weekly-average rating color
+- [x] Improved mobile history layout
+- [x] Improved light-theme and dark-theme readability
+
 ## v0.3.2D — Dashboard Control Center
 
 - [ ] Remaining messages today
 - [ ] Remaining messages for the five-day target
 - [ ] Remaining messages for the seven-day target
+- [ ] Remaining messages for the fixed 1,976-message threshold
 - [ ] Remaining hours today
 - [ ] Required average messages per remaining hour
 - [ ] Required daily pace based on remaining calendar days
@@ -306,6 +391,9 @@ Following planned sprint:
 - [ ] Quick removal of work sessions from Dashboard
 - [ ] Further reduction of unnecessary scrolling
 - [ ] Consistent goal calculations between Dashboard and Work page
+- [ ] Dashboard backup-status indicator
+- [ ] Dashboard active-database status
+- [ ] Dashboard quick access to weekly settings
 
 ## v0.3.3 — Google Sheets Migration
 

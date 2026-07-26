@@ -107,7 +107,7 @@ export default function WorkPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <PageHeader
         title="Praca"
         description="Rejestr wiadomości, czasu pracy, zarobków i tygodniowych celów."
@@ -131,86 +131,90 @@ export default function WorkPage() {
         onDeleteWeek={deleteWeek}
       />
 
-      <WorkHistory
-        weeks={weeks}
-        activeWeekId={activeWeek.id}
-        isSaving={isSaving}
-        onSelectWeek={selectWeek}
-      />
+      {error && <div className="app-notice app-notice-error">{error}</div>}
 
-      <div className="flex flex-col gap-3 rounded-xl border border-emerald-900/50 bg-emerald-950/20 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-start gap-3 text-emerald-200">
-          <Database aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-emerald-400" />
-
-          <p className="leading-6">Dane wszystkich tygodni są zapisywane lokalnie.</p>
-        </div>
-
-        <span className="shrink-0 text-xs font-medium text-emerald-400">
-          {isSaving ? 'Zapisywanie…' : 'Zapisano lokalnie'}
-        </span>
-      </div>
-
-      {error && (
-        <div className="rounded-xl border border-red-900/60 bg-red-950/30 px-4 py-3 text-sm text-red-300">
-          {error}
-        </div>
-      )}
-
-      <div className="rounded-2xl border border-zinc-700 bg-gradient-to-br from-zinc-900 to-zinc-950 p-5 sm:p-6">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <section className="overflow-hidden rounded-2xl border border-zinc-700 bg-gradient-to-br from-zinc-900 to-zinc-950">
+        <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div>
-            <p className="text-sm font-medium text-zinc-500">Aktywny tydzień</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
+              Aktywny tydzień
+            </p>
 
-            <h2 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50">
+            <h2 className="mt-1 text-xl font-bold tracking-tight text-zinc-50 sm:text-2xl">
               {formatIsoDate(activeWeek.startDate)}
               {' – '}
               {formatIsoDate(activeWeek.endDate)}
             </h2>
 
-            <p className="mt-2 text-sm text-zinc-500">
-              Stawka za zwykłą wiadomość:{' '}
-              <span className="font-medium text-zinc-300">
+            <p className="mt-1.5 text-sm text-zinc-500">
+              Stawka za wiadomość:{' '}
+              <span className="font-semibold text-zinc-300">
                 {formatCurrencyEur(summary.messageRateEur)}
               </span>
             </p>
           </div>
 
-          <div className="rounded-xl border border-zinc-700 bg-zinc-950/70 px-4 py-3">
-            <p className="text-xs uppercase tracking-wide text-zinc-500">Zarobek brutto</p>
+          <div className="grid grid-cols-2 gap-2 sm:flex">
+            <div className="rounded-xl border border-zinc-700 bg-zinc-950/65 px-4 py-3">
+              <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-500">
+                Brutto
+              </p>
 
-            <p className="mt-1 text-xl font-semibold text-zinc-100">
-              {formatCurrencyEur(summary.grossEarningsEur)}
-            </p>
+              <p className="mt-1 text-lg font-bold text-zinc-100">
+                {formatCurrencyEur(summary.grossEarningsEur)}
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-zinc-700 bg-zinc-950/65 px-4 py-3">
+              <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-500">
+                Status danych
+              </p>
+
+              <p
+                className={`mt-1 text-sm font-bold ${
+                  isSaving ? 'text-amber-400' : 'text-emerald-400'
+                }`}
+              >
+                {isSaving ? 'Zapisywanie…' : 'Zapisano lokalnie'}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
+        <div className="flex items-center gap-2 border-t border-zinc-700 bg-zinc-950/25 px-4 py-2.5 text-xs text-zinc-500 sm:px-5">
+          <Database aria-hidden="true" className="size-3.5 shrink-0" />
+          Dane wszystkich tygodni są zapisywane lokalnie w tej przeglądarce.
+        </div>
+      </section>
 
-      <div className="grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(19rem,0.65fr)]">
-        <WorkProgressCard
-          totalMessages={summary.totalMessages}
-          progress={progress}
-          goals={activeWeek.goals}
+      <div className="grid items-start gap-4 2xl:grid-cols-[minmax(0,1.45fr)_minmax(22rem,0.55fr)]">
+        <WorkDaysTable
+          days={activeWeek.days}
+          selectedDayId={selectedDayId}
+          onEditDay={setSelectedDayId}
         />
 
-        <WorkWeekSettings
-          heldMessages={activeWeek.heldMessages}
-          exchangeRateEurPln={activeWeek.exchangeRateEurPln}
-          onHeldMessagesChange={(heldMessages) => {
-            void updateWeek((currentWeek) => ({
-              ...currentWeek,
-              heldMessages,
-            }));
-          }}
-          onExchangeRateChange={(exchangeRateEurPln) => {
-            void updateWeek((currentWeek) => ({
-              ...currentWeek,
-              exchangeRateEurPln,
-            }));
-          }}
-          onReset={handleReset}
-        />
+        <div className="space-y-4">
+          <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
+
+          <WorkWeekSettings
+            heldMessages={activeWeek.heldMessages}
+            exchangeRateEurPln={activeWeek.exchangeRateEurPln}
+            onHeldMessagesChange={(heldMessages) => {
+              void updateWeek((currentWeek) => ({
+                ...currentWeek,
+                heldMessages,
+              }));
+            }}
+            onExchangeRateChange={(exchangeRateEurPln) => {
+              void updateWeek((currentWeek) => ({
+                ...currentWeek,
+                exchangeRateEurPln,
+              }));
+            }}
+            onReset={handleReset}
+          />
+        </div>
       </div>
 
       {selectedDay && (
@@ -221,10 +225,17 @@ export default function WorkPage() {
         />
       )}
 
-      <WorkDaysTable
-        days={activeWeek.days}
-        selectedDayId={selectedDayId}
-        onEditDay={setSelectedDayId}
+      <WorkProgressCard
+        totalMessages={summary.totalMessages}
+        progress={progress}
+        goals={activeWeek.goals}
+      />
+
+      <WorkHistory
+        weeks={weeks}
+        activeWeekId={activeWeek.id}
+        isSaving={isSaving}
+        onSelectWeek={selectWeek}
       />
 
       <FinancialPlanSummary

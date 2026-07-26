@@ -25,10 +25,10 @@ export default function WorkDaysTable({ days, selectedDayId, onEditDay }: WorkDa
   return (
     <section className="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/50">
       <div className="border-b border-zinc-800 px-5 py-4 sm:px-6">
-        <h2 className="text-base font-semibold text-zinc-100">Dni tygodnia</h2>
+        <h2 className="text-base font-semibold text-zinc-100">Historia aktywnego tygodnia</h2>
 
         <p className="mt-1 text-sm text-zinc-500">
-          Wybierz dzień, aby zmienić wiadomości, ocenę albo bloki pracy.
+          Data, piwa, ocena, wiadomości, godziny, średnia, bloki i edycja dnia.
         </p>
       </div>
 

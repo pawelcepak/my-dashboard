@@ -36,7 +36,7 @@ All notable changes to CHB will be documented in this file.
 - Weekly work-history section.
 - Work weeks grouped by year.
 - Reusable history-card component.
-- Weekly history metrics for messages, hours, performance, earnings, rating, beer count and goal completion.
+- Weekly history metrics for messages, hours, performance, earnings, rating, beer count, blocks and goal completion.
 - Active-week information in the global application header.
 - Complete JSON export of work weeks and application settings.
 - JSON backup-file validation.
@@ -71,6 +71,20 @@ All notable changes to CHB will be documented in this file.
 - Separate five-day and seven-day goal progress indicators in the Work module.
 - Synchronized work-goal summary in the Work module.
 - Financial-goal progress displayed sequentially on the Dashboard.
+- Shared message-rate threshold bar.
+- Full message-rate scale from 0 to 1,976 messages.
+- Visual threshold markers for 776, 1,576 and 1,976 messages.
+- Current-message position indicator on the message-rate scale.
+- Current-rate and next-threshold information.
+- Shared message-rate threshold presentation on Dashboard and Work page.
+- Exact custom work-rating color scale.
+- Rating-color support for individual days and weekly averages.
+- Active-week history redesigned as the primary left-side work view.
+- Compact active-week summary panel.
+- Redesigned weekly-history cards.
+- Weekly-history block count.
+- Visual active-week marker in history cards.
+- Responsive active-week work layout.
 
 ### Changed
 
@@ -113,6 +127,24 @@ All notable changes to CHB will be documented in this file.
 - Work-progress presentation now distinguishes goal completion from message-rate thresholds.
 - Work summary now displays daily, five-day, seven-day and daily-hours targets together.
 - Existing single weekly targets are interpreted as seven-day targets during migration and backup import.
+- Work-rating presentation now uses the exact user-defined color scale instead of generic Tailwind colors.
+- Ratings at or above 9.0 use the highest green rating color.
+- Rating 8.5 remains the blue default rating.
+- Every rating level from below 8.2 through above 9.0 now has a dedicated visual state.
+- Work page now places active-week daily history before long-term weekly history.
+- Active-week daily history and active-week summary are presented side by side on wide screens.
+- Active-week summary and week settings move below daily history on smaller screens.
+- Weekly progress is displayed below the active-week working area.
+- Long-term week history is displayed below weekly progress.
+- Financial plan remains at the bottom of the Work page.
+- Work-page local-save status is integrated into the active-week header.
+- Weekly summary cards are more compact and easier to scan.
+- Weekly-history cards now use stronger metric hierarchy and separated metric cells.
+- Weekly-history message totals use the application accent.
+- Weekly-average ratings use the exact rating color scale.
+- Zero beer count remains green and positive beer count remains red.
+- Message-rate progress now uses one fixed scale ending at the permanent 1,976-message threshold.
+- Dashboard now shows both synchronized weekly goals together with the fixed message-rate scale.
 
 ### Fixed
 
@@ -135,6 +167,12 @@ All notable changes to CHB will be documented in this file.
 - Fixed older JSON backups being rejected because of the missing five-day goal.
 - Fixed goal values not remaining synchronized after changing the source field.
 - Fixed goal presentation in the Work module showing only one weekly target.
+- Fixed Dashboard rating colors relying on generic class-name detection.
+- Fixed weekly-average ratings not using the same colors as daily ratings.
+- Fixed message-rate progress resetting around each next threshold instead of using the full permanent scale.
+- Fixed missing fixed 1,976-message goal presentation on Dashboard.
+- Fixed active-week daily data requiring excessive scrolling on the Work page.
+- Fixed long-term week history appearing before the active-week working area.
 
 ## [0.3.0-beta.3] - 2026-07-25
 

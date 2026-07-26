@@ -1,5 +1,6 @@
-import { CalendarDays, Target } from 'lucide-react';
+import { CalendarDays } from 'lucide-react';
 
+import MessageRateThresholdBar from '@/modules/work/components/MessageRateThresholdBar';
 import type { WorkProgress, WorkWeekGoals } from '@/modules/work/types/work.types';
 import {
   formatDecimal,
@@ -23,28 +24,23 @@ const statusStyles: Record<
   WorkProgress['status'],
   {
     badge: string;
-    bar: string;
     label: string;
   }
 > = {
   red: {
     badge: 'border-red-900/70 bg-red-950/50 text-red-300',
-    bar: 'bg-red-500',
     label: 'Poniżej pierwszego progu',
   },
   yellow: {
     badge: 'border-amber-900/70 bg-amber-950/50 text-amber-300',
-    bar: 'bg-amber-400',
     label: 'Pierwszy próg osiągnięty',
   },
   'light-green': {
     badge: 'border-lime-900/70 bg-lime-950/50 text-lime-300',
-    bar: 'bg-lime-400',
     label: 'Drugi próg osiągnięty',
   },
   green: {
     badge: 'border-emerald-900/70 bg-emerald-950/50 text-emerald-300',
-    bar: 'bg-emerald-500',
     label: 'Najwyższy próg osiągnięty',
   },
 };
@@ -125,10 +121,12 @@ function GoalProgress({ label, target, totalMessages }: GoalProgressProps) {
 
       <div className="mt-3 h-2 overflow-hidden rounded-full bg-zinc-800">
         <div
-          className={`h-full rounded-full transition-all ${
+          className={`h-full rounded-full transition-[width] duration-300 ${
             isCompleted ? 'bg-emerald-500' : 'bg-[var(--app-accent)]'
           }`}
-          style={{ width: `${percentage}%` }}
+          style={{
+            width: `${percentage}%`,
+          }}
         />
       </div>
     </div>
@@ -141,11 +139,6 @@ export default function WorkProgressCard({
   goals,
 }: WorkProgressCardProps) {
   const styles = statusStyles[progress.status];
-
-  const thresholdTarget = progress.nextThreshold ?? totalMessages;
-
-  const thresholdPercentage =
-    thresholdTarget > 0 ? Math.min(100, (totalMessages / thresholdTarget) * 100) : 100;
 
   return (
     <section className="rounded-2xl border border-zinc-700 bg-zinc-900/50">
@@ -165,7 +158,7 @@ export default function WorkProgressCard({
         </span>
       </div>
 
-      <div className="p-5 sm:p-6">
+      <div className="space-y-5 p-5 sm:p-6">
         <div className="grid gap-3 lg:grid-cols-2">
           <GoalProgress
             label="Cel tygodniowy — 7 dni"
@@ -180,72 +173,7 @@ export default function WorkProgressCard({
           />
         </div>
 
-        <div className="mt-5 rounded-xl border border-zinc-700 bg-zinc-950/40 p-4">
-          <div className="flex items-center justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold text-zinc-300">Próg stawki</p>
-
-              <p className="mt-1 text-sm text-zinc-500">
-                Aktualny wynik: {formatNumber(totalMessages)}
-              </p>
-            </div>
-
-            <div className="flex size-10 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-900 text-zinc-400">
-              <Target aria-hidden="true" className="size-5" />
-            </div>
-          </div>
-
-          <div className="mt-4 h-2 overflow-hidden rounded-full bg-zinc-800">
-            <div
-              className={`h-full rounded-full transition-all ${styles.bar}`}
-              style={{
-                width: `${thresholdPercentage}%`,
-              }}
-            />
-          </div>
-
-          {progress.nextThreshold !== null ? (
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
-                  Następny próg
-                </p>
-
-                <p className="mt-1 text-sm font-bold text-zinc-200">
-                  {formatNumber(progress.nextThreshold)}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
-                  Brakuje
-                </p>
-
-                <p className="mt-1 text-sm font-bold text-zinc-200">
-                  {formatNumber(progress.messagesMissing)}
-                </p>
-              </div>
-
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
-                  Tempo do progu
-                </p>
-
-                <p className="mt-1 text-sm font-bold text-zinc-200">
-                  {progress.remainingDays > 0
-                    ? `${formatNumber(
-                        progress.requiredMessagesPerDay
-                      )} × ${progress.remainingDays} dni`
-                    : 'Brak pozostałych dni'}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <p className="mt-4 text-sm font-semibold text-emerald-400">
-              Najwyższy próg stawki został osiągnięty.
-            </p>
-          )}
-        </div>
+        <MessageRateThresholdBar totalMessages={totalMessages} />
       </div>
     </section>
   );

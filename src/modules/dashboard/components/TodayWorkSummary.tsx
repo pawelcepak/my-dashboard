@@ -132,20 +132,6 @@ export default function TodayWorkSummary({
 
   const beerPresentation = getBeerPresentation(day.beers);
 
-  const ratingColor = ratingPresentation.className.includes('emerald')
-    ? 'text-emerald-300'
-    : ratingPresentation.className.includes('lime')
-      ? 'text-lime-300'
-      : ratingPresentation.className.includes('sky')
-        ? 'text-sky-300'
-        : ratingPresentation.className.includes('blue')
-          ? 'text-blue-300'
-          : ratingPresentation.className.includes('amber')
-            ? 'text-amber-300'
-            : ratingPresentation.className.includes('red')
-              ? 'text-red-300'
-              : 'text-zinc-400';
-
   return (
     <section className="rounded-xl border border-zinc-700 bg-zinc-900/65 shadow-sm">
       <div className="flex items-center justify-between gap-4 border-b border-zinc-700 px-4 py-3">
@@ -176,61 +162,64 @@ export default function TodayWorkSummary({
           />
         </div>
 
-        <div className="mt-3 grid gap-2 sm:grid-cols-3">
-          <SecondaryMetric
-            label="Ocena"
-            value={formatWorkRating(day.workRating)}
-            icon={Star}
-            valueClassName={ratingColor}
-          />
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-zinc-700 bg-zinc-950/40 px-3 py-2.5">
+          <div className="flex min-w-0 items-center gap-2">
+            <Star aria-hidden="true" className="size-4 shrink-0 text-zinc-500" />
 
-          <SecondaryMetric
-            label="Piwa"
-            value={String(day.beers)}
-            icon={Beer}
-            valueClassName={day.beers === 0 ? 'text-emerald-300' : 'text-red-300'}
-          />
-
-          <SecondaryMetric
-            label="Bloki"
-            value={String(day.sessions.length)}
-            icon={MessageSquareText}
-          />
-        </div>
-
-        <div className="mt-3 flex flex-wrap gap-2">
-          <span
-            className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${ratingPresentation.className}`}
-          >
-            {ratingPresentation.label}
-          </span>
-
-          <span
-            className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${beerPresentation.className}`}
-          >
-            {day.beers === 0 ? 'Bez alkoholu' : `${day.beers} piw`}
-          </span>
-        </div>
-
-        {day.sessions.length > 0 && (
-          <div className="mt-3 border-t border-zinc-700 pt-3">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
-              Bloki pracy
-            </p>
-
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {day.sessions.map((session) => (
-                <span
-                  key={session.id}
-                  className="rounded-md border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[11px] font-medium text-zinc-400"
-                >
-                  {session.startTime}–{session.endTime}
-                </span>
-              ))}
-            </div>
+            <span className="truncate text-xs font-medium text-zinc-500">Ocena</span>
           </div>
-        )}
+
+          <span className="shrink-0 text-sm font-bold" style={{ color: ratingPresentation.color }}>
+            {formatWorkRating(day.workRating)}
+          </span>
+        </div>
+
+        <SecondaryMetric
+          label="Piwa"
+          value={String(day.beers)}
+          icon={Beer}
+          valueClassName={day.beers === 0 ? 'text-emerald-300' : 'text-red-300'}
+        />
+
+        <SecondaryMetric
+          label="Bloki"
+          value={String(day.sessions.length)}
+          icon={MessageSquareText}
+        />
       </div>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        <span
+          className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${ratingPresentation.className}`}
+        >
+          {ratingPresentation.label}
+        </span>
+
+        <span
+          className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${beerPresentation.className}`}
+        >
+          {day.beers === 0 ? 'Bez alkoholu' : `${day.beers} piw`}
+        </span>
+      </div>
+
+      {day.sessions.length > 0 && (
+        <div className="mt-3 border-t border-zinc-700 pt-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
+            Bloki pracy
+          </p>
+
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {day.sessions.map((session) => (
+              <span
+                key={session.id}
+                className="rounded-md border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[11px] font-medium text-zinc-400"
+              >
+                {session.startTime}–{session.endTime}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

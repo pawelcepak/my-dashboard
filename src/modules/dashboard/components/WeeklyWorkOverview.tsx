@@ -1,6 +1,7 @@
 import { Banknote, Clock3, Gauge, Mail, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+import MessageRateThresholdBar from '@/modules/work/components/MessageRateThresholdBar';
 import type { WorkProgress, WorkWeek, WorkWeekSummary } from '@/modules/work/types/work.types';
 import {
   formatCurrencyPln,
@@ -20,6 +21,12 @@ type InlineMetricProps = {
   value: string;
   icon: typeof Mail;
   accent?: boolean;
+};
+
+type CompactGoalProps = {
+  label: string;
+  current: number;
+  target: number | null;
 };
 
 function InlineMetric({ label, value, icon: Icon, accent = false }: InlineMetricProps) {
@@ -52,20 +59,61 @@ function InlineMetric({ label, value, icon: Icon, accent = false }: InlineMetric
   );
 }
 
-function getGoalPercentage(current: number, target: number | null): number | null {
+function CompactGoal({ label, current, target }: CompactGoalProps) {
   if (target === null || target <= 0) {
-    return null;
+    return (
+      <div className="rounded-lg border border-zinc-700 bg-zinc-950/40 px-3 py-2.5">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-500">{label}</p>
+
+        <p className="mt-1 text-xs font-medium text-zinc-500">Brak celu</p>
+      </div>
+    );
   }
 
-  return Math.min(100, (current / target) * 100);
-}
+  const percentage = Math.min(100, (current / target) * 100);
 
-export default function WeeklyWorkOverview({ week, summary, progress }: WeeklyWorkOverviewProps) {
-  const goalPercentage = getGoalPercentage(summary.totalMessages, week.goals.weeklyMessagesTarget);
+  const isCompleted = current >= target;
 
   return (
-    <section className="rounded-xl border border-zinc-700 bg-zinc-900/65 shadow-sm">
-      <div className="grid gap-4 p-4 lg:grid-cols-[11rem_minmax(0,1fr)_minmax(18rem,0.75fr)] lg:items-center">
+    <div
+      className={`rounded-lg border px-3 py-2.5 ${
+        isCompleted ? 'border-emerald-800 bg-emerald-950/20' : 'border-zinc-700 bg-zinc-950/40'
+      }`}
+    >
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-zinc-500">{label}</p>
+
+        <p
+          className={`text-xs font-bold ${
+            isCompleted ? 'text-emerald-400' : 'text-[var(--app-accent)]'
+          }`}
+        >
+          {formatDecimal(percentage)}%
+        </p>
+      </div>
+
+      <p className="mt-1 text-xs font-semibold text-zinc-300">
+        {formatNumber(current)} / {formatNumber(target)}
+      </p>
+
+      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-800">
+        <div
+          className={`h-full rounded-full transition-[width] duration-300 ${
+            isCompleted ? 'bg-emerald-500' : 'bg-[var(--app-accent)]'
+          }`}
+          style={{
+            width: `${percentage}%`,
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default function WeeklyWorkOverview({ week, summary }: WeeklyWorkOverviewProps) {
+  return (
+    <section className="overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/65 shadow-sm">
+      <div className="grid gap-4 p-4 lg:grid-cols-[11rem_minmax(0,1fr)_minmax(20rem,0.8fr)] lg:items-center">
         <div className="flex items-center justify-between gap-3 lg:block">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
@@ -108,49 +156,31 @@ export default function WeeklyWorkOverview({ week, summary, progress }: WeeklyWo
           />
         </div>
 
-        <div className="rounded-xl border border-zinc-700 bg-zinc-950/40 p-3">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex min-w-0 items-center gap-2">
-              <Target aria-hidden="true" className="size-4 shrink-0 text-[var(--app-accent)]" />
+        <div>
+          <div className="mb-2 flex items-center gap-2">
+            <Target aria-hidden="true" className="size-4 text-[var(--app-accent)]" />
 
-              <p className="truncate text-xs font-semibold text-zinc-300">Cel tygodniowy</p>
-            </div>
-
-            {goalPercentage !== null && (
-              <p className="shrink-0 text-sm font-bold text-[var(--app-accent)]">
-                {formatDecimal(goalPercentage)}%
-              </p>
-            )}
+            <p className="text-xs font-semibold text-zinc-300">Cele tygodniowe</p>
           </div>
 
-          <p className="mt-2 text-xs font-medium text-zinc-500">
-            {week.goals.weeklyMessagesTarget === null
-              ? 'Nie ustawiono celu'
-              : `${formatNumber(summary.totalMessages)} / ${formatNumber(
-                  week.goals.weeklyMessagesTarget
-                )} wiadomości`}
-          </p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <CompactGoal
+              label="7 dni"
+              current={summary.totalMessages}
+              target={week.goals.weeklyMessagesTarget}
+            />
 
-          {goalPercentage !== null && (
-            <div className="mt-2 h-2 overflow-hidden rounded-full bg-zinc-800">
-              <div
-                className="h-full rounded-full bg-[var(--app-accent)] transition-all"
-                style={{ width: `${goalPercentage}%` }}
-              />
-            </div>
-          )}
-
-          <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[11px] font-medium text-zinc-500">
-            <span>
-              Próg:{' '}
-              {progress.nextThreshold === null
-                ? 'osiągnięty'
-                : formatNumber(progress.nextThreshold)}
-            </span>
-
-            <span>Brakuje: {formatNumber(progress.messagesMissing)}</span>
+            <CompactGoal
+              label="5 dni"
+              current={summary.totalMessages}
+              target={week.goals.weeklyMessagesTarget5Days}
+            />
           </div>
         </div>
+      </div>
+
+      <div className="border-t border-zinc-700 p-4">
+        <MessageRateThresholdBar totalMessages={summary.totalMessages} compact />
       </div>
     </section>
   );
