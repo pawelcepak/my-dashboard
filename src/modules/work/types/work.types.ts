@@ -46,7 +46,7 @@ export type WorkWeekCreateOptions = {
   copySettingsFromWeekId: string | null;
 };
 
-export type AppSettingKey = 'activeWorkWeekId';
+export type AppSettingKey = 'activeWorkWeekId' | 'lastBackupAt';
 
 export type AppSetting = {
   key: AppSettingKey;

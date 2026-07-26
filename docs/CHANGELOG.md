@@ -30,6 +30,13 @@ All notable changes to CHB will be documented in this file.
 - Reusable history-card component.
 - Weekly history metrics for messages, hours, performance, earnings, rating, beer count and goal completion.
 - Active-week information in the global application header.
+- Complete JSON export of work weeks and application settings.
+- JSON backup-file validation.
+- Backup preview before restoring data.
+- Transaction-based replacement of the local database.
+- Automatic recovery of the active-week setting during import.
+- Last-backup timestamp.
+- Backup and restore panel in Settings.
 
 ### Changed
 
@@ -47,6 +54,7 @@ All notable changes to CHB will be documented in this file.
 - Work history is ordered from the newest week to the oldest.
 - Selecting a history card changes the active week without reloading the application.
 - The application header displays the active week number and date range.
+- Settings page now contains local-data safety tools.
 
 ### Planned visual corrections
 

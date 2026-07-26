@@ -161,15 +161,19 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 
 ## v0.4.x — Backup and Data Safety
 
-- [ ] JSON export
-- [ ] JSON import
-- [ ] Backup validation
-- [ ] Backup preview
-- [ ] Confirmation before replacing data
-- [ ] Date of last backup
+- [x] Complete JSON export
+- [x] Complete JSON import
+- [x] Backup-file validation
+- [x] Backup preview
+- [x] Confirmation before replacing data
+- [x] Last-backup timestamp
+- [x] Transaction-based database replacement
+- [x] Active-week recovery during import
+- [ ] Automatic backup reminders
 - [ ] Selective module export
 - [ ] Local backup history
 - [ ] Data-reset workflow
+- [ ] Encrypted backup files
 
 ## v0.5.x — Expenses Module
 
