@@ -40,6 +40,20 @@ export type WorkWeek = {
   updatedAt: string;
 };
 
+export type WorkWeekCreateOptions = {
+  year: number;
+  weekNumber: number;
+  copySettingsFromWeekId: string | null;
+};
+
+export type AppSettingKey = 'activeWorkWeekId';
+
+export type AppSetting = {
+  key: AppSettingKey;
+  value: string;
+  updatedAt: string;
+};
+
 export type MessageRateTier = {
   minimumMessages: number;
   maximumMessages: number | null;

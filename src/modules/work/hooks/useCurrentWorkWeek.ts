@@ -3,15 +3,23 @@ import { useLiveQuery } from 'dexie-react-hooks';
 
 import { database } from '@/database/database';
 import { workWeekService } from '@/modules/work/services/workWeekService';
-import type { WorkWeek } from '@/modules/work/types/work.types';
+import type { WorkWeek, WorkWeekCreateOptions } from '@/modules/work/types/work.types';
+
+type WorkWeekQueryResult = {
+  activeWeek: WorkWeek | undefined;
+  weeks: WorkWeek[];
+};
 
 type UseCurrentWorkWeekResult = {
   week: WorkWeek | undefined;
+  weeks: WorkWeek[];
   isLoading: boolean;
   isSaving: boolean;
   error: string | null;
   updateWeek: (updater: (week: WorkWeek) => WorkWeek) => Promise<void>;
   resetWeek: () => Promise<void>;
+  selectWeek: (workWeekId: string) => Promise<void>;
+  createWeek: (options: WorkWeekCreateOptions) => Promise<WorkWeek | undefined>;
 };
 
 function getErrorMessage(error: unknown): string {
@@ -27,7 +35,19 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const week = useLiveQuery(() => database.workWeeks.orderBy('startDate').last(), []);
+  const queryResult = useLiveQuery(async (): Promise<WorkWeekQueryResult> => {
+    const weeks = await database.workWeeks.orderBy('startDate').reverse().toArray();
+
+    const activeSetting = await database.appSettings.get('activeWorkWeekId');
+
+    const activeWeek =
+      weeks.find((candidateWeek) => candidateWeek.id === activeSetting?.value) ?? weeks[0];
+
+    return {
+      activeWeek,
+      weeks,
+    };
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -57,6 +77,9 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
     };
   }, []);
 
+  const week = queryResult?.activeWeek;
+  const weeks = queryResult?.weeks ?? [];
+
   const updateWeek = useCallback(
     async (updater: (currentWeek: WorkWeek) => WorkWeek): Promise<void> => {
       if (!week) {
@@ -69,7 +92,9 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
         await workWeekService.updateWeek(week.id, updater);
         setError(null);
       } catch (updateError) {
-        setError(getErrorMessage(updateError));
+        const message = getErrorMessage(updateError);
+
+        setError(message);
         throw updateError;
       } finally {
         setIsSaving(false);
@@ -89,19 +114,62 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
       await workWeekService.resetWeek(week.id);
       setError(null);
     } catch (resetError) {
-      setError(getErrorMessage(resetError));
+      const message = getErrorMessage(resetError);
+
+      setError(message);
       throw resetError;
     } finally {
       setIsSaving(false);
     }
   }, [week]);
 
+  const selectWeek = useCallback(async (workWeekId: string): Promise<void> => {
+    setIsSaving(true);
+
+    try {
+      await workWeekService.setActiveWeek(workWeekId);
+      setError(null);
+    } catch (selectionError) {
+      const message = getErrorMessage(selectionError);
+
+      setError(message);
+      throw selectionError;
+    } finally {
+      setIsSaving(false);
+    }
+  }, []);
+
+  const createWeek = useCallback(
+    async (options: WorkWeekCreateOptions): Promise<WorkWeek | undefined> => {
+      setIsSaving(true);
+
+      try {
+        const newWeek = await workWeekService.createWeek(options);
+
+        setError(null);
+
+        return newWeek;
+      } catch (creationError) {
+        const message = getErrorMessage(creationError);
+
+        setError(message);
+        throw creationError;
+      } finally {
+        setIsSaving(false);
+      }
+    },
+    []
+  );
+
   return {
     week,
-    isLoading: isInitializing || week === undefined,
+    weeks,
+    isLoading: isInitializing || queryResult === undefined,
     isSaving,
     error,
     updateWeek,
     resetWeek,
+    selectWeek,
+    createWeek,
   };
 }

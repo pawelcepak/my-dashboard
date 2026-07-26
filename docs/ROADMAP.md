@@ -1,12 +1,12 @@
-# My Dashboard Roadmap
+# CHB Roadmap
 
 ## Product direction
 
-My Dashboard is a personal, offline-first application designed to manage work, expenses, debts, portfolio information and cross-module statistics.
+CHB is a personal, offline-first application designed to record and manage the user's real life.
 
-The application is developed incrementally. Each module owns its business logic while shared infrastructure provides navigation, storage, presentation and future synchronization.
+The long-term product direction includes work, finances, debts, portfolio history, physical measurements, workouts, habits, personal goals, business activity and cross-module statistics.
 
-The Dashboard serves as the central daily interface. Module pages provide detailed editing, history and advanced statistics.
+The Dashboard serves as the central daily interface. Detailed module pages provide editing, history and advanced analysis.
 
 ## v0.1.x — Foundation
 
@@ -27,18 +27,25 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 
 - [x] Desktop layout
 - [x] Responsive mobile layout
-- [x] Sidebar navigation
 - [x] Lucide icons
 - [x] Dashboard overview
 - [x] Shared page header
 - [x] Shared metric card
 - [x] Shared section card
+- [x] Bottom tab navigation
+- [x] Compact mobile navigation
+- [x] Light and dark themes
+- [x] Persistent theme preference
+- [x] Theme toggle
+- [x] CHB branding
 - [ ] Shared empty state
 - [ ] Shared button system
 - [ ] Error route
 - [ ] Not-found page
-- [ ] Light and dark theme support
 - [ ] Centralized application version display
+- [ ] Final Dashboard visual redesign
+- [ ] Final light-theme contrast pass
+- [ ] Final dark-theme contrast pass
 
 ## v0.3.x — Work Module
 
@@ -74,13 +81,17 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 - [x] Dexie dependency
 - [x] Dexie React hooks
 - [x] Versioned work database schema
-- [x] Persistent current work week
+- [x] Persistent work weeks
 - [x] Reactive database queries
 - [x] Transaction-based week updates
 - [x] Automatic initial-data seeding
 - [x] ISO creation and update timestamps
 - [x] Shared reactive data between Dashboard and Work module
-- [ ] Database migrations beyond schema version 1
+- [x] Dexie schema version 2
+- [x] Application settings table
+- [x] Active-work-week persistence
+- [x] Existing-data migration
+- [x] Unique ISO week protection
 - [ ] Data-integrity validation
 - [ ] Recovery from corrupted work records
 
@@ -96,7 +107,6 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 - [x] Quick work-session creation from Dashboard
 - [x] Quick rating editing from Dashboard
 - [x] Quick beer-count editing from Dashboard
-- [x] Quick financial-plan editing from Dashboard
 - [x] Weekly summary on Dashboard
 - [x] Goal progress on Dashboard
 - [x] Work-threshold progress on Dashboard
@@ -108,17 +118,22 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 
 ### Week management
 
-- [ ] Creating new weeks
-- [ ] Automatic ISO week number
-- [ ] Automatic week date range
-- [ ] Weekly history
-- [ ] Selecting an active week
-- [ ] Editing previous weeks
+- [x] Creating new weeks
+- [x] Automatic ISO week number proposal
+- [x] Automatic Monday-to-Sunday date range
+- [x] Selecting an active week
+- [x] Persistent active-week selection
+- [x] Protection against duplicate ISO weeks
+- [x] Copying exchange rate from selected week
+- [x] Copying goals from selected week
+- [x] Copying financial plan from selected week
+- [x] Empty daily records for new weeks
+- [ ] Dedicated weekly-history view
+- [ ] Grouping history by year and month
 - [ ] Deleting weeks
-- [ ] Duplicating selected week settings
 - [ ] Week-close workflow
-- [ ] Automatic creation of the next week
-- [ ] Protection against duplicate ISO weeks
+- [ ] Automatic next-week creation
+- [ ] Importing historical weeks from Google Sheets
 
 ### Statistics
 
@@ -134,7 +149,19 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 - [ ] Daily-goal completion statistics
 - [ ] Weekly-goal completion statistics
 
-## v0.4.x — Expenses Module
+## v0.4.x — Backup and Data Safety
+
+- [ ] JSON export
+- [ ] JSON import
+- [ ] Backup validation
+- [ ] Backup preview
+- [ ] Confirmation before replacing data
+- [ ] Date of last backup
+- [ ] Selective module export
+- [ ] Local backup history
+- [ ] Data-reset workflow
+
+## v0.5.x — Expenses Module
 
 - [ ] Expense model
 - [ ] Expense entries
@@ -143,12 +170,11 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 - [ ] Recurring expenses
 - [ ] Monthly summaries
 - [ ] Expense statistics
-- [ ] Expense charts
 - [ ] Persistent expense storage
 - [ ] Dashboard expense summary
 - [ ] Dashboard quick expense entry
 
-## v0.5.x — Debts Module
+## v0.6.x — Debts Module
 
 - [ ] Debt model
 - [ ] Debt entries
@@ -156,24 +182,38 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 - [ ] Payment schedules
 - [ ] Remaining-balance calculations
 - [ ] Debt statistics
-- [ ] Debt charts
 - [ ] Persistent debt storage
 - [ ] Dashboard debt summary
 - [ ] Dashboard quick repayment entry
 
-## v0.6.x — Portfolio Module
+## v0.7.x — Portfolio Module
 
 - [ ] Portfolio model
 - [ ] Accounts
 - [ ] Cash balances
 - [ ] Currencies
 - [ ] Assets
+- [ ] Portfolio snapshots
 - [ ] Portfolio history
 - [ ] Portfolio statistics
 - [ ] Persistent portfolio storage
 - [ ] Dashboard portfolio summary
 
-## v0.7.x — Cross-module Statistics
+## v0.8.x — Health and Training
+
+- [ ] Body-weight measurements
+- [ ] Body measurements
+- [ ] Measurement history
+- [ ] Workout entries
+- [ ] Exercise library
+- [ ] Training plans
+- [ ] Training statistics
+- [ ] Weight charts
+- [ ] Measurement charts
+- [ ] Hydration tracking
+- [ ] Habit tracking
+
+## v0.9.x — Cross-module Statistics
 
 - [ ] Shared date filters
 - [ ] Work and finance comparisons
@@ -181,22 +221,21 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 - [ ] Payment-day statistics
 - [ ] Debt-repayment statistics
 - [ ] Portfolio history
+- [ ] Health and work comparisons
 - [ ] Dashboard trend cards
 - [ ] Cross-module charts
 
-## v0.8.x — Data Management
+## Future business module
 
-- [ ] Database migration strategy
-- [ ] JSON export
-- [ ] JSON import
-- [ ] Backup validation
-- [ ] Backup preview
-- [ ] Selective module export
-- [ ] Selective module import
-- [ ] Local backup history
-- [ ] Data-reset workflow
+- [ ] Esoteric-service revenue
+- [ ] Clients
+- [ ] Orders
+- [ ] Service costs
+- [ ] Business goals
+- [ ] Business statistics
+- [ ] Business Dashboard summary
 
-## v0.9.x — Application Distribution
+## Future synchronization and distribution
 
 - [ ] PWA manifest
 - [ ] Service worker
@@ -205,17 +244,12 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 - [ ] Installable Windows application
 - [ ] Installable Linux application
 - [ ] GitHub Pages deployment
-- [ ] Automated GitHub Actions deployment
-- [ ] Deployment documentation
-
-## Future synchronization
-
+- [ ] Automated deployment
 - [ ] Synchronization requirements
 - [ ] Conflict-resolution strategy
 - [ ] Optional cloud provider
 - [ ] Cross-device authentication
 - [ ] Encrypted remote backup
-- [ ] Synchronization-status interface
 
 ## v1.0.0 — Stable Release
 
@@ -223,6 +257,7 @@ The Dashboard serves as the central daily interface. Module pages provide detail
 - [ ] Stable Expenses module
 - [ ] Stable Debts module
 - [ ] Stable Portfolio module
+- [ ] Stable Health module
 - [ ] Stable Statistics module
 - [ ] Reliable backup and restore
 - [ ] Cross-device installation

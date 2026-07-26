@@ -1,39 +1,44 @@
 # Changelog
 
-All notable changes to My Dashboard will be documented in this file.
+All notable changes to CHB will be documented in this file.
 
 ## [Unreleased]
 
 ### Added
 
-- Automatic local-date detection on the Dashboard.
-- Automatic matching of the current date with a work-day record.
-- Current-day work summary on the Dashboard.
-- Quick editing of daily messages from the Dashboard.
-- Quick editing of daily work rating from the Dashboard.
-- Quick editing of daily beer count from the Dashboard.
-- Quick work-session creation from the Dashboard.
-- Editable daily message target.
-- Editable weekly message target.
-- Editable daily hours target.
-- Weekly work overview on the Dashboard.
-- Weekly goal-progress presentation.
-- Work-threshold progress on the Dashboard.
-- Editable weekly financial plan on the Dashboard.
-- Live synchronization between Dashboard and Work module through Dexie.
-- Graceful state for dates outside the active work week.
-- Graceful state for missing current-day records.
-- Reusable local-date utilities.
+- Light and dark application themes.
+- Persistent theme preference.
+- Theme toggle in the application header.
+- Bottom tab navigation.
+- Compact mobile navigation with an additional More panel.
+- Crimson active-navigation state.
+- CHB application branding.
+- Persistent active-work-week selection.
+- Application settings table in Dexie.
+- Dexie schema version 2.
+- Migration of existing work data to the new schema.
+- Creating arbitrary ISO work weeks.
+- Automatic Monday-to-Sunday work-week ranges.
+- Automatic current ISO week proposal.
+- Switching between saved work weeks.
+- Protection against duplicate year and week-number combinations.
+- Optional copying of exchange rate, goals and financial plan.
+- Empty daily records for newly created weeks.
+- Reactive week switching between Dashboard and Work module.
 
 ### Changed
 
-- Dashboard Work card now displays real data from IndexedDB.
-- Dashboard Work card now displays total worked hours.
-- Dashboard Work card now displays message count and net PLN earnings.
-- Dashboard is now an active daily-work interface rather than a static overview.
-- Dashboard and Work module use the same reactive work-week record.
-- Financial-plan changes made on the Dashboard are immediately visible in the Work module.
-- Goals are now persisted as part of the active work week.
+- Navigation moved from the left sidebar to the bottom edge.
+- Application content now uses the full available width.
+- Application name changed from My Dashboard to CHB.
+- Active navigation uses a crimson accent.
+- Dark theme uses a lighter gray background.
+- Light-theme borders have stronger contrast.
+- Work module now operates on an explicitly selected active week.
+- Reset action now clears activity from the selected week instead of restoring example data.
+- Dashboard automatically displays the selected active work week.
+- Work-week selector replaces the previous single-week workflow.
+- The work-week compound index is now unique.
 
 ## [0.3.0-beta.3] - 2026-07-25
 
@@ -81,11 +86,6 @@ All notable changes to My Dashboard will be documented in this file.
 - Default work rating is represented as 8.5.
 - Work ratings and beer counts are visually emphasized.
 
-### Known limitations
-
-- Work data remains in memory and is reset after a page refresh.
-- Permanent Dexie storage is not yet connected.
-
 ## [0.3.0-beta.1] - 2026-07-25
 
 ### Added
@@ -100,11 +100,6 @@ All notable changes to My Dashboard will be documented in this file.
 - Work-day table with mobile presentation.
 - Weekly financial-plan summary.
 - Example work-week data.
-
-### Known limitations
-
-- The Work module uses example data.
-- Editing and persistent storage are not available.
 
 ## [0.2.1] - 2026-07-25
 

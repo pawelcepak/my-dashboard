@@ -1,11 +1,12 @@
 import { CalendarDays, Database, LoaderCircle } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import FinancialPlanSummary from '@/modules/work/components/FinancialPlanSummary';
 import WorkDayEditor from '@/modules/work/components/WorkDayEditor';
 import WorkDaysTable from '@/modules/work/components/WorkDaysTable';
 import WorkProgressCard from '@/modules/work/components/WorkProgressCard';
 import WorkSummaryGrid from '@/modules/work/components/WorkSummaryGrid';
+import WorkWeekManager from '@/modules/work/components/WorkWeekManager';
 import WorkWeekSettings from '@/modules/work/components/WorkWeekSettings';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
 import type { FinancialPlanItem, WorkDay } from '@/modules/work/types/work.types';
@@ -25,7 +26,7 @@ function WorkPageLoading() {
 
         <p className="mt-4 text-sm font-medium text-zinc-300">Wczytywanie danych pracy</p>
 
-        <p className="mt-1 text-sm text-zinc-600">Otwieranie lokalnej bazy danych.</p>
+        <p className="mt-1 text-sm text-zinc-500">Otwieranie lokalnej bazy danych.</p>
       </div>
     </div>
   );
@@ -37,34 +38,35 @@ function WorkPageError({ message }: { message: string }) {
       <h1 className="text-lg font-semibold text-red-200">Nie udało się wczytać danych</h1>
 
       <p className="mt-2 text-sm leading-6 text-red-300/80">{message}</p>
-
-      <p className="mt-4 text-sm text-zinc-500">
-        Odśwież stronę. Jeżeli problem będzie się powtarzał, sprawdzimy bazę IndexedDB w narzędziach
-        przeglądarki.
-      </p>
     </div>
   );
 }
 
 export default function WorkPage() {
-  const { week, isLoading, isSaving, error, updateWeek, resetWeek } = useCurrentWorkWeek();
+  const { week, weeks, isLoading, isSaving, error, updateWeek, resetWeek, selectWeek, createWeek } =
+    useCurrentWorkWeek();
 
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedDayId(null);
+  }, [week?.id]);
 
   if (isLoading) {
     return <WorkPageLoading />;
   }
 
   if (!week) {
-    return (
-      <WorkPageError message={error ?? 'W bazie danych nie znaleziono bieżącego tygodnia pracy.'} />
-    );
+    return <WorkPageError message={error ?? 'W bazie danych nie znaleziono tygodnia pracy.'} />;
   }
 
-  const summary = calculateWorkWeekSummary(week);
-  const progress = calculateWorkProgress(week, summary.totalMessages);
+  const activeWeek = week;
 
-  const selectedDay = week.days.find((day) => day.id === selectedDayId) ?? null;
+  const summary = calculateWorkWeekSummary(activeWeek);
+
+  const progress = calculateWorkProgress(activeWeek, summary.totalMessages);
+
+  const selectedDay = activeWeek.days.find((day) => day.id === selectedDayId) ?? null;
 
   function updateDay(updatedDay: WorkDay) {
     void updateWeek((currentWeek) => ({
@@ -82,7 +84,7 @@ export default function WorkPage() {
 
   function handleReset() {
     const shouldReset = window.confirm(
-      'Czy na pewno przywrócić dane przykładowe? Obecne zmiany tego tygodnia zostaną zastąpione.'
+      `Czy wyczyścić dane tygodnia ${activeWeek.weekNumber} roku ${activeWeek.year}? Wiadomości, bloki, piwa, oceny i zatrzymane wiadomości zostaną usunięte.`
     );
 
     if (!shouldReset) {
@@ -94,29 +96,34 @@ export default function WorkPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <PageHeader
         title="Praca"
         description="Rejestr wiadomości, czasu pracy, zarobków i tygodniowych celów."
         action={
-          <div className="flex items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-2.5 text-sm text-zinc-300">
+          <div className="flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-2.5 text-sm text-zinc-300">
             <CalendarDays aria-hidden="true" className="size-4 text-zinc-500" />
 
             <span>
-              Tydzień {week.weekNumber}, {week.year}
+              Tydzień {activeWeek.weekNumber}, {activeWeek.year}
             </span>
           </div>
         }
+      />
+
+      <WorkWeekManager
+        activeWeek={activeWeek}
+        weeks={weeks}
+        isSaving={isSaving}
+        onSelectWeek={selectWeek}
+        onCreateWeek={createWeek}
       />
 
       <div className="flex flex-col gap-3 rounded-xl border border-emerald-900/50 bg-emerald-950/20 px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-3 text-emerald-200">
           <Database aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-emerald-400" />
 
-          <p className="leading-6">
-            Dane są zapisywane automatycznie w lokalnej bazie przeglądarki i pozostaną po
-            odświeżeniu strony.
-          </p>
+          <p className="leading-6">Dane wszystkich tygodni są zapisywane lokalnie.</p>
         </div>
 
         <span className="shrink-0 text-xs font-medium text-emerald-400">
@@ -130,15 +137,15 @@ export default function WorkPage() {
         </div>
       )}
 
-      <div className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 p-5 sm:p-6">
+      <div className="rounded-2xl border border-zinc-700 bg-gradient-to-br from-zinc-900 to-zinc-950 p-5 sm:p-6">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-medium text-zinc-500">Aktualny tydzień</p>
+            <p className="text-sm font-medium text-zinc-500">Aktywny tydzień</p>
 
             <h2 className="mt-1 text-2xl font-semibold tracking-tight text-zinc-50">
-              {formatIsoDate(week.startDate)}
+              {formatIsoDate(activeWeek.startDate)}
               {' – '}
-              {formatIsoDate(week.endDate)}
+              {formatIsoDate(activeWeek.endDate)}
             </h2>
 
             <p className="mt-2 text-sm text-zinc-500">
@@ -149,8 +156,8 @@ export default function WorkPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950/70 px-4 py-3">
-            <p className="text-xs uppercase tracking-wide text-zinc-600">Zarobek brutto</p>
+          <div className="rounded-xl border border-zinc-700 bg-zinc-950/70 px-4 py-3">
+            <p className="text-xs uppercase tracking-wide text-zinc-500">Zarobek brutto</p>
 
             <p className="mt-1 text-xl font-semibold text-zinc-100">
               {formatCurrencyEur(summary.grossEarningsEur)}
@@ -165,8 +172,8 @@ export default function WorkPage() {
         <WorkProgressCard totalMessages={summary.totalMessages} progress={progress} />
 
         <WorkWeekSettings
-          heldMessages={week.heldMessages}
-          exchangeRateEurPln={week.exchangeRateEurPln}
+          heldMessages={activeWeek.heldMessages}
+          exchangeRateEurPln={activeWeek.exchangeRateEurPln}
           onHeldMessagesChange={(heldMessages) => {
             void updateWeek((currentWeek) => ({
               ...currentWeek,
@@ -191,12 +198,16 @@ export default function WorkPage() {
         />
       )}
 
-      <WorkDaysTable days={week.days} selectedDayId={selectedDayId} onEditDay={setSelectedDayId} />
+      <WorkDaysTable
+        days={activeWeek.days}
+        selectedDayId={selectedDayId}
+        onEditDay={setSelectedDayId}
+      />
 
       <FinancialPlanSummary
-        items={week.financialPlan}
+        items={activeWeek.financialPlan}
         summary={summary}
-        exchangeRateEurPln={week.exchangeRateEurPln}
+        exchangeRateEurPln={activeWeek.exchangeRateEurPln}
         onItemsChange={updateFinancialPlan}
       />
     </div>
