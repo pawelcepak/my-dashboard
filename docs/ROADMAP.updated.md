@@ -10,21 +10,29 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 
 ## Current development line
 
-Current completed sprint:
+Current completed cloud milestone:
 
-- v0.3.2C — Smart Goal Synchronization
+- v0.4.1F — Automatic Cloud Sync
 
-Current completed visual refinement:
+Current stable working state:
 
-- Work and Dashboard usability refinement after v0.3.2C
+- Offline-first Dexie storage
+- Private Supabase authentication
+- Automatic PC and laptop synchronization
+- Safe startup upload and download
+- Conflict detection and manual conflict resolution
+- Manual JSON backup and restore
+- Automated GitHub Pages deployment
 
-Next planned sprint:
+Next optional product sprint:
 
 - v0.3.2D — Dashboard Control Center
 
 Following planned sprint:
 
 - v0.3.3 — Google Sheets Migration
+
+Future quality and intelligence work remains planned but is not required for normal daily use.
 
 ## v0.1.x — Foundation
 
@@ -431,6 +439,118 @@ Following planned sprint:
 - [ ] Encrypted backup files
 - [ ] Backup schema migration framework
 
+## v0.4.1 — Private Cloud and Cross-device Synchronization
+
+### v0.4.1A — Supabase Foundation
+
+- [x] Install Supabase JavaScript client
+- [x] Vite environment-variable configuration
+- [x] Private single-user authentication
+- [x] Persistent login session
+- [x] Login screen
+- [x] Logout control
+- [x] Protected application layout
+- [x] Disabled public account registration
+- [x] GitHub Actions Supabase secrets
+- [x] Production authentication on GitHub Pages
+
+### v0.4.1B — Cloud Status
+
+- [x] Live cloud-status indicator in the header
+- [x] Online and offline detection
+- [x] Supabase connection verification
+- [x] Expandable cloud-status panel
+- [x] Account information
+- [x] Device information
+- [x] Last connection-check timestamp
+- [x] Last synchronization timestamp
+- [x] Manual connection check
+- [x] Local-database status presentation
+
+### v0.4.1C — Cloud Snapshot Sync
+
+- [x] Complete local Dexie snapshot generation
+- [x] Private Supabase snapshot upload
+- [x] Private Supabase snapshot download
+- [x] One snapshot per authenticated user
+- [x] RLS-protected cloud record
+- [x] Cloud snapshot timestamp
+- [x] Manual upload
+- [x] Manual download
+- [x] Strong confirmation before replacement
+- [x] Existing CHB backup validation reused for cloud restore
+- [x] Transaction-based cloud restore
+- [x] Manual recovery controls remain available
+
+### v0.4.1D — Safe Version Comparison
+
+- [x] Stable local-data fingerprint
+- [x] Stable cloud-data fingerprint
+- [x] Ignore non-content backup timestamps during comparison
+- [x] Detect empty cloud
+- [x] Detect synchronized versions
+- [x] Detect local changes
+- [x] Detect newer cloud data
+- [x] Detect two-sided conflict
+- [x] Manual local-version selection
+- [x] Manual cloud-version selection
+- [x] No silent overwrite during conflict
+- [x] Per-device synchronization baseline
+
+### v0.4.1E — Cloud Architecture Refactor
+
+- [x] CloudProvider limited primarily to React state orchestration
+- [x] Dedicated cloud snapshot service
+- [x] Dedicated cloud comparison service
+- [x] Dedicated cloud metadata service
+- [x] Dedicated cloud synchronization service
+- [x] Dedicated cloud fingerprint utility
+- [x] Persistent synchronization metadata in local storage
+- [x] Device-name detection
+- [x] Modular foundation for future application modules
+- [x] Safe version comparison preserved after refactor
+
+### v0.4.1F — Automatic Cloud Sync
+
+- [x] Persistent dirty-state tracker
+- [x] Dirty revision counter
+- [x] Dirty timestamp
+- [x] Dirty tracking after successful work-data writes
+- [x] Dirty tracking for week creation
+- [x] Dirty tracking for week deletion
+- [x] Dirty tracking for week reset
+- [x] Dirty tracking for active-week selection
+- [x] Revision-safe dirty-state clearing
+- [x] Debounced automatic upload
+- [x] 2.5-second quiet period before upload
+- [x] Avoid duplicate uploads during rapid edits
+- [x] Preserve edits made during an active upload
+- [x] Automatic retry after internet recovery
+- [x] Automatic startup inspection
+- [x] Automatic upload when local data is unambiguously newer
+- [x] Automatic upload when the cloud is empty
+- [x] Automatic download when cloud data is unambiguously newer
+- [x] No automatic action when versions are equal
+- [x] No automatic overwrite during conflict
+- [x] Offline local work remains available
+- [x] Manual upload and download remain available
+- [x] Ready for normal PC and Linux-laptop workflow
+
+### Future cloud improvements
+
+- [ ] Synchronization activity history
+- [ ] Named custom devices
+- [ ] Pending-change counter
+- [ ] Record-level change queue
+- [ ] Changed-field summary
+- [ ] Selective module synchronization
+- [ ] Cloud snapshot history
+- [ ] Restore a previous cloud snapshot
+- [ ] Encrypted cloud payload
+- [ ] Background synchronization for an installed PWA
+- [ ] Additional conflict-difference preview
+- [ ] Cloud diagnostics page
+
 ## v0.5.x — Expenses Module
 
 - [ ] Expense model
@@ -484,7 +604,173 @@ Following planned sprint:
 - [ ] Hydration tracking
 - [ ] Habit tracking
 
-## v0.9.x — Cross-module Statistics
+## Future Quality Pass — Visual Density and Daily Usability
+
+### General quality
+
+- [ ] Shared empty-state system
+- [ ] Shared button system
+- [ ] Error route
+- [ ] Not-found page
+- [ ] Centralized application version display
+- [ ] Consistent loading states
+- [ ] Consistent confirmation dialogs
+- [ ] Keyboard accessibility review
+- [ ] Responsive-layout review
+- [ ] Light-theme contrast review
+- [ ] Dark-theme contrast review
+- [ ] Production bundle code splitting
+- [ ] Lazy loading for application modules
+- [ ] Animation and transition consistency
+- [ ] Long-term usability review based on real daily work
+
+### Work performance indicators
+
+- [ ] Green upward indicator for average performance at or above 43.0 messages/hour
+- [ ] Yellow neutral indicator for average performance from 36.0 to below 43.0 messages/hour
+- [ ] Red downward indicator for average performance below 36.0 messages/hour
+- [ ] Consistent messages-per-hour indicators on Dashboard
+- [ ] Consistent messages-per-hour indicators on Work page
+- [ ] Consistent messages-per-hour indicators in daily history
+- [ ] Consistent messages-per-hour indicators in weekly history
+- [ ] Consistent messages-per-hour indicators in future statistics
+
+### Work-page layout refinement
+
+- [ ] Three-column wide-screen Work layout
+- [ ] Approximately 40% active-week daily history
+- [ ] Approximately 30% active-week summary
+- [ ] Approximately 30% long-term week history
+- [ ] Keep all three areas visible on 1920×1080 displays
+- [ ] Compact spreadsheet-like daily-history density
+- [ ] Content-sized columns for date, beers, rating, held messages, messages, hours, average and blocks
+- [ ] Reduced unnecessary horizontal spacing
+- [ ] Held-message count displayed between rating and regular messages
+- [ ] Individual weekly EUR/PLN rate retained
+- [ ] Weekly EUR/PLN rate integrated visually into the active-week panel
+- [ ] Improved weekly-settings panel styling
+- [ ] Faster daily scanning during normal work
+
+## Future Daily Goals and Reminder System
+
+### Goal management
+
+- [ ] Daily-goal data model
+- [ ] Default morning goal
+- [ ] Default evening goal
+- [ ] Default work goal
+- [ ] Default Czech-study goal
+- [ ] Default training goal
+- [ ] Add custom daily goals
+- [ ] Rename daily goals
+- [ ] Reorder daily goals
+- [ ] Lock daily goals
+- [ ] Unlock daily goals
+- [ ] Remove unlocked daily goals
+- [ ] Mark goals as completed
+- [ ] Daily completion history
+- [ ] Per-day notes
+
+### Reminder workflow
+
+- [ ] Morning reminder around 10:00
+- [ ] Evening reminder around 22:00
+- [ ] Show an overdue reminder after the next login
+- [ ] Catch up missing evening entries
+- [ ] Catch up missing weekend entries
+- [ ] Detect a long period without opening CHB
+- [ ] Review missed days after returning
+- [ ] Configurable reminder behavior
+- [ ] Browser notification support
+- [ ] Installed-PWA notification support
+
+### Completion statistics
+
+- [ ] Completed-versus-expected presentation such as 3/10
+- [ ] Red completion state below 50%
+- [ ] Yellow completion state from 51% to 85%
+- [ ] Green completion state from 86% to 100%
+- [ ] Goal-specific completion percentage
+- [ ] Morning-routine statistics
+- [ ] Evening-routine statistics
+- [ ] Work-goal statistics
+- [ ] Czech-study statistics
+- [ ] Training statistics
+- [ ] Weekly and monthly consistency
+- [ ] Streak tracking
+
+## v0.9.x — CHB Intelligence
+
+### Daily and weekly insights
+
+- [ ] Daily Insight
+- [ ] Weekly Insight
+- [ ] Comparison with the previous week
+- [ ] Comparison with four-week average
+- [ ] Comparison with eight-week average
+- [ ] Best result detection
+- [ ] Personal-record detection
+- [ ] Streak detection
+- [ ] Goal-arrival estimate
+- [ ] Fixed-threshold arrival estimate
+- [ ] Predicted weekly earnings
+- [ ] Predicted weekly result
+- [ ] Ahead-of-plan and behind-plan explanation
+
+### CHB Coach
+
+- [ ] Data-driven coaching without generic motivational quotes
+- [ ] Best working-hour detection
+- [ ] Best weekday detection
+- [ ] Relationship between work duration and rating
+- [ ] Relationship between working hours and messages per hour
+- [ ] Relationship between alcohol count and work outcomes when supported by data
+- [ ] Detection of sustainable performance ranges
+- [ ] Calm contextual feedback on weaker days
+- [ ] Positive progress framing based on historical evidence
+- [ ] Only show conclusions supported by sufficient personal data
+
+### Trends and predictions
+
+- [ ] Four-week trends
+- [ ] Eight-week trends
+- [ ] Monthly trends
+- [ ] Yearly trends
+- [ ] Performance-growth rate
+- [ ] Performance-decline rate
+- [ ] Earnings forecast
+- [ ] Goal-completion forecast
+- [ ] Record-probability estimate
+- [ ] Confidence indicators for predictions
+
+### CHB Timeline
+
+- [ ] Personal achievement timeline
+- [ ] Weekly record markers
+- [ ] Earnings-record markers
+- [ ] Rating-record markers
+- [ ] Performance-record markers
+- [ ] Longest-streak markers
+- [ ] First fixed-threshold achievement
+- [ ] Major debt-repayment milestones
+- [ ] Portfolio milestones
+- [ ] Health and training milestones
+- [ ] First cloud synchronization milestone
+- [ ] First backup milestone
+
+### Cross-module intelligence
+
+- [ ] Expenses Intelligence
+- [ ] Debts Intelligence
+- [ ] Portfolio Intelligence
+- [ ] Health Intelligence
+- [ ] Daily-goal consistency insights
+- [ ] Work and health relationships
+- [ ] Work and spending relationships
+- [ ] Debt-repayment forecasts
+- [ ] Personal recommendations based only on recorded data
+
+## Future Cross-module Statistics
 
 - [ ] Shared date filters
 - [ ] Work and finance comparisons

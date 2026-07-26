@@ -6,6 +6,32 @@ All notable changes to CHB will be documented in this file.
 
 ### Added
 
+- Private Supabase authentication for the single CHB account.
+- Persistent authenticated sessions across refreshes and browser restarts.
+- Protected application shell for unauthenticated users.
+- Supabase configuration through Vite environment variables.
+- GitHub Actions support for Supabase production secrets.
+- Cloud connection status in the application header.
+- Expandable cloud-status panel with account, device, internet and timestamp details.
+- Manual upload of the complete local Dexie database to a private Supabase snapshot.
+- Manual restoration of the complete cloud snapshot to the local Dexie database.
+- Strong confirmation before replacing local or cloud data.
+- Cloud snapshot validation through the existing CHB backup validation layer.
+- Local and cloud data fingerprints for version comparison.
+- Persistent per-device cloud synchronization metadata.
+- Detection of empty cloud storage, synchronized data, local changes, newer cloud data and conflicts.
+- Manual conflict resolution by preserving either the local or cloud version.
+- Modular cloud architecture with dedicated snapshot, comparison, metadata and synchronization services.
+- Persistent local dirty-state tracking with revision numbers.
+- Dirty tracking for work-week edits, resets, creation, deletion and active-week changes.
+- Debounced automatic cloud upload after 2.5 seconds without further local changes.
+- Revision-safe dirty-state clearing when changes occur during an upload.
+- Automatic synchronization after internet connectivity returns.
+- Safe startup synchronization after login or page reload.
+- Automatic startup upload when local data is unambiguously newer or the cloud is empty.
+- Automatic startup download when the cloud is unambiguously newer.
+- Conflict protection that prevents automatic overwrite when both versions changed.
+- Offline-first operation while synchronization is unavailable.
 - Light and dark application themes.
 - Persistent theme preference.
 - Theme toggle in the application header.
@@ -88,6 +114,14 @@ All notable changes to CHB will be documented in this file.
 
 ### Changed
 
+- CHB now uses a local-first, cloud-synchronized data model instead of relying only on manual JSON transfers between devices.
+- The header's former local-only indicator has been replaced by a live cloud-status control.
+- Cloud synchronization timestamps and device metadata persist independently on every device.
+- Local data writes now mark the cloud state as pending only after successful database operations.
+- Upload and download operations now update the shared version baseline used for future comparisons.
+- Application startup now inspects local and cloud fingerprints before choosing a safe automatic action.
+- Reconnecting to the internet now triggers a fresh safe synchronization check.
+- Manual upload and download remain available as explicit recovery and conflict-resolution controls.
 - Navigation moved from the left sidebar to the bottom edge.
 - Desktop bottom navigation is aligned to the left.
 - Application content now uses the full available width.
@@ -148,6 +182,12 @@ All notable changes to CHB will be documented in this file.
 
 ### Fixed
 
+- Fixed production authentication failing when GitHub Actions did not receive the Supabase environment secrets.
+- Fixed incorrect Supabase project URL configuration by requiring the project base URL instead of the REST endpoint.
+- Fixed cloud synchronization time being lost after refreshing the page.
+- Fixed automatic synchronization potentially clearing a newer local change made during an active upload.
+- Fixed automatic upload running when the cloud was newer or when a conflict required manual resolution.
+- Fixed first-device and second-device synchronization from silently overwriting unrelated versions.
 - Fixed TypeScript path aliases without using deprecated `baseUrl`.
 - Fixed native Vite TypeScript-path resolution.
 - Fixed repository initialization at the incorrect Desktop directory level.

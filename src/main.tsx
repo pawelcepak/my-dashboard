@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
 import AuthProvider from '@/app/auth/AuthProvider';
+import CloudProvider from '@/app/cloud/CloudProvider';
 import { router } from '@/app/router/router';
 import ThemeProvider from '@/app/theme/ThemeProvider';
 
@@ -18,7 +19,9 @@ createRoot(rootElement).render(
   <StrictMode>
     <ThemeProvider>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <CloudProvider>
+          <RouterProvider router={router} />
+        </CloudProvider>
       </AuthProvider>
     </ThemeProvider>
   </StrictMode>

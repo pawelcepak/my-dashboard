@@ -1,8 +1,9 @@
-import { Database, LoaderCircle, LogOut, UserRound } from 'lucide-react';
+import { LoaderCircle, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAuth } from '@/app/auth/useAuth';
+import CloudStatusIndicator from '@/app/cloud/CloudStatusIndicator';
 import ThemeToggle from '@/app/layout/ThemeToggle';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
 import { formatShortIsoDate } from '@/modules/work/utils/workCalculations';
@@ -25,7 +26,7 @@ function capitalizeFirstLetter(value: string): string {
 }
 
 export default function Header() {
-  const { user, signOut } = useAuth();
+  const { signOut } = useAuth();
 
   const { week, isLoading } = useCurrentWorkWeek();
 
@@ -79,22 +80,7 @@ export default function Header() {
         </div>
 
         <div className="flex shrink-0 items-center gap-2">
-          <div
-            title={`Zalogowano jako ${user?.email ?? 'użytkownik CHB'}`}
-            className="hidden h-9 max-w-52 items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900 px-3 text-xs font-semibold text-zinc-500 lg:flex"
-          >
-            <UserRound aria-hidden="true" className="size-3.5 shrink-0" strokeWidth={1.9} />
-
-            <span className="truncate">{user?.email}</span>
-          </div>
-
-          <div
-            title="Dane zapisywane lokalnie w tej przeglądarce"
-            className="hidden h-9 items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900 px-3 text-xs font-semibold text-zinc-500 sm:flex"
-          >
-            <Database aria-hidden="true" className="size-3.5" strokeWidth={1.9} />
-            Lokalnie
-          </div>
+          <CloudStatusIndicator />
 
           <ThemeToggle />
 

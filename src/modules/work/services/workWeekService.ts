@@ -1,3 +1,4 @@
+import { cloudDirtyTracker } from '@/app/cloud/services/cloudDirtyTracker';
 import { database } from '@/database/database';
 import { createInitialWorkWeek } from '@/modules/work/data/workMockData';
 import type { WorkWeek, WorkWeekCreateOptions } from '@/modules/work/types/work.types';
@@ -6,43 +7,56 @@ import { clearWorkWeekActivity, createEmptyWorkWeek } from '@/modules/work/utils
 type WorkWeekUpdater = (week: WorkWeek) => WorkWeek;
 
 async function initialize(): Promise<void> {
-  await database.transaction('rw', database.workWeeks, database.appSettings, async () => {
-    const numberOfWeeks = await database.workWeeks.count();
+  const databaseChanged = await database.transaction(
+    'rw',
+    database.workWeeks,
+    database.appSettings,
+    async (): Promise<boolean> => {
+      const numberOfWeeks = await database.workWeeks.count();
 
-    if (numberOfWeeks === 0) {
-      const initialWeek = createInitialWorkWeek();
+      if (numberOfWeeks === 0) {
+        const initialWeek = createInitialWorkWeek();
 
-      await database.workWeeks.put(initialWeek);
+        await database.workWeeks.put(initialWeek);
 
-      await database.appSettings.put({
-        key: 'activeWorkWeekId',
-        value: initialWeek.id,
-        updatedAt: new Date().toISOString(),
-      });
+        await database.appSettings.put({
+          key: 'activeWorkWeekId',
+          value: initialWeek.id,
+          updatedAt: new Date().toISOString(),
+        });
 
-      return;
-    }
-
-    const activeSetting = await database.appSettings.get('activeWorkWeekId');
-
-    if (activeSetting) {
-      const activeWeekExists = await database.workWeeks.get(activeSetting.value);
-
-      if (activeWeekExists) {
-        return;
+        return true;
       }
-    }
 
-    const newestWeek = await database.workWeeks.orderBy('startDate').last();
+      const activeSetting = await database.appSettings.get('activeWorkWeekId');
 
-    if (newestWeek) {
-      await database.appSettings.put({
-        key: 'activeWorkWeekId',
-        value: newestWeek.id,
-        updatedAt: new Date().toISOString(),
-      });
+      if (activeSetting) {
+        const activeWeekExists = await database.workWeeks.get(activeSetting.value);
+
+        if (activeWeekExists) {
+          return false;
+        }
+      }
+
+      const newestWeek = await database.workWeeks.orderBy('startDate').last();
+
+      if (newestWeek) {
+        await database.appSettings.put({
+          key: 'activeWorkWeekId',
+          value: newestWeek.id,
+          updatedAt: new Date().toISOString(),
+        });
+
+        return true;
+      }
+
+      return false;
     }
-  });
+  );
+
+  if (databaseChanged) {
+    cloudDirtyTracker.markDirty();
+  }
 }
 
 async function getAllWeeks(): Promise<WorkWeek[]> {
@@ -68,32 +82,41 @@ async function getWeekById(workWeekId: string): Promise<WorkWeek | undefined> {
 }
 
 async function createWeek(options: WorkWeekCreateOptions): Promise<WorkWeek> {
-  return database.transaction('rw', database.workWeeks, database.appSettings, async () => {
-    const existingWeek = await database.workWeeks
-      .where('[year+weekNumber]')
-      .equals([options.year, options.weekNumber])
-      .first();
+  const newWeek = await database.transaction(
+    'rw',
+    database.workWeeks,
+    database.appSettings,
+    async (): Promise<WorkWeek> => {
+      const existingWeek = await database.workWeeks
+        .where('[year+weekNumber]')
+        .equals([options.year, options.weekNumber])
+        .first();
 
-    if (existingWeek) {
-      throw new Error(`Tydzień ${options.weekNumber} roku ${options.year} już istnieje.`);
+      if (existingWeek) {
+        throw new Error(`Tydzień ${options.weekNumber} roku ${options.year} już istnieje.`);
+      }
+
+      const sourceWeek = options.copySettingsFromWeekId
+        ? await database.workWeeks.get(options.copySettingsFromWeekId)
+        : undefined;
+
+      const createdWeek = createEmptyWorkWeek(options, sourceWeek);
+
+      await database.workWeeks.add(createdWeek);
+
+      await database.appSettings.put({
+        key: 'activeWorkWeekId',
+        value: createdWeek.id,
+        updatedAt: new Date().toISOString(),
+      });
+
+      return createdWeek;
     }
+  );
 
-    const sourceWeek = options.copySettingsFromWeekId
-      ? await database.workWeeks.get(options.copySettingsFromWeekId)
-      : undefined;
+  cloudDirtyTracker.markDirty();
 
-    const newWeek = createEmptyWorkWeek(options, sourceWeek);
-
-    await database.workWeeks.add(newWeek);
-
-    await database.appSettings.put({
-      key: 'activeWorkWeekId',
-      value: newWeek.id,
-      updatedAt: new Date().toISOString(),
-    });
-
-    return newWeek;
-  });
+  return newWeek;
 }
 
 async function setActiveWeek(workWeekId: string): Promise<void> {
@@ -103,11 +126,19 @@ async function setActiveWeek(workWeekId: string): Promise<void> {
     throw new Error(`Nie znaleziono tygodnia pracy: ${workWeekId}`);
   }
 
+  const currentSetting = await database.appSettings.get('activeWorkWeekId');
+
+  if (currentSetting?.value === workWeekId) {
+    return;
+  }
+
   await database.appSettings.put({
     key: 'activeWorkWeekId',
     value: workWeekId,
     updatedAt: new Date().toISOString(),
   });
+
+  cloudDirtyTracker.markDirty();
 }
 
 async function saveWeek(week: WorkWeek): Promise<void> {
@@ -115,6 +146,8 @@ async function saveWeek(week: WorkWeek): Promise<void> {
     ...week,
     updatedAt: new Date().toISOString(),
   });
+
+  cloudDirtyTracker.markDirty();
 }
 
 async function updateWeek(workWeekId: string, updater: WorkWeekUpdater): Promise<void> {
@@ -138,6 +171,8 @@ async function updateWeek(workWeekId: string, updater: WorkWeekUpdater): Promise
       updatedAt: new Date().toISOString(),
     });
   });
+
+  cloudDirtyTracker.markDirty();
 }
 
 async function resetWeek(workWeekId: string): Promise<void> {
@@ -176,6 +211,8 @@ async function deleteWeek(workWeekId: string): Promise<void> {
       });
     }
   });
+
+  cloudDirtyTracker.markDirty();
 }
 
 export const workWeekService = {
