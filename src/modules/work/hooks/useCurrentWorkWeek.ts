@@ -20,6 +20,7 @@ type UseCurrentWorkWeekResult = {
   resetWeek: () => Promise<void>;
   selectWeek: (workWeekId: string) => Promise<void>;
   createWeek: (options: WorkWeekCreateOptions) => Promise<WorkWeek | undefined>;
+  deleteWeek: (workWeekId: string) => Promise<void>;
 };
 
 function getErrorMessage(error: unknown): string {
@@ -32,7 +33,9 @@ function getErrorMessage(error: unknown): string {
 
 export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
   const [isInitializing, setIsInitializing] = useState(true);
+
   const [isSaving, setIsSaving] = useState(false);
+
   const [error, setError] = useState<string | null>(null);
 
   const queryResult = useLiveQuery(async (): Promise<WorkWeekQueryResult> => {
@@ -90,11 +93,10 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
 
       try {
         await workWeekService.updateWeek(week.id, updater);
+
         setError(null);
       } catch (updateError) {
-        const message = getErrorMessage(updateError);
-
-        setError(message);
+        setError(getErrorMessage(updateError));
         throw updateError;
       } finally {
         setIsSaving(false);
@@ -114,9 +116,7 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
       await workWeekService.resetWeek(week.id);
       setError(null);
     } catch (resetError) {
-      const message = getErrorMessage(resetError);
-
-      setError(message);
+      setError(getErrorMessage(resetError));
       throw resetError;
     } finally {
       setIsSaving(false);
@@ -130,9 +130,7 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
       await workWeekService.setActiveWeek(workWeekId);
       setError(null);
     } catch (selectionError) {
-      const message = getErrorMessage(selectionError);
-
-      setError(message);
+      setError(getErrorMessage(selectionError));
       throw selectionError;
     } finally {
       setIsSaving(false);
@@ -150,9 +148,7 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
 
         return newWeek;
       } catch (creationError) {
-        const message = getErrorMessage(creationError);
-
-        setError(message);
+        setError(getErrorMessage(creationError));
         throw creationError;
       } finally {
         setIsSaving(false);
@@ -160,6 +156,20 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
     },
     []
   );
+
+  const deleteWeek = useCallback(async (workWeekId: string): Promise<void> => {
+    setIsSaving(true);
+
+    try {
+      await workWeekService.deleteWeek(workWeekId);
+      setError(null);
+    } catch (deletionError) {
+      setError(getErrorMessage(deletionError));
+      throw deletionError;
+    } finally {
+      setIsSaving(false);
+    }
+  }, []);
 
   return {
     week,
@@ -171,5 +181,6 @@ export function useCurrentWorkWeek(): UseCurrentWorkWeekResult {
     resetWeek,
     selectWeek,
     createWeek,
+    deleteWeek,
   };
 }

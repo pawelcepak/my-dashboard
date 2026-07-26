@@ -8,6 +8,16 @@ The long-term product direction includes work, finances, debts, portfolio histor
 
 The Dashboard serves as the central daily interface. Detailed module pages provide editing, history and advanced analysis.
 
+## Current development line
+
+Current completed sprint:
+
+- v0.3.2B — Smart Financial Goals
+
+Next planned sprint:
+
+- v0.3.2C — Smart Goal Synchronization
+
 ## v0.1.x — Foundation
 
 - [x] React
@@ -38,16 +48,19 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [x] Persistent theme preference
 - [x] Theme toggle
 - [x] CHB branding
-- [ ] Make the CHB header label navigate to the Dashboard
-- [ ] Align desktop bottom navigation tabs to the left
+- [x] Make the CHB header label navigate to the Dashboard
+- [x] Align desktop bottom navigation tabs to the left
+- [x] Dashboard visual refresh
+- [x] Light-theme contrast pass
+- [x] Dark-theme contrast pass
+- [x] Shared notice styles
+- [x] Shared panel styles
 - [ ] Shared empty state
 - [ ] Shared button system
 - [ ] Error route
 - [ ] Not-found page
 - [ ] Centralized application version display
-- [ ] Final Dashboard visual redesign
-- [ ] Final light-theme contrast pass
-- [ ] Final dark-theme contrast pass
+- [ ] Additional visual refinements based on long-term usage
 
 ## v0.3.x — Work Module
 
@@ -77,6 +90,10 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [x] Editable held-message count
 - [x] Editable EUR/PLN exchange rate
 - [x] Editable weekly financial plan
+- [x] Adding financial goals
+- [x] Removing financial goals
+- [x] Editing financial-goal names
+- [x] Editing financial-goal amounts
 
 ### Data layer
 
@@ -90,12 +107,15 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [x] ISO creation and update timestamps
 - [x] Shared reactive data between Dashboard and Work module
 - [x] Dexie schema version 2
+- [x] Dexie schema version 3
 - [x] Application settings table
 - [x] Active-work-week persistence
 - [x] Existing-data migration
+- [x] Existing financial-plan priority migration
 - [x] Unique ISO week protection
-- [ ] Data-integrity validation
+- [ ] Full data-integrity validation
 - [ ] Recovery from corrupted work records
+- [ ] Database health diagnostics
 
 ### Goals and daily workflow
 
@@ -112,11 +132,39 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [x] Weekly summary on Dashboard
 - [x] Goal progress on Dashboard
 - [x] Work-threshold progress on Dashboard
+- [ ] Daily-message target automatically updates weekly target
+- [ ] Weekly-message target automatically updates daily target
+- [ ] Define the number of planned work days used for goal synchronization
+- [ ] Remaining daily message target
+- [ ] Remaining weekly message target
+- [ ] Required daily pace based on remaining days
 - [ ] Quick removal of work sessions from Dashboard
 - [ ] One-click work-session timer
 - [ ] Configurable default work rating
 - [ ] Configurable default exchange rate
 - [ ] Configurable default goals
+
+### Financial goals
+
+- [x] Priority-based financial goals
+- [x] Sequential financial allocation
+- [x] Individual financial-goal completion percentage
+- [x] Financial-goal completion indicators
+- [x] Financial-goal ordering controls
+- [x] Financial-goal locking
+- [x] Financial-goal unlocking
+- [x] Safe financial-goal removal
+- [x] New goals added at the end of the priority list
+- [x] Automatic priority renumbering
+- [x] Existing-plan priority migration
+- [x] Financial priorities copied to new weeks
+- [x] Financial lock states copied to new weeks
+- [x] Financial progress displayed on Dashboard
+- [ ] Optional drag-and-drop ordering
+- [ ] Reusable financial-allocation engine for the Debts module
+- [ ] Financial-goal templates
+- [ ] Copy selected goals between weeks
+- [ ] Archive completed financial goals
 
 ### Week management
 
@@ -136,11 +184,14 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [x] Active-week history-card indicator
 - [x] Weekly summary metrics in history
 - [x] Reusable shared history-card component
+- [x] Deleting weeks
+- [x] Strong work-week deletion confirmation
+- [x] Protection against deleting the last week
+- [x] Automatic active-week recovery after deletion
 - [ ] Grouping history by month
 - [ ] Year filter
 - [ ] Month filter
 - [ ] History search
-- [ ] Deleting weeks
 - [ ] Week-close workflow
 - [ ] Automatic next-week creation
 - [ ] Importing historical weeks from Google Sheets
@@ -159,6 +210,46 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [ ] Daily-goal completion statistics
 - [ ] Weekly-goal completion statistics
 
+## v0.3.2C — Smart Goal Synchronization
+
+- [ ] Daily message goal updates the weekly message goal automatically
+- [ ] Weekly message goal updates the daily message goal automatically
+- [ ] Manual daily-hours target remains independent
+- [ ] Clear indication of which goal was edited last
+- [ ] Consistent calculation rules on Dashboard and Work page
+- [ ] Goal recalculation without temporary inconsistent states
+- [ ] Goal synchronization preserved in backup and restore
+- [ ] Validation for zero, empty and decimal values
+- [ ] Mobile-friendly goal editing
+- [ ] Updated tests and documentation
+
+## v0.3.2D — Dashboard Control Center
+
+- [ ] Remaining messages today
+- [ ] Remaining messages this week
+- [ ] Remaining hours today
+- [ ] Required average messages per remaining hour
+- [ ] Required daily pace based on remaining work days
+- [ ] Improved current-day status presentation
+- [ ] Improved weekly status presentation
+- [ ] Quick editing of the most frequently used values
+- [ ] Compact history of recent work blocks
+- [ ] Further reduction of unnecessary scrolling
+
+## v0.3.3 — Google Sheets Migration
+
+- [ ] Define historical import format
+- [ ] Import work history from week 8 of 2026
+- [ ] Import preview
+- [ ] Duplicate detection
+- [ ] ISO week validation
+- [ ] Date validation
+- [ ] Numeric-value validation
+- [ ] Partial import
+- [ ] Batch import
+- [ ] Import result report
+- [ ] Restore point before import
+
 ## v0.4.x — Backup and Data Safety
 
 - [x] Complete JSON export
@@ -169,11 +260,13 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [x] Last-backup timestamp
 - [x] Transaction-based database replacement
 - [x] Active-week recovery during import
+- [x] Backward-compatible backup import
 - [ ] Automatic backup reminders
 - [ ] Selective module export
 - [ ] Local backup history
 - [ ] Data-reset workflow
 - [ ] Encrypted backup files
+- [ ] Backup schema migration framework
 
 ## v0.5.x — Expenses Module
 
@@ -199,6 +292,7 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [ ] Persistent debt storage
 - [ ] Dashboard debt summary
 - [ ] Dashboard quick repayment entry
+- [ ] Reuse financial-priority allocation logic for repayments
 
 ## v0.7.x — Portfolio Module
 
@@ -257,13 +351,17 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 - [ ] Installable Android application
 - [ ] Installable Windows application
 - [ ] Installable Linux application
-- [ ] GitHub Pages deployment
-- [ ] Automated deployment
+- [x] GitHub Pages deployment
+- [x] Automated deployment
+- [x] Production build for repository subpath
+- [x] Static-hosting-compatible routing
 - [ ] Synchronization requirements
 - [ ] Conflict-resolution strategy
 - [ ] Optional cloud provider
 - [ ] Cross-device authentication
 - [ ] Encrypted remote backup
+- [ ] Private deployment strategy
+- [ ] Access control for future sensitive remote data
 
 ## v1.0.0 — Stable Release
 

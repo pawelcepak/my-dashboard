@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import type { FinancialPlanItem, WorkWeekSummary } from '@/modules/work/types/work.types';
 import { formatCurrencyPln } from '@/modules/work/utils/workCalculations';
 
+import { calculateFinancialPlanProgress } from '@/modules/work/utils/workCalculations';
+
 type CompactFinancialPlanProps = {
   items: FinancialPlanItem[];
   summary: WorkWeekSummary;
@@ -11,6 +13,8 @@ type CompactFinancialPlanProps = {
 
 export default function CompactFinancialPlan({ items, summary }: CompactFinancialPlanProps) {
   const hasSurplus = summary.financialPlanBalancePln >= 0;
+
+  const planProgress = calculateFinancialPlanProgress(summary.netEarningsPln, items);
 
   const progressPercentage =
     summary.financialPlanTotalPln > 0
@@ -105,18 +109,43 @@ export default function CompactFinancialPlan({ items, summary }: CompactFinancia
         </div>
 
         <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <div
-              key={item.id}
-              className="flex items-center justify-between gap-3 rounded-lg border border-zinc-700 bg-zinc-950/35 px-3 py-2"
-            >
-              <span className="truncate text-xs font-medium text-zinc-500">{item.name}</span>
+          {planProgress.map((progress) => {
+            const item = items.find((currentItem) => currentItem.id === progress.itemId);
 
-              <span className="shrink-0 text-xs font-bold text-zinc-300">
-                {formatCurrencyPln(item.plannedAmountPln)}
-              </span>
-            </div>
-          ))}
+            if (!item) {
+              return null;
+            }
+
+            return (
+              <div
+                key={item.id}
+                className="rounded-lg border border-zinc-700 bg-zinc-950/50 px-3 py-2"
+              >
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-semibold text-zinc-300">{item.name}</p>
+
+                  <p className="text-xs text-zinc-500">{progress.percentage.toFixed(0)}%</p>
+                </div>
+
+                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-800">
+                  <div
+                    className={`h-full rounded-full ${
+                      progress.completed ? 'bg-emerald-500' : 'bg-[var(--app-accent)]'
+                    }`}
+                    style={{
+                      width: `${Math.min(progress.percentage, 100)}%`,
+                    }}
+                  />
+                </div>
+
+                <p className="mt-2 text-xs text-zinc-500">
+                  {formatCurrencyPln(progress.fundedAmount)}
+                  {' / '}
+                  {formatCurrencyPln(item.plannedAmountPln)}
+                </p>
+              </div>
+            );
+          })}
 
           {items.length === 0 && (
             <p className="text-sm text-zinc-500">Brak pozycji planu finansowego.</p>

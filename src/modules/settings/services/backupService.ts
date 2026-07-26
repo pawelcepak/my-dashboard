@@ -71,17 +71,48 @@ function isWorkDay(value: unknown): value is WorkDay {
   );
 }
 
-function isFinancialPlanItem(value: unknown): value is FinancialPlanItem {
+function parseFinancialPlanItem(value: unknown, index: number): FinancialPlanItem {
   if (!isRecord(value)) {
-    return false;
+    throw new Error(`Nieprawidłowa pozycja planu finansowego nr ${index + 1}.`);
   }
 
-  return (
-    isString(value.id) &&
-    isString(value.name) &&
-    isFiniteNumber(value.plannedAmountPln) &&
-    value.plannedAmountPln >= 0
-  );
+  if (
+    !isString(value.id) ||
+    !isString(value.name) ||
+    !isFiniteNumber(value.plannedAmountPln) ||
+    value.plannedAmountPln < 0
+  ) {
+    throw new Error(`Pozycja planu finansowego nr ${index + 1} zawiera nieprawidłowe dane.`);
+  }
+
+  const priority =
+    isFiniteNumber(value.priority) && Number.isInteger(value.priority) && value.priority > 0
+      ? value.priority
+      : index + 1;
+
+  const locked = typeof value.locked === 'boolean' ? value.locked : false;
+
+  return {
+    id: value.id,
+    name: value.name,
+    plannedAmountPln: value.plannedAmountPln,
+    priority,
+    locked,
+  };
+}
+
+function normalizeFinancialPlan(value: unknown): FinancialPlanItem[] {
+  if (!Array.isArray(value)) {
+    throw new Error('Tydzień zawiera nieprawidłowy plan finansowy.');
+  }
+
+  return value
+    .map(parseFinancialPlanItem)
+    .sort((firstItem, secondItem) => firstItem.priority - secondItem.priority)
+    .map((item, index) => ({
+      ...item,
+      priority: index + 1,
+    }));
 }
 
 function isWorkWeekGoals(value: unknown): value is WorkWeekGoals {
@@ -96,34 +127,51 @@ function isWorkWeekGoals(value: unknown): value is WorkWeekGoals {
   );
 }
 
-function isWorkWeek(value: unknown): value is WorkWeek {
+function parseWorkWeek(value: unknown): WorkWeek {
   if (!isRecord(value)) {
-    return false;
+    throw new Error('Kopia zawiera nieprawidłowy rekord tygodnia.');
   }
 
-  return (
-    isString(value.id) &&
-    isFiniteNumber(value.year) &&
-    Number.isInteger(value.year) &&
-    isFiniteNumber(value.weekNumber) &&
-    Number.isInteger(value.weekNumber) &&
-    value.weekNumber >= 1 &&
-    value.weekNumber <= 53 &&
-    isIsoDate(value.startDate) &&
-    isIsoDate(value.endDate) &&
-    isFiniteNumber(value.heldMessages) &&
-    value.heldMessages >= 0 &&
-    isFiniteNumber(value.exchangeRateEurPln) &&
-    value.exchangeRateEurPln >= 0 &&
-    isWorkWeekGoals(value.goals) &&
-    Array.isArray(value.days) &&
-    value.days.length === 7 &&
-    value.days.every(isWorkDay) &&
-    Array.isArray(value.financialPlan) &&
-    value.financialPlan.every(isFinancialPlanItem) &&
-    isIsoDateTime(value.createdAt) &&
-    isIsoDateTime(value.updatedAt)
-  );
+  if (
+    !isString(value.id) ||
+    !isFiniteNumber(value.year) ||
+    !Number.isInteger(value.year) ||
+    !isFiniteNumber(value.weekNumber) ||
+    !Number.isInteger(value.weekNumber) ||
+    value.weekNumber < 1 ||
+    value.weekNumber > 53 ||
+    !isIsoDate(value.startDate) ||
+    !isIsoDate(value.endDate) ||
+    !isFiniteNumber(value.heldMessages) ||
+    value.heldMessages < 0 ||
+    !isFiniteNumber(value.exchangeRateEurPln) ||
+    value.exchangeRateEurPln < 0 ||
+    !isWorkWeekGoals(value.goals) ||
+    !Array.isArray(value.days) ||
+    value.days.length !== 7 ||
+    !value.days.every(isWorkDay) ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  ) {
+    throw new Error(
+      `Tydzień ${String(value.year)}-W${String(value.weekNumber)} zawiera nieprawidłowe dane.`
+    );
+  }
+
+  return {
+    id: value.id,
+    year: value.year,
+    weekNumber: value.weekNumber,
+    startDate: value.startDate,
+    endDate: value.endDate,
+    heldMessages: value.heldMessages,
+    exchangeRateEurPln: value.exchangeRateEurPln,
+    goals: value.goals,
+    days: value.days,
+    financialPlan: normalizeFinancialPlan(value.financialPlan),
+    createdAt: value.createdAt,
+    updatedAt: value.updatedAt,
+  };
 }
 
 function isAppSetting(value: unknown): value is AppSetting {
@@ -193,11 +241,13 @@ function validateBackup(value: unknown): ChbBackupFile {
     throw new Error('Kopia nie zawiera sekcji danych.');
   }
 
-  if (!Array.isArray(value.data.workWeeks) || !value.data.workWeeks.every(isWorkWeek)) {
-    throw new Error('Kopia zawiera nieprawidłowe rekordy tygodni pracy.');
+  if (!Array.isArray(value.data.workWeeks)) {
+    throw new Error('Kopia nie zawiera prawidłowej listy tygodni pracy.');
   }
 
-  if (value.data.workWeeks.length === 0) {
+  const normalizedWorkWeeks = value.data.workWeeks.map(parseWorkWeek);
+
+  if (normalizedWorkWeeks.length === 0) {
     throw new Error('Kopia nie zawiera żadnego tygodnia pracy.');
   }
 
@@ -210,7 +260,7 @@ function validateBackup(value: unknown): ChbBackupFile {
     version: BACKUP_FORMAT_VERSION,
     createdAt: value.createdAt,
     data: {
-      workWeeks: value.data.workWeeks,
+      workWeeks: normalizedWorkWeeks,
       appSettings: value.data.appSettings,
     },
   };

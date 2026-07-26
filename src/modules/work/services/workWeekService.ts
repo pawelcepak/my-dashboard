@@ -144,6 +144,40 @@ async function resetWeek(workWeekId: string): Promise<void> {
   await updateWeek(workWeekId, clearWorkWeekActivity);
 }
 
+async function deleteWeek(workWeekId: string): Promise<void> {
+  await database.transaction('rw', database.workWeeks, database.appSettings, async () => {
+    const numberOfWeeks = await database.workWeeks.count();
+
+    if (numberOfWeeks <= 1) {
+      throw new Error('Nie można usunąć ostatniego tygodnia w bazie.');
+    }
+
+    const week = await database.workWeeks.get(workWeekId);
+
+    if (!week) {
+      throw new Error(`Nie znaleziono tygodnia pracy: ${workWeekId}`);
+    }
+
+    const activeSetting = await database.appSettings.get('activeWorkWeekId');
+
+    await database.workWeeks.delete(workWeekId);
+
+    if (activeSetting?.value === workWeekId) {
+      const newestRemainingWeek = await database.workWeeks.orderBy('startDate').last();
+
+      if (!newestRemainingWeek) {
+        throw new Error('Nie znaleziono tygodnia zastępczego.');
+      }
+
+      await database.appSettings.put({
+        key: 'activeWorkWeekId',
+        value: newestRemainingWeek.id,
+        updatedAt: new Date().toISOString(),
+      });
+    }
+  });
+}
+
 export const workWeekService = {
   initialize,
   getAllWeeks,
@@ -154,4 +188,5 @@ export const workWeekService = {
   saveWeek,
   updateWeek,
   resetWeek,
+  deleteWeek,
 };

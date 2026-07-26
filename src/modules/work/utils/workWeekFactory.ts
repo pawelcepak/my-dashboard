@@ -10,10 +10,12 @@ const DEFAULT_EXCHANGE_RATE_EUR_PLN = 4.2;
 const DEFAULT_WORK_RATING = 8.5;
 
 function createFinancialPlanCopy(sourceItems: FinancialPlanItem[]): FinancialPlanItem[] {
-  return sourceItems.map((item) => ({
+  return sourceItems.map((item, index) => ({
     id: crypto.randomUUID(),
     name: item.name,
     plannedAmountPln: item.plannedAmountPln,
+    priority: item.priority ?? index + 1,
+    locked: item.locked ?? false,
   }));
 }
 

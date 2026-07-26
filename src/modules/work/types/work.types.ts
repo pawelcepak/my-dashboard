@@ -15,8 +15,22 @@ export type WorkDay = {
 
 export type FinancialPlanItem = {
   id: string;
+
   name: string;
+
   plannedAmountPln: number;
+
+  /*
+   * Mniejsza liczba = wyższy priorytet.
+   */
+
+  priority: number;
+
+  /*
+   * Czy priorytet jest zablokowany.
+   */
+
+  locked: boolean;
 };
 
 export type WorkWeekGoals = {

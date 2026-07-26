@@ -1,4 +1,4 @@
-import { CalendarPlus, Check, ChevronDown, Copy } from 'lucide-react';
+import { CalendarPlus, Check, ChevronDown, Copy, Trash2 } from 'lucide-react';
 import { useMemo, useState, type FormEvent } from 'react';
 
 import type { WorkWeek, WorkWeekCreateOptions } from '@/modules/work/types/work.types';
@@ -15,6 +15,7 @@ type WorkWeekManagerProps = {
   isSaving: boolean;
   onSelectWeek: (workWeekId: string) => Promise<void>;
   onCreateWeek: (options: WorkWeekCreateOptions) => Promise<WorkWeek | undefined>;
+  onDeleteWeek: (workWeekId: string) => Promise<void>;
 };
 
 const inputClasses =
@@ -26,13 +27,18 @@ export default function WorkWeekManager({
   isSaving,
   onSelectWeek,
   onCreateWeek,
+  onDeleteWeek,
 }: WorkWeekManagerProps) {
   const currentIsoWeek = useMemo(() => getIsoWeekInformation(), []);
 
   const [isCreationOpen, setIsCreationOpen] = useState(false);
+
   const [year, setYear] = useState(currentIsoWeek.year);
+
   const [weekNumber, setWeekNumber] = useState(currentIsoWeek.weekNumber);
+
   const [copySettings, setCopySettings] = useState(true);
+
   const [localError, setLocalError] = useState<string | null>(null);
 
   const maximumWeekNumber = getIsoWeeksInYear(year);
@@ -51,6 +57,48 @@ export default function WorkWeekManager({
       setIsCreationOpen(false);
     } catch (error) {
       setLocalError(error instanceof Error ? error.message : 'Nie udało się utworzyć tygodnia.');
+    }
+  }
+
+  async function handleDeleteWeek() {
+    setLocalError(null);
+
+    if (weeks.length <= 1) {
+      setLocalError('Nie można usunąć ostatniego tygodnia w bazie.');
+
+      return;
+    }
+
+    const weekLabel = formatWorkWeekLabel(activeWeek.year, activeWeek.weekNumber);
+
+    const firstConfirmation = window.confirm(
+      `USUWANIE TYGODNIA\n\n${weekLabel}\n${formatIsoDate(activeWeek.startDate)} – ${formatIsoDate(
+        activeWeek.endDate
+      )}\n\nUsunięte zostaną wszystkie wiadomości, bloki pracy, oceny, piwa, cele i plan finansowy tego tygodnia.\n\nPrzed kontynuowaniem upewnij się, że masz aktualny backup JSON.\n\nCzy przejść do końcowego potwierdzenia?`
+    );
+
+    if (!firstConfirmation) {
+      return;
+    }
+
+    const requiredText = `USUŃ ${weekLabel}`;
+
+    const providedText = window.prompt(
+      `Aby trwale usunąć tydzień, wpisz dokładnie:\n\n${requiredText}`
+    );
+
+    if (providedText !== requiredText) {
+      if (providedText !== null) {
+        setLocalError('Usuwanie anulowano. Wpisany tekst potwierdzenia był nieprawidłowy.');
+      }
+
+      return;
+    }
+
+    try {
+      await onDeleteWeek(activeWeek.id);
+    } catch (error) {
+      setLocalError(error instanceof Error ? error.message : 'Nie udało się usunąć tygodnia.');
     }
   }
 
@@ -97,7 +145,7 @@ export default function WorkWeekManager({
 
             <ChevronDown
               aria-hidden="true"
-              className="pointer-events-none absolute right-3 top-3 size-4 text-zinc-500"
+              className="pointer-events-none absolute top-3 right-3 size-4 text-zinc-500"
             />
           </label>
 
@@ -109,6 +157,18 @@ export default function WorkWeekManager({
           >
             <CalendarPlus aria-hidden="true" className="size-4" />
             Nowy tydzień
+          </button>
+
+          <button
+            type="button"
+            disabled={isSaving || weeks.length <= 1}
+            onClick={() => {
+              void handleDeleteWeek();
+            }}
+            className="flex h-10 items-center justify-center gap-2 rounded-lg border border-red-800 bg-red-950/30 px-4 text-sm font-semibold text-red-300 transition hover:bg-red-950/60 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            <Trash2 aria-hidden="true" className="size-4" />
+            Usuń tydzień
           </button>
         </div>
       </div>
@@ -183,9 +243,13 @@ export default function WorkWeekManager({
               {isSaving ? 'Tworzenie…' : 'Utwórz'}
             </button>
           </div>
-
-          {localError && <p className="mt-3 text-sm text-red-400">{localError}</p>}
         </form>
+      )}
+
+      {localError && (
+        <div className="border-t border-zinc-700 px-4 py-3">
+          <p className="text-sm font-medium text-red-300">{localError}</p>
+        </div>
       )}
     </section>
   );

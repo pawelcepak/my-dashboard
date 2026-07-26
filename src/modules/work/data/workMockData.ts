@@ -17,14 +17,25 @@ export const currentWorkWeek: WorkWeek = {
   },
   financialPlan: [
     {
-      id: 'financial-plan-life',
+      id: 'life',
       name: 'Życie',
       plannedAmountPln: 306,
+      priority: 1,
+      locked: true,
     },
     {
-      id: 'financial-plan-millennium',
-      name: 'Millennium',
-      plannedAmountPln: 75,
+      id: 'komornik',
+      name: 'Komornik',
+      plannedAmountPln: 100,
+      priority: 2,
+      locked: true,
+    },
+    {
+      id: 'plenti',
+      name: 'Plenti',
+      plannedAmountPln: 300,
+      priority: 3,
+      locked: true,
     },
   ],
   days: [

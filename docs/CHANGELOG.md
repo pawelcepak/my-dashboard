@@ -13,16 +13,21 @@ All notable changes to CHB will be documented in this file.
 - Compact mobile navigation with an additional More panel.
 - Crimson active-navigation state.
 - CHB application branding.
+- Clickable CHB header label leading to the Dashboard.
+- Left-aligned desktop bottom navigation.
 - Persistent active-work-week selection.
 - Application settings table in Dexie.
 - Dexie schema version 2.
+- Dexie schema version 3.
 - Migration of existing work data to the new schema.
+- Migration of existing financial plans to priority-based records.
 - Creating arbitrary ISO work weeks.
 - Automatic Monday-to-Sunday work-week ranges.
 - Automatic current ISO week proposal.
 - Switching between saved work weeks.
 - Protection against duplicate year and week-number combinations.
 - Optional copying of exchange rate, goals and financial plan.
+- Copying financial-goal priorities and lock states to new weeks.
 - Empty daily records for newly created weeks.
 - Reactive week switching between Dashboard and Work module.
 - Weekly work-history section.
@@ -37,15 +42,42 @@ All notable changes to CHB will be documented in this file.
 - Automatic recovery of the active-week setting during import.
 - Last-backup timestamp.
 - Backup and restore panel in Settings.
+- Backward-compatible import of backups created before financial priorities were introduced.
+- Automated deployment to GitHub Pages.
+- Production configuration for the GitHub Pages repository path.
+- Hash-based routing compatible with static hosting.
+- Compact Dashboard control-center layout.
+- Priority-based financial goals.
+- Sequential allocation of weekly net earnings between financial goals.
+- Individual progress percentage for each financial goal.
+- Financial-goal completion indicators.
+- Editable financial-goal ordering.
+- Financial-goal locking and unlocking.
+- Safe removal of unlocked financial goals.
+- Automatic financial-priority normalization.
+- Strongly confirmed work-week deletion.
+- Automatic active-week recovery after deleting the selected week.
+- Protection against deleting the last remaining work week.
 
 ### Changed
 
 - Navigation moved from the left sidebar to the bottom edge.
+- Desktop bottom navigation is aligned to the left.
 - Application content now uses the full available width.
 - Application name changed from My Dashboard to CHB.
+- The CHB label in the application header is now a Dashboard link.
 - Active navigation uses a crimson accent.
-- Dark theme uses a lighter gray background.
-- Light-theme borders have stronger contrast.
+- Dashboard layout is more compact and requires less scrolling.
+- Dashboard daily metrics have stronger visual hierarchy.
+- Quick work actions are divided into clearer groups.
+- Weekly work overview is displayed as a compact summary strip.
+- Financial-plan summary has clearer progress and allocation presentation.
+- Placeholder modules occupy less Dashboard space.
+- Dark theme now uses a dark-gray palette instead of near-black or overly light gray.
+- Light-theme borders and surfaces have stronger contrast.
+- Informational, warning, success and error messages have improved contrast.
+- Shared panels and section cards use a more consistent visual system.
+- Theme-toggle presentation and interaction have been improved.
 - Work module now operates on an explicitly selected active week.
 - Reset action now clears activity from the selected week instead of restoring example data.
 - Dashboard automatically displays the selected active work week.
@@ -55,12 +87,28 @@ All notable changes to CHB will be documented in this file.
 - Selecting a history card changes the active week without reloading the application.
 - The application header displays the active week number and date range.
 - Settings page now contains local-data safety tools.
+- New financial goals are always added at the end of the priority list.
+- Financial-plan priorities are renumbered automatically after reordering or deletion.
+- Locked financial goals cannot be moved or removed.
+- Financial progress is calculated separately and sequentially for every goal.
+- Older backup files receive default priority and lock values during import.
+- Static production routing now uses URL hashes to prevent direct-route 404 errors.
 
-### Planned visual corrections
+### Fixed
 
-- Make the CHB header label navigate to the Dashboard.
-- Align desktop bottom navigation tabs to the left.
-- Continue refining Dashboard readability and theme contrast.
+- Fixed TypeScript path aliases without using deprecated `baseUrl`.
+- Fixed native Vite TypeScript-path resolution.
+- Fixed repository initialization at the incorrect Desktop directory level.
+- Fixed incomplete Git merge completion.
+- Fixed GitHub Pages workflow placement on a feature branch.
+- Fixed production asset paths for GitHub Pages.
+- Fixed direct-page refreshes on static hosting.
+- Fixed financial goals being inserted ahead of existing priorities.
+- Fixed financial-goal reordering being reverted by priority sorting.
+- Fixed missing `priority` and `locked` values in newly created financial goals.
+- Fixed missing `priority` and `locked` values when copying financial plans.
+- Fixed compatibility of older JSON backups with the financial-goal model.
+- Fixed deletion of an active week leaving an invalid active-week setting.
 
 ## [0.3.0-beta.3] - 2026-07-25
 

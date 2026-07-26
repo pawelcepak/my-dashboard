@@ -8,6 +8,8 @@ import type {
   WorkWeekSummary,
 } from '@/modules/work/types/work.types';
 
+import type { FinancialPlanItem } from '../types/work.types';
+
 export const HELD_MESSAGE_RATE_EUR = 0.05;
 
 export const MESSAGE_RATE_TIERS: MessageRateTier[] = [
@@ -253,4 +255,40 @@ export function formatShortIsoDate(date: string): string {
     day: '2-digit',
     month: '2-digit',
   }).format(new Date(`${date}T00:00:00`));
+}
+
+export type FinancialPlanProgress = {
+  itemId: string;
+
+  fundedAmount: number;
+
+  percentage: number;
+
+  completed: boolean;
+};
+
+export function calculateFinancialPlanProgress(
+  earnedPln: number,
+  items: FinancialPlanItem[]
+): FinancialPlanProgress[] {
+  const sortedItems = [...items].sort(
+    (firstItem, secondItem) =>
+      (firstItem.priority ?? Number.MAX_SAFE_INTEGER) -
+      (secondItem.priority ?? Number.MAX_SAFE_INTEGER)
+  );
+
+  let remainingMoney = earnedPln;
+
+  return sortedItems.map((item) => {
+    const fundedAmount = Math.max(0, Math.min(item.plannedAmountPln, remainingMoney));
+
+    remainingMoney -= fundedAmount;
+
+    return {
+      itemId: item.id,
+      fundedAmount,
+      percentage: item.plannedAmountPln === 0 ? 100 : (fundedAmount / item.plannedAmountPln) * 100,
+      completed: fundedAmount >= item.plannedAmountPln,
+    };
+  });
 }

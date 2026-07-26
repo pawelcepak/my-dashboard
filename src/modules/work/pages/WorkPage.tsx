@@ -44,8 +44,18 @@ function WorkPageError({ message }: { message: string }) {
 }
 
 export default function WorkPage() {
-  const { week, weeks, isLoading, isSaving, error, updateWeek, resetWeek, selectWeek, createWeek } =
-    useCurrentWorkWeek();
+  const {
+    week,
+    weeks,
+    isLoading,
+    isSaving,
+    error,
+    updateWeek,
+    resetWeek,
+    selectWeek,
+    createWeek,
+    deleteWeek,
+  } = useCurrentWorkWeek();
 
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
 
@@ -118,6 +128,7 @@ export default function WorkPage() {
         isSaving={isSaving}
         onSelectWeek={selectWeek}
         onCreateWeek={createWeek}
+        onDeleteWeek={deleteWeek}
       />
 
       <WorkHistory
