@@ -1,14 +1,14 @@
 import type {
+  FinancialPlanItem,
   MessageRateTier,
   PayoutFeeTier,
   WorkDay,
   WorkProgress,
   WorkSession,
   WorkWeek,
+  WorkWeekGoals,
   WorkWeekSummary,
 } from '@/modules/work/types/work.types';
-
-import type { FinancialPlanItem } from '../types/work.types';
 
 export const HELD_MESSAGE_RATE_EUR = 0.05;
 
@@ -64,6 +64,9 @@ export const PAYOUT_FEE_TIERS: PayoutFeeTier[] = [
 ];
 
 const MESSAGE_THRESHOLDS = [0, 776, 1576, 1976];
+const GOAL_PRECISION_MULTIPLIER = 100;
+
+export type WorkGoalSource = 'daily' | 'weekly-7-days' | 'weekly-5-days';
 
 function parseTimeToMinutes(time: string): number {
   const [hours, minutes] = time.split(':').map(Number);
@@ -71,8 +74,59 @@ function parseTimeToMinutes(time: string): number {
   return hours * 60 + minutes;
 }
 
+function roundGoalValue(value: number): number {
+  return Math.round(value * GOAL_PRECISION_MULTIPLIER) / GOAL_PRECISION_MULTIPLIER;
+}
+
+export function synchronizeWorkGoals(
+  source: WorkGoalSource,
+  sourceValue: number | null,
+  dailyHoursTarget: number | null
+): WorkWeekGoals {
+  if (sourceValue === null) {
+    return {
+      dailyMessagesTarget: null,
+      weeklyMessagesTarget: null,
+      weeklyMessagesTarget5Days: null,
+      dailyHoursTarget,
+    };
+  }
+
+  const normalizedSourceValue = Math.max(0, sourceValue);
+
+  if (source === 'daily') {
+    return {
+      dailyMessagesTarget: roundGoalValue(normalizedSourceValue),
+      weeklyMessagesTarget: roundGoalValue(normalizedSourceValue * 7),
+      weeklyMessagesTarget5Days: roundGoalValue(normalizedSourceValue * 5),
+      dailyHoursTarget,
+    };
+  }
+
+  if (source === 'weekly-7-days') {
+    const dailyMessagesTarget = roundGoalValue(normalizedSourceValue / 7);
+
+    return {
+      dailyMessagesTarget,
+      weeklyMessagesTarget: roundGoalValue(normalizedSourceValue),
+      weeklyMessagesTarget5Days: roundGoalValue(dailyMessagesTarget * 5),
+      dailyHoursTarget,
+    };
+  }
+
+  const dailyMessagesTarget = roundGoalValue(normalizedSourceValue / 5);
+
+  return {
+    dailyMessagesTarget,
+    weeklyMessagesTarget: roundGoalValue(dailyMessagesTarget * 7),
+    weeklyMessagesTarget5Days: roundGoalValue(normalizedSourceValue),
+    dailyHoursTarget,
+  };
+}
+
 export function getSessionMinutes(session: WorkSession): number {
   const startMinutes = parseTimeToMinutes(session.startTime);
+
   let endMinutes = parseTimeToMinutes(session.endTime);
 
   if (endMinutes < startMinutes) {
@@ -103,6 +157,7 @@ export function getDayMessagesPerHour(day: WorkDay): number {
 export function getMessageRate(totalMessages: number): number {
   const tier = MESSAGE_RATE_TIERS.find(({ minimumMessages, maximumMessages }) => {
     const meetsMinimum = totalMessages >= minimumMessages;
+
     const meetsMaximum = maximumMessages === null || totalMessages <= maximumMessages;
 
     return meetsMinimum && meetsMaximum;
@@ -114,6 +169,7 @@ export function getMessageRate(totalMessages: number): number {
 export function getPayoutFee(grossAmountEur: number): number {
   const tier = PAYOUT_FEE_TIERS.find(({ minimumAmountEur, maximumAmountEur }) => {
     const meetsMinimum = grossAmountEur >= minimumAmountEur;
+
     const meetsMaximum = maximumAmountEur === null || grossAmountEur <= maximumAmountEur;
 
     return meetsMinimum && meetsMaximum;
@@ -226,6 +282,18 @@ export function formatDecimal(value: number): string {
   }).format(value);
 }
 
+export function formatGoalValue(value: number | null): string {
+  if (value === null) {
+    return '';
+  }
+
+  return new Intl.NumberFormat('pl-PL', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+    useGrouping: false,
+  }).format(value);
+}
+
 export function formatCurrencyEur(value: number): string {
   return new Intl.NumberFormat('pl-PL', {
     style: 'currency',
@@ -259,11 +327,8 @@ export function formatShortIsoDate(date: string): string {
 
 export type FinancialPlanProgress = {
   itemId: string;
-
   fundedAmount: number;
-
   percentage: number;
-
   completed: boolean;
 };
 

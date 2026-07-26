@@ -12,11 +12,15 @@ The Dashboard serves as the central daily interface. Detailed module pages provi
 
 Current completed sprint:
 
-- v0.3.2B — Smart Financial Goals
+- v0.3.2C — Smart Goal Synchronization
 
 Next planned sprint:
 
-- v0.3.2C — Smart Goal Synchronization
+- v0.3.2D — Dashboard Control Center
+
+Following planned sprint:
+
+- v0.3.3 — Google Sheets Migration
 
 ## v0.1.x — Foundation
 
@@ -77,6 +81,11 @@ Next planned sprint:
 - [x] Weekly financial plan
 - [x] Work-rating presentation
 - [x] Alcohol-count presentation
+- [x] Shared work-goal synchronization engine
+- [x] Daily-to-weekly goal calculation
+- [x] Seven-day-to-daily goal calculation
+- [x] Five-day-to-daily goal calculation
+- [x] Goal-value rounding to two decimal places
 
 ### Editing
 
@@ -94,6 +103,10 @@ Next planned sprint:
 - [x] Removing financial goals
 - [x] Editing financial-goal names
 - [x] Editing financial-goal amounts
+- [x] Editable daily message target
+- [x] Editable seven-day message target
+- [x] Editable five-day message target
+- [x] Editable independent daily-hours target
 
 ### Data layer
 
@@ -108,10 +121,12 @@ Next planned sprint:
 - [x] Shared reactive data between Dashboard and Work module
 - [x] Dexie schema version 2
 - [x] Dexie schema version 3
+- [x] Dexie schema version 4
 - [x] Application settings table
 - [x] Active-work-week persistence
 - [x] Existing-data migration
 - [x] Existing financial-plan priority migration
+- [x] Existing work-goal synchronization migration
 - [x] Unique ISO week protection
 - [ ] Full data-integrity validation
 - [ ] Recovery from corrupted work records
@@ -121,7 +136,8 @@ Next planned sprint:
 
 - [x] Weekly-goal data model
 - [x] Editable daily message target
-- [x] Editable weekly message target
+- [x] Editable seven-day message target
+- [x] Editable five-day message target
 - [x] Editable daily hours target
 - [x] Automatic current-day detection
 - [x] Current-day summary
@@ -132,9 +148,15 @@ Next planned sprint:
 - [x] Weekly summary on Dashboard
 - [x] Goal progress on Dashboard
 - [x] Work-threshold progress on Dashboard
-- [ ] Daily-message target automatically updates weekly target
-- [ ] Weekly-message target automatically updates daily target
-- [ ] Define the number of planned work days used for goal synchronization
+- [x] Daily message goal automatically updates both weekly goals
+- [x] Seven-day message goal automatically updates daily and five-day goals
+- [x] Five-day message goal automatically updates daily and seven-day goals
+- [x] Daily-hours target remains independent
+- [x] Immediate synchronized goal preview before saving
+- [x] Synchronized goal values preserved after page refresh
+- [x] Synchronized goal values preserved independently for every week
+- [x] Separate five-day and seven-day progress on the Work page
+- [x] Combined goal summary on the Work page
 - [ ] Remaining daily message target
 - [ ] Remaining weekly message target
 - [ ] Required daily pace based on remaining days
@@ -175,7 +197,7 @@ Next planned sprint:
 - [x] Persistent active-week selection
 - [x] Protection against duplicate ISO weeks
 - [x] Copying exchange rate from selected week
-- [x] Copying goals from selected week
+- [x] Copying synchronized goals from selected week
 - [x] Copying financial plan from selected week
 - [x] Empty daily records for new weeks
 - [x] Weekly-history view
@@ -210,31 +232,80 @@ Next planned sprint:
 - [ ] Daily-goal completion statistics
 - [ ] Weekly-goal completion statistics
 
+## v0.3.2A — UX & Visual Refresh
+
+- [x] Clickable CHB Dashboard link
+- [x] Left-aligned desktop bottom navigation
+- [x] Compact application header
+- [x] Dashboard layout redesign
+- [x] Reduced Dashboard scrolling
+- [x] Stronger daily-metric hierarchy
+- [x] Grouped Dashboard quick actions
+- [x] Compact weekly summary
+- [x] Financial-plan visual redesign
+- [x] Improved light-theme contrast
+- [x] Improved dark-theme contrast
+- [x] Shared notice styles
+- [x] Improved Settings backup presentation
+- [x] Improved theme toggle
+
+## v0.3.2B — Smart Financial Goals
+
+- [x] Editable financial goals
+- [x] Add financial goals
+- [x] Remove financial goals
+- [x] Priority-based financial goals
+- [x] Sequential financial allocation
+- [x] Financial-goal completion percentage
+- [x] Financial-goal ordering controls
+- [x] Financial-goal locking
+- [x] Financial-goal unlocking
+- [x] Automatic priority normalization
+- [x] Existing-plan priority migration
+- [x] Smart financial Dashboard
+- [x] Strong work-week deletion confirmation
+- [x] Delete work week
+- [x] Automatic active-week recovery
+- [x] Backward-compatible financial-goal backup import
+
 ## v0.3.2C — Smart Goal Synchronization
 
-- [ ] Daily message goal updates the weekly message goal automatically
-- [ ] Weekly message goal updates the daily message goal automatically
-- [ ] Manual daily-hours target remains independent
-- [ ] Clear indication of which goal was edited last
-- [ ] Consistent calculation rules on Dashboard and Work page
-- [ ] Goal recalculation without temporary inconsistent states
-- [ ] Goal synchronization preserved in backup and restore
-- [ ] Validation for zero, empty and decimal values
-- [ ] Mobile-friendly goal editing
-- [ ] Updated tests and documentation
+- [x] Daily message goal updates the seven-day goal automatically
+- [x] Daily message goal updates the five-day goal automatically
+- [x] Seven-day goal updates the daily goal automatically
+- [x] Seven-day goal updates the five-day goal automatically
+- [x] Five-day goal updates the daily goal automatically
+- [x] Five-day goal updates the seven-day goal automatically
+- [x] Manual daily-hours target remains independent
+- [x] Shared synchronization rules on Dashboard and Work page
+- [x] Goal recalculation without temporary inconsistent saved states
+- [x] Goal synchronization preserved in backup and restore
+- [x] Backward-compatible import of older goal records
+- [x] Dexie version 4 migration
+- [x] Validation for empty and non-negative values
+- [x] Decimal goal-value support
+- [x] Mobile-friendly goal editing
+- [x] Separate five-day and seven-day progress indicators
+- [x] Synchronized goal summary on Work page
+- [x] Updated tests and documentation
 
 ## v0.3.2D — Dashboard Control Center
 
 - [ ] Remaining messages today
-- [ ] Remaining messages this week
+- [ ] Remaining messages for the five-day target
+- [ ] Remaining messages for the seven-day target
 - [ ] Remaining hours today
 - [ ] Required average messages per remaining hour
-- [ ] Required daily pace based on remaining work days
+- [ ] Required daily pace based on remaining calendar days
+- [ ] Required daily pace based on remaining five-day work period
+- [ ] Ahead-of-plan and behind-plan indicators
 - [ ] Improved current-day status presentation
 - [ ] Improved weekly status presentation
 - [ ] Quick editing of the most frequently used values
 - [ ] Compact history of recent work blocks
+- [ ] Quick removal of work sessions from Dashboard
 - [ ] Further reduction of unnecessary scrolling
+- [ ] Consistent goal calculations between Dashboard and Work page
 
 ## v0.3.3 — Google Sheets Migration
 
@@ -245,10 +316,13 @@ Next planned sprint:
 - [ ] ISO week validation
 - [ ] Date validation
 - [ ] Numeric-value validation
+- [ ] Financial-plan validation
+- [ ] Work-goal normalization during import
 - [ ] Partial import
 - [ ] Batch import
 - [ ] Import result report
 - [ ] Restore point before import
+- [ ] Verify imported weeks against the original spreadsheet
 
 ## v0.4.x — Backup and Data Safety
 
@@ -260,7 +334,8 @@ Next planned sprint:
 - [x] Last-backup timestamp
 - [x] Transaction-based database replacement
 - [x] Active-week recovery during import
-- [x] Backward-compatible backup import
+- [x] Backward-compatible financial-goal backup import
+- [x] Backward-compatible synchronized-goal backup import
 - [ ] Automatic backup reminders
 - [ ] Selective module export
 - [ ] Local backup history

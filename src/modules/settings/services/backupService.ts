@@ -17,6 +17,12 @@ import { formatWorkWeekLabel } from '@/modules/work/utils/workWeekDate';
 
 const SUPPORTED_SETTING_KEYS = new Set(['activeWorkWeekId', 'lastBackupAt']);
 
+const GOAL_PRECISION_MULTIPLIER = 100;
+
+function roundGoalValue(value: number): number {
+  return Math.round(value * GOAL_PRECISION_MULTIPLIER) / GOAL_PRECISION_MULTIPLIER;
+}
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -31,6 +37,18 @@ function isFiniteNumber(value: unknown): value is number {
 
 function isNullableNumber(value: unknown): value is number | null {
   return value === null || isFiniteNumber(value);
+}
+
+function parseNullableNonNegativeNumber(value: unknown): number | null {
+  if (value === null || value === undefined) {
+    return null;
+  }
+
+  if (!isFiniteNumber(value) || value < 0) {
+    throw new Error('Cel zawiera nieprawidłową wartość liczbową.');
+  }
+
+  return value;
 }
 
 function isIsoDate(value: unknown): value is string {
@@ -115,16 +133,59 @@ function normalizeFinancialPlan(value: unknown): FinancialPlanItem[] {
     }));
 }
 
-function isWorkWeekGoals(value: unknown): value is WorkWeekGoals {
+function parseWorkWeekGoals(value: unknown): WorkWeekGoals {
   if (!isRecord(value)) {
-    return false;
+    throw new Error('Tydzień zawiera nieprawidłowe cele pracy.');
   }
 
-  return (
-    isNullableNumber(value.dailyMessagesTarget) &&
-    isNullableNumber(value.weeklyMessagesTarget) &&
-    isNullableNumber(value.dailyHoursTarget)
-  );
+  const storedDailyMessagesTarget = parseNullableNonNegativeNumber(value.dailyMessagesTarget);
+
+  const storedWeekly7DaysTarget = parseNullableNonNegativeNumber(value.weeklyMessagesTarget);
+
+  const storedWeekly5DaysTarget = parseNullableNonNegativeNumber(value.weeklyMessagesTarget5Days);
+
+  const dailyHoursTarget = parseNullableNonNegativeNumber(value.dailyHoursTarget);
+
+  if (storedDailyMessagesTarget !== null) {
+    return {
+      dailyMessagesTarget: roundGoalValue(storedDailyMessagesTarget),
+      weeklyMessagesTarget:
+        storedWeekly7DaysTarget ?? roundGoalValue(storedDailyMessagesTarget * 7),
+      weeklyMessagesTarget5Days:
+        storedWeekly5DaysTarget ?? roundGoalValue(storedDailyMessagesTarget * 5),
+      dailyHoursTarget,
+    };
+  }
+
+  if (storedWeekly7DaysTarget !== null) {
+    const dailyMessagesTarget = roundGoalValue(storedWeekly7DaysTarget / 7);
+
+    return {
+      dailyMessagesTarget,
+      weeklyMessagesTarget: roundGoalValue(storedWeekly7DaysTarget),
+      weeklyMessagesTarget5Days:
+        storedWeekly5DaysTarget ?? roundGoalValue((storedWeekly7DaysTarget / 7) * 5),
+      dailyHoursTarget,
+    };
+  }
+
+  if (storedWeekly5DaysTarget !== null) {
+    const dailyMessagesTarget = roundGoalValue(storedWeekly5DaysTarget / 5);
+
+    return {
+      dailyMessagesTarget,
+      weeklyMessagesTarget: roundGoalValue((storedWeekly5DaysTarget / 5) * 7),
+      weeklyMessagesTarget5Days: roundGoalValue(storedWeekly5DaysTarget),
+      dailyHoursTarget,
+    };
+  }
+
+  return {
+    dailyMessagesTarget: null,
+    weeklyMessagesTarget: null,
+    weeklyMessagesTarget5Days: null,
+    dailyHoursTarget,
+  };
 }
 
 function parseWorkWeek(value: unknown): WorkWeek {
@@ -146,7 +207,6 @@ function parseWorkWeek(value: unknown): WorkWeek {
     value.heldMessages < 0 ||
     !isFiniteNumber(value.exchangeRateEurPln) ||
     value.exchangeRateEurPln < 0 ||
-    !isWorkWeekGoals(value.goals) ||
     !Array.isArray(value.days) ||
     value.days.length !== 7 ||
     !value.days.every(isWorkDay) ||
@@ -166,7 +226,7 @@ function parseWorkWeek(value: unknown): WorkWeek {
     endDate: value.endDate,
     heldMessages: value.heldMessages,
     exchangeRateEurPln: value.exchangeRateEurPln,
-    goals: value.goals,
+    goals: parseWorkWeekGoals(value.goals),
     days: value.days,
     financialPlan: normalizeFinancialPlan(value.financialPlan),
     createdAt: value.createdAt,
@@ -266,6 +326,7 @@ function validateBackup(value: unknown): ChbBackupFile {
   };
 
   validateUniqueWeeks(backup.data.workWeeks);
+
   validateUniqueSettings(backup.data.appSettings);
 
   return backup;
@@ -294,6 +355,7 @@ function downloadJsonFile(fileName: string, contents: string): void {
   });
 
   const objectUrl = URL.createObjectURL(blob);
+
   const link = document.createElement('a');
 
   link.href = objectUrl;
@@ -365,6 +427,7 @@ async function readBackupFile(file: File): Promise<BackupPreview> {
   );
 
   const firstWeek = sortedWeeks[0];
+
   const lastWeek = sortedWeeks[sortedWeeks.length - 1];
 
   const activeSetting = backup.data.appSettings.find(

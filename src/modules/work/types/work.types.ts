@@ -15,27 +15,42 @@ export type WorkDay = {
 
 export type FinancialPlanItem = {
   id: string;
-
   name: string;
-
   plannedAmountPln: number;
 
   /*
-   * Mniejsza liczba = wyższy priorytet.
+   * Mniejsza liczba oznacza wyższy priorytet.
    */
-
   priority: number;
 
   /*
-   * Czy priorytet jest zablokowany.
+   * Zablokowany cel nie może zostać przesunięty ani usunięty.
    */
-
   locked: boolean;
 };
 
 export type WorkWeekGoals = {
+  /*
+   * Bazowy cel wiadomości na jeden dzień.
+   */
   dailyMessagesTarget: number | null;
+
+  /*
+   * Cel tygodniowy liczony dla siedmiu dni.
+   *
+   * Zachowujemy dotychczasową nazwę pola ze względu na zgodność
+   * istniejących komponentów, danych i wcześniejszych backupów.
+   */
   weeklyMessagesTarget: number | null;
+
+  /*
+   * Cel tygodniowy liczony dla pięciu dni.
+   */
+  weeklyMessagesTarget5Days: number | null;
+
+  /*
+   * Niezależny, ręcznie ustawiany cel godzin pracy dziennie.
+   */
   dailyHoursTarget: number | null;
 };
 

@@ -11,8 +11,9 @@ export const currentWorkWeek: WorkWeek = {
   heldMessages: 9,
   exchangeRateEurPln: 4.2,
   goals: {
-    dailyMessagesTarget: null,
+    dailyMessagesTarget: 225.14,
     weeklyMessagesTarget: 1576,
+    weeklyMessagesTarget5Days: 1125.71,
     dailyHoursTarget: null,
   },
   financialPlan: [

@@ -19,14 +19,17 @@ All notable changes to CHB will be documented in this file.
 - Application settings table in Dexie.
 - Dexie schema version 2.
 - Dexie schema version 3.
+- Dexie schema version 4.
 - Migration of existing work data to the new schema.
 - Migration of existing financial plans to priority-based records.
+- Migration of existing work goals to synchronized daily, five-day and seven-day values.
 - Creating arbitrary ISO work weeks.
 - Automatic Monday-to-Sunday work-week ranges.
 - Automatic current ISO week proposal.
 - Switching between saved work weeks.
 - Protection against duplicate year and week-number combinations.
 - Optional copying of exchange rate, goals and financial plan.
+- Copying synchronized work goals to newly created weeks.
 - Copying financial-goal priorities and lock states to new weeks.
 - Empty daily records for newly created weeks.
 - Reactive week switching between Dashboard and Work module.
@@ -43,6 +46,7 @@ All notable changes to CHB will be documented in this file.
 - Last-backup timestamp.
 - Backup and restore panel in Settings.
 - Backward-compatible import of backups created before financial priorities were introduced.
+- Backward-compatible import of backups created before synchronized five-day and seven-day work goals were introduced.
 - Automated deployment to GitHub Pages.
 - Production configuration for the GitHub Pages repository path.
 - Hash-based routing compatible with static hosting.
@@ -58,6 +62,15 @@ All notable changes to CHB will be documented in this file.
 - Strongly confirmed work-week deletion.
 - Automatic active-week recovery after deleting the selected week.
 - Protection against deleting the last remaining work week.
+- Synchronized daily message target.
+- Synchronized seven-day weekly message target.
+- Synchronized five-day weekly message target.
+- Shared work-goal synchronization engine.
+- Independent daily-hours target.
+- Immediate goal recalculation while editing on the Dashboard.
+- Separate five-day and seven-day goal progress indicators in the Work module.
+- Synchronized work-goal summary in the Work module.
+- Financial-goal progress displayed sequentially on the Dashboard.
 
 ### Changed
 
@@ -93,6 +106,13 @@ All notable changes to CHB will be documented in this file.
 - Financial progress is calculated separately and sequentially for every goal.
 - Older backup files receive default priority and lock values during import.
 - Static production routing now uses URL hashes to prevent direct-route 404 errors.
+- Editing the daily message target now recalculates the five-day and seven-day targets.
+- Editing the seven-day target now recalculates the daily and five-day targets.
+- Editing the five-day target now recalculates the daily and seven-day targets.
+- Daily working-hours target remains independent from message-goal synchronization.
+- Work-progress presentation now distinguishes goal completion from message-rate thresholds.
+- Work summary now displays daily, five-day, seven-day and daily-hours targets together.
+- Existing single weekly targets are interpreted as seven-day targets during migration and backup import.
 
 ### Fixed
 
@@ -109,6 +129,12 @@ All notable changes to CHB will be documented in this file.
 - Fixed missing `priority` and `locked` values when copying financial plans.
 - Fixed compatibility of older JSON backups with the financial-goal model.
 - Fixed deletion of an active week leaving an invalid active-week setting.
+- Fixed creation of incomplete `WorkWeekGoals` records after introducing the five-day target.
+- Fixed inconsistent daily and weekly message goals.
+- Fixed older work weeks missing the five-day goal after database migration.
+- Fixed older JSON backups being rejected because of the missing five-day goal.
+- Fixed goal values not remaining synchronized after changing the source field.
+- Fixed goal presentation in the Work module showing only one weekly target.
 
 ## [0.3.0-beta.3] - 2026-07-25
 

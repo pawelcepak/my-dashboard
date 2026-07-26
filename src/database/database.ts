@@ -1,6 +1,75 @@
 import Dexie, { type Table } from 'dexie';
 
-import type { AppSetting, FinancialPlanItem, WorkWeek } from '@/modules/work/types/work.types';
+import type {
+  AppSetting,
+  FinancialPlanItem,
+  WorkWeek,
+  WorkWeekGoals,
+} from '@/modules/work/types/work.types';
+
+const DEFAULT_WEEKLY_MESSAGES_TARGET = 1576;
+const GOAL_PRECISION_MULTIPLIER = 100;
+
+function roundGoalValue(value: number): number {
+  return Math.round(value * GOAL_PRECISION_MULTIPLIER) / GOAL_PRECISION_MULTIPLIER;
+}
+
+function getNullableNonNegativeNumber(value: unknown): number | null {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) {
+    return null;
+  }
+
+  return value;
+}
+
+function normalizeWorkGoals(goals: Partial<WorkWeekGoals> | undefined): WorkWeekGoals {
+  const storedDailyTarget = getNullableNonNegativeNumber(goals?.dailyMessagesTarget);
+
+  const storedWeekly7DaysTarget = getNullableNonNegativeNumber(goals?.weeklyMessagesTarget);
+
+  const storedWeekly5DaysTarget = getNullableNonNegativeNumber(goals?.weeklyMessagesTarget5Days);
+
+  const dailyHoursTarget = getNullableNonNegativeNumber(goals?.dailyHoursTarget);
+
+  if (storedDailyTarget !== null) {
+    return {
+      dailyMessagesTarget: roundGoalValue(storedDailyTarget),
+      weeklyMessagesTarget: storedWeekly7DaysTarget ?? roundGoalValue(storedDailyTarget * 7),
+      weeklyMessagesTarget5Days: storedWeekly5DaysTarget ?? roundGoalValue(storedDailyTarget * 5),
+      dailyHoursTarget,
+    };
+  }
+
+  if (storedWeekly7DaysTarget !== null) {
+    const dailyMessagesTarget = roundGoalValue(storedWeekly7DaysTarget / 7);
+
+    return {
+      dailyMessagesTarget,
+      weeklyMessagesTarget: roundGoalValue(storedWeekly7DaysTarget),
+      weeklyMessagesTarget5Days:
+        storedWeekly5DaysTarget ?? roundGoalValue((storedWeekly7DaysTarget / 7) * 5),
+      dailyHoursTarget,
+    };
+  }
+
+  if (storedWeekly5DaysTarget !== null) {
+    const dailyMessagesTarget = roundGoalValue(storedWeekly5DaysTarget / 5);
+
+    return {
+      dailyMessagesTarget,
+      weeklyMessagesTarget: roundGoalValue((storedWeekly5DaysTarget / 5) * 7),
+      weeklyMessagesTarget5Days: roundGoalValue(storedWeekly5DaysTarget),
+      dailyHoursTarget,
+    };
+  }
+
+  return {
+    dailyMessagesTarget: null,
+    weeklyMessagesTarget: null,
+    weeklyMessagesTarget5Days: null,
+    dailyHoursTarget,
+  };
+}
 
 function normalizeFinancialPlan(items: FinancialPlanItem[] | undefined): FinancialPlanItem[] {
   return [...(items ?? [])]
@@ -42,8 +111,9 @@ class MyDashboardDatabase extends Dexie {
         const normalizedWeeks = weeks.map((week) => ({
           ...week,
           goals: week.goals ?? {
-            dailyMessagesTarget: null,
-            weeklyMessagesTarget: 1576,
+            dailyMessagesTarget: roundGoalValue(DEFAULT_WEEKLY_MESSAGES_TARGET / 7),
+            weeklyMessagesTarget: DEFAULT_WEEKLY_MESSAGES_TARGET,
+            weeklyMessagesTarget5Days: roundGoalValue((DEFAULT_WEEKLY_MESSAGES_TARGET / 7) * 5),
             dailyHoursTarget: null,
           },
           createdAt: week.createdAt ?? new Date().toISOString(),
@@ -78,6 +148,25 @@ class MyDashboardDatabase extends Dexie {
         const normalizedWeeks = weeks.map((week) => ({
           ...week,
           financialPlan: normalizeFinancialPlan(week.financialPlan),
+          updatedAt: new Date().toISOString(),
+        }));
+
+        await workWeeksTable.bulkPut(normalizedWeeks);
+      });
+
+    this.version(4)
+      .stores({
+        workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
+        appSettings: 'key, updatedAt',
+      })
+      .upgrade(async (transaction) => {
+        const workWeeksTable = transaction.table<WorkWeek, string>('workWeeks');
+
+        const weeks = await workWeeksTable.toArray();
+
+        const normalizedWeeks = weeks.map((week) => ({
+          ...week,
+          goals: normalizeWorkGoals(week.goals),
           updatedAt: new Date().toISOString(),
         }));
 

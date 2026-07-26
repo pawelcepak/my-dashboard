@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 import FinancialPlanSummary from '@/modules/work/components/FinancialPlanSummary';
 import WorkDayEditor from '@/modules/work/components/WorkDayEditor';
 import WorkDaysTable from '@/modules/work/components/WorkDaysTable';
+import WorkHistory from '@/modules/work/components/WorkHistory';
 import WorkProgressCard from '@/modules/work/components/WorkProgressCard';
 import WorkSummaryGrid from '@/modules/work/components/WorkSummaryGrid';
 import WorkWeekManager from '@/modules/work/components/WorkWeekManager';
 import WorkWeekSettings from '@/modules/work/components/WorkWeekSettings';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
-import WorkHistory from '@/modules/work/components/WorkHistory';
 import type { FinancialPlanItem, WorkDay } from '@/modules/work/types/work.types';
 import {
   calculateWorkProgress,
@@ -185,10 +185,14 @@ export default function WorkPage() {
         </div>
       </div>
 
-      <WorkSummaryGrid summary={summary} />
+      <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
 
       <div className="grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(19rem,0.65fr)]">
-        <WorkProgressCard totalMessages={summary.totalMessages} progress={progress} />
+        <WorkProgressCard
+          totalMessages={summary.totalMessages}
+          progress={progress}
+          goals={activeWeek.goals}
+        />
 
         <WorkWeekSettings
           heldMessages={activeWeek.heldMessages}
