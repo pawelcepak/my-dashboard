@@ -3,9 +3,12 @@ import Dexie, { type Table } from 'dexie';
 import type {
   AppSetting,
   FinancialPlanItem,
+  WorkDay,
   WorkWeek,
   WorkWeekGoals,
 } from '@/modules/work/types/work.types';
+
+export const DATABASE_SCHEMA_VERSION = 5;
 
 const DEFAULT_WEEKLY_MESSAGES_TARGET = 1576;
 const GOAL_PRECISION_MULTIPLIER = 100;
@@ -20,6 +23,30 @@ function getNullableNonNegativeNumber(value: unknown): number | null {
   }
 
   return value;
+}
+
+function getNonNegativeInteger(value: unknown): number {
+  if (
+    typeof value !== 'number' ||
+    !Number.isFinite(value) ||
+    !Number.isInteger(value) ||
+    value < 0
+  ) {
+    return 0;
+  }
+
+  return value;
+}
+
+function normalizeWorkDay(day: WorkDay): WorkDay {
+  return {
+    ...day,
+    messages: getNonNegativeInteger(day.messages),
+    freeMessages: getNonNegativeInteger(day.freeMessages),
+    heldMessages: getNonNegativeInteger(day.heldMessages),
+    beers: getNonNegativeInteger(day.beers),
+    sessions: Array.isArray(day.sessions) ? day.sessions : [],
+  };
 }
 
 function normalizeWorkGoals(goals: Partial<WorkWeekGoals> | undefined): WorkWeekGoals {
@@ -168,6 +195,27 @@ class MyDashboardDatabase extends Dexie {
           ...week,
           goals: normalizeWorkGoals(week.goals),
           updatedAt: new Date().toISOString(),
+        }));
+
+        await workWeeksTable.bulkPut(normalizedWeeks);
+      });
+
+    this.version(DATABASE_SCHEMA_VERSION)
+      .stores({
+        workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
+        appSettings: 'key, updatedAt',
+      })
+      .upgrade(async (transaction) => {
+        const workWeeksTable = transaction.table<WorkWeek, string>('workWeeks');
+
+        const weeks = await workWeeksTable.toArray();
+
+        const migrationTimestamp = new Date().toISOString();
+
+        const normalizedWeeks = weeks.map((week) => ({
+          ...week,
+          days: week.days.map(normalizeWorkDay),
+          updatedAt: migrationTimestamp,
         }));
 
         await workWeeksTable.bulkPut(normalizedWeeks);

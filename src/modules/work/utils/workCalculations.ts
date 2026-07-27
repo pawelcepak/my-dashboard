@@ -144,6 +144,10 @@ export function getDayWorkedHours(day: WorkDay): number {
   return getDayWorkedMinutes(day) / 60;
 }
 
+export function getDayTotalMessages(day: WorkDay): number {
+  return day.messages + day.heldMessages;
+}
+
 export function getDayMessagesPerHour(day: WorkDay): number {
   const hours = getDayWorkedHours(day);
 
@@ -151,7 +155,28 @@ export function getDayMessagesPerHour(day: WorkDay): number {
     return 0;
   }
 
-  return day.messages / hours;
+  return getDayTotalMessages(day) / hours;
+}
+
+export function getDailyHeldMessagesTotal(week: WorkWeek): number {
+  return week.days.reduce((total, day) => total + day.heldMessages, 0);
+}
+
+/*
+ * Pole WorkWeek.heldMessages pozostaje przejściowym zabezpieczeniem
+ * zgodności ze starszymi rekordami, które nie miały podziału dziennego.
+ *
+ * Po pierwszej zmianie dziennych zatrzymanych wiadomości WorkPage zapisuje
+ * ich sumę również do starszego pola tygodniowego.
+ */
+export function getEffectiveHeldMessagesTotal(week: WorkWeek): number {
+  const dailyTotal = getDailyHeldMessagesTotal(week);
+
+  if (dailyTotal > 0 || week.heldMessages === 0) {
+    return dailyTotal;
+  }
+
+  return week.heldMessages;
 }
 
 export function getMessageRate(totalMessages: number): number {
@@ -181,17 +206,21 @@ export function getPayoutFee(grossAmountEur: number): number {
 export function calculateWorkWeekSummary(week: WorkWeek): WorkWeekSummary {
   const totalMessages = week.days.reduce((total, day) => total + day.messages, 0);
 
+  const totalHeldMessages = getEffectiveHeldMessagesTotal(week);
+
   const totalMinutes = week.days.reduce((total, day) => total + getDayWorkedMinutes(day), 0);
 
   const totalHours = totalMinutes / 60;
 
-  const averageMessagesPerHour = totalHours > 0 ? totalMessages / totalHours : 0;
+  const totalMessagesForPerformance = totalMessages + totalHeldMessages;
+
+  const averageMessagesPerHour = totalHours > 0 ? totalMessagesForPerformance / totalHours : 0;
 
   const messageRateEur = getMessageRate(totalMessages);
 
   const regularMessagesEarningsEur = totalMessages * messageRateEur;
 
-  const heldMessagesEarningsEur = week.heldMessages * HELD_MESSAGE_RATE_EUR;
+  const heldMessagesEarningsEur = totalHeldMessages * HELD_MESSAGE_RATE_EUR;
 
   const grossEarningsEur = regularMessagesEarningsEur + heldMessagesEarningsEur;
 
@@ -208,7 +237,7 @@ export function calculateWorkWeekSummary(week: WorkWeek): WorkWeekSummary {
 
   return {
     totalMessages,
-    totalHeldMessages: week.heldMessages,
+    totalHeldMessages,
     totalMinutes,
     totalHours,
     averageMessagesPerHour,
@@ -242,7 +271,7 @@ export function calculateWorkProgress(week: WorkWeek, totalMessages: number): Wo
   const nextThreshold = MESSAGE_THRESHOLDS.find((threshold) => threshold > totalMessages) ?? null;
 
   const completedDays = week.days.filter(
-    (day) => day.messages > 0 || day.sessions.length > 0
+    (day) => day.messages > 0 || day.heldMessages > 0 || day.sessions.length > 0
   ).length;
 
   const remainingDays = Math.max(0, week.days.length - completedDays);

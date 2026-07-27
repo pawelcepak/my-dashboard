@@ -51,6 +51,18 @@ function parseNullableNonNegativeNumber(value: unknown): number | null {
   return value;
 }
 
+function parseNonNegativeInteger(value: unknown, fallbackValue = 0): number {
+  if (value === undefined) {
+    return fallbackValue;
+  }
+
+  if (!isFiniteNumber(value) || !Number.isInteger(value) || value < 0) {
+    throw new Error('Dzień zawiera nieprawidłową wartość liczbową.');
+  }
+
+  return value;
+}
+
 function isIsoDate(value: unknown): value is string {
   return isString(value) && /^\d{4}-\d{2}-\d{2}$/.test(value);
 }
@@ -71,22 +83,31 @@ function isWorkSession(value: unknown): value is WorkSession {
   return isString(value.id) && isString(value.startTime) && isString(value.endTime);
 }
 
-function isWorkDay(value: unknown): value is WorkDay {
+function parseWorkDay(value: unknown): WorkDay {
   if (!isRecord(value)) {
-    return false;
+    throw new Error('Tydzień zawiera nieprawidłowy rekord dnia.');
   }
 
-  return (
-    isString(value.id) &&
-    isIsoDate(value.date) &&
-    isFiniteNumber(value.beers) &&
-    value.beers >= 0 &&
-    isNullableNumber(value.workRating) &&
-    isFiniteNumber(value.messages) &&
-    value.messages >= 0 &&
-    Array.isArray(value.sessions) &&
-    value.sessions.every(isWorkSession)
-  );
+  if (
+    !isString(value.id) ||
+    !isIsoDate(value.date) ||
+    !isNullableNumber(value.workRating) ||
+    !Array.isArray(value.sessions) ||
+    !value.sessions.every(isWorkSession)
+  ) {
+    throw new Error(`Dzień ${String(value.date)} zawiera nieprawidłowe dane.`);
+  }
+
+  return {
+    id: value.id,
+    date: value.date,
+    messages: parseNonNegativeInteger(value.messages),
+    freeMessages: parseNonNegativeInteger(value.freeMessages),
+    heldMessages: parseNonNegativeInteger(value.heldMessages),
+    beers: parseNonNegativeInteger(value.beers),
+    workRating: value.workRating,
+    sessions: value.sessions,
+  };
 }
 
 function parseFinancialPlanItem(value: unknown, index: number): FinancialPlanItem {
@@ -209,7 +230,6 @@ function parseWorkWeek(value: unknown): WorkWeek {
     value.exchangeRateEurPln < 0 ||
     !Array.isArray(value.days) ||
     value.days.length !== 7 ||
-    !value.days.every(isWorkDay) ||
     !isIsoDateTime(value.createdAt) ||
     !isIsoDateTime(value.updatedAt)
   ) {
@@ -227,7 +247,7 @@ function parseWorkWeek(value: unknown): WorkWeek {
     heldMessages: value.heldMessages,
     exchangeRateEurPln: value.exchangeRateEurPln,
     goals: parseWorkWeekGoals(value.goals),
-    days: value.days,
+    days: value.days.map(parseWorkDay),
     financialPlan: normalizeFinancialPlan(value.financialPlan),
     createdAt: value.createdAt,
     updatedAt: value.updatedAt,

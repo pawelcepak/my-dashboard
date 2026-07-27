@@ -1,4 +1,4 @@
-import { Clock3, Save, Target } from 'lucide-react';
+import { ChevronDown, Clock3, Plus, Save, SlidersHorizontal, Target } from 'lucide-react';
 import { useEffect, useState, type FormEvent } from 'react';
 
 import type {
@@ -29,6 +29,9 @@ const labelClasses =
 
 const buttonClasses =
   'flex h-9 items-center justify-center gap-2 rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] px-3 text-xs font-semibold text-[var(--app-accent)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50';
+
+const panelToggleClasses =
+  'flex min-h-11 w-full items-center justify-between gap-3 rounded-xl border border-zinc-700 bg-zinc-950/45 px-4 py-3 text-left transition hover:border-zinc-600 hover:bg-zinc-950/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--app-accent)]';
 
 function parseNonNegativeInteger(value: string): number {
   const parsedValue = Number.parseInt(value, 10);
@@ -71,6 +74,10 @@ export default function QuickWorkActions({
   onUpdateDay,
   onUpdateGoals,
 }: QuickWorkActionsProps) {
+  const [isQuickEntryOpen, setIsQuickEntryOpen] = useState(false);
+
+  const [areGoalsOpen, setAreGoalsOpen] = useState(false);
+
   const [messages, setMessages] = useState(String(day.messages));
 
   const [workRating, setWorkRating] = useState(
@@ -190,209 +197,279 @@ export default function QuickWorkActions({
   return (
     <section className="rounded-xl border border-zinc-700 bg-zinc-900/65 shadow-sm">
       <div className="border-b border-zinc-700 px-4 py-3">
-        <h2 className="text-sm font-semibold text-zinc-100">Szybki wpis</h2>
+        <h2 className="text-sm font-semibold text-zinc-100">Sterowanie Dashboardem</h2>
 
-        <p className="mt-0.5 text-xs text-zinc-500">Najczęściej zmieniane dane dnia i tygodnia</p>
+        <p className="mt-0.5 text-xs text-zinc-500">
+          Rozwiń tylko panel, którego aktualnie potrzebujesz
+        </p>
       </div>
 
-      <div className="grid gap-3 p-4 lg:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
-        <form
-          onSubmit={(event) => {
-            void handleDaySubmit(event);
-          }}
-          className="rounded-xl border border-zinc-700 bg-zinc-950/40 p-3"
+      <div className="space-y-2 p-3">
+        <button
+          type="button"
+          aria-expanded={isQuickEntryOpen}
+          aria-controls="dashboard-quick-entry-panel"
+          onClick={() => setIsQuickEntryOpen((currentValue) => !currentValue)}
+          className={panelToggleClasses}
         >
-          <div className="mb-3 flex items-center justify-between">
-            <h3 className="text-xs font-semibold text-zinc-300">Dzisiejsze dane</h3>
+          <span className="flex min-w-0 items-center gap-3">
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] text-[var(--app-accent)]">
+              <Plus aria-hidden="true" className="size-4" />
+            </span>
 
-            <Save aria-hidden="true" className="size-4 text-zinc-500" />
+            <span className="min-w-0">
+              <span className="block text-sm font-semibold text-zinc-200">Szybki wpis</span>
+
+              <span className="mt-0.5 block truncate text-[11px] text-zinc-500">
+                Dzisiejsze dane i nowy blok pracy
+              </span>
+            </span>
+          </span>
+
+          <ChevronDown
+            aria-hidden="true"
+            className={`size-4 shrink-0 text-zinc-500 transition-transform ${
+              isQuickEntryOpen ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+
+        {isQuickEntryOpen && (
+          <div
+            id="dashboard-quick-entry-panel"
+            className="grid gap-3 rounded-xl border border-zinc-700 bg-zinc-950/25 p-3 lg:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2"
+          >
+            <form
+              onSubmit={(event) => {
+                void handleDaySubmit(event);
+              }}
+              className="rounded-xl border border-zinc-700 bg-zinc-950/55 p-3"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-xs font-semibold text-zinc-300">Dzisiejsze dane</h3>
+
+                <Save aria-hidden="true" className="size-4 text-zinc-500" />
+              </div>
+
+              <div className="grid grid-cols-3 gap-2">
+                <label>
+                  <span className={labelClasses}>Wiadomości</span>
+
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    value={messages}
+                    onChange={(event) => setMessages(event.target.value)}
+                    className={inputClasses}
+                  />
+                </label>
+
+                <label>
+                  <span className={labelClasses}>Ocena</span>
+
+                  <input
+                    type="number"
+                    min="0"
+                    max="10"
+                    step="0.1"
+                    value={workRating}
+                    onChange={(event) => setWorkRating(event.target.value)}
+                    className={inputClasses}
+                  />
+                </label>
+
+                <label>
+                  <span className={labelClasses}>Piwa</span>
+
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    value={beers}
+                    onChange={(event) => setBeers(event.target.value)}
+                    className={inputClasses}
+                  />
+                </label>
+              </div>
+
+              <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
+                <Save aria-hidden="true" className="size-3.5" />
+                Zapisz dzień
+              </button>
+            </form>
+
+            <form
+              onSubmit={(event) => {
+                void handleSessionSubmit(event);
+              }}
+              className="rounded-xl border border-zinc-700 bg-zinc-950/55 p-3"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-xs font-semibold text-zinc-300">Nowy blok pracy</h3>
+
+                <Clock3 aria-hidden="true" className="size-4 text-zinc-500" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <label>
+                  <span className={labelClasses}>Początek</span>
+
+                  <input
+                    type="time"
+                    value={sessionStart}
+                    onChange={(event) => setSessionStart(event.target.value)}
+                    className={inputClasses}
+                  />
+                </label>
+
+                <label>
+                  <span className={labelClasses}>Koniec</span>
+
+                  <input
+                    type="time"
+                    value={sessionEnd}
+                    onChange={(event) => setSessionEnd(event.target.value)}
+                    className={inputClasses}
+                  />
+                </label>
+              </div>
+
+              <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
+                <Clock3 aria-hidden="true" className="size-3.5" />
+                Dodaj blok
+              </button>
+            </form>
           </div>
+        )}
 
-          <div className="grid grid-cols-3 gap-2">
-            <label>
-              <span className={labelClasses}>Wiadomości</span>
-
-              <input
-                type="number"
-                min="0"
-                step="1"
-                value={messages}
-                onChange={(event) => setMessages(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
-
-            <label>
-              <span className={labelClasses}>Ocena</span>
-
-              <input
-                type="number"
-                min="0"
-                max="10"
-                step="0.1"
-                value={workRating}
-                onChange={(event) => setWorkRating(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
-
-            <label>
-              <span className={labelClasses}>Piwa</span>
-
-              <input
-                type="number"
-                min="0"
-                step="1"
-                value={beers}
-                onChange={(event) => setBeers(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
-          </div>
-
-          <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
-            <Save aria-hidden="true" className="size-3.5" />
-            Zapisz dzień
-          </button>
-        </form>
-
-        <form
-          onSubmit={(event) => {
-            void handleSessionSubmit(event);
-          }}
-          className="rounded-xl border border-zinc-700 bg-zinc-950/40 p-3"
+        <button
+          type="button"
+          aria-expanded={areGoalsOpen}
+          aria-controls="dashboard-work-goals-panel"
+          onClick={() => setAreGoalsOpen((currentValue) => !currentValue)}
+          className={panelToggleClasses}
         >
-          <div className="mb-3 flex items-center justify-between">
-            <h3 className="text-xs font-semibold text-zinc-300">Nowy blok pracy</h3>
+          <span className="flex min-w-0 items-center gap-3">
+            <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900 text-zinc-500">
+              <Target aria-hidden="true" className="size-4" />
+            </span>
 
-            <Clock3 aria-hidden="true" className="size-4 text-zinc-500" />
-          </div>
+            <span className="min-w-0">
+              <span className="block text-sm font-semibold text-zinc-200">Cele pracy</span>
 
-          <div className="grid grid-cols-2 gap-2">
-            <label>
-              <span className={labelClasses}>Początek</span>
+              <span className="mt-0.5 block truncate text-[11px] text-zinc-500">
+                Dzienny, 5 dni, 7 dni i godziny
+              </span>
+            </span>
+          </span>
 
-              <input
-                type="time"
-                value={sessionStart}
-                onChange={(event) => setSessionStart(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
+          <ChevronDown
+            aria-hidden="true"
+            className={`size-4 shrink-0 text-zinc-500 transition-transform ${
+              areGoalsOpen ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
 
-            <label>
-              <span className={labelClasses}>Koniec</span>
+        {areGoalsOpen && (
+          <form
+            id="dashboard-work-goals-panel"
+            onSubmit={(event) => {
+              void handleGoalsSubmit(event);
+            }}
+            className="rounded-xl border border-zinc-700 bg-zinc-950/55 p-3"
+          >
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <h3 className="text-xs font-semibold text-zinc-300">Cele pracy</h3>
 
-              <input
-                type="time"
-                value={sessionEnd}
-                onChange={(event) => setSessionEnd(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
-          </div>
+                <p className="mt-0.5 text-[10px] text-zinc-500">
+                  Zmiana jednego celu przelicza dwa pozostałe
+                </p>
+              </div>
 
-          <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
-            <Clock3 aria-hidden="true" className="size-3.5" />
-            Dodaj blok
-          </button>
-        </form>
-
-        <form
-          onSubmit={(event) => {
-            void handleGoalsSubmit(event);
-          }}
-          className="rounded-xl border border-zinc-700 bg-zinc-950/40 p-3"
-        >
-          <div className="mb-3 flex items-center justify-between">
-            <div>
-              <h3 className="text-xs font-semibold text-zinc-300">Cele pracy</h3>
-
-              <p className="mt-0.5 text-[10px] text-zinc-500">
-                Zmiana jednego celu przelicza dwa pozostałe
-              </p>
+              <SlidersHorizontal aria-hidden="true" className="size-4 text-zinc-500" />
             </div>
 
-            <Target aria-hidden="true" className="size-4 text-zinc-500" />
-          </div>
+            <div className="grid grid-cols-2 gap-2">
+              <label>
+                <span className={labelClasses}>Dzienny</span>
 
-          <div className="grid grid-cols-2 gap-2">
-            <label>
-              <span className={labelClasses}>Dzienny</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={dailyMessagesTarget}
+                  placeholder="—"
+                  onChange={(event) => {
+                    const value = event.target.value;
 
-              <input
-                type="text"
-                inputMode="decimal"
-                value={dailyMessagesTarget}
-                placeholder="—"
-                onChange={(event) => {
-                  const value = event.target.value;
+                    setDailyMessagesTarget(value);
 
-                  setDailyMessagesTarget(value);
+                    synchronizeGoalFields('daily', value);
+                  }}
+                  className={inputClasses}
+                />
+              </label>
 
-                  synchronizeGoalFields('daily', value);
-                }}
-                className={inputClasses}
-              />
-            </label>
+              <label>
+                <span className={labelClasses}>Tydzień 7 dni</span>
 
-            <label>
-              <span className={labelClasses}>Tydzień 7 dni</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={weeklyMessagesTarget}
+                  placeholder="—"
+                  onChange={(event) => {
+                    const value = event.target.value;
 
-              <input
-                type="text"
-                inputMode="decimal"
-                value={weeklyMessagesTarget}
-                placeholder="—"
-                onChange={(event) => {
-                  const value = event.target.value;
+                    setWeeklyMessagesTarget(value);
 
-                  setWeeklyMessagesTarget(value);
+                    synchronizeGoalFields('weekly-7-days', value);
+                  }}
+                  className={inputClasses}
+                />
+              </label>
 
-                  synchronizeGoalFields('weekly-7-days', value);
-                }}
-                className={inputClasses}
-              />
-            </label>
+              <label>
+                <span className={labelClasses}>Tydzień 5 dni</span>
 
-            <label>
-              <span className={labelClasses}>Tydzień 5 dni</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={weeklyMessagesTarget5Days}
+                  placeholder="—"
+                  onChange={(event) => {
+                    const value = event.target.value;
 
-              <input
-                type="text"
-                inputMode="decimal"
-                value={weeklyMessagesTarget5Days}
-                placeholder="—"
-                onChange={(event) => {
-                  const value = event.target.value;
+                    setWeeklyMessagesTarget5Days(value);
 
-                  setWeeklyMessagesTarget5Days(value);
+                    synchronizeGoalFields('weekly-5-days', value);
+                  }}
+                  className={inputClasses}
+                />
+              </label>
 
-                  synchronizeGoalFields('weekly-5-days', value);
-                }}
-                className={inputClasses}
-              />
-            </label>
+              <label>
+                <span className={labelClasses}>Godziny dziennie</span>
 
-            <label>
-              <span className={labelClasses}>Godziny dziennie</span>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={dailyHoursTarget}
+                  placeholder="—"
+                  onChange={(event) => setDailyHoursTarget(event.target.value)}
+                  className={inputClasses}
+                />
+              </label>
+            </div>
 
-              <input
-                type="text"
-                inputMode="decimal"
-                value={dailyHoursTarget}
-                placeholder="—"
-                onChange={(event) => setDailyHoursTarget(event.target.value)}
-                className={inputClasses}
-              />
-            </label>
-          </div>
-
-          <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
-            <Target aria-hidden="true" className="size-3.5" />
-            Zapisz cele
-          </button>
-        </form>
+            <button type="submit" disabled={isSaving} className={`${buttonClasses} mt-3 w-full`}>
+              <Target aria-hidden="true" className="size-3.5" />
+              Zapisz cele
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );

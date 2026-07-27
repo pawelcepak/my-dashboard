@@ -2,11 +2,6 @@ import { Clock3, Plus, Trash2, X } from 'lucide-react';
 
 import type { WorkDay, WorkSession } from '@/modules/work/types/work.types';
 import {
-  formatWorkRating,
-  getBeerPresentation,
-  getWorkRatingPresentation,
-} from '@/modules/work/utils/workPresentation';
-import {
   formatDecimal,
   formatHours,
   formatIsoDate,
@@ -21,9 +16,9 @@ type WorkDayEditorProps = {
 };
 
 const inputClasses =
-  'h-11 w-full rounded-xl border border-zinc-800 bg-zinc-950 px-3 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-700 focus:border-zinc-600 focus:ring-2 focus:ring-zinc-800';
+  'h-10 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 text-sm text-zinc-100 outline-none transition focus:border-[var(--app-accent)] focus:ring-1 focus:ring-[var(--app-accent)]';
 
-const labelClasses = 'mb-2 block text-sm font-medium text-zinc-400';
+const labelClasses = 'mb-1.5 block text-[10px] font-semibold uppercase tracking-wide text-zinc-500';
 
 function createSession(): WorkSession {
   return {
@@ -33,40 +28,10 @@ function createSession(): WorkSession {
   };
 }
 
-function toNonNegativeInteger(value: string): number {
-  const parsedValue = Number.parseInt(value, 10);
-
-  if (!Number.isFinite(parsedValue) || parsedValue < 0) {
-    return 0;
-  }
-
-  return parsedValue;
-}
-
-function toWorkRating(value: string): number | null {
-  if (value === '') {
-    return null;
-  }
-
-  const normalizedValue = value.replace(',', '.');
-  const parsedValue = Number.parseFloat(normalizedValue);
-
-  if (!Number.isFinite(parsedValue)) {
-    return null;
-  }
-
-  const limitedValue = Math.min(10, Math.max(0, parsedValue));
-
-  return Math.round(limitedValue * 10) / 10;
-}
-
 export default function WorkDayEditor({ day, onChange, onClose }: WorkDayEditorProps) {
   const workedHours = getDayWorkedHours(day);
-  const messagesPerHour = getDayMessagesPerHour(day);
 
-  const ratingPresentation = getWorkRatingPresentation(day.workRating);
-
-  const beerPresentation = getBeerPresentation(day.beers);
+  const messagesPerHour = workedHours > 0 ? getDayMessagesPerHour(day) : 0;
 
   function updateSession(sessionId: string, field: 'startTime' | 'endTime', value: string) {
     onChange({
@@ -97,163 +62,91 @@ export default function WorkDayEditor({ day, onChange, onClose }: WorkDayEditorP
   }
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900 shadow-2xl shadow-black/20">
-      <div className="flex items-center justify-between gap-4 border-b border-zinc-800 px-5 py-4 sm:px-6">
-        <div>
-          <h2 className="text-base font-semibold text-zinc-100">Edycja dnia</h2>
+    <div
+      role="presentation"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <section
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="work-session-editor-title"
+        className="max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900 shadow-2xl shadow-black/50"
+      >
+        <div className="flex items-center justify-between gap-4 border-b border-zinc-700 px-4 py-3.5 sm:px-5">
+          <div>
+            <h2 id="work-session-editor-title" className="text-sm font-semibold text-zinc-100">
+              Bloki pracy
+            </h2>
 
-          <p className="mt-1 text-sm text-zinc-500">{formatIsoDate(day.date)}</p>
-        </div>
-
-        <button
-          type="button"
-          aria-label="Zamknij edycję dnia"
-          onClick={onClose}
-          className="flex size-10 items-center justify-center rounded-xl text-zinc-500 transition hover:bg-zinc-800 hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
-        >
-          <X aria-hidden="true" className="size-5" />
-        </button>
-      </div>
-
-      <div className="space-y-6 p-5 sm:p-6">
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <label>
-            <span className={labelClasses}>Data</span>
-
-            <input
-              type="date"
-              value={day.date}
-              onChange={(event) =>
-                onChange({
-                  ...day,
-                  date: event.target.value,
-                })
-              }
-              className={inputClasses}
-            />
-          </label>
-
-          <label>
-            <span className={labelClasses}>Liczba piw</span>
-
-            <input
-              type="number"
-              min="0"
-              step="1"
-              value={day.beers}
-              onChange={(event) =>
-                onChange({
-                  ...day,
-                  beers: toNonNegativeInteger(event.target.value),
-                })
-              }
-              className={inputClasses}
-            />
-
-            <span
-              className={`mt-2 inline-flex rounded-full border px-2.5 py-1 text-xs font-medium ${beerPresentation.className}`}
-            >
-              {beerPresentation.label}
-            </span>
-          </label>
-
-          <label>
-            <span className={labelClasses}>Ocena pracy</span>
-
-            <input
-              type="number"
-              min="0"
-              max="10"
-              step="0.1"
-              value={day.workRating ?? ''}
-              placeholder="8,5"
-              onChange={(event) =>
-                onChange({
-                  ...day,
-                  workRating: toWorkRating(event.target.value),
-                })
-              }
-              className={inputClasses}
-            />
-
-            <span
-              className={`mt-2 inline-flex rounded-full border px-2.5 py-1 text-xs font-medium ${ratingPresentation.className}`}
-            >
-              {formatWorkRating(day.workRating)}
-              {day.workRating !== null ? ` · ${ratingPresentation.label}` : ''}
-            </span>
-          </label>
-
-          <label>
-            <span className={labelClasses}>Wiadomości</span>
-
-            <input
-              type="number"
-              min="0"
-              step="1"
-              value={day.messages}
-              onChange={(event) =>
-                onChange({
-                  ...day,
-                  messages: toNonNegativeInteger(event.target.value),
-                })
-              }
-              className={inputClasses}
-            />
-          </label>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-            <p className="text-xs uppercase tracking-wide text-zinc-600">Łączny czas pracy</p>
-
-            <p className="mt-2 text-xl font-semibold text-zinc-100">
-              {formatHours(workedHours)} godz.
-            </p>
+            <p className="mt-0.5 text-xs text-zinc-500">{formatIsoDate(day.date)}</p>
           </div>
 
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-4">
-            <p className="text-xs uppercase tracking-wide text-zinc-600">Wiadomości na godzinę</p>
-
-            <p className="mt-2 text-xl font-semibold text-zinc-100">
-              {workedHours > 0 ? formatDecimal(messagesPerHour) : '—'}
-            </p>
-          </div>
+          <button
+            type="button"
+            aria-label="Zamknij edycję bloków"
+            onClick={onClose}
+            className="flex size-9 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-950 text-zinc-500 transition hover:bg-zinc-800 hover:text-zinc-100"
+          >
+            <X aria-hidden="true" className="size-4" />
+          </button>
         </div>
 
-        <div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h3 className="text-sm font-semibold text-zinc-200">Bloki pracy</h3>
-
-              <p className="mt-1 text-sm text-zinc-500">
-                Czas dnia jest obliczany automatycznie z poniższych przedziałów.
+        <div className="max-h-[calc(90vh-4rem)] overflow-y-auto p-4 sm:p-5">
+          <div className="mb-4 grid grid-cols-2 gap-2">
+            <div className="rounded-xl border border-zinc-700 bg-zinc-950/50 p-3">
+              <p className="text-[9px] font-bold uppercase tracking-wide text-zinc-500">
+                Łączny czas
               </p>
+
+              <p className="mt-1 text-lg font-bold text-zinc-100">{formatHours(workedHours)} h</p>
+            </div>
+
+            <div className="rounded-xl border border-zinc-700 bg-zinc-950/50 p-3">
+              <p className="text-[9px] font-bold uppercase tracking-wide text-zinc-500">
+                Średnia/h
+              </p>
+
+              <p className="mt-1 text-lg font-bold text-zinc-100">
+                {workedHours > 0 ? formatDecimal(messagesPerHour) : '—'}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h3 className="text-xs font-semibold text-zinc-300">Przedziały czasu</h3>
+
+              <p className="mt-0.5 text-[11px] text-zinc-500">Zmiany zapisują się automatycznie.</p>
             </div>
 
             <button
               type="button"
               onClick={addSession}
-              className="flex h-10 w-fit items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 px-4 text-sm font-medium text-zinc-200 transition hover:border-zinc-600 hover:bg-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-600"
+              className="flex h-9 items-center justify-center gap-2 rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] px-3 text-xs font-semibold text-[var(--app-accent)] transition hover:brightness-110"
             >
-              <Plus aria-hidden="true" className="size-4" />
+              <Plus aria-hidden="true" className="size-3.5" />
               Dodaj blok
             </button>
           </div>
 
           {day.sessions.length > 0 ? (
-            <div className="mt-4 space-y-3">
+            <div className="mt-3 space-y-2">
               {day.sessions.map((session, index) => (
                 <div
                   key={session.id}
-                  className="grid gap-3 rounded-xl border border-zinc-800 bg-zinc-950/40 p-4 sm:grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end"
+                  className="grid gap-2 rounded-xl border border-zinc-700 bg-zinc-950/40 p-3 sm:grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end"
                 >
-                  <div className="flex size-10 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-500">
+                  <div className="flex size-10 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900 text-zinc-500">
                     <Clock3 aria-hidden="true" className="size-4" />
                   </div>
 
                   <label>
-                    <span className={labelClasses}>Początek bloku {index + 1}</span>
+                    <span className={labelClasses}>Początek {index + 1}</span>
 
                     <input
                       type="time"
@@ -280,7 +173,7 @@ export default function WorkDayEditor({ day, onChange, onClose }: WorkDayEditorP
                     type="button"
                     aria-label={`Usuń blok ${index + 1}`}
                     onClick={() => removeSession(session.id)}
-                    className="flex size-11 items-center justify-center rounded-xl border border-red-950 bg-red-950/30 text-red-400 transition hover:bg-red-950/60 hover:text-red-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-900"
+                    className="flex size-10 items-center justify-center rounded-lg border border-red-900/70 bg-red-950/30 text-red-400 transition hover:bg-red-950/60"
                   >
                     <Trash2 aria-hidden="true" className="size-4" />
                   </button>
@@ -288,16 +181,16 @@ export default function WorkDayEditor({ day, onChange, onClose }: WorkDayEditorP
               ))}
             </div>
           ) : (
-            <div className="mt-4 rounded-xl border border-dashed border-zinc-800 bg-zinc-950/30 px-5 py-8 text-center">
+            <div className="mt-3 rounded-xl border border-dashed border-zinc-700 bg-zinc-950/30 px-5 py-7 text-center">
               <p className="text-sm font-medium text-zinc-400">Brak bloków pracy</p>
 
-              <p className="mt-1 text-sm text-zinc-600">
-                Dodaj pierwszy blok, aby aplikacja mogła obliczyć czas pracy.
+              <p className="mt-1 text-xs text-zinc-600">
+                Dodaj pierwszy blok, aby obliczyć godziny.
               </p>
             </div>
           )}
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }

@@ -7,9 +7,30 @@ export type WorkSession = {
 export type WorkDay = {
   id: string;
   date: string;
+
+  /*
+   * Płatne wiadomości, których stawka zależy od tygodniowego progu.
+   *
+   * Zachowujemy nazwę `messages` dla zgodności z dotychczasowymi danymi,
+   * obliczeniami, backupami i komponentami.
+   */
+  messages: number;
+
+  /*
+   * Darmowe wiadomości rozliczane według osobnej, stałej stawki.
+   */
+  freeMessages: number;
+
+  /*
+   * Zatrzymane wiadomości przypisane do konkretnego dnia.
+   *
+   * Pole tygodniowe WorkWeek.heldMessages pozostaje tymczasowo zachowane
+   * dla zgodności ze starszymi danymi i obecnym interfejsem.
+   */
+  heldMessages: number;
+
   beers: number;
   workRating: number | null;
-  messages: number;
   sessions: WorkSession[];
 };
 
@@ -60,7 +81,16 @@ export type WorkWeek = {
   weekNumber: number;
   startDate: string;
   endDate: string;
+
+  /*
+   * Starsza tygodniowa wartość zatrzymanych wiadomości.
+   *
+   * Pozostaje zachowana podczas przejścia na dane dzienne. Jej usunięcie
+   * będzie możliwe dopiero po pełnej migracji interfejsu, obliczeń,
+   * historii i backupów.
+   */
   heldMessages: number;
+
   exchangeRateEurPln: number;
   goals: WorkWeekGoals;
   days: WorkDay[];

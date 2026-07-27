@@ -43,9 +43,11 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-20',
       date: '2026-07-20',
+      messages: 188,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 2,
       workRating: 8.5,
-      messages: 188,
       sessions: [
         {
           id: 'session-2026-07-20-1',
@@ -57,9 +59,11 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-21',
       date: '2026-07-21',
+      messages: 216,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 0,
       workRating: 8.7,
-      messages: 216,
       sessions: [
         {
           id: 'session-2026-07-21-1',
@@ -71,9 +75,11 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-22',
       date: '2026-07-22',
+      messages: 155,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 3,
       workRating: 8.6,
-      messages: 155,
       sessions: [
         {
           id: 'session-2026-07-22-1',
@@ -85,9 +91,11 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-23',
       date: '2026-07-23',
+      messages: 146,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 1,
       workRating: 8.8,
-      messages: 146,
       sessions: [
         {
           id: 'session-2026-07-23-1',
@@ -99,9 +107,11 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-24',
       date: '2026-07-24',
+      messages: 138,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 0,
       workRating: 9,
-      messages: 138,
       sessions: [
         {
           id: 'session-2026-07-24-1',
@@ -148,17 +158,21 @@ export const currentWorkWeek: WorkWeek = {
     {
       id: 'work-day-2026-07-25',
       date: '2026-07-25',
+      messages: 0,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 0,
       workRating: 8.5,
-      messages: 0,
       sessions: [],
     },
     {
       id: 'work-day-2026-07-26',
       date: '2026-07-26',
+      messages: 0,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 0,
       workRating: 8.5,
-      messages: 0,
       sessions: [],
     },
   ],

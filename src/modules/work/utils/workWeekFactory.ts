@@ -30,9 +30,11 @@ function createEmptyWorkDays(startDate: string): WorkDay[] {
     return {
       id: crypto.randomUUID(),
       date,
+      messages: 0,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 0,
       workRating: DEFAULT_WORK_RATING,
-      messages: 0,
       sessions: [],
     };
   });
@@ -75,9 +77,11 @@ export function clearWorkWeekActivity(week: WorkWeek): WorkWeek {
     heldMessages: 0,
     days: week.days.map((day) => ({
       ...day,
+      messages: 0,
+      freeMessages: 0,
+      heldMessages: 0,
       beers: 0,
       workRating: DEFAULT_WORK_RATING,
-      messages: 0,
       sessions: [],
     })),
   };
