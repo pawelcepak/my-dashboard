@@ -1,5 +1,6 @@
 import AppPreferencesPanel from '@/modules/settings/components/AppPreferencesPanel';
 import DataBackupPanel from '@/modules/settings/components/DataBackupPanel';
+import HistoricalWorkImportPanel from '@/modules/settings/components/HistoricalWorkImportPanel';
 import PageHeader from '@/shared/components/PageHeader';
 
 export default function SettingsPage() {
@@ -11,6 +12,8 @@ export default function SettingsPage() {
       />
 
       <AppPreferencesPanel />
+
+      <HistoricalWorkImportPanel />
 
       <DataBackupPanel />
     </div>

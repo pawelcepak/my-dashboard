@@ -6735,6 +6735,86 @@
       "status": "completed",
       "priority": "high",
       "tags": ["ai-project-interface"]
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.5.5.work.ux.improvements",
+      "parentId": null,
+      "text": "v0.5.5 — Work UX Improvements"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.session.current-time-defaults",
+      "parentId": "section.v0.5.5.work.ux.improvements",
+      "title": "Current-time defaults for new work sessions",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "daily-ux"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.session.two-minute-default",
+      "parentId": "section.v0.5.5.work.ux.improvements",
+      "title": "Two-minute default duration for new work sessions",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "daily-ux"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.threshold.remaining-percentage",
+      "parentId": "section.v0.5.5.work.ux.improvements",
+      "title": "Remaining percentage for the next message-rate threshold",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "progress"]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.5.6.historical.work.import",
+      "parentId": null,
+      "text": "v0.5.6 — Historical Work Import"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.history.import.weeks.8.29",
+      "parentId": "section.v0.5.6.historical.work.import",
+      "title": "Import 2026 work history for ISO weeks 8–29",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "history", "migration"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.history.import.duplicate.safety",
+      "parentId": "section.v0.5.6.historical.work.import",
+      "title": "Preserve existing weeks during historical import",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "history", "data-safety"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.history.import.source.validation",
+      "parentId": "section.v0.5.6.historical.work.import",
+      "title": "Validate imported weekly message and beer totals against source screenshots",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "history", "validation"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.history.import.placeholder.sessions",
+      "parentId": "section.v0.5.6.historical.work.import",
+      "title": "Preserve historical daily duration with identifiable placeholder sessions",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "history", "compatibility"]
     }
   ]
 }

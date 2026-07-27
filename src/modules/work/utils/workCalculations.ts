@@ -65,6 +65,12 @@ export const PAYOUT_FEE_TIERS: PayoutFeeTier[] = [
 
 const MESSAGE_THRESHOLDS = [0, 776, 1576, 1976];
 const GOAL_PRECISION_MULTIPLIER = 100;
+const DEFAULT_WORK_SESSION_DURATION_MINUTES = 2;
+
+export type DefaultWorkSessionTimes = {
+  startTime: string;
+  endTime: string;
+};
 
 export type WorkGoalSource = 'daily' | 'weekly-7-days' | 'weekly-5-days';
 
@@ -72,6 +78,24 @@ function parseTimeToMinutes(time: string): number {
   const [hours, minutes] = time.split(':').map(Number);
 
   return hours * 60 + minutes;
+}
+
+function formatMinutesAsTime(totalMinutes: number): string {
+  const minutesInDay = 24 * 60;
+  const normalizedMinutes = ((totalMinutes % minutesInDay) + minutesInDay) % minutesInDay;
+  const hours = Math.floor(normalizedMinutes / 60);
+  const minutes = normalizedMinutes % 60;
+
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+}
+
+export function getDefaultWorkSessionTimes(now: Date = new Date()): DefaultWorkSessionTimes {
+  const startMinutes = now.getHours() * 60 + now.getMinutes();
+
+  return {
+    startTime: formatMinutesAsTime(startMinutes),
+    endTime: formatMinutesAsTime(startMinutes + DEFAULT_WORK_SESSION_DURATION_MINUTES),
+  };
 }
 
 function roundGoalValue(value: number): number {

@@ -1,21 +1,20 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.5.3",
-  "currentSprint": "0.5.4E-F",
-  "currentGoal": "Complete the vendor-neutral AI Project Interface and generate adapters for general agents, Cursor and Claude-compatible tools.",
+  "currentVersion": "0.5.6",
+  "currentSprint": "0.5.6",
+  "currentGoal": "Import the verified 2026 work history for ISO weeks 8–29 without overwriting existing weeks.",
   "stableState": true,
   "lastCompleted": [
-    "Machine-readable project data foundation",
-    "Project-data validation",
-    "Deterministic CHANGELOG and ROADMAP generation",
-    "Deterministic AI context and project-state generation"
+    "Current-time defaults for new work sessions",
+    "Two-minute default duration for new work sessions",
+    "Remaining percentage for the next message-rate threshold"
   ],
   "nextTasks": [
-    "Validate module and issue registries",
-    "Generate the AI Project Interface manifest",
-    "Generate AGENTS.md, CLAUDE.md and Cursor project rules",
-    "Run the complete release preparation pipeline"
+    "Import missing historical weeks 8–29 from Settings",
+    "Verify weekly message and beer totals after import",
+    "Allow cloud synchronization to upload the merged history",
+    "Review historical exchange rates separately when needed"
   ],
   "knownIssues": [
     {
@@ -23,6 +22,12 @@
       "severity": "low",
       "status": "planned",
       "description": "Experimental beer comparison may present confusing values and requires a later quality pass."
+    },
+    {
+      "id": "issue.history.placeholder-session-times",
+      "severity": "medium",
+      "status": "accepted",
+      "description": "Historical screenshots contain daily duration but not exact session start and end times. Imported duration-placeholder sessions must be excluded from future hour-of-day analysis."
     }
   ],
   "constraints": [

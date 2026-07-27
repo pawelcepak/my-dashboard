@@ -2,8 +2,8 @@
   "id": "chb-ai-project-interface",
   "version": 1,
   "vendorNeutral": true,
-  "currentVersion": "0.5.3",
-  "currentSprint": "0.5.4E-F",
+  "currentVersion": "0.5.6",
+  "currentSprint": "0.5.6",
   "canonicalSources": [
     "docs/data/project.json",
     "docs/data/current-context.json",

@@ -123,7 +123,14 @@
             "Generated AGENTS.md guidance for generic coding agents.",
             "Generated CLAUDE.md guidance for Claude-compatible coding tools.",
             "Generated Cursor project rules derived from the same vendor-neutral source.",
-            "Generated AI Project Interface documentation and machine-readable manifest."
+            "Generated AI Project Interface documentation and machine-readable manifest.",
+            "Current-time defaults for every newly created work session.",
+            "Automatic two-minute default duration for newly created work sessions.",
+            "Controlled one-time import of 2026 ISO work weeks 8–29.",
+            "Duplicate-safe historical import that preserves existing weeks.",
+            "Verified historical totals for paid messages and beer counts.",
+            "Technical duration-placeholder sessions for historical daily working time.",
+            "Historical-import status and action panel in Settings."
           ]
         },
         {
@@ -194,7 +201,10 @@
             "Zero beer count remains green and positive beer count remains red.",
             "Message-rate progress now uses one fixed scale ending at the permanent 1,976-message threshold.",
             "Dashboard now shows both synchronized weekly goals together with the fixed message-rate scale.",
-            "Project documentation now exposes one vendor-neutral interface for current and future AI coding tools."
+            "Project documentation now exposes one vendor-neutral interface for current and future AI coding tools.",
+            "Message-rate threshold status now shows the percentage remaining to the next threshold.",
+            "Historical screenshot messages are stored as paid messages, while unavailable held and free message values default to zero.",
+            "Historical sessions preserve total duration without claiming exact source start and end times."
           ]
         },
         {

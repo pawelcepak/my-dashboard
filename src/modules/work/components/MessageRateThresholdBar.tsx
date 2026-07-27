@@ -2,6 +2,7 @@ import { Check, Flag, TrendingUp } from 'lucide-react';
 
 import {
   formatCurrencyEur,
+  formatDecimal,
   formatNumber,
   getMessageRate,
 } from '@/modules/work/utils/workCalculations';
@@ -73,6 +74,9 @@ export default function MessageRateThresholdBar({
   const nextThreshold = getNextThreshold(totalMessages);
 
   const messagesMissing = nextThreshold === null ? 0 : Math.max(0, nextThreshold - totalMessages);
+
+  const remainingPercentage =
+    nextThreshold === null || nextThreshold <= 0 ? 0 : (messagesMissing / nextThreshold) * 100;
 
   const highestThresholdReached = totalMessages >= MAXIMUM_THRESHOLD;
 
@@ -250,7 +254,9 @@ export default function MessageRateThresholdBar({
             >
               {highestThresholdReached
                 ? 'Najwyższy próg stawki został osiągnięty'
-                : `Do następnego progu brakuje ${formatNumber(messagesMissing)} wiadomości`}
+                : `Do następnego progu brakuje ${formatNumber(
+                    messagesMissing
+                  )} wiadomości (${formatDecimal(remainingPercentage)}% pozostało)`}
             </p>
           </div>
 

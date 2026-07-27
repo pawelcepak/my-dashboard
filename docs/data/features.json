@@ -8930,6 +8930,126 @@
       "acceptanceCriteria": [],
       "relatedFiles": [],
       "tags": ["ai-project-interface"]
+    },
+    {
+      "id": "feature.work.session.current-time-defaults",
+      "title": "Current-time defaults for new work sessions",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.session.current-time-defaults",
+      "roadmapPath": ["v0.5.5 — Work UX Improvements"],
+      "introducedIn": "0.5.5",
+      "description": "New sessions use the current local hour and minute as their initial start time.",
+      "acceptanceCriteria": [
+        "Dashboard quick entry uses the current time when opened",
+        "Work-day session editor uses the current time when adding a block"
+      ],
+      "relatedFiles": [
+        "src/modules/dashboard/components/QuickWorkActions.tsx",
+        "src/modules/work/components/WorkDayEditor.tsx",
+        "src/modules/work/utils/workCalculations.ts"
+      ],
+      "tags": ["work", "daily-ux"]
+    },
+    {
+      "id": "feature.work.session.two-minute-default",
+      "title": "Two-minute default duration for new work sessions",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.session.two-minute-default",
+      "roadmapPath": ["v0.5.5 — Work UX Improvements"],
+      "introducedIn": "0.5.5",
+      "description": "The default end time is two minutes after the generated start time, including midnight rollover.",
+      "acceptanceCriteria": ["15:00 creates 15:00–15:02", "23:59 creates 23:59–00:01"],
+      "relatedFiles": ["src/modules/work/utils/workCalculations.ts"],
+      "tags": ["work", "daily-ux"]
+    },
+    {
+      "id": "feature.work.threshold.remaining-percentage",
+      "title": "Remaining percentage for the next message-rate threshold",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.threshold.remaining-percentage",
+      "roadmapPath": ["v0.5.5 — Work UX Improvements"],
+      "introducedIn": "0.5.5",
+      "description": "Threshold status shows both missing messages and the percentage of the next absolute threshold still remaining.",
+      "acceptanceCriteria": [
+        "Percentage uses missing messages divided by the next threshold",
+        "Percentage is formatted consistently with CHB decimal formatting",
+        "Highest threshold keeps the completed presentation"
+      ],
+      "relatedFiles": ["src/modules/work/components/MessageRateThresholdBar.tsx"],
+      "tags": ["work", "progress"]
+    },
+    {
+      "id": "feature.work.history.import.weeks.8.29",
+      "title": "Import 2026 work history for ISO weeks 8–29",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.history.import.weeks.8.29",
+      "roadmapPath": ["v0.5.6 — Historical Work Import"],
+      "introducedIn": "0.5.6",
+      "description": "Adds the transcribed and validated work history from the supplied weekly screenshots.",
+      "acceptanceCriteria": [
+        "Weeks 8–29 contain seven ISO-dated day records",
+        "Weekly paid-message totals match the source screenshots",
+        "Weekly beer totals match the source screenshots"
+      ],
+      "relatedFiles": [
+        "src/modules/settings/data/historicalWorkWeeks2026.ts",
+        "src/modules/settings/services/historicalWorkImportService.ts"
+      ],
+      "tags": ["work", "history", "migration"]
+    },
+    {
+      "id": "feature.work.history.import.duplicate.safety",
+      "title": "Preserve existing weeks during historical import",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.history.import.duplicate.safety",
+      "roadmapPath": ["v0.5.6 — Historical Work Import"],
+      "introducedIn": "0.5.6",
+      "description": "The import adds only missing year/week combinations and never overwrites an existing week.",
+      "acceptanceCriteria": [
+        "Existing weeks are skipped",
+        "Weeks 30 and 31 remain unchanged",
+        "The active-week setting remains unchanged"
+      ],
+      "relatedFiles": ["src/modules/settings/services/historicalWorkImportService.ts"],
+      "tags": ["work", "history", "data-safety"]
+    },
+    {
+      "id": "feature.work.history.import.source.validation",
+      "title": "Validate imported weekly totals against screenshots",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.history.import.source.validation",
+      "roadmapPath": ["v0.5.6 — Historical Work Import"],
+      "introducedIn": "0.5.6",
+      "description": "Source beer and paid-message totals were checked for every imported week before packaging.",
+      "acceptanceCriteria": [
+        "All 22 weekly message totals match",
+        "All 22 weekly beer totals match"
+      ],
+      "relatedFiles": ["src/modules/settings/data/historicalWorkWeeks2026.ts"],
+      "tags": ["work", "history", "validation"]
+    },
+    {
+      "id": "feature.work.history.import.placeholder.sessions",
+      "title": "Identifiable historical duration-placeholder sessions",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.history.import.placeholder.sessions",
+      "roadmapPath": ["v0.5.6 — Historical Work Import"],
+      "introducedIn": "0.5.6",
+      "description": "Historical daily duration is represented by one technical session whose identifier marks it as a placeholder.",
+      "acceptanceCriteria": [
+        "Weekly total time remains consistent with the screenshot summary",
+        "Placeholder session IDs contain duration-placeholder",
+        "Future hour-of-day analysis can exclude placeholder sessions"
+      ],
+      "relatedFiles": ["src/modules/settings/data/historicalWorkWeeks2026.ts"],
+      "tags": ["work", "history", "compatibility"]
     }
   ]
 }

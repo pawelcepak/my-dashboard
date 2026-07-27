@@ -9,6 +9,7 @@ import type {
 } from '@/modules/work/types/work.types';
 import {
   formatGoalValue,
+  getDefaultWorkSessionTimes,
   synchronizeWorkGoals,
   type WorkGoalSource,
 } from '@/modules/work/utils/workCalculations';
@@ -88,9 +89,11 @@ export default function QuickWorkActions({
 
   const [beers, setBeers] = useState(String(day.beers));
 
-  const [sessionStart, setSessionStart] = useState('08:00');
+  const [initialSessionTimes] = useState(() => getDefaultWorkSessionTimes());
 
-  const [sessionEnd, setSessionEnd] = useState('09:00');
+  const [sessionStart, setSessionStart] = useState(initialSessionTimes.startTime);
+
+  const [sessionEnd, setSessionEnd] = useState(initialSessionTimes.endTime);
 
   const [dailyMessagesTarget, setDailyMessagesTarget] = useState(
     formatGoalValue(week.goals.dailyMessagesTarget)
@@ -165,6 +168,13 @@ export default function QuickWorkActions({
     });
   }
 
+  function refreshSessionTimes() {
+    const { startTime, endTime } = getDefaultWorkSessionTimes();
+
+    setSessionStart(startTime);
+    setSessionEnd(endTime);
+  }
+
   async function handleSessionSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -178,6 +188,8 @@ export default function QuickWorkActions({
       ...day,
       sessions: [...day.sessions, newSession],
     });
+
+    refreshSessionTimes();
   }
 
   async function handleGoalsSubmit(event: FormEvent<HTMLFormElement>) {
@@ -214,7 +226,15 @@ export default function QuickWorkActions({
           type="button"
           aria-expanded={isQuickEntryOpen}
           aria-controls="dashboard-quick-entry-panel"
-          onClick={() => setIsQuickEntryOpen((currentValue) => !currentValue)}
+          onClick={() => {
+            const nextValue = !isQuickEntryOpen;
+
+            setIsQuickEntryOpen(nextValue);
+
+            if (nextValue) {
+              refreshSessionTimes();
+            }
+          }}
           className={panelToggleClasses}
         >
           <span className="flex min-w-0 items-center gap-3">

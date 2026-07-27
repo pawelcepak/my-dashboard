@@ -23,6 +23,20 @@
       "workaround": "The warning does not block deployment.",
       "plannedResolution": "Add route-level lazy loading and production code splitting during a later quality pass.",
       "relatedFiles": ["src/app/router.tsx", "vite.config.ts"]
+    },
+    {
+      "id": "issue.history.placeholder-session-times",
+      "title": "Historical sessions do not contain exact source clock times",
+      "severity": "medium",
+      "status": "accepted",
+      "description": "The source screenshots contain daily duration but not exact session start and end times.",
+      "workaround": "Use duration-placeholder session IDs and exclude those sessions from future hour-of-day analysis.",
+      "plannedResolution": "Keep the imported duration for totals. Exact clock-time analysis will use only native CHB sessions unless original timestamps are provided later.",
+      "relatedFiles": [
+        "src/modules/settings/data/historicalWorkWeeks2026.ts",
+        "src/modules/settings/components/HistoricalWorkImportPanel.tsx"
+      ],
+      "moduleId": "module.work"
     }
   ]
 }

@@ -7,6 +7,7 @@ import {
   formatIsoDate,
   getDayMessagesPerHour,
   getDayWorkedHours,
+  getDefaultWorkSessionTimes,
 } from '@/modules/work/utils/workCalculations';
 
 type WorkDayEditorProps = {
@@ -21,10 +22,12 @@ const inputClasses =
 const labelClasses = 'mb-1.5 block text-[10px] font-semibold uppercase tracking-wide text-zinc-500';
 
 function createSession(): WorkSession {
+  const { startTime, endTime } = getDefaultWorkSessionTimes();
+
   return {
     id: crypto.randomUUID(),
-    startTime: '08:00',
-    endTime: '09:00',
+    startTime,
+    endTime,
   };
 }
 

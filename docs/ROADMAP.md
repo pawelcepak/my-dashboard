@@ -842,3 +842,16 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Generated AGENTS.md adapter
 - [x] Generated CLAUDE.md adapter
 - [x] Generated Cursor project rules
+
+## v0.5.5 — Work UX Improvements
+
+- [x] Current-time defaults for new work sessions
+- [x] Two-minute default duration for new work sessions
+- [x] Remaining percentage for the next message-rate threshold
+
+## v0.5.6 — Historical Work Import
+
+- [x] Import 2026 work history for ISO weeks 8–29
+- [x] Preserve existing weeks during historical import
+- [x] Validate imported weekly message and beer totals against source screenshots
+- [x] Preserve historical daily duration with identifiable placeholder sessions

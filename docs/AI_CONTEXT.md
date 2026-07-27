@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.5.3`
-- Current sprint: `0.5.4E-F`
+- Current version: `0.5.6`
+- Current sprint: `0.5.6`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Complete the vendor-neutral AI Project Interface and generate adapters for general agents, Cursor and Claude-compatible tools.
+Import the verified 2026 work history for ISO weeks 8–29 without overwriting existing weeks.
 
 ## Non-negotiable principles
 
@@ -43,15 +43,16 @@ Complete the vendor-neutral AI Project Interface and generate adapters for gener
 
 ## Next tasks
 
-- Validate module and issue registries
-- Generate the AI Project Interface manifest
-- Generate AGENTS.md, CLAUDE.md and Cursor project rules
-- Run the complete release preparation pipeline
+- Import missing historical weeks 8–29 from Settings
+- Verify weekly message and beer totals after import
+- Allow cloud synchronization to upload the merged history
+- Review historical exchange rates separately when needed
 
 ## Open and accepted issues
 
 - `issue.intelligence.beer-comparison` (low, planned): The experimental comparison may present values that are easy to interpret as day counts or strong conclusions when the sample is small.
 - `issue.build.large-main-chunk` (low, accepted): The production bundle currently emits a chunk-size warning after minification.
+- `issue.history.placeholder-session-times` (medium, accepted): The source screenshots contain daily duration but not exact session start and end times.
 
 ## Accepted architectural decisions
 
