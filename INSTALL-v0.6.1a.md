@@ -3,6 +3,7 @@
 Skopiuj zawartość paczki do głównego katalogu projektu i zaakceptuj zastąpienie plików.
 
 Naprawia:
+
 - błąd TypeScript dotyczący `PortfolioTransactionInput`,
 - zwracanie wyniku importu CSV przez `usePortfolio`,
 - ostrzeżenie hooka w formularzu transakcji,

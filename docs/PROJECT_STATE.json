@@ -1,7 +1,7 @@
 {
   "interfaceVersion": 1,
-  "generatedFromVersion": "0.6.1a",
-  "generatedFromSprint": "0.6.1a",
+  "generatedFromVersion": "0.6.2",
+  "generatedFromSprint": "0.6.2",
   "project": {
     "$schema": "../schemas/project.schema.json",
     "schemaVersion": 1,
@@ -9,8 +9,8 @@
     "name": "CHB",
     "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
     "repository": "my-dashboard",
-    "currentVersion": "0.6.1a",
-    "currentSprint": "0.6.1a",
+    "currentVersion": "0.6.2",
+    "currentSprint": "0.6.2",
     "status": "active",
     "architectureVersion": 2,
     "documentationModel": "ai-project-interface",
@@ -57,17 +57,18 @@
   "context": {
     "$schema": "../schemas/current-context.schema.json",
     "schemaVersion": 1,
-    "currentVersion": "0.6.1a",
-    "currentSprint": "0.6.1a",
-    "currentGoal": "Fix Portfolio UX TypeScript build errors and React hook dependency warnings.",
+    "currentVersion": "0.6.2",
+    "currentSprint": "0.6.2",
+    "currentGoal": "Allow the bottom navigation to be reordered and individually colored without editing code.",
     "stableState": true,
     "lastCompleted": [
-      "Portfolio UX A–D implementation"
+      "Portfolio UX A-D",
+      "Portfolio UX hotfix"
     ],
     "nextTasks": [
-      "Run release:prepare",
-      "Test transaction entry, inline editing and CSV import",
-      "Commit and push after all checks pass"
+      "Test navigation order on desktop and mobile",
+      "Test per-tab colors",
+      "Verify preferences synchronize between devices"
     ],
     "knownIssues": [
       {
@@ -440,10 +441,10 @@
     }
   ],
   "summary": {
-    "roadmapTasks": 681,
-    "completedRoadmapTasks": 377,
+    "roadmapTasks": 685,
+    "completedRoadmapTasks": 381,
     "plannedRoadmapTasks": 304,
-    "features": 680,
+    "features": 684,
     "activeModules": 7,
     "openIssues": 3,
     "acceptedDecisions": 7,

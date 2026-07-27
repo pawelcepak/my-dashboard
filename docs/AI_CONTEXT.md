@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.6.1a`
-- Current sprint: `0.6.1a`
+- Current version: `0.6.2`
+- Current sprint: `0.6.2`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Fix Portfolio UX TypeScript build errors and React hook dependency warnings.
+Allow the bottom navigation to be reordered and individually colored without editing code.
 
 ## Non-negotiable principles
 
@@ -44,9 +44,9 @@ Fix Portfolio UX TypeScript build errors and React hook dependency warnings.
 
 ## Next tasks
 
-- Run release:prepare
-- Test transaction entry, inline editing and CSV import
-- Commit and push after all checks pass
+- Test navigation order on desktop and mobile
+- Test per-tab colors
+- Verify preferences synchronize between devices
 
 ## Open and accepted issues
 

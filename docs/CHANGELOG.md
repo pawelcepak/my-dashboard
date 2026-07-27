@@ -138,6 +138,9 @@ All notable changes to CHB will be documented in this file.
 - Portfolio category distribution bars.
 - Inline editing of Portfolio transaction rows.
 - Portfolio transaction filtering by type, tag and text.
+- Custom bottom-navigation ordering stored in application preferences.
+- Individual color selection for every bottom-navigation tab.
+- Drag-and-drop navigation editor with touch-friendly move controls.
 
 ### Changed
 
@@ -213,6 +216,8 @@ All notable changes to CHB will be documented in this file.
 - Portfolio transaction form now remembers the last selected tag.
 - EnterTalkPro is selected automatically for income when no remembered income tag exists.
 - Portfolio history uses a denser, scrollable table.
+- Mobile navigation now uses the first four user-ordered tabs as primary items.
+- Desktop bottom navigation scrolls horizontally when more tabs are added.
 
 ### Fixed
 

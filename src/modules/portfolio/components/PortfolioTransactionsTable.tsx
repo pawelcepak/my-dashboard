@@ -1,15 +1,5 @@
-import {
-  Check,
-  Filter,
-  Pencil,
-  Trash2,
-  X,
-} from 'lucide-react';
-import {
-  useMemo,
-  useState,
-  type KeyboardEvent,
-} from 'react';
+import { Check, Filter, Pencil, Trash2, X } from 'lucide-react';
+import { useMemo, useState, type KeyboardEvent } from 'react';
 
 import type {
   PortfolioAccount,
@@ -29,10 +19,7 @@ type PortfolioTransactionsTableProps = {
   transactions: PortfolioTransaction[];
   tags: PortfolioTag[];
   isSaving: boolean;
-  onUpdate: (
-    transactionId: string,
-    input: PortfolioTransactionInput
-  ) => Promise<void>;
+  onUpdate: (transactionId: string, input: PortfolioTransactionInput) => Promise<void>;
   onDelete: (transaction: PortfolioTransaction) => Promise<void>;
 };
 
@@ -49,59 +36,34 @@ export default function PortfolioTransactionsTable({
   onUpdate,
   onDelete,
 }: PortfolioTransactionsTableProps) {
-  const [typeFilter, setTypeFilter] = useState<
-    PortfolioTransactionType | 'all'
-  >('all');
+  const [typeFilter, setTypeFilter] = useState<PortfolioTransactionType | 'all'>('all');
   const [tagFilter, setTagFilter] = useState('all');
   const [query, setQuery] = useState('');
-  const [sortDirection, setSortDirection] =
-    useState<SortDirection>('newest');
+  const [sortDirection, setSortDirection] = useState<SortDirection>('newest');
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [draft, setDraft] =
-    useState<PortfolioTransactionInput | null>(null);
+  const [draft, setDraft] = useState<PortfolioTransactionInput | null>(null);
 
-  const tagsById = useMemo(
-    () => new Map(tags.map((tag) => [tag.id, tag])),
-    [tags]
-  );
+  const tagsById = useMemo(() => new Map(tags.map((tag) => [tag.id, tag])), [tags]);
 
   const rows = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase('pl-PL');
 
-    const filtered = createPortfolioLedger(account, transactions).filter(
-      (row) => {
-        const tagName = row.transaction.tagId
-          ? tagsById.get(row.transaction.tagId)?.name ?? ''
-          : '';
+    const filtered = createPortfolioLedger(account, transactions).filter((row) => {
+      const tagName = row.transaction.tagId
+        ? (tagsById.get(row.transaction.tagId)?.name ?? '')
+        : '';
 
-        return (
-          (typeFilter === 'all' ||
-            row.transaction.type === typeFilter) &&
-          (tagFilter === 'all' ||
-            row.transaction.tagId === tagFilter) &&
-          (!normalizedQuery ||
-            row.transaction.note
-              .toLocaleLowerCase('pl-PL')
-              .includes(normalizedQuery) ||
-            tagName
-              .toLocaleLowerCase('pl-PL')
-              .includes(normalizedQuery))
-        );
-      }
-    );
+      return (
+        (typeFilter === 'all' || row.transaction.type === typeFilter) &&
+        (tagFilter === 'all' || row.transaction.tagId === tagFilter) &&
+        (!normalizedQuery ||
+          row.transaction.note.toLocaleLowerCase('pl-PL').includes(normalizedQuery) ||
+          tagName.toLocaleLowerCase('pl-PL').includes(normalizedQuery))
+      );
+    });
 
-    return sortDirection === 'newest'
-      ? filtered.reverse()
-      : filtered;
-  }, [
-    account,
-    transactions,
-    tagsById,
-    typeFilter,
-    tagFilter,
-    query,
-    sortDirection,
-  ]);
+    return sortDirection === 'newest' ? filtered.reverse() : filtered;
+  }, [account, transactions, tagsById, typeFilter, tagFilter, query, sortDirection]);
 
   function startEditing(transaction: PortfolioTransaction) {
     setEditingId(transaction.id);
@@ -128,9 +90,7 @@ export default function PortfolioTransactionsTable({
     cancelEditing();
   }
 
-  function handleEditKeyDown(
-    event: KeyboardEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
+  function handleEditKeyDown(event: KeyboardEvent<HTMLInputElement | HTMLSelectElement>) {
     if (event.key === 'Escape') {
       event.preventDefault();
       cancelEditing();
@@ -146,9 +106,7 @@ export default function PortfolioTransactionsTable({
     <section className="app-panel overflow-hidden">
       <div className="flex flex-col gap-3 border-b border-zinc-700 px-4 py-3 xl:flex-row xl:items-end xl:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-zinc-100">
-            Historia transakcji
-          </h2>
+          <h2 className="text-sm font-semibold text-zinc-100">Historia transakcji</h2>
 
           <p className="mt-0.5 text-xs text-zinc-500">
             Kliknij ołówek, edytuj wiersz i zatwierdź Enterem
@@ -159,9 +117,7 @@ export default function PortfolioTransactionsTable({
           <select
             value={typeFilter}
             onChange={(event) =>
-              setTypeFilter(
-                event.target.value as PortfolioTransactionType | 'all'
-              )
+              setTypeFilter(event.target.value as PortfolioTransactionType | 'all')
             }
             className={cellInputClasses}
           >
@@ -199,9 +155,7 @@ export default function PortfolioTransactionsTable({
 
           <select
             value={sortDirection}
-            onChange={(event) =>
-              setSortDirection(event.target.value as SortDirection)
-            }
+            onChange={(event) => setSortDirection(event.target.value as SortDirection)}
             className={cellInputClasses}
           >
             <option value="newest">Najnowsze</option>
@@ -212,36 +166,20 @@ export default function PortfolioTransactionsTable({
 
       {rows.length === 0 ? (
         <div className="px-5 py-10 text-center">
-          <p className="text-sm font-semibold text-zinc-300">
-            Brak pasujących transakcji
-          </p>
+          <p className="text-sm font-semibold text-zinc-300">Brak pasujących transakcji</p>
         </div>
       ) : (
         <div className="max-h-[34rem] overflow-auto">
           <table className="w-full min-w-[830px] border-collapse text-xs">
             <thead className="sticky top-0 z-10 bg-zinc-950 text-[9px] uppercase tracking-wide text-zinc-500">
               <tr>
-                <th className="border-b border-zinc-700 px-2 py-2 text-left">
-                  Data
-                </th>
-                <th className="border-b border-zinc-700 px-2 py-2 text-left">
-                  Rodzaj
-                </th>
-                <th className="border-b border-zinc-700 px-2 py-2 text-left">
-                  Tag
-                </th>
-                <th className="border-b border-zinc-700 px-2 py-2 text-left">
-                  Notatka
-                </th>
-                <th className="border-b border-zinc-700 px-2 py-2 text-right">
-                  Kwota
-                </th>
-                <th className="border-b border-zinc-700 px-2 py-2 text-right">
-                  Saldo
-                </th>
-                <th className="border-b border-zinc-700 px-2 py-2 text-right">
-                  Akcje
-                </th>
+                <th className="border-b border-zinc-700 px-2 py-2 text-left">Data</th>
+                <th className="border-b border-zinc-700 px-2 py-2 text-left">Rodzaj</th>
+                <th className="border-b border-zinc-700 px-2 py-2 text-left">Tag</th>
+                <th className="border-b border-zinc-700 px-2 py-2 text-left">Notatka</th>
+                <th className="border-b border-zinc-700 px-2 py-2 text-right">Kwota</th>
+                <th className="border-b border-zinc-700 px-2 py-2 text-right">Saldo</th>
+                <th className="border-b border-zinc-700 px-2 py-2 text-right">Akcje</th>
               </tr>
             </thead>
 
@@ -249,10 +187,7 @@ export default function PortfolioTransactionsTable({
               {rows.map((row) => {
                 const isEditing = editingId === row.transaction.id;
                 const availableTags = tags.filter(
-                  (tag) =>
-                    !draft ||
-                    tag.kind === draft.type ||
-                    tag.kind === 'both'
+                  (tag) => !draft || tag.kind === draft.type || tag.kind === 'both'
                 );
 
                 return (
@@ -286,8 +221,7 @@ export default function PortfolioTransactionsTable({
                           onChange={(event) =>
                             setDraft({
                               ...draft,
-                              type: event.target
-                                .value as PortfolioTransactionType,
+                              type: event.target.value as PortfolioTransactionType,
                               tagId: null,
                             })
                           }
@@ -300,14 +234,10 @@ export default function PortfolioTransactionsTable({
                       ) : (
                         <span
                           className={
-                            row.transaction.type === 'income'
-                              ? 'text-emerald-400'
-                              : 'text-red-400'
+                            row.transaction.type === 'income' ? 'text-emerald-400' : 'text-red-400'
                           }
                         >
-                          {row.transaction.type === 'income'
-                            ? 'Przychód'
-                            : 'Wydatek'}
+                          {row.transaction.type === 'income' ? 'Przychód' : 'Wydatek'}
                         </span>
                       )}
                     </td>
@@ -333,8 +263,7 @@ export default function PortfolioTransactionsTable({
                           ))}
                         </select>
                       ) : (
-                        tagsById.get(row.transaction.tagId ?? '')?.name ??
-                        'Bez tagu'
+                        (tagsById.get(row.transaction.tagId ?? '')?.name ?? 'Bez tagu')
                       )}
                     </td>
 

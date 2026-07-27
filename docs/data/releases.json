@@ -2,9 +2,7 @@
   "$schema": "../schemas/releases.schema.json",
   "schemaVersion": 1,
   "documentTitle": "Changelog",
-  "introduction": [
-    "All notable changes to CHB will be documented in this file."
-  ],
+  "introduction": ["All notable changes to CHB will be documented in this file."],
   "releases": [
     {
       "version": "Unreleased",
@@ -145,7 +143,10 @@
             "Portfolio monthly income, monthly expenses and average daily expense statistics.",
             "Portfolio category distribution bars.",
             "Inline editing of Portfolio transaction rows.",
-            "Portfolio transaction filtering by type, tag and text."
+            "Portfolio transaction filtering by type, tag and text.",
+            "Custom bottom-navigation ordering stored in application preferences.",
+            "Individual color selection for every bottom-navigation tab.",
+            "Drag-and-drop navigation editor with touch-friendly move controls."
           ]
         },
         {
@@ -222,7 +223,9 @@
             "Historical sessions preserve total duration without claiming exact source start and end times.",
             "Portfolio transaction form now remembers the last selected tag.",
             "EnterTalkPro is selected automatically for income when no remembered income tag exists.",
-            "Portfolio history uses a denser, scrollable table."
+            "Portfolio history uses a denser, scrollable table.",
+            "Mobile navigation now uses the first four user-ordered tabs as primary items.",
+            "Desktop bottom navigation scrolls horizontally when more tabs are added."
           ]
         },
         {

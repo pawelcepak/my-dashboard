@@ -1,12 +1,5 @@
 import { Save } from 'lucide-react';
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type FormEvent,
-  type KeyboardEvent,
-} from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 
 import type {
   PortfolioTag,
@@ -37,11 +30,8 @@ function getTodayIso(): string {
 
 function getStoredTagId(type: PortfolioTransactionType): string {
   return (
-    window.localStorage.getItem(
-      type === 'income'
-        ? LAST_INCOME_TAG_KEY
-        : LAST_EXPENSE_TAG_KEY
-    ) ?? ''
+    window.localStorage.getItem(type === 'income' ? LAST_INCOME_TAG_KEY : LAST_EXPENSE_TAG_KEY) ??
+    ''
   );
 }
 
@@ -54,35 +44,27 @@ export default function PortfolioTransactionForm({
   const amountRef = useRef<HTMLInputElement>(null);
 
   const [date, setDate] = useState(getTodayIso);
-  const [type, setType] =
-    useState<PortfolioTransactionType>('expense');
+  const [type, setType] = useState<PortfolioTransactionType>('expense');
   const [amount, setAmount] = useState('');
   const [tagId, setTagId] = useState('');
   const [note, setNote] = useState('');
 
   const availableTags = useMemo(
-    () =>
-      tags.filter(
-        (tag) => tag.kind === type || tag.kind === 'both'
-      ),
+    () => tags.filter((tag) => tag.kind === type || tag.kind === 'both'),
     [tags, type]
   );
 
   useEffect(() => {
     const storedTagId = getStoredTagId(type);
 
-    if (
-      storedTagId &&
-      availableTags.some((tag) => tag.id === storedTagId)
-    ) {
+    if (storedTagId && availableTags.some((tag) => tag.id === storedTagId)) {
       setTagId(storedTagId);
       return;
     }
 
     if (type === 'income') {
       const enterTalkTag = availableTags.find(
-        (tag) =>
-          tag.name.toLocaleLowerCase('pl-PL') === 'entertalkpro'
+        (tag) => tag.name.toLocaleLowerCase('pl-PL') === 'entertalkpro'
       );
 
       setTagId(enterTalkTag?.id ?? '');
@@ -114,9 +96,7 @@ export default function PortfolioTransactionForm({
 
     if (tagId) {
       window.localStorage.setItem(
-        type === 'income'
-          ? LAST_INCOME_TAG_KEY
-          : LAST_EXPENSE_TAG_KEY,
+        type === 'income' ? LAST_INCOME_TAG_KEY : LAST_EXPENSE_TAG_KEY,
         tagId
       );
     }
@@ -124,14 +104,8 @@ export default function PortfolioTransactionForm({
     resetAfterSave();
   }
 
-  function handleFieldKeyDown(
-    event: KeyboardEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
-    if (
-      event.key === 'Enter' &&
-      !event.shiftKey &&
-      event.currentTarget.tagName !== 'SELECT'
-    ) {
+  function handleFieldKeyDown(event: KeyboardEvent<HTMLInputElement | HTMLSelectElement>) {
+    if (event.key === 'Enter' && !event.shiftKey && event.currentTarget.tagName !== 'SELECT') {
       event.preventDefault();
       formRef.current?.requestSubmit();
     }
@@ -140,9 +114,7 @@ export default function PortfolioTransactionForm({
   return (
     <section className="app-panel overflow-hidden">
       <div className="border-b border-zinc-700 px-4 py-3">
-        <h2 className="text-sm font-semibold text-zinc-100">
-          Nowa transakcja
-        </h2>
+        <h2 className="text-sm font-semibold text-zinc-100">Nowa transakcja</h2>
 
         <p className="mt-0.5 text-xs text-zinc-500">
           Enter zapisuje, a ostatni tag jest zapamiętywany
@@ -178,11 +150,7 @@ export default function PortfolioTransactionForm({
 
           <select
             value={type}
-            onChange={(event) =>
-              setType(
-                event.target.value as PortfolioTransactionType
-              )
-            }
+            onChange={(event) => setType(event.target.value as PortfolioTransactionType)}
             className={inputClasses}
           >
             <option value="expense">Wydatek</option>

@@ -6646,9 +6646,7 @@
       "title": "Machine-readable project data foundation",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "developer-infrastructure"
-      ]
+      "tags": ["developer-infrastructure"]
     },
     {
       "type": "task",
@@ -6657,9 +6655,7 @@
       "title": "Project-data validation and consistency checks",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "developer-infrastructure"
-      ]
+      "tags": ["developer-infrastructure"]
     },
     {
       "type": "task",
@@ -6668,9 +6664,7 @@
       "title": "Deterministic CHANGELOG and ROADMAP generator",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "developer-infrastructure"
-      ]
+      "tags": ["developer-infrastructure"]
     },
     {
       "type": "task",
@@ -6679,9 +6673,7 @@
       "title": "Automated release preparation command",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "developer-infrastructure"
-      ]
+      "tags": ["developer-infrastructure"]
     },
     {
       "type": "heading",
@@ -6697,9 +6689,7 @@
       "title": "Machine-readable module registry",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6708,9 +6698,7 @@
       "title": "Machine-readable known-issue registry",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6719,9 +6707,7 @@
       "title": "Vendor-neutral AI Project Interface manifest",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6730,9 +6716,7 @@
       "title": "Generated AGENTS.md adapter",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6741,9 +6725,7 @@
       "title": "Generated CLAUDE.md adapter",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6752,9 +6734,7 @@
       "title": "Generated Cursor project rules",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "heading",
@@ -6770,10 +6750,7 @@
       "title": "Current-time defaults for new work sessions",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "daily-ux"
-      ]
+      "tags": ["work", "daily-ux"]
     },
     {
       "type": "task",
@@ -6782,10 +6759,7 @@
       "title": "Two-minute default duration for new work sessions",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "daily-ux"
-      ]
+      "tags": ["work", "daily-ux"]
     },
     {
       "type": "task",
@@ -6794,10 +6768,7 @@
       "title": "Remaining percentage for the next message-rate threshold",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "progress"
-      ]
+      "tags": ["work", "progress"]
     },
     {
       "type": "blank"
@@ -6816,11 +6787,7 @@
       "title": "Import 2026 work history for ISO weeks 8–29",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "history",
-        "migration"
-      ]
+      "tags": ["work", "history", "migration"]
     },
     {
       "type": "task",
@@ -6829,11 +6796,7 @@
       "title": "Preserve existing weeks during historical import",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "history",
-        "data-safety"
-      ]
+      "tags": ["work", "history", "data-safety"]
     },
     {
       "type": "task",
@@ -6842,11 +6805,7 @@
       "title": "Validate imported weekly message and beer totals against source screenshots",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "history",
-        "validation"
-      ]
+      "tags": ["work", "history", "validation"]
     },
     {
       "type": "task",
@@ -6855,11 +6814,7 @@
       "title": "Preserve historical daily duration with identifiable placeholder sessions",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "history",
-        "compatibility"
-      ]
+      "tags": ["work", "history", "compatibility"]
     },
     {
       "type": "blank"
@@ -6878,9 +6833,7 @@
       "title": "Functional income and expense ledger",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6889,9 +6842,7 @@
       "title": "Automatic running balance",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6900,9 +6851,7 @@
       "title": "Editable Portfolio tags",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6911,9 +6860,7 @@
       "title": "Optional transaction notes",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6922,9 +6869,7 @@
       "title": "Multiple transactions on one date",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6933,9 +6878,7 @@
       "title": "Portfolio backup and cloud synchronization",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6944,9 +6887,7 @@
       "title": "Safe Windows project ZIP script",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "blank"
@@ -6965,11 +6906,7 @@
       "title": "Normalize legacy cloud snapshots without Portfolio arrays",
       "status": "completed",
       "priority": "critical",
-      "tags": [
-        "cloud",
-        "portfolio",
-        "compatibility"
-      ]
+      "tags": ["cloud", "portfolio", "compatibility"]
     },
     {
       "type": "task",
@@ -6978,11 +6915,7 @@
       "title": "Make cloud fingerprint and timestamp comparison safe for legacy snapshots",
       "status": "completed",
       "priority": "critical",
-      "tags": [
-        "cloud",
-        "portfolio",
-        "compatibility"
-      ]
+      "tags": ["cloud", "portfolio", "compatibility"]
     },
     {
       "type": "blank"
@@ -7001,10 +6934,7 @@
       "title": "Fast Portfolio entry with remembered tags and Enter submission",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "ux"
-      ]
+      "tags": ["portfolio", "ux"]
     },
     {
       "type": "task",
@@ -7013,10 +6943,7 @@
       "title": "Compact filtered transaction table with inline editing",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "ux"
-      ]
+      "tags": ["portfolio", "ux"]
     },
     {
       "type": "task",
@@ -7025,10 +6952,7 @@
       "title": "Monthly and category Portfolio statistics",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "ux"
-      ]
+      "tags": ["portfolio", "ux"]
     },
     {
       "type": "task",
@@ -7037,10 +6961,7 @@
       "title": "Portfolio CSV preview and import",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "ux"
-      ]
+      "tags": ["portfolio", "ux"]
     },
     {
       "type": "blank"
@@ -7059,10 +6980,7 @@
       "title": "Fix Portfolio UX TypeScript build errors",
       "status": "completed",
       "priority": "critical",
-      "tags": [
-        "portfolio",
-        "hotfix"
-      ]
+      "tags": ["portfolio", "hotfix"]
     },
     {
       "type": "task",
@@ -7071,10 +6989,53 @@
       "title": "Remove Portfolio React hook dependency warnings",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "hotfix"
-      ]
+      "tags": ["portfolio", "hotfix"]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.6.2.customizable.bottom.navigation",
+      "parentId": null,
+      "text": "v0.6.2 — Customizable Bottom Navigation"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.navigation.preference-model",
+      "parentId": "section.v0.6.2.customizable.bottom.navigation",
+      "title": "Store navigation order and tab colors in application preferences",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["navigation", "settings", "ux"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.navigation.settings-editor",
+      "parentId": "section.v0.6.2.customizable.bottom.navigation",
+      "title": "Manage tab order and colors without code",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["navigation", "settings", "ux"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.navigation.drag-drop",
+      "parentId": "section.v0.6.2.customizable.bottom.navigation",
+      "title": "Reorder tabs by drag and touch-friendly controls",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["navigation", "settings", "ux"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.navigation.adaptive-bar",
+      "parentId": "section.v0.6.2.customizable.bottom.navigation",
+      "title": "Adapt desktop and mobile bars to the configured order",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["navigation", "settings", "ux"]
     }
   ]
 }

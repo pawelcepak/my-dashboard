@@ -880,3 +880,10 @@ Future quality and intelligence work remains planned but is not required for nor
 
 - [x] Fix Portfolio UX TypeScript build errors
 - [x] Remove Portfolio React hook dependency warnings
+
+## v0.6.2 — Customizable Bottom Navigation
+
+- [x] Store navigation order and tab colors in application preferences
+- [x] Manage tab order and colors without code
+- [x] Reorder tabs by drag and touch-friendly controls
+- [x] Adapt desktop and mobile bars to the configured order

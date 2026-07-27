@@ -1,17 +1,15 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.6.1a",
-  "currentSprint": "0.6.1a",
-  "currentGoal": "Fix Portfolio UX TypeScript build errors and React hook dependency warnings.",
+  "currentVersion": "0.6.2",
+  "currentSprint": "0.6.2",
+  "currentGoal": "Allow the bottom navigation to be reordered and individually colored without editing code.",
   "stableState": true,
-  "lastCompleted": [
-    "Portfolio UX A–D implementation"
-  ],
+  "lastCompleted": ["Portfolio UX A-D", "Portfolio UX hotfix"],
   "nextTasks": [
-    "Run release:prepare",
-    "Test transaction entry, inline editing and CSV import",
-    "Commit and push after all checks pass"
+    "Test navigation order on desktop and mobile",
+    "Test per-tab colors",
+    "Verify preferences synchronize between devices"
   ],
   "knownIssues": [
     {

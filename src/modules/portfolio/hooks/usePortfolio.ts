@@ -63,22 +63,19 @@ export function usePortfolio() {
     };
   }, []);
 
-  const runAction = useCallback(
-    async <T,>(action: () => Promise<T>): Promise<T> => {
-      setIsSaving(true);
-      setError(null);
+  const runAction = useCallback(async <T>(action: () => Promise<T>): Promise<T> => {
+    setIsSaving(true);
+    setError(null);
 
-      try {
-        return await action();
-      } catch (actionError) {
-        setError(getErrorMessage(actionError));
-        throw actionError;
-      } finally {
-        setIsSaving(false);
-      }
-    },
-    []
-  );
+    try {
+      return await action();
+    } catch (actionError) {
+      setError(getErrorMessage(actionError));
+      throw actionError;
+    } finally {
+      setIsSaving(false);
+    }
+  }, []);
 
   return {
     account: data?.account,
@@ -97,16 +94,8 @@ export function usePortfolio() {
     updateTag: (tagId: string, input: PortfolioTagInput) =>
       runAction(() => portfolioService.updateTag(tagId, input)),
     deleteTag: (tagId: string) => runAction(() => portfolioService.deleteTag(tagId)),
-    updateAccount: (
-      initialBalance: number,
-      initialBalanceDate: string
-    ) =>
-      runAction(() =>
-        portfolioService.updateAccount(
-          initialBalance,
-          initialBalanceDate
-        )
-      ),
+    updateAccount: (initialBalance: number, initialBalanceDate: string) =>
+      runAction(() => portfolioService.updateAccount(initialBalance, initialBalanceDate)),
     importCsvRows: (rows: PortfolioCsvRow[]) =>
       runAction(() => portfolioService.importCsvRows(rows)),
   };

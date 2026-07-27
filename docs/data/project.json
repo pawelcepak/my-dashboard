@@ -5,8 +5,8 @@
   "name": "CHB",
   "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
   "repository": "my-dashboard",
-  "currentVersion": "0.6.1a",
-  "currentSprint": "0.6.1a",
+  "currentVersion": "0.6.2",
+  "currentSprint": "0.6.2",
   "status": "active",
   "architectureVersion": 2,
   "documentationModel": "ai-project-interface",
@@ -26,12 +26,7 @@
     "Supabase",
     "React Router 7"
   ],
-  "platforms": [
-    "Windows 11",
-    "Xubuntu",
-    "Android browser",
-    "GitHub Pages"
-  ],
+  "platforms": ["Windows 11", "Xubuntu", "Android browser", "GitHub Pages"],
   "principles": [
     "Local-first and offline-capable",
     "Cloud synchronization must not silently overwrite conflicts",

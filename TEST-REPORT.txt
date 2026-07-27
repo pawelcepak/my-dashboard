@@ -1,15 +1,15 @@
-CHB v0.6.1 — Portfolio UX A–D
+CHB v0.6.2 — Customizable Bottom Navigation
 
-Preparation checks:
-PASS: project documentation validation
-PASS: generated documentation consistency
-PASS: TypeScript/TSX syntax scan (no TS1xxx parser errors)
+Package preparation checks:
+- Overlay created from CHB_Project_2026-07-27_22-11.zip.
+- Navigation preference keys added to backup validation.
+- Existing preferences remain backward-compatible through defaults.
+- TypeScript source was statically reviewed.
 
-The sandbox did not contain a complete executable npm dependency tree,
-so the full Prettier, Oxlint and Vite build must be run locally with:
+The container did not contain a complete dependency installation, so run the full checks locally:
 
+npm run docs:validate
+npm run docs:generate
+npm run docs:check
 npm run release:prepare
 npm run dev
-
-The package was generated from:
-CHB_Project_2026-07-27_21-51.zip

@@ -27,6 +27,8 @@ const SUPPORTED_SETTING_KEYS = new Set([
   'lastBackupAt',
   'tableDensity',
   'accentTheme',
+  'navigationOrder',
+  'navigationTabColors',
 ]);
 
 const GOAL_PRECISION_MULTIPLIER = 100;

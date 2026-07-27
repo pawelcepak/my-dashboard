@@ -9,10 +9,7 @@ import PortfolioSummary from '@/modules/portfolio/components/PortfolioSummary';
 import PortfolioTransactionForm from '@/modules/portfolio/components/PortfolioTransactionForm';
 import PortfolioTransactionsTable from '@/modules/portfolio/components/PortfolioTransactionsTable';
 import { usePortfolio } from '@/modules/portfolio/hooks/usePortfolio';
-import type {
-  PortfolioTag,
-  PortfolioTransaction,
-} from '@/modules/portfolio/types/portfolio.types';
+import type { PortfolioTag, PortfolioTransaction } from '@/modules/portfolio/types/portfolio.types';
 import { calculatePortfolioSummary } from '@/modules/portfolio/utils/portfolioCalculations';
 import PageHeader from '@/shared/components/PageHeader';
 
@@ -35,10 +32,7 @@ export default function PortfolioPage() {
   } = usePortfolio();
 
   const summary = useMemo(
-    () =>
-      account
-        ? calculatePortfolioSummary(account, transactions)
-        : null,
+    () => (account ? calculatePortfolioSummary(account, transactions) : null),
     [account, transactions]
   );
 
@@ -46,21 +40,25 @@ export default function PortfolioPage() {
     return (
       <div className="flex min-h-[28rem] items-center justify-center">
         <div className="text-center">
-          <LoaderCircle
-            aria-hidden="true"
-            className="mx-auto size-8 animate-spin text-zinc-500"
-          />
-          <p className="mt-4 text-sm font-medium text-zinc-300">
-            Wczytywanie portfela
-          </p>
+          <LoaderCircle aria-hidden="true" className="mx-auto size-8 animate-spin text-zinc-500" />
+
+          <p className="mt-4 text-sm font-medium text-zinc-300">Wczytywanie portfela</p>
         </div>
       </div>
     );
   }
 
-  async function handleDeleteTransaction(
-    transaction: PortfolioTransaction
-  ) {
+  async function handleCreateTransaction(
+    input: Parameters<typeof createTransaction>[0]
+  ): Promise<void> {
+    await createTransaction(input);
+  }
+
+  async function handleCreateTag(input: Parameters<typeof createTag>[0]): Promise<void> {
+    await createTag(input);
+  }
+
+  async function handleDeleteTransaction(transaction: PortfolioTransaction) {
     const shouldDelete = window.confirm(
       `Czy usunąć transakcję z dnia ${transaction.date} na kwotę ${transaction.amount.toFixed(
         2
@@ -100,17 +98,11 @@ export default function PortfolioPage() {
         }
       />
 
-      {error && (
-        <div className="app-notice app-notice-error">{error}</div>
-      )}
+      {error && <div className="app-notice app-notice-error">{error}</div>}
 
       <PortfolioSummary summary={summary} />
 
-      <PortfolioTransactionForm
-        tags={tags}
-        isSaving={isSaving}
-        onSave={createTransaction}
-      />
+      <PortfolioTransactionForm tags={tags} isSaving={isSaving} onSave={handleCreateTransaction} />
 
       <PortfolioTransactionsTable
         account={account}
@@ -122,29 +114,19 @@ export default function PortfolioPage() {
       />
 
       <div className="grid items-start gap-4 2xl:grid-cols-[minmax(0,1.35fr)_minmax(21rem,0.65fr)]">
-        <PortfolioStatisticsPanel
-          summary={summary}
-          transactions={transactions}
-          tags={tags}
-        />
+        <PortfolioStatisticsPanel summary={summary} transactions={transactions} tags={tags} />
 
-        <PortfolioCsvImportPanel
-          isSaving={isSaving}
-          onImport={importCsvRows}
-        />
+        <PortfolioCsvImportPanel isSaving={isSaving} onImport={importCsvRows} />
       </div>
 
-      <PortfolioBalanceChart
-        account={account}
-        transactions={transactions}
-      />
+      <PortfolioBalanceChart account={account} transactions={transactions} />
 
       <PortfolioSettingsPanel
         account={account}
         tags={tags}
         isSaving={isSaving}
         onUpdateAccount={updateAccount}
-        onCreateTag={createTag}
+        onCreateTag={handleCreateTag}
         onUpdateTag={updateTag}
         onDeleteTag={handleDeleteTag}
       />
