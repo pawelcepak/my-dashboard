@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 
+import { useAppSettings } from '@/modules/settings/hooks/useAppSettings';
 import WorkDayEditor from '@/modules/work/components/WorkDayEditor';
 import WorkDaysTable from '@/modules/work/components/WorkDaysTable';
 import WorkHistory from '@/modules/work/components/WorkHistory';
+import WorkIntelligencePanel from '@/modules/work/components/WorkIntelligencePanel';
 import WorkSummaryGrid from '@/modules/work/components/WorkSummaryGrid';
 import WorkWeekSettings from '@/modules/work/components/WorkWeekSettings';
 import type { WorkDay, WorkWeek, WorkWeekSummary } from '@/modules/work/types/work.types';
@@ -29,6 +31,8 @@ export default function WorkMainGridContainer({
   resetWeek,
   selectWeek,
 }: WorkMainGridContainerProps) {
+  const { preferences } = useAppSettings();
+
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -50,13 +54,6 @@ export default function WorkMainGridContainer({
 
       return {
         ...updatedWeek,
-
-        /*
-         * Pole tygodniowe pozostaje aktualizowane dla zgodności
-         * ze starszymi danymi, backupami i wersjami aplikacji.
-         *
-         * Głównym źródłem prawdy są wartości zapisane w dniach.
-         */
         heldMessages: getDailyHeldMessagesTotal(updatedWeek),
       };
     });
@@ -72,6 +69,7 @@ export default function WorkMainGridContainer({
     }
 
     setSelectedDayId(null);
+
     void resetWeek();
   }
 
@@ -82,6 +80,7 @@ export default function WorkMainGridContainer({
           <WorkDaysTable
             days={activeWeek.days}
             isSaving={isSaving}
+            tableDensity={preferences.tableDensity}
             onUpdateDay={updateDay}
             onEditSessions={setSelectedDayId}
           />
@@ -91,17 +90,7 @@ export default function WorkMainGridContainer({
           <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
 
           <WorkWeekSettings
-            heldMessages={summary.totalHeldMessages}
             exchangeRateEurPln={activeWeek.exchangeRateEurPln}
-            onHeldMessagesChange={() => {
-              /*
-               * Zatrzymane wiadomości są obecnie edytowane
-               * wyłącznie w poszczególnych dniach.
-               *
-               * Prop pozostaje tymczasowo wymagany przez istniejący
-               * komponent WorkWeekSettings.
-               */
-            }}
             onExchangeRateChange={(exchangeRateEurPln) => {
               void updateWeek((currentWeek) => ({
                 ...currentWeek,
@@ -122,6 +111,8 @@ export default function WorkMainGridContainer({
           />
         </div>
       </div>
+
+      <WorkIntelligencePanel week={activeWeek} />
 
       {selectedDay && (
         <WorkDayEditor

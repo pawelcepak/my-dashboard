@@ -1,4 +1,4 @@
-import { Beer, Clock3, Mail, MessageSquareText, Star } from 'lucide-react';
+import { Beer, Clock3, Mail, MessageSquareMore, MessageSquareText, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import MessagesPerHourIndicator from '@/modules/work/components/MessagesPerHourIndicator';
@@ -9,11 +9,7 @@ import {
   getDayMessagesPerHour,
   getDayWorkedHours,
 } from '@/modules/work/utils/workCalculations';
-import {
-  formatWorkRating,
-  getBeerPresentation,
-  getWorkRatingPresentation,
-} from '@/modules/work/utils/workPresentation';
+import { formatWorkRating, getWorkRatingPresentation } from '@/modules/work/utils/workPresentation';
 
 type TodayWorkSummaryProps = {
   dateLabel: string;
@@ -145,8 +141,6 @@ export default function TodayWorkSummary({
 
   const ratingPresentation = getWorkRatingPresentation(day.workRating);
 
-  const beerPresentation = getBeerPresentation(day.beers);
-
   return (
     <section className="rounded-xl border border-zinc-700 bg-zinc-900/65 shadow-sm">
       <div className="flex items-center justify-between gap-4 border-b border-zinc-700 px-4 py-3">
@@ -165,41 +159,33 @@ export default function TodayWorkSummary({
       </div>
 
       <div className="space-y-3 p-4">
-        <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
-          <MainMetric label="Wiadomości" value={formatNumber(day.messages)} icon={Mail} accent />
+        <div className="grid gap-2 sm:grid-cols-2 2xl:grid-cols-4">
+          <MainMetric label="Płatne" value={formatNumber(day.messages)} icon={Mail} accent />
+
+          <MainMetric
+            label="Zatrzymane"
+            value={formatNumber(day.heldMessages)}
+            icon={MessageSquareMore}
+          />
 
           <MainMetric label="Czas pracy" value={`${formatHours(workedHours)} h`} icon={Clock3} />
 
           <AverageMetric value={messagesPerHour} />
         </div>
 
-        <div className="grid gap-2 sm:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-3">
-          <div className="flex items-center justify-between gap-3 rounded-lg border border-zinc-700 bg-zinc-950/40 px-3 py-2.5">
-            <div className="flex min-w-0 items-center gap-2">
-              <Star aria-hidden="true" className="size-4 shrink-0 text-zinc-500" />
-
-              <span className="truncate text-xs font-medium text-zinc-500">Ocena</span>
-            </div>
-
-            <span
-              className="shrink-0 text-sm font-bold"
-              style={{ color: ratingPresentation.color }}
-            >
-              {formatWorkRating(day.workRating)}
-            </span>
-          </div>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <SecondaryMetric
+            label="Ocena"
+            value={formatWorkRating(day.workRating)}
+            icon={Star}
+            valueClassName={day.workRating === null ? 'text-zinc-500' : ''}
+          />
 
           <SecondaryMetric
             label="Piwa"
             value={String(day.beers)}
             icon={Beer}
             valueClassName={day.beers === 0 ? 'text-emerald-300' : 'text-red-300'}
-          />
-
-          <SecondaryMetric
-            label="Bloki"
-            value={String(day.sessions.length)}
-            icon={MessageSquareText}
           />
         </div>
 
@@ -210,31 +196,10 @@ export default function TodayWorkSummary({
             {ratingPresentation.label}
           </span>
 
-          <span
-            className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${beerPresentation.className}`}
-          >
-            {day.beers === 0 ? 'Bez alkoholu' : `${day.beers} piw`}
+          <span className="rounded-full border border-cyan-900 bg-cyan-950/30 px-2.5 py-1 text-[11px] font-semibold text-cyan-300">
+            {formatNumber(day.heldMessages)} × 0,05 EUR
           </span>
         </div>
-
-        {day.sessions.length > 0 && (
-          <div className="border-t border-zinc-700 pt-3">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-500">
-              Bloki pracy
-            </p>
-
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {day.sessions.map((session) => (
-                <span
-                  key={session.id}
-                  className="rounded-md border border-zinc-700 bg-zinc-950 px-2.5 py-1 text-[11px] font-medium text-zinc-400"
-                >
-                  {session.startTime}–{session.endTime}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

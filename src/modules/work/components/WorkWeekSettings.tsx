@@ -1,9 +1,7 @@
-import { MessageSquareMore, Trash2 } from 'lucide-react';
+import { CircleDollarSign, Trash2 } from 'lucide-react';
 
 type WorkWeekSettingsProps = {
-  heldMessages: number;
   exchangeRateEurPln: number;
-  onHeldMessagesChange: (value: number) => void;
   onExchangeRateChange: (value: number) => void;
   onReset: () => void;
 };
@@ -13,6 +11,7 @@ const inputClasses =
 
 function parseNonNegativeNumber(value: string): number {
   const normalizedValue = value.replace(',', '.');
+
   const parsedValue = Number.parseFloat(normalizedValue);
 
   if (!Number.isFinite(parsedValue) || parsedValue < 0) {
@@ -23,9 +22,7 @@ function parseNonNegativeNumber(value: string): number {
 }
 
 export default function WorkWeekSettings({
-  heldMessages,
   exchangeRateEurPln,
-  onHeldMessagesChange,
   onExchangeRateChange,
   onReset,
 }: WorkWeekSettingsProps) {
@@ -39,32 +36,11 @@ export default function WorkWeekSettings({
         </div>
 
         <div className="flex size-10 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 text-zinc-500">
-          <MessageSquareMore aria-hidden="true" className="size-5" />
+          <CircleDollarSign aria-hidden="true" className="size-5" />
         </div>
       </div>
 
       <div className="space-y-5 p-5 sm:p-6">
-        <label>
-          <span className="mb-2 block text-sm font-medium text-zinc-400">
-            Zatrzymane wiadomości
-          </span>
-
-          <input
-            type="number"
-            min="0"
-            step="1"
-            value={heldMessages}
-            onChange={(event) =>
-              onHeldMessagesChange(Math.floor(parseNonNegativeNumber(event.target.value)))
-            }
-            className={inputClasses}
-          />
-
-          <span className="mt-2 block text-xs leading-5 text-zinc-500">
-            Każda zatrzymana wiadomość jest liczona po 0,05 EUR.
-          </span>
-        </label>
-
         <label>
           <span className="mb-2 block text-sm font-medium text-zinc-400">Kurs EUR/PLN</span>
 
@@ -76,7 +52,20 @@ export default function WorkWeekSettings({
             onChange={(event) => onExchangeRateChange(parseNonNegativeNumber(event.target.value))}
             className={inputClasses}
           />
+
+          <span className="mt-2 block text-xs leading-5 text-zinc-500">
+            Kurs jest zapisywany osobno dla każdego tygodnia.
+          </span>
         </label>
+
+        <div className="rounded-xl border border-zinc-700 bg-zinc-950/40 px-4 py-3">
+          <p className="text-xs font-medium text-zinc-400">Zatrzymane wiadomości</p>
+
+          <p className="mt-1 text-xs leading-5 text-zinc-500">
+            Są wpisywane bezpośrednio przy odpowiednich dniach i automatycznie sumowane do wyniku
+            tygodnia.
+          </p>
+        </div>
 
         <button
           type="button"

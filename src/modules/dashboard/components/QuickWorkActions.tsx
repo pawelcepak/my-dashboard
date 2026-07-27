@@ -80,6 +80,8 @@ export default function QuickWorkActions({
 
   const [messages, setMessages] = useState(String(day.messages));
 
+  const [heldMessages, setHeldMessages] = useState(String(day.heldMessages));
+
   const [workRating, setWorkRating] = useState(
     day.workRating === null ? '' : String(day.workRating)
   );
@@ -111,10 +113,12 @@ export default function QuickWorkActions({
   useEffect(() => {
     setMessages(String(day.messages));
 
+    setHeldMessages(String(day.heldMessages));
+
     setWorkRating(day.workRating === null ? '' : String(day.workRating));
 
     setBeers(String(day.beers));
-  }, [day.id, day.messages, day.workRating, day.beers]);
+  }, [day.id, day.messages, day.heldMessages, day.workRating, day.beers]);
 
   useEffect(() => {
     setDailyMessagesTarget(formatGoalValue(week.goals.dailyMessagesTarget));
@@ -155,6 +159,7 @@ export default function QuickWorkActions({
     await onUpdateDay({
       ...day,
       messages: parseNonNegativeInteger(messages),
+      heldMessages: parseNonNegativeInteger(heldMessages),
       workRating: parseWorkRating(workRating),
       beers: parseNonNegativeInteger(beers),
     });
@@ -221,7 +226,7 @@ export default function QuickWorkActions({
               <span className="block text-sm font-semibold text-zinc-200">Szybki wpis</span>
 
               <span className="mt-0.5 block truncate text-[11px] text-zinc-500">
-                Dzisiejsze dane i nowy blok pracy
+                Dzisiejsze wyniki i nowy blok pracy
               </span>
             </span>
           </span>
@@ -251,9 +256,9 @@ export default function QuickWorkActions({
                 <Save aria-hidden="true" className="size-4 text-zinc-500" />
               </div>
 
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 <label>
-                  <span className={labelClasses}>Wiadomości</span>
+                  <span className={labelClasses}>Płatne</span>
 
                   <input
                     type="number"
@@ -261,6 +266,19 @@ export default function QuickWorkActions({
                     step="1"
                     value={messages}
                     onChange={(event) => setMessages(event.target.value)}
+                    className={inputClasses}
+                  />
+                </label>
+
+                <label>
+                  <span className={labelClasses}>Zatrzymane</span>
+
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    value={heldMessages}
+                    onChange={(event) => setHeldMessages(event.target.value)}
                     className={inputClasses}
                   />
                 </label>

@@ -15,7 +15,12 @@ import type {
 } from '@/modules/work/types/work.types';
 import { formatWorkWeekLabel } from '@/modules/work/utils/workWeekDate';
 
-const SUPPORTED_SETTING_KEYS = new Set(['activeWorkWeekId', 'lastBackupAt']);
+const SUPPORTED_SETTING_KEYS = new Set([
+  'activeWorkWeekId',
+  'lastBackupAt',
+  'tableDensity',
+  'accentTheme',
+]);
 
 const GOAL_PRECISION_MULTIPLIER = 100;
 

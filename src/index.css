@@ -281,3 +281,265 @@ select {
   color: var(--color-red-300);
   background: var(--color-red-950);
 }
+
+/*
+ * Tabele arkuszowe.
+ *
+ * Wartości są przygotowane pod przyszłe przełączanie gęstości:
+ * standardowej, kompaktowej i bardzo kompaktowej.
+ */
+
+.work-table-density-standard {
+  --work-table-cell-padding-x: 0.5rem;
+  --work-table-cell-padding-y: 0.375rem;
+  --work-table-font-size: 0.75rem;
+  --work-table-header-font-size: 0.625rem;
+  --work-table-edit-height: 1.75rem;
+}
+
+.work-table-density-compact {
+  --work-table-cell-padding-x: 0.25rem;
+  --work-table-cell-padding-y: 0.1875rem;
+  --work-table-font-size: 0.6875rem;
+  --work-table-header-font-size: 0.5625rem;
+  --work-table-edit-height: 1.5rem;
+}
+
+.work-table-density-very-compact {
+  --work-table-cell-padding-x: 3px;
+  --work-table-cell-padding-y: 2px;
+  --work-table-font-size: 0.6875rem;
+  --work-table-header-font-size: 0.5625rem;
+  --work-table-edit-height: 1.375rem;
+}
+
+.work-spreadsheet-table {
+  width: max-content;
+  min-width: max-content;
+  border-collapse: collapse;
+  table-layout: auto;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.work-spreadsheet-table thead {
+  color: var(--color-zinc-500);
+  background: color-mix(in srgb, var(--color-zinc-950) 45%, transparent);
+}
+
+.work-spreadsheet-table th {
+  padding: var(--work-table-cell-padding-y) var(--work-table-cell-padding-x);
+  border-right: 1px solid color-mix(in srgb, var(--color-zinc-700) 55%, transparent);
+  border-bottom: 1px solid var(--color-zinc-700);
+  font-size: var(--work-table-header-font-size);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.work-spreadsheet-table td {
+  height: calc(var(--work-table-edit-height) + (var(--work-table-cell-padding-y) * 2));
+  padding: var(--work-table-cell-padding-y) var(--work-table-cell-padding-x);
+  border-right: 1px solid color-mix(in srgb, var(--color-zinc-700) 45%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-zinc-700) 65%, transparent);
+  font-size: var(--work-table-font-size);
+  line-height: 1.2;
+}
+
+.work-spreadsheet-table th:last-child,
+.work-spreadsheet-table td:last-child {
+  border-right: 0;
+}
+
+.work-spreadsheet-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.work-spreadsheet-table tbody tr {
+  transition: background-color 120ms ease;
+}
+
+.work-spreadsheet-table tbody tr:hover {
+  background: color-mix(in srgb, var(--color-zinc-950) 48%, transparent);
+}
+
+.work-spreadsheet-value {
+  display: inline-flex;
+  width: auto;
+  min-width: 2ch;
+  height: var(--work-table-edit-height);
+  align-items: center;
+  justify-content: flex-end;
+  border: 0;
+  border-radius: 0.2rem;
+  padding: 0 2px;
+  background: transparent;
+  font-size: inherit;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.work-spreadsheet-value:hover {
+  background: color-mix(in srgb, var(--color-zinc-800) 70%, transparent);
+}
+
+.work-spreadsheet-value:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 1px var(--app-accent);
+}
+
+.work-spreadsheet-input {
+  display: inline-block;
+  min-width: 3ch;
+  max-width: 8ch;
+  height: var(--work-table-edit-height);
+  border: 0;
+  border-bottom: 1px solid var(--app-accent);
+  border-radius: 0;
+  padding: 0 2px;
+  color: var(--color-zinc-100);
+  background: transparent;
+  font-size: inherit;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  outline: 0;
+}
+
+.work-spreadsheet-hours {
+  display: inline-flex;
+  width: auto;
+  height: var(--work-table-edit-height);
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  border: 0;
+  border-radius: 0.2rem;
+  padding: 0 2px;
+  color: var(--color-zinc-300);
+  background: transparent;
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition:
+    color 120ms ease,
+    background-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.work-spreadsheet-hours:hover {
+  color: var(--color-zinc-100);
+  background: color-mix(in srgb, var(--color-zinc-800) 70%, transparent);
+}
+
+.work-spreadsheet-hours:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 1px var(--app-accent);
+}
+
+/*
+ * Globalne motywy akcentu.
+ */
+
+:root[data-accent='crimson'] {
+  --app-accent: #dc143c;
+  --app-accent-hover: #bc1032;
+  --app-accent-soft: rgb(220 20 60 / 10%);
+  --app-accent-border: rgb(220 20 60 / 48%);
+  --app-accent-shadow: rgb(220 20 60 / 14%);
+}
+
+:root.dark[data-accent='crimson'] {
+  --app-accent: #ff315d;
+  --app-accent-hover: #ff5577;
+  --app-accent-soft: rgb(255 49 93 / 18%);
+  --app-accent-border: rgb(255 49 93 / 60%);
+  --app-accent-shadow: rgb(255 49 93 / 20%);
+}
+
+:root[data-accent='blue'] {
+  --app-accent: #2563eb;
+  --app-accent-hover: #1d4ed8;
+  --app-accent-soft: rgb(37 99 235 / 11%);
+  --app-accent-border: rgb(37 99 235 / 48%);
+  --app-accent-shadow: rgb(37 99 235 / 15%);
+}
+
+:root.dark[data-accent='blue'] {
+  --app-accent: #60a5fa;
+  --app-accent-hover: #93c5fd;
+  --app-accent-soft: rgb(96 165 250 / 18%);
+  --app-accent-border: rgb(96 165 250 / 58%);
+  --app-accent-shadow: rgb(96 165 250 / 20%);
+}
+
+:root[data-accent='emerald'] {
+  --app-accent: #059669;
+  --app-accent-hover: #047857;
+  --app-accent-soft: rgb(5 150 105 / 11%);
+  --app-accent-border: rgb(5 150 105 / 48%);
+  --app-accent-shadow: rgb(5 150 105 / 15%);
+}
+
+:root.dark[data-accent='emerald'] {
+  --app-accent: #34d399;
+  --app-accent-hover: #6ee7b7;
+  --app-accent-soft: rgb(52 211 153 / 18%);
+  --app-accent-border: rgb(52 211 153 / 58%);
+  --app-accent-shadow: rgb(52 211 153 / 20%);
+}
+
+:root[data-accent='amber'] {
+  --app-accent: #d97706;
+  --app-accent-hover: #b45309;
+  --app-accent-soft: rgb(217 119 6 / 11%);
+  --app-accent-border: rgb(217 119 6 / 50%);
+  --app-accent-shadow: rgb(217 119 6 / 15%);
+}
+
+:root.dark[data-accent='amber'] {
+  --app-accent: #fbbf24;
+  --app-accent-hover: #fcd34d;
+  --app-accent-soft: rgb(251 191 36 / 18%);
+  --app-accent-border: rgb(251 191 36 / 58%);
+  --app-accent-shadow: rgb(251 191 36 / 20%);
+}
+
+:root[data-accent='violet'] {
+  --app-accent: #7c3aed;
+  --app-accent-hover: #6d28d9;
+  --app-accent-soft: rgb(124 58 237 / 11%);
+  --app-accent-border: rgb(124 58 237 / 48%);
+  --app-accent-shadow: rgb(124 58 237 / 15%);
+}
+
+:root.dark[data-accent='violet'] {
+  --app-accent: #a78bfa;
+  --app-accent-hover: #c4b5fd;
+  --app-accent-soft: rgb(167 139 250 / 18%);
+  --app-accent-border: rgb(167 139 250 / 58%);
+  --app-accent-shadow: rgb(167 139 250 / 20%);
+}
+
+/*
+ * Aktywna komórka tabeli arkuszowej.
+ */
+
+.work-spreadsheet-value:focus {
+  outline: 0;
+  background: color-mix(in srgb, var(--app-accent-soft) 72%, transparent);
+  box-shadow:
+    inset 0 0 0 1px var(--app-accent),
+    0 0 0 1px var(--app-accent-shadow);
+}
+
+.work-spreadsheet-input:focus {
+  border-bottom-color: var(--app-accent);
+  background: color-mix(in srgb, var(--app-accent-soft) 58%, transparent);
+}

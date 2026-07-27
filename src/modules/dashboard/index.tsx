@@ -10,6 +10,7 @@ import type { WorkDay, WorkWeekGoals } from '@/modules/work/types/work.types';
 import {
   calculateWorkProgress,
   calculateWorkWeekSummary,
+  getDailyHeldMessagesTotal,
 } from '@/modules/work/utils/workCalculations';
 import {
   capitalizeFirstLetter,
@@ -20,6 +21,7 @@ import {
 } from '@/modules/work/utils/workDate';
 import MetricCard from '@/shared/components/MetricCard';
 import PageHeader from '@/shared/components/PageHeader';
+import DashboardGoalProgress from '@/modules/dashboard/components/DashboardGoalProgress';
 
 const otherModules = [
   {
@@ -95,10 +97,21 @@ export default function DashboardPage() {
   const progress = calculateWorkProgress(week, summary.totalMessages);
 
   async function updateTodayDay(updatedDay: WorkDay) {
-    await updateWeek((currentWeek) => ({
-      ...currentWeek,
-      days: currentWeek.days.map((day) => (day.id === updatedDay.id ? updatedDay : day)),
-    }));
+    await updateWeek((currentWeek) => {
+      const updatedDays = currentWeek.days.map((day) =>
+        day.id === updatedDay.id ? updatedDay : day
+      );
+
+      const updatedWeek = {
+        ...currentWeek,
+        days: updatedDays,
+      };
+
+      return {
+        ...updatedWeek,
+        heldMessages: getDailyHeldMessagesTotal(updatedWeek),
+      };
+    });
   }
 
   async function updateGoals(goals: WorkWeekGoals) {
@@ -153,6 +166,11 @@ export default function DashboardPage() {
       </div>
 
       <WeeklyWorkOverview week={week} summary={summary} progress={progress} />
+
+      <DashboardGoalProgress
+        netEarningsPln={summary.netEarningsPln}
+        totalHours={summary.totalHours}
+      />
 
       <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)]">
         <CompactFinancialPlan items={week.financialPlan} summary={summary} />

@@ -1,4 +1,4 @@
-import { Banknote, Clock3, Mail, PiggyBank, Target, Timer } from 'lucide-react';
+import { Banknote, Clock3, Mail, MessageSquareMore, PiggyBank, Target, Timer } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import MessageRateThresholdBar from '@/modules/work/components/MessageRateThresholdBar';
@@ -202,12 +202,18 @@ export default function WeeklyWorkOverview({ week, summary }: WeeklyWorkOverview
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 border-zinc-700 sm:grid-cols-4 lg:border-x lg:px-5">
+        <div className="grid grid-cols-2 gap-4 border-zinc-700 sm:grid-cols-5 lg:border-x lg:px-5">
           <InlineMetric
-            label="Wiadomości"
+            label="Płatne"
             value={formatNumber(summary.totalMessages)}
             icon={Mail}
             accent
+          />
+
+          <InlineMetric
+            label="Zatrzymane"
+            value={formatNumber(summary.totalHeldMessages)}
+            icon={MessageSquareMore}
           />
 
           <InlineMetric label="Godziny" value={formatHours(summary.totalHours)} icon={Clock3} />

@@ -1,3 +1,5 @@
+import type { AppPreferenceKey } from '@/modules/settings/types/appSettings.types';
+
 export type WorkSession = {
   id: string;
   startTime: string;
@@ -105,7 +107,7 @@ export type WorkWeekCreateOptions = {
   copySettingsFromWeekId: string | null;
 };
 
-export type AppSettingKey = 'activeWorkWeekId' | 'lastBackupAt';
+export type AppSettingKey = 'activeWorkWeekId' | 'lastBackupAt' | AppPreferenceKey;
 
 export type AppSetting = {
   key: AppSettingKey;
