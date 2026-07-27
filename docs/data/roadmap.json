@@ -6621,6 +6621,120 @@
       "status": "planned",
       "priority": "normal",
       "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.5.4.developer.infrastructure",
+      "parentId": null,
+      "text": "v0.5.4 — Developer Infrastructure"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.v0.5.4.a.d",
+      "parentId": "section.v0.5.4.developer.infrastructure",
+      "text": "v0.5.4A-D — Documentation foundation"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.project.data.foundation",
+      "parentId": "section.v0.5.4.a.d",
+      "title": "Machine-readable project data foundation",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["developer-infrastructure"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.project.data.validation",
+      "parentId": "section.v0.5.4.a.d",
+      "title": "Project-data validation and consistency checks",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["developer-infrastructure"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.project.docs.generator",
+      "parentId": "section.v0.5.4.a.d",
+      "title": "Deterministic CHANGELOG and ROADMAP generator",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["developer-infrastructure"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.project.release.toolchain",
+      "parentId": "section.v0.5.4.a.d",
+      "title": "Automated release preparation command",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["developer-infrastructure"]
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.v0.5.4.e.f",
+      "parentId": "section.v0.5.4.developer.infrastructure",
+      "text": "v0.5.4E-F — AI Project Interface"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ai.interface.module.registry",
+      "parentId": "section.v0.5.4.e.f",
+      "title": "Machine-readable module registry",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ai-project-interface"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ai.interface.issue.registry",
+      "parentId": "section.v0.5.4.e.f",
+      "title": "Machine-readable known-issue registry",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ai-project-interface"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ai.interface.manifest",
+      "parentId": "section.v0.5.4.e.f",
+      "title": "Vendor-neutral AI Project Interface manifest",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ai-project-interface"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ai.interface.agents.adapter",
+      "parentId": "section.v0.5.4.e.f",
+      "title": "Generated AGENTS.md adapter",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ai-project-interface"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ai.interface.claude.adapter",
+      "parentId": "section.v0.5.4.e.f",
+      "title": "Generated CLAUDE.md adapter",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ai-project-interface"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ai.interface.cursor.adapter",
+      "parentId": "section.v0.5.4.e.f",
+      "title": "Generated Cursor project rules",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ai-project-interface"]
     }
   ]
 }

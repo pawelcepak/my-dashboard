@@ -1,0 +1,28 @@
+{
+  "$schema": "../schemas/issues.schema.json",
+  "schemaVersion": 1,
+  "issues": [
+    {
+      "id": "issue.intelligence.beer-comparison",
+      "title": "Experimental beer comparison can be confusing",
+      "moduleId": "module.work",
+      "severity": "low",
+      "status": "planned",
+      "description": "The experimental comparison may present values that are easy to interpret as day counts or strong conclusions when the sample is small.",
+      "workaround": "Treat CHB Intelligence as experimental and verify the sample-size labels.",
+      "plannedResolution": "Dedicated CHB Intelligence quality pass with clearer units, minimum sample sizes and confidence indicators.",
+      "relatedFiles": ["src/modules/work/components/WorkIntelligencePanel.tsx"]
+    },
+    {
+      "id": "issue.build.large-main-chunk",
+      "title": "Production main chunk exceeds the Vite warning threshold",
+      "moduleId": "module.app",
+      "severity": "low",
+      "status": "accepted",
+      "description": "The production bundle currently emits a chunk-size warning after minification.",
+      "workaround": "The warning does not block deployment.",
+      "plannedResolution": "Add route-level lazy loading and production code splitting during a later quality pass.",
+      "relatedFiles": ["src/app/router.tsx", "vite.config.ts"]
+    }
+  ]
+}

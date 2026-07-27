@@ -6,9 +6,9 @@
   "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
   "repository": "my-dashboard",
   "currentVersion": "0.5.3",
-  "currentSprint": "0.5.4A-D",
+  "currentSprint": "0.5.4E-F",
   "status": "active",
-  "architectureVersion": 1,
+  "architectureVersion": 2,
   "documentationModel": "ai-project-interface",
   "sourceOfTruth": "docs/data",
   "generatedDocuments": [
@@ -36,5 +36,12 @@
     "Generated Markdown is output; docs/data JSON is the source of truth",
     "AI integration must remain vendor-neutral",
     "The application must remain usable on older hardware"
-  ]
+  ],
+  "aiProjectInterface": {
+    "version": 1,
+    "core": "docs/data",
+    "entryPoint": "docs/AI_CONTEXT.md",
+    "machineState": "docs/PROJECT_STATE.json",
+    "manifest": "docs/AI_PROJECT_INTERFACE.json"
+  }
 }

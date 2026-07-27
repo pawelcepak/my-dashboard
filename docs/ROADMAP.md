@@ -824,3 +824,21 @@ Future quality and intelligence work remains planned but is not required for nor
 - [ ] Cross-device installation
 - [ ] Production deployment
 - [ ] Production documentation
+
+## v0.5.4 — Developer Infrastructure
+
+### v0.5.4A-D — Documentation foundation
+
+- [x] Machine-readable project data foundation
+- [x] Project-data validation and consistency checks
+- [x] Deterministic CHANGELOG and ROADMAP generator
+- [x] Automated release preparation command
+
+### v0.5.4E-F — AI Project Interface
+
+- [x] Machine-readable module registry
+- [x] Machine-readable known-issue registry
+- [x] Vendor-neutral AI Project Interface manifest
+- [x] Generated AGENTS.md adapter
+- [x] Generated CLAUDE.md adapter
+- [x] Generated Cursor project rules

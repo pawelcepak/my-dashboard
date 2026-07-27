@@ -111,6 +111,13 @@ All notable changes to CHB will be documented in this file.
 - Weekly-history block count.
 - Visual active-week marker in history cards.
 - Responsive active-week work layout.
+- Machine-readable AI Project Interface manifest.
+- Module registry with dependencies, entry files and AI-specific notes.
+- Known-issue registry with severity, status, workarounds and planned resolutions.
+- Generated AGENTS.md guidance for generic coding agents.
+- Generated CLAUDE.md guidance for Claude-compatible coding tools.
+- Generated Cursor project rules derived from the same vendor-neutral source.
+- Generated AI Project Interface documentation and machine-readable manifest.
 
 ### Changed
 
@@ -179,6 +186,7 @@ All notable changes to CHB will be documented in this file.
 - Zero beer count remains green and positive beer count remains red.
 - Message-rate progress now uses one fixed scale ending at the permanent 1,976-message threshold.
 - Dashboard now shows both synchronized weekly goals together with the fixed message-rate scale.
+- Project documentation now exposes one vendor-neutral interface for current and future AI coding tools.
 
 ### Fixed
 

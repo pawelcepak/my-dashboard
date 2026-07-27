@@ -1,4 +1,7 @@
 {
+  "interfaceVersion": 1,
+  "generatedFromVersion": "0.5.3",
+  "generatedFromSprint": "0.5.4E-F",
   "project": {
     "$schema": "../schemas/project.schema.json",
     "schemaVersion": 1,
@@ -7,9 +10,9 @@
     "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
     "repository": "my-dashboard",
     "currentVersion": "0.5.3",
-    "currentSprint": "0.5.4A-D",
+    "currentSprint": "0.5.4E-F",
     "status": "active",
-    "architectureVersion": 1,
+    "architectureVersion": 2,
     "documentationModel": "ai-project-interface",
     "sourceOfTruth": "docs/data",
     "generatedDocuments": [
@@ -37,26 +40,33 @@
       "Generated Markdown is output; docs/data JSON is the source of truth",
       "AI integration must remain vendor-neutral",
       "The application must remain usable on older hardware"
-    ]
+    ],
+    "aiProjectInterface": {
+      "version": 1,
+      "core": "docs/data",
+      "entryPoint": "docs/AI_CONTEXT.md",
+      "machineState": "docs/PROJECT_STATE.json",
+      "manifest": "docs/AI_PROJECT_INTERFACE.json"
+    }
   },
   "context": {
     "$schema": "../schemas/current-context.schema.json",
     "schemaVersion": 1,
     "currentVersion": "0.5.3",
-    "currentSprint": "0.5.4A-D",
-    "currentGoal": "Build the machine-readable documentation foundation, validation, generators and release commands.",
+    "currentSprint": "0.5.4E-F",
+    "currentGoal": "Complete the vendor-neutral AI Project Interface and generate adapters for general agents, Cursor and Claude-compatible tools.",
     "stableState": true,
     "lastCompleted": [
-      "Spreadsheet keyboard navigation",
-      "Live accent themes",
-      "Dashboard weekly goals for 945 PLN and 40 hours",
-      "Experimental CHB Intelligence"
+      "Machine-readable project data foundation",
+      "Project-data validation",
+      "Deterministic CHANGELOG and ROADMAP generation",
+      "Deterministic AI context and project-state generation"
     ],
     "nextTasks": [
-      "Validate all docs/data files",
-      "Generate CHANGELOG.md and ROADMAP.md",
-      "Generate AI_CONTEXT.md and PROJECT_STATE.json",
-      "Add release preparation scripts"
+      "Validate module and issue registries",
+      "Generate the AI Project Interface manifest",
+      "Generate AGENTS.md, CLAUDE.md and Cursor project rules",
+      "Run the complete release preparation pipeline"
     ],
     "knownIssues": [
       {
@@ -79,15 +89,259 @@
       "docs/data/roadmap.json",
       "docs/data/features.json",
       "docs/data/decisions.json",
-      "docs/data/current-context.json"
+      "docs/data/current-context.json",
+      "docs/data/modules.json",
+      "docs/data/issues.json",
+      "docs/data/ai-interface.json",
+      "docs/AI_PROJECT_INTERFACE.json",
+      "AGENTS.md",
+      "CLAUDE.md",
+      ".cursor/rules/chb-project.mdc"
     ]
   },
+  "modules": [
+    {
+      "id": "module.app",
+      "name": "Application Shell",
+      "status": "active",
+      "description": "Routing, layout, navigation, theme and global providers.",
+      "rootPath": "src/app",
+      "entryFiles": ["src/app/router.tsx"],
+      "dependsOn": [],
+      "aiNotes": ["Preserve HashRouter compatibility for GitHub Pages."]
+    },
+    {
+      "id": "module.dashboard",
+      "name": "Dashboard",
+      "status": "active",
+      "description": "Central daily interface and weekly overview.",
+      "rootPath": "src/modules/dashboard",
+      "entryFiles": ["src/modules/dashboard/index.tsx"],
+      "dependsOn": ["module.work", "module.settings"],
+      "aiNotes": ["Dashboard edits the same WorkDay records as the Work module."]
+    },
+    {
+      "id": "module.work",
+      "name": "Work",
+      "status": "active",
+      "description": "Work weeks, daily records, earnings, goals, tables and experimental intelligence.",
+      "rootPath": "src/modules/work",
+      "entryFiles": ["src/modules/work/pages/WorkPage.tsx"],
+      "dependsOn": ["module.database", "module.settings", "module.cloud"],
+      "aiNotes": [
+        "WorkDay is the source of truth for daily work values.",
+        "Legacy WorkWeek.heldMessages remains for compatibility."
+      ]
+    },
+    {
+      "id": "module.settings",
+      "name": "Settings",
+      "status": "active",
+      "description": "Application preferences, backup and restore.",
+      "rootPath": "src/modules/settings",
+      "entryFiles": ["src/modules/settings/index.tsx"],
+      "dependsOn": ["module.database", "module.cloud"],
+      "aiNotes": [
+        "Components must use appSettingsService/useAppSettings instead of direct Dexie reads for preferences."
+      ]
+    },
+    {
+      "id": "module.cloud",
+      "name": "Cloud Sync",
+      "status": "active",
+      "description": "Private Supabase snapshot synchronization and conflict protection.",
+      "rootPath": "src/app/cloud",
+      "entryFiles": ["src/app/cloud/CloudProvider.tsx"],
+      "dependsOn": ["module.database"],
+      "aiNotes": ["Never silently overwrite a detected two-sided conflict."]
+    },
+    {
+      "id": "module.database",
+      "name": "Local Database",
+      "status": "active",
+      "description": "Dexie/IndexedDB schema, migrations and local-first persistence.",
+      "rootPath": "src/database",
+      "entryFiles": ["src/database/database.ts"],
+      "dependsOn": [],
+      "aiNotes": ["Schema changes require explicit migrations and backup compatibility review."]
+    },
+    {
+      "id": "module.expenses",
+      "name": "Expenses",
+      "status": "planned",
+      "description": "Future expenses module.",
+      "rootPath": "src/modules/expenses",
+      "entryFiles": [],
+      "dependsOn": ["module.database"],
+      "aiNotes": []
+    },
+    {
+      "id": "module.debts",
+      "name": "Debts",
+      "status": "planned",
+      "description": "Future debts and repayment module.",
+      "rootPath": "src/modules/debts",
+      "entryFiles": [],
+      "dependsOn": ["module.database"],
+      "aiNotes": []
+    },
+    {
+      "id": "module.portfolio",
+      "name": "Portfolio",
+      "status": "planned",
+      "description": "Future portfolio history and balances module.",
+      "rootPath": "src/modules/portfolio",
+      "entryFiles": [],
+      "dependsOn": ["module.database"],
+      "aiNotes": []
+    },
+    {
+      "id": "module.statistics",
+      "name": "Statistics",
+      "status": "planned",
+      "description": "Future cross-module statistics and charts.",
+      "rootPath": "src/modules/statistics",
+      "entryFiles": [],
+      "dependsOn": ["module.work"],
+      "aiNotes": []
+    }
+  ],
+  "issues": [
+    {
+      "id": "issue.intelligence.beer-comparison",
+      "title": "Experimental beer comparison can be confusing",
+      "moduleId": "module.work",
+      "severity": "low",
+      "status": "planned",
+      "description": "The experimental comparison may present values that are easy to interpret as day counts or strong conclusions when the sample is small.",
+      "workaround": "Treat CHB Intelligence as experimental and verify the sample-size labels.",
+      "plannedResolution": "Dedicated CHB Intelligence quality pass with clearer units, minimum sample sizes and confidence indicators.",
+      "relatedFiles": ["src/modules/work/components/WorkIntelligencePanel.tsx"]
+    },
+    {
+      "id": "issue.build.large-main-chunk",
+      "title": "Production main chunk exceeds the Vite warning threshold",
+      "moduleId": "module.app",
+      "severity": "low",
+      "status": "accepted",
+      "description": "The production bundle currently emits a chunk-size warning after minification.",
+      "workaround": "The warning does not block deployment.",
+      "plannedResolution": "Add route-level lazy loading and production code splitting during a later quality pass.",
+      "relatedFiles": ["src/app/router.tsx", "vite.config.ts"]
+    }
+  ],
+  "acceptedDecisions": [
+    {
+      "id": "decision.data.local-first",
+      "date": "2026-07-27",
+      "title": "Use a local-first data model",
+      "status": "accepted",
+      "context": "CHB must remain usable without internet and on multiple devices.",
+      "decision": "Dexie is the primary local store; Supabase synchronizes snapshots without replacing local-first behavior.",
+      "consequences": [
+        "UI updates do not wait for the network",
+        "Conflicts require safe comparison and explicit resolution",
+        "Cloud synchronization is debounced for older hardware"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.work.day-source-of-truth",
+      "date": "2026-07-27",
+      "title": "Use WorkDay as the source of truth for daily work data",
+      "status": "accepted",
+      "context": "Dashboard, Work and future statistics must calculate from identical records.",
+      "decision": "Paid messages, held messages, beers, rating and sessions are stored on WorkDay.",
+      "consequences": [
+        "Weekly totals are derived from days",
+        "Dashboard edits the same records as the Work page",
+        "Legacy weekly heldMessages remains temporarily for compatibility"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.ui.tables-primary-interface",
+      "date": "2026-07-27",
+      "title": "Use tables as the primary daily work interface",
+      "status": "accepted",
+      "context": "The user works faster in spreadsheet-like interfaces than in detached forms.",
+      "decision": "Daily work values are edited inline with keyboard navigation; forms are reserved for complex configuration.",
+      "consequences": [
+        "Enter saves values",
+        "Table density is configurable",
+        "Future data-heavy modules should reuse the table system"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.settings.central-service",
+      "date": "2026-07-27",
+      "title": "Centralize application preferences",
+      "status": "accepted",
+      "context": "Preferences will expand to colors, tab order, layouts and future modules.",
+      "decision": "Components use appSettingsService and useAppSettings rather than reading Dexie directly.",
+      "consequences": [
+        "Preferences are synchronized and backed up automatically",
+        "UI reacts to preference changes",
+        "Future settings share one architecture"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.docs.json-source-of-truth",
+      "date": "2026-07-27",
+      "title": "Use machine-readable project data as documentation source",
+      "status": "accepted",
+      "context": "The roadmap and changelog are too large to maintain reliably by hand.",
+      "decision": "docs/data JSON is authoritative; Markdown and AI context files are generated outputs.",
+      "consequences": [
+        "Documentation can be validated",
+        "Multiple AI providers can consume the same project interface",
+        "Manual edits to generated files are overwritten"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.ai.vendor-neutral-interface",
+      "date": "2026-07-27",
+      "title": "Keep the AI Project Interface vendor-neutral",
+      "status": "accepted",
+      "context": "The project may later use Cursor, OpenAI, Anthropic, Copilot, Gemini, MCP or local models.",
+      "decision": "Use plain JSON, JSON Schema and generated Markdown without provider-specific requirements in the core.",
+      "consequences": [
+        "Provider adapters can be added later",
+        "Project context remains portable",
+        "Core project data does not require an AI SDK"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.ai.generated-provider-adapters",
+      "date": "2026-07-27",
+      "title": "Generate provider adapters from one AI Project Interface",
+      "status": "accepted",
+      "context": "Different coding agents use different conventional context files.",
+      "decision": "Keep canonical context in docs/data and generate AGENTS.md, CLAUDE.md and Cursor rules as disposable adapters.",
+      "consequences": [
+        "Provider files never become independent sources of truth",
+        "A new provider can be added without changing project data",
+        "Generated adapters are checked for drift in CI and release preparation"
+      ],
+      "relatedFeatures": [
+        "feature.ai.interface.agents.adapter",
+        "feature.ai.interface.claude.adapter",
+        "feature.ai.interface.cursor.adapter"
+      ]
+    }
+  ],
   "summary": {
-    "roadmapTasks": 649,
-    "completedRoadmapTasks": 345,
+    "roadmapTasks": 659,
+    "completedRoadmapTasks": 355,
     "plannedRoadmapTasks": 304,
-    "features": 649,
-    "acceptedDecisions": 6,
+    "features": 658,
+    "activeModules": 6,
+    "openIssues": 2,
+    "acceptedDecisions": 7,
     "releases": 6
   }
 }

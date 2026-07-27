@@ -1,0 +1,111 @@
+{
+  "$schema": "../schemas/modules.schema.json",
+  "schemaVersion": 1,
+  "modules": [
+    {
+      "id": "module.app",
+      "name": "Application Shell",
+      "status": "active",
+      "description": "Routing, layout, navigation, theme and global providers.",
+      "rootPath": "src/app",
+      "entryFiles": ["src/app/router.tsx"],
+      "dependsOn": [],
+      "aiNotes": ["Preserve HashRouter compatibility for GitHub Pages."]
+    },
+    {
+      "id": "module.dashboard",
+      "name": "Dashboard",
+      "status": "active",
+      "description": "Central daily interface and weekly overview.",
+      "rootPath": "src/modules/dashboard",
+      "entryFiles": ["src/modules/dashboard/index.tsx"],
+      "dependsOn": ["module.work", "module.settings"],
+      "aiNotes": ["Dashboard edits the same WorkDay records as the Work module."]
+    },
+    {
+      "id": "module.work",
+      "name": "Work",
+      "status": "active",
+      "description": "Work weeks, daily records, earnings, goals, tables and experimental intelligence.",
+      "rootPath": "src/modules/work",
+      "entryFiles": ["src/modules/work/pages/WorkPage.tsx"],
+      "dependsOn": ["module.database", "module.settings", "module.cloud"],
+      "aiNotes": [
+        "WorkDay is the source of truth for daily work values.",
+        "Legacy WorkWeek.heldMessages remains for compatibility."
+      ]
+    },
+    {
+      "id": "module.settings",
+      "name": "Settings",
+      "status": "active",
+      "description": "Application preferences, backup and restore.",
+      "rootPath": "src/modules/settings",
+      "entryFiles": ["src/modules/settings/index.tsx"],
+      "dependsOn": ["module.database", "module.cloud"],
+      "aiNotes": [
+        "Components must use appSettingsService/useAppSettings instead of direct Dexie reads for preferences."
+      ]
+    },
+    {
+      "id": "module.cloud",
+      "name": "Cloud Sync",
+      "status": "active",
+      "description": "Private Supabase snapshot synchronization and conflict protection.",
+      "rootPath": "src/app/cloud",
+      "entryFiles": ["src/app/cloud/CloudProvider.tsx"],
+      "dependsOn": ["module.database"],
+      "aiNotes": ["Never silently overwrite a detected two-sided conflict."]
+    },
+    {
+      "id": "module.database",
+      "name": "Local Database",
+      "status": "active",
+      "description": "Dexie/IndexedDB schema, migrations and local-first persistence.",
+      "rootPath": "src/database",
+      "entryFiles": ["src/database/database.ts"],
+      "dependsOn": [],
+      "aiNotes": ["Schema changes require explicit migrations and backup compatibility review."]
+    },
+    {
+      "id": "module.expenses",
+      "name": "Expenses",
+      "status": "planned",
+      "description": "Future expenses module.",
+      "rootPath": "src/modules/expenses",
+      "entryFiles": [],
+      "dependsOn": ["module.database"],
+      "aiNotes": []
+    },
+    {
+      "id": "module.debts",
+      "name": "Debts",
+      "status": "planned",
+      "description": "Future debts and repayment module.",
+      "rootPath": "src/modules/debts",
+      "entryFiles": [],
+      "dependsOn": ["module.database"],
+      "aiNotes": []
+    },
+    {
+      "id": "module.portfolio",
+      "name": "Portfolio",
+      "status": "planned",
+      "description": "Future portfolio history and balances module.",
+      "rootPath": "src/modules/portfolio",
+      "entryFiles": [],
+      "dependsOn": ["module.database"],
+      "aiNotes": []
+    },
+    {
+      "id": "module.statistics",
+      "name": "Statistics",
+      "status": "planned",
+      "description": "Future cross-module statistics and charts.",
+      "rootPath": "src/modules/statistics",
+      "entryFiles": [],
+      "dependsOn": ["module.work"],
+      "aiNotes": []
+    }
+  ]
+}

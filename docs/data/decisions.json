@@ -85,6 +85,24 @@
         "Core project data does not require an AI SDK"
       ],
       "relatedFeatures": []
+    },
+    {
+      "id": "decision.ai.generated-provider-adapters",
+      "date": "2026-07-27",
+      "title": "Generate provider adapters from one AI Project Interface",
+      "status": "accepted",
+      "context": "Different coding agents use different conventional context files.",
+      "decision": "Keep canonical context in docs/data and generate AGENTS.md, CLAUDE.md and Cursor rules as disposable adapters.",
+      "consequences": [
+        "Provider files never become independent sources of truth",
+        "A new provider can be added without changing project data",
+        "Generated adapters are checked for drift in CI and release preparation"
+      ],
+      "relatedFeatures": [
+        "feature.ai.interface.agents.adapter",
+        "feature.ai.interface.claude.adapter",
+        "feature.ai.interface.cursor.adapter"
+      ]
     }
   ]
 }

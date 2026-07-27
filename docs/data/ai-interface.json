@@ -1,0 +1,61 @@
+{
+  "$schema": "../schemas/ai-interface.schema.json",
+  "schemaVersion": 1,
+  "id": "chb-ai-project-interface",
+  "version": 1,
+  "vendorNeutral": true,
+  "canonicalSources": [
+    "docs/data/project.json",
+    "docs/data/current-context.json",
+    "docs/data/modules.json",
+    "docs/data/issues.json",
+    "docs/data/decisions.json",
+    "docs/data/features.json",
+    "docs/data/roadmap.json",
+    "docs/data/releases.json"
+  ],
+  "readingOrder": [
+    "docs/AI_CONTEXT.md",
+    "docs/PROJECT_STATE.json",
+    "docs/AI_PROJECT_INTERFACE.json",
+    "docs/data/current-context.json",
+    "docs/data/decisions.json",
+    "docs/data/modules.json"
+  ],
+  "generatedAdapters": [
+    {
+      "id": "adapter.generic-agents",
+      "path": "AGENTS.md",
+      "target": "generic coding agents"
+    },
+    {
+      "id": "adapter.claude",
+      "path": "CLAUDE.md",
+      "target": "Claude-compatible coding tools"
+    },
+    {
+      "id": "adapter.cursor",
+      "path": ".cursor/rules/chb-project.mdc",
+      "target": "Cursor"
+    }
+  ],
+  "requiredAgentBehavior": [
+    "Read generated context before changing code.",
+    "Treat docs/data as the documentation source of truth.",
+    "Do not manually edit generated documentation or adapter files.",
+    "Preserve local-first behavior and cloud conflict protection.",
+    "Run npm run release:prepare before proposing a release commit.",
+    "State assumptions and do not invent missing project facts."
+  ],
+  "generatedFiles": [
+    "docs/CHANGELOG.md",
+    "docs/ROADMAP.md",
+    "docs/AI_CONTEXT.md",
+    "docs/PROJECT_STATE.json",
+    "docs/AI_PROJECT_INTERFACE.json",
+    "docs/ai/PROJECT_INTERFACE.md",
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".cursor/rules/chb-project.mdc"
+  ]
+}

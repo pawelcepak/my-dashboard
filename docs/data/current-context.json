@@ -2,20 +2,20 @@
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
   "currentVersion": "0.5.3",
-  "currentSprint": "0.5.4A-D",
-  "currentGoal": "Build the machine-readable documentation foundation, validation, generators and release commands.",
+  "currentSprint": "0.5.4E-F",
+  "currentGoal": "Complete the vendor-neutral AI Project Interface and generate adapters for general agents, Cursor and Claude-compatible tools.",
   "stableState": true,
   "lastCompleted": [
-    "Spreadsheet keyboard navigation",
-    "Live accent themes",
-    "Dashboard weekly goals for 945 PLN and 40 hours",
-    "Experimental CHB Intelligence"
+    "Machine-readable project data foundation",
+    "Project-data validation",
+    "Deterministic CHANGELOG and ROADMAP generation",
+    "Deterministic AI context and project-state generation"
   ],
   "nextTasks": [
-    "Validate all docs/data files",
-    "Generate CHANGELOG.md and ROADMAP.md",
-    "Generate AI_CONTEXT.md and PROJECT_STATE.json",
-    "Add release preparation scripts"
+    "Validate module and issue registries",
+    "Generate the AI Project Interface manifest",
+    "Generate AGENTS.md, CLAUDE.md and Cursor project rules",
+    "Run the complete release preparation pipeline"
   ],
   "knownIssues": [
     {
@@ -38,6 +38,13 @@
     "docs/data/roadmap.json",
     "docs/data/features.json",
     "docs/data/decisions.json",
-    "docs/data/current-context.json"
+    "docs/data/current-context.json",
+    "docs/data/modules.json",
+    "docs/data/issues.json",
+    "docs/data/ai-interface.json",
+    "docs/AI_PROJECT_INTERFACE.json",
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".cursor/rules/chb-project.mdc"
   ]
 }
