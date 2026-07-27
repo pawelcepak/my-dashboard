@@ -1,4 +1,11 @@
 import { database } from '@/database/database';
+import type {
+  PortfolioAccount,
+  PortfolioTag,
+  PortfolioTagKind,
+  PortfolioTransaction,
+  PortfolioTransactionType,
+} from '@/modules/portfolio/types/portfolio.types';
 import {
   BACKUP_FORMAT_NAME,
   BACKUP_FORMAT_VERSION,
@@ -305,6 +312,100 @@ function validateUniqueSettings(settings: AppSetting[]): void {
   }
 }
 
+function isPortfolioTransactionType(value: unknown): value is PortfolioTransactionType {
+  return value === 'income' || value === 'expense';
+}
+
+function isPortfolioTagKind(value: unknown): value is PortfolioTagKind {
+  return value === 'income' || value === 'expense' || value === 'both';
+}
+
+function parsePortfolioAccount(value: unknown): PortfolioAccount {
+  if (
+    !isRecord(value) ||
+    !isString(value.id) ||
+    !isString(value.name) ||
+    !isFiniteNumber(value.initialBalance) ||
+    !isIsoDate(value.initialBalanceDate) ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  ) {
+    throw new Error('Kopia zawiera nieprawidłowy portfel.');
+  }
+
+  return {
+    id: value.id,
+    name: value.name,
+    initialBalance: value.initialBalance,
+    initialBalanceDate: value.initialBalanceDate,
+    createdAt: value.createdAt,
+    updatedAt: value.updatedAt,
+  };
+}
+
+function parsePortfolioTag(value: unknown): PortfolioTag {
+  if (
+    !isRecord(value) ||
+    !isString(value.id) ||
+    !isString(value.name) ||
+    !isPortfolioTagKind(value.kind) ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  ) {
+    throw new Error('Kopia zawiera nieprawidłowy tag portfela.');
+  }
+
+  return {
+    id: value.id,
+    name: value.name,
+    kind: value.kind,
+    createdAt: value.createdAt,
+    updatedAt: value.updatedAt,
+  };
+}
+
+function parsePortfolioTransaction(value: unknown): PortfolioTransaction {
+  if (
+    !isRecord(value) ||
+    !isString(value.id) ||
+    !isString(value.accountId) ||
+    !isIsoDate(value.date) ||
+    !isPortfolioTransactionType(value.type) ||
+    !isFiniteNumber(value.amount) ||
+    value.amount <= 0 ||
+    !(value.tagId === null || isString(value.tagId)) ||
+    !isString(value.note) ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  ) {
+    throw new Error('Kopia zawiera nieprawidłową transakcję portfela.');
+  }
+
+  return {
+    id: value.id,
+    accountId: value.accountId,
+    date: value.date,
+    type: value.type,
+    amount: value.amount,
+    tagId: value.tagId,
+    note: value.note,
+    createdAt: value.createdAt,
+    updatedAt: value.updatedAt,
+  };
+}
+
+function validateUniqueIds(values: Array<{ id: string }>, label: string): void {
+  const ids = new Set<string>();
+
+  for (const value of values) {
+    if (ids.has(value.id)) {
+      throw new Error(`Kopia zawiera powtórzony identyfikator ${label}: ${value.id}.`);
+    }
+
+    ids.add(value.id);
+  }
+}
+
 function validateBackup(value: unknown): ChbBackupFile {
   if (!isRecord(value)) {
     throw new Error('Plik nie zawiera prawidłowego obiektu JSON.');
@@ -314,7 +415,7 @@ function validateBackup(value: unknown): ChbBackupFile {
     throw new Error('To nie jest plik kopii zapasowej CHB.');
   }
 
-  if (value.version !== BACKUP_FORMAT_VERSION) {
+  if (value.version !== 1 && value.version !== BACKUP_FORMAT_VERSION) {
     throw new Error(`Nieobsługiwana wersja kopii: ${String(value.version)}.`);
   }
 
@@ -340,6 +441,18 @@ function validateBackup(value: unknown): ChbBackupFile {
     throw new Error('Kopia zawiera nieprawidłowe ustawienia aplikacji.');
   }
 
+  const normalizedPortfolioAccounts = Array.isArray(value.data.portfolioAccounts)
+    ? value.data.portfolioAccounts.map(parsePortfolioAccount)
+    : [];
+
+  const normalizedPortfolioTags = Array.isArray(value.data.portfolioTags)
+    ? value.data.portfolioTags.map(parsePortfolioTag)
+    : [];
+
+  const normalizedPortfolioTransactions = Array.isArray(value.data.portfolioTransactions)
+    ? value.data.portfolioTransactions.map(parsePortfolioTransaction)
+    : [];
+
   const backup: ChbBackupFile = {
     format: BACKUP_FORMAT_NAME,
     version: BACKUP_FORMAT_VERSION,
@@ -347,14 +460,24 @@ function validateBackup(value: unknown): ChbBackupFile {
     data: {
       workWeeks: normalizedWorkWeeks,
       appSettings: value.data.appSettings,
+      portfolioAccounts: normalizedPortfolioAccounts,
+      portfolioTags: normalizedPortfolioTags,
+      portfolioTransactions: normalizedPortfolioTransactions,
     },
   };
 
   validateUniqueWeeks(backup.data.workWeeks);
 
   validateUniqueSettings(backup.data.appSettings);
+  validateUniqueIds(backup.data.portfolioAccounts, 'portfela');
+  validateUniqueIds(backup.data.portfolioTags, 'tagu portfela');
+  validateUniqueIds(backup.data.portfolioTransactions, 'transakcji portfela');
 
   return backup;
+}
+
+export function normalizeBackup(value: unknown): ChbBackupFile {
+  return validateBackup(value);
 }
 
 function createFileName(createdAt: string): string {
@@ -405,9 +528,14 @@ async function exportBackup(): Promise<string> {
     updatedAt: createdAt,
   });
 
-  const workWeeks = await database.workWeeks.orderBy('startDate').toArray();
-
-  const appSettings = await database.appSettings.toArray();
+  const [workWeeks, appSettings, portfolioAccounts, portfolioTags, portfolioTransactions] =
+    await Promise.all([
+      database.workWeeks.orderBy('startDate').toArray(),
+      database.appSettings.toArray(),
+      database.portfolioAccounts.toArray(),
+      database.portfolioTags.toArray(),
+      database.portfolioTransactions.toArray(),
+    ]);
 
   if (workWeeks.length === 0) {
     throw new Error('Nie można utworzyć kopii bez tygodni pracy.');
@@ -420,6 +548,9 @@ async function exportBackup(): Promise<string> {
     data: {
       workWeeks,
       appSettings,
+      portfolioAccounts,
+      portfolioTags,
+      portfolioTransactions,
     },
   };
 
@@ -467,6 +598,7 @@ async function readBackupFile(file: File): Promise<BackupPreview> {
     backup,
     createdAt: backup.createdAt,
     workWeekCount: backup.data.workWeeks.length,
+    portfolioTransactionCount: backup.data.portfolioTransactions.length,
     years: [...new Set(backup.data.workWeeks.map((week) => week.year))].sort(
       (firstYear, secondYear) => secondYear - firstYear
     ),
@@ -481,42 +613,66 @@ async function readBackupFile(file: File): Promise<BackupPreview> {
 async function restoreBackup(backup: ChbBackupFile): Promise<void> {
   const validatedBackup = validateBackup(backup);
 
-  await database.transaction('rw', database.workWeeks, database.appSettings, async () => {
-    await database.workWeeks.clear();
-    await database.appSettings.clear();
+  await database.transaction(
+    'rw',
+    database.workWeeks,
+    database.appSettings,
+    database.portfolioAccounts,
+    database.portfolioTags,
+    database.portfolioTransactions,
+    async () => {
+      await database.workWeeks.clear();
+      await database.appSettings.clear();
+      await database.portfolioAccounts.clear();
+      await database.portfolioTags.clear();
+      await database.portfolioTransactions.clear();
 
-    await database.workWeeks.bulkPut(validatedBackup.data.workWeeks);
+      await database.workWeeks.bulkPut(validatedBackup.data.workWeeks);
 
-    if (validatedBackup.data.appSettings.length > 0) {
-      await database.appSettings.bulkPut(validatedBackup.data.appSettings);
-    }
-
-    const activeSetting = await database.appSettings.get('activeWorkWeekId');
-
-    const activeWeekExists = activeSetting
-      ? await database.workWeeks.get(activeSetting.value)
-      : undefined;
-
-    if (!activeWeekExists) {
-      const newestWeek = await database.workWeeks.orderBy('startDate').last();
-
-      if (!newestWeek) {
-        throw new Error('Po imporcie nie znaleziono żadnego tygodnia.');
+      if (validatedBackup.data.appSettings.length > 0) {
+        await database.appSettings.bulkPut(validatedBackup.data.appSettings);
       }
 
-      const timestamp = new Date().toISOString();
+      if (validatedBackup.data.portfolioAccounts.length > 0) {
+        await database.portfolioAccounts.bulkPut(validatedBackup.data.portfolioAccounts);
+      }
 
-      await database.appSettings.put({
-        key: 'activeWorkWeekId',
-        value: newestWeek.id,
-        updatedAt: timestamp,
-      });
+      if (validatedBackup.data.portfolioTags.length > 0) {
+        await database.portfolioTags.bulkPut(validatedBackup.data.portfolioTags);
+      }
+
+      if (validatedBackup.data.portfolioTransactions.length > 0) {
+        await database.portfolioTransactions.bulkPut(validatedBackup.data.portfolioTransactions);
+      }
+
+      const activeSetting = await database.appSettings.get('activeWorkWeekId');
+
+      const activeWeekExists = activeSetting
+        ? await database.workWeeks.get(activeSetting.value)
+        : undefined;
+
+      if (!activeWeekExists) {
+        const newestWeek = await database.workWeeks.orderBy('startDate').last();
+
+        if (!newestWeek) {
+          throw new Error('Po imporcie nie znaleziono żadnego tygodnia.');
+        }
+
+        const timestamp = new Date().toISOString();
+
+        await database.appSettings.put({
+          key: 'activeWorkWeekId',
+          value: newestWeek.id,
+          updatedAt: timestamp,
+        });
+      }
     }
-  });
+  );
 }
 
 export const backupService = {
   exportBackup,
   readBackupFile,
   restoreBackup,
+  normalizeBackup,
 };

@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.5.6`
-- Current sprint: `0.5.6`
+- Current version: `0.6.1a`
+- Current sprint: `0.6.1a`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Import the verified 2026 work history for ISO weeks 8–29 without overwriting existing weeks.
+Fix Portfolio UX TypeScript build errors and React hook dependency warnings.
 
 ## Non-negotiable principles
 
@@ -40,13 +40,13 @@ Import the verified 2026 work history for ISO weeks 8–29 without overwriting e
 - `module.settings` — Settings: Application preferences, backup and restore.
 - `module.cloud` — Cloud Sync: Private Supabase snapshot synchronization and conflict protection.
 - `module.database` — Local Database: Dexie/IndexedDB schema, migrations and local-first persistence.
+- `module.portfolio` — Portfolio: Income and expense ledger, balances, tags, statistics and CSV import.
 
 ## Next tasks
 
-- Import missing historical weeks 8–29 from Settings
-- Verify weekly message and beer totals after import
-- Allow cloud synchronization to upload the merged history
-- Review historical exchange rates separately when needed
+- Run release:prepare
+- Test transaction entry, inline editing and CSV import
+- Commit and push after all checks pass
 
 ## Open and accepted issues
 

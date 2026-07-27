@@ -1,6 +1,11 @@
 import Dexie, { type Table } from 'dexie';
 
 import type {
+  PortfolioAccount,
+  PortfolioTag,
+  PortfolioTransaction,
+} from '@/modules/portfolio/types/portfolio.types';
+import type {
   AppSetting,
   FinancialPlanItem,
   WorkDay,
@@ -8,7 +13,7 @@ import type {
   WorkWeekGoals,
 } from '@/modules/work/types/work.types';
 
-export const DATABASE_SCHEMA_VERSION = 5;
+export const DATABASE_SCHEMA_VERSION = 6;
 
 const DEFAULT_WEEKLY_MESSAGES_TARGET = 1576;
 const GOAL_PRECISION_MULTIPLIER = 100;
@@ -115,6 +120,9 @@ function normalizeFinancialPlan(items: FinancialPlanItem[] | undefined): Financi
 class MyDashboardDatabase extends Dexie {
   workWeeks!: Table<WorkWeek, string>;
   appSettings!: Table<AppSetting, string>;
+  portfolioAccounts!: Table<PortfolioAccount, string>;
+  portfolioTags!: Table<PortfolioTag, string>;
+  portfolioTransactions!: Table<PortfolioTransaction, string>;
 
   constructor() {
     super('my-dashboard');
@@ -200,7 +208,7 @@ class MyDashboardDatabase extends Dexie {
         await workWeeksTable.bulkPut(normalizedWeeks);
       });
 
-    this.version(DATABASE_SCHEMA_VERSION)
+    this.version(5)
       .stores({
         workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
         appSettings: 'key, updatedAt',
@@ -220,6 +228,14 @@ class MyDashboardDatabase extends Dexie {
 
         await workWeeksTable.bulkPut(normalizedWeeks);
       });
+    this.version(DATABASE_SCHEMA_VERSION).stores({
+      workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
+      appSettings: 'key, updatedAt',
+      portfolioAccounts: 'id, updatedAt',
+      portfolioTags: 'id, name, kind, updatedAt',
+      portfolioTransactions:
+        'id, accountId, date, type, tagId, createdAt, updatedAt, [accountId+date]',
+    });
   }
 }
 

@@ -6646,7 +6646,9 @@
       "title": "Machine-readable project data foundation",
       "status": "completed",
       "priority": "high",
-      "tags": ["developer-infrastructure"]
+      "tags": [
+        "developer-infrastructure"
+      ]
     },
     {
       "type": "task",
@@ -6655,7 +6657,9 @@
       "title": "Project-data validation and consistency checks",
       "status": "completed",
       "priority": "high",
-      "tags": ["developer-infrastructure"]
+      "tags": [
+        "developer-infrastructure"
+      ]
     },
     {
       "type": "task",
@@ -6664,7 +6668,9 @@
       "title": "Deterministic CHANGELOG and ROADMAP generator",
       "status": "completed",
       "priority": "high",
-      "tags": ["developer-infrastructure"]
+      "tags": [
+        "developer-infrastructure"
+      ]
     },
     {
       "type": "task",
@@ -6673,7 +6679,9 @@
       "title": "Automated release preparation command",
       "status": "completed",
       "priority": "high",
-      "tags": ["developer-infrastructure"]
+      "tags": [
+        "developer-infrastructure"
+      ]
     },
     {
       "type": "heading",
@@ -6689,7 +6697,9 @@
       "title": "Machine-readable module registry",
       "status": "completed",
       "priority": "high",
-      "tags": ["ai-project-interface"]
+      "tags": [
+        "ai-project-interface"
+      ]
     },
     {
       "type": "task",
@@ -6698,7 +6708,9 @@
       "title": "Machine-readable known-issue registry",
       "status": "completed",
       "priority": "high",
-      "tags": ["ai-project-interface"]
+      "tags": [
+        "ai-project-interface"
+      ]
     },
     {
       "type": "task",
@@ -6707,7 +6719,9 @@
       "title": "Vendor-neutral AI Project Interface manifest",
       "status": "completed",
       "priority": "high",
-      "tags": ["ai-project-interface"]
+      "tags": [
+        "ai-project-interface"
+      ]
     },
     {
       "type": "task",
@@ -6716,7 +6730,9 @@
       "title": "Generated AGENTS.md adapter",
       "status": "completed",
       "priority": "high",
-      "tags": ["ai-project-interface"]
+      "tags": [
+        "ai-project-interface"
+      ]
     },
     {
       "type": "task",
@@ -6725,7 +6741,9 @@
       "title": "Generated CLAUDE.md adapter",
       "status": "completed",
       "priority": "high",
-      "tags": ["ai-project-interface"]
+      "tags": [
+        "ai-project-interface"
+      ]
     },
     {
       "type": "task",
@@ -6734,7 +6752,9 @@
       "title": "Generated Cursor project rules",
       "status": "completed",
       "priority": "high",
-      "tags": ["ai-project-interface"]
+      "tags": [
+        "ai-project-interface"
+      ]
     },
     {
       "type": "heading",
@@ -6750,7 +6770,10 @@
       "title": "Current-time defaults for new work sessions",
       "status": "completed",
       "priority": "high",
-      "tags": ["work", "daily-ux"]
+      "tags": [
+        "work",
+        "daily-ux"
+      ]
     },
     {
       "type": "task",
@@ -6759,7 +6782,10 @@
       "title": "Two-minute default duration for new work sessions",
       "status": "completed",
       "priority": "high",
-      "tags": ["work", "daily-ux"]
+      "tags": [
+        "work",
+        "daily-ux"
+      ]
     },
     {
       "type": "task",
@@ -6768,7 +6794,10 @@
       "title": "Remaining percentage for the next message-rate threshold",
       "status": "completed",
       "priority": "high",
-      "tags": ["work", "progress"]
+      "tags": [
+        "work",
+        "progress"
+      ]
     },
     {
       "type": "blank"
@@ -6787,7 +6816,11 @@
       "title": "Import 2026 work history for ISO weeks 8–29",
       "status": "completed",
       "priority": "high",
-      "tags": ["work", "history", "migration"]
+      "tags": [
+        "work",
+        "history",
+        "migration"
+      ]
     },
     {
       "type": "task",
@@ -6796,7 +6829,11 @@
       "title": "Preserve existing weeks during historical import",
       "status": "completed",
       "priority": "high",
-      "tags": ["work", "history", "data-safety"]
+      "tags": [
+        "work",
+        "history",
+        "data-safety"
+      ]
     },
     {
       "type": "task",
@@ -6805,7 +6842,11 @@
       "title": "Validate imported weekly message and beer totals against source screenshots",
       "status": "completed",
       "priority": "high",
-      "tags": ["work", "history", "validation"]
+      "tags": [
+        "work",
+        "history",
+        "validation"
+      ]
     },
     {
       "type": "task",
@@ -6814,7 +6855,226 @@
       "title": "Preserve historical daily duration with identifiable placeholder sessions",
       "status": "completed",
       "priority": "high",
-      "tags": ["work", "history", "compatibility"]
+      "tags": [
+        "work",
+        "history",
+        "compatibility"
+      ]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.6.0.portfolio.foundation",
+      "parentId": null,
+      "text": "v0.6.0 — Portfolio Foundation"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.ledger",
+      "parentId": "section.v0.6.0.portfolio.foundation",
+      "title": "Functional income and expense ledger",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.balance",
+      "parentId": "section.v0.6.0.portfolio.foundation",
+      "title": "Automatic running balance",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.tags",
+      "parentId": "section.v0.6.0.portfolio.foundation",
+      "title": "Editable Portfolio tags",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.notes",
+      "parentId": "section.v0.6.0.portfolio.foundation",
+      "title": "Optional transaction notes",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.same.date",
+      "parentId": "section.v0.6.0.portfolio.foundation",
+      "title": "Multiple transactions on one date",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.backup.cloud",
+      "parentId": "section.v0.6.0.portfolio.foundation",
+      "title": "Portfolio backup and cloud synchronization",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.project.zip.script",
+      "parentId": "section.v0.6.0.portfolio.foundation",
+      "title": "Safe Windows project ZIP script",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio"
+      ]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.6.0a.cloud-compatibility-hotfix",
+      "parentId": null,
+      "text": "v0.6.0a — Cloud Compatibility Hotfix"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cloud.legacy-portfolio-normalization",
+      "parentId": "section.v0.6.0a.cloud-compatibility-hotfix",
+      "title": "Normalize legacy cloud snapshots without Portfolio arrays",
+      "status": "completed",
+      "priority": "critical",
+      "tags": [
+        "cloud",
+        "portfolio",
+        "compatibility"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cloud.legacy-fingerprint-safety",
+      "parentId": "section.v0.6.0a.cloud-compatibility-hotfix",
+      "title": "Make cloud fingerprint and timestamp comparison safe for legacy snapshots",
+      "status": "completed",
+      "priority": "critical",
+      "tags": [
+        "cloud",
+        "portfolio",
+        "compatibility"
+      ]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.6.1.portfolio.ux",
+      "parentId": null,
+      "text": "v0.6.1 — Portfolio UX"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.ux.fast-entry",
+      "parentId": "section.v0.6.1.portfolio.ux",
+      "title": "Fast Portfolio entry with remembered tags and Enter submission",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio",
+        "ux"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.ux.inline-editing",
+      "parentId": "section.v0.6.1.portfolio.ux",
+      "title": "Compact filtered transaction table with inline editing",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio",
+        "ux"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.ux.statistics",
+      "parentId": "section.v0.6.1.portfolio.ux",
+      "title": "Monthly and category Portfolio statistics",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio",
+        "ux"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.ux.csv-import",
+      "parentId": "section.v0.6.1.portfolio.ux",
+      "title": "Portfolio CSV preview and import",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio",
+        "ux"
+      ]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.6.1a.portfolio.ux.hotfix",
+      "parentId": null,
+      "text": "v0.6.1a — Portfolio UX Hotfix"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.ux.hotfix.build",
+      "parentId": "section.v0.6.1a.portfolio.ux.hotfix",
+      "title": "Fix Portfolio UX TypeScript build errors",
+      "status": "completed",
+      "priority": "critical",
+      "tags": [
+        "portfolio",
+        "hotfix"
+      ]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.ux.hotfix.hooks",
+      "parentId": "section.v0.6.1a.portfolio.ux.hotfix",
+      "title": "Remove Portfolio React hook dependency warnings",
+      "status": "completed",
+      "priority": "high",
+      "tags": [
+        "portfolio",
+        "hotfix"
+      ]
     }
   ]
 }

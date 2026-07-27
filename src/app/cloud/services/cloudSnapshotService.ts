@@ -36,10 +36,14 @@ function getErrorMessage(error: unknown): string {
 }
 
 export async function createLocalSnapshot(): Promise<ChbBackupFile> {
-  const [workWeeks, appSettings] = await Promise.all([
-    database.workWeeks.orderBy('startDate').toArray(),
-    database.appSettings.toArray(),
-  ]);
+  const [workWeeks, appSettings, portfolioAccounts, portfolioTags, portfolioTransactions] =
+    await Promise.all([
+      database.workWeeks.orderBy('startDate').toArray(),
+      database.appSettings.toArray(),
+      database.portfolioAccounts.toArray(),
+      database.portfolioTags.toArray(),
+      database.portfolioTransactions.toArray(),
+    ]);
 
   if (workWeeks.length === 0) {
     throw new Error('Lokalna baza nie zawiera żadnego tygodnia pracy.');
@@ -52,6 +56,9 @@ export async function createLocalSnapshot(): Promise<ChbBackupFile> {
     data: {
       workWeeks,
       appSettings,
+      portfolioAccounts,
+      portfolioTags,
+      portfolioTransactions,
     },
   };
 }
@@ -95,8 +102,10 @@ async function getCloudSnapshot(userId: string): Promise<CloudSnapshotRow | null
     return null;
   }
 
+  const snapshot = backupService.normalizeBackup(data.snapshot);
+
   return {
-    snapshot: data.snapshot as ChbBackupFile,
+    snapshot,
     createdAt: data.created_at,
     updatedAt: data.updated_at,
   };

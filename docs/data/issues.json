@@ -11,7 +11,9 @@
       "description": "The experimental comparison may present values that are easy to interpret as day counts or strong conclusions when the sample is small.",
       "workaround": "Treat CHB Intelligence as experimental and verify the sample-size labels.",
       "plannedResolution": "Dedicated CHB Intelligence quality pass with clearer units, minimum sample sizes and confidence indicators.",
-      "relatedFiles": ["src/modules/work/components/WorkIntelligencePanel.tsx"]
+      "relatedFiles": [
+        "src/modules/work/components/WorkIntelligencePanel.tsx"
+      ]
     },
     {
       "id": "issue.build.large-main-chunk",
@@ -22,7 +24,10 @@
       "description": "The production bundle currently emits a chunk-size warning after minification.",
       "workaround": "The warning does not block deployment.",
       "plannedResolution": "Add route-level lazy loading and production code splitting during a later quality pass.",
-      "relatedFiles": ["src/app/router.tsx", "vite.config.ts"]
+      "relatedFiles": [
+        "src/app/router.tsx",
+        "vite.config.ts"
+      ]
     },
     {
       "id": "issue.history.placeholder-session-times",
@@ -37,6 +42,39 @@
         "src/modules/settings/components/HistoricalWorkImportPanel.tsx"
       ],
       "moduleId": "module.work"
+    },
+    {
+      "id": "issue.cloud.legacy-snapshot-missing-portfolio",
+      "title": "Legacy cloud snapshot lacks Portfolio arrays",
+      "severity": "high",
+      "status": "resolved",
+      "description": "Snapshots created before v0.6.0 do not contain portfolioAccounts, portfolioTags or portfolioTransactions.",
+      "workaround": "Install v0.6.0a and preserve the local version when resolving the first post-upgrade comparison.",
+      "plannedResolution": "Resolved in v0.6.0a.",
+      "relatedFiles": [
+        "src/modules/settings/services/backupService.ts",
+        "src/app/cloud/services/cloudSnapshotService.ts"
+      ],
+      "relatedFeatures": [
+        "feature.cloud.legacy-portfolio-normalization"
+      ],
+      "moduleId": "module.cloud"
+    },
+    {
+      "id": "issue.portfolio.ux.csv-import-return-type",
+      "title": "Portfolio CSV import result was discarded by the hook",
+      "severity": "high",
+      "status": "resolved",
+      "module": "portfolio",
+      "description": "The generic action wrapper returned Promise<void>, while the CSV panel required the import summary.",
+      "workaround": "Install v0.6.1a.",
+      "plannedResolution": "Resolved in v0.6.1a.",
+      "relatedFiles": [
+        "src/modules/portfolio/hooks/usePortfolio.ts"
+      ],
+      "relatedFeatures": [
+        "feature.portfolio.ux.hotfix.build"
+      ]
     }
   ]
 }

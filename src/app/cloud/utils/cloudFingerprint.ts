@@ -38,6 +38,16 @@ function createComparableData(backup: ChbBackupFile) {
     appSettings: backup.data.appSettings
       .filter((setting) => setting.key !== 'lastBackupAt')
       .sort((firstSetting, secondSetting) => firstSetting.key.localeCompare(secondSetting.key)),
+    portfolioAccounts: [...(backup.data.portfolioAccounts ?? [])].sort(
+      (firstAccount, secondAccount) => firstAccount.id.localeCompare(secondAccount.id)
+    ),
+    portfolioTags: [...(backup.data.portfolioTags ?? [])].sort((firstTag, secondTag) =>
+      firstTag.id.localeCompare(secondTag.id)
+    ),
+    portfolioTransactions: [...(backup.data.portfolioTransactions ?? [])].sort(
+      (firstTransaction, secondTransaction) =>
+        firstTransaction.id.localeCompare(secondTransaction.id)
+    ),
   };
 }
 

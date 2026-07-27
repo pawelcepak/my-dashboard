@@ -23,7 +23,13 @@ function getLocalDataTimestamp(backup: ChbBackupFile): string | null {
     .filter((setting) => setting.key !== 'lastBackupAt')
     .map((setting) => setting.updatedAt);
 
-  return getLatestTimestamp([...weekTimestamps, ...settingTimestamps]);
+  const portfolioTimestamps = [
+    ...(backup.data.portfolioAccounts ?? []).map((account) => account.updatedAt),
+    ...(backup.data.portfolioTags ?? []).map((tag) => tag.updatedAt),
+    ...(backup.data.portfolioTransactions ?? []).map((transaction) => transaction.updatedAt),
+  ];
+
+  return getLatestTimestamp([...weekTimestamps, ...settingTimestamps, ...portfolioTimestamps]);
 }
 
 async function inspect(userId: string): Promise<CloudInspectionResult> {

@@ -90,12 +90,15 @@
     {
       "id": "module.portfolio",
       "name": "Portfolio",
-      "status": "planned",
-      "description": "Future portfolio history and balances module.",
+      "status": "active",
+      "description": "Income and expense ledger, balances, tags, statistics and CSV import.",
       "rootPath": "src/modules/portfolio",
-      "entryFiles": [],
-      "dependsOn": ["module.database"],
-      "aiNotes": []
+      "entryFiles": ["src/modules/portfolio/index.tsx"],
+      "dependsOn": ["module.database", "module.cloud"],
+      "aiNotes": [
+        "Portfolio balance is derived from the initial balance and chronologically ordered transactions.",
+        "Transactions store positive amounts; type determines the signed ledger value."
+      ]
     },
     {
       "id": "module.statistics",

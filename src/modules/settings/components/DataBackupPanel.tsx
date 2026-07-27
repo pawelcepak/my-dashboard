@@ -24,13 +24,15 @@ export default function DataBackupPanel() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const databaseSummary = useLiveQuery(async () => {
-    const [workWeekCount, lastBackupSetting] = await Promise.all([
+    const [workWeekCount, portfolioTransactionCount, lastBackupSetting] = await Promise.all([
       database.workWeeks.count(),
+      database.portfolioTransactions.count(),
       database.appSettings.get('lastBackupAt'),
     ]);
 
     return {
       workWeekCount,
+      portfolioTransactionCount,
       lastBackupAt: lastBackupSetting?.value ?? null,
     };
   }, []);
@@ -94,7 +96,7 @@ export default function DataBackupPanel() {
     }
 
     const shouldRestore = window.confirm(
-      `Import zastąpi wszystkie obecne dane CHB.\n\nKopia zawiera ${preview.workWeekCount} tygodni.\n\nCzy na pewno kontynuować?`
+      `Import zastąpi wszystkie obecne dane CHB.\n\nKopia zawiera ${preview.workWeekCount} tygodni i ${preview.portfolioTransactionCount} transakcji Portfela.\n\nCzy na pewno kontynuować?`
     );
 
     if (!shouldRestore) {
@@ -155,7 +157,7 @@ export default function DataBackupPanel() {
               <h2 className="font-semibold text-zinc-100">Eksport danych</h2>
 
               <p className="mt-1 text-sm leading-6 text-zinc-500">
-                Zapisz wszystkie tygodnie i ustawienia CHB w jednym pliku JSON.
+                Zapisz tygodnie, Portfel i ustawienia CHB w jednym pliku JSON.
               </p>
             </div>
           </div>
@@ -165,6 +167,14 @@ export default function DataBackupPanel() {
               <dt className="text-zinc-500">Tygodnie w bazie</dt>
 
               <dd className="font-medium text-zinc-200">{databaseSummary?.workWeekCount ?? '—'}</dd>
+            </div>
+
+            <div className="flex justify-between gap-4">
+              <dt className="text-zinc-500">Transakcje Portfela</dt>
+
+              <dd className="font-medium text-zinc-200">
+                {databaseSummary?.portfolioTransactionCount ?? '—'}
+              </dd>
             </div>
 
             <div className="flex justify-between gap-4">

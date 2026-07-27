@@ -833,7 +833,6 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Project-data validation and consistency checks
 - [x] Deterministic CHANGELOG and ROADMAP generator
 - [x] Automated release preparation command
-
 ### v0.5.4E-F — AI Project Interface
 
 - [x] Machine-readable module registry
@@ -842,7 +841,6 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Generated AGENTS.md adapter
 - [x] Generated CLAUDE.md adapter
 - [x] Generated Cursor project rules
-
 ## v0.5.5 — Work UX Improvements
 
 - [x] Current-time defaults for new work sessions
@@ -855,3 +853,30 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Preserve existing weeks during historical import
 - [x] Validate imported weekly message and beer totals against source screenshots
 - [x] Preserve historical daily duration with identifiable placeholder sessions
+
+## v0.6.0 — Portfolio Foundation
+
+- [x] Functional income and expense ledger
+- [x] Automatic running balance
+- [x] Editable Portfolio tags
+- [x] Optional transaction notes
+- [x] Multiple transactions on one date
+- [x] Portfolio backup and cloud synchronization
+- [x] Safe Windows project ZIP script
+
+## v0.6.0a — Cloud Compatibility Hotfix
+
+- [x] Normalize legacy cloud snapshots without Portfolio arrays
+- [x] Make cloud fingerprint and timestamp comparison safe for legacy snapshots
+
+## v0.6.1 — Portfolio UX
+
+- [x] Fast Portfolio entry with remembered tags and Enter submission
+- [x] Compact filtered transaction table with inline editing
+- [x] Monthly and category Portfolio statistics
+- [x] Portfolio CSV preview and import
+
+## v0.6.1a — Portfolio UX Hotfix
+
+- [x] Fix Portfolio UX TypeScript build errors
+- [x] Remove Portfolio React hook dependency warnings

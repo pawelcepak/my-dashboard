@@ -1,0 +1,15 @@
+CHB v0.6.1 — Portfolio UX A–D
+
+Preparation checks:
+PASS: project documentation validation
+PASS: generated documentation consistency
+PASS: TypeScript/TSX syntax scan (no TS1xxx parser errors)
+
+The sandbox did not contain a complete executable npm dependency tree,
+so the full Prettier, Oxlint and Vite build must be run locally with:
+
+npm run release:prepare
+npm run dev
+
+The package was generated from:
+CHB_Project_2026-07-27_21-51.zip

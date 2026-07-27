@@ -125,6 +125,19 @@ All notable changes to CHB will be documented in this file.
 - Verified historical totals for paid messages and beer counts.
 - Technical duration-placeholder sessions for historical daily working time.
 - Historical-import status and action panel in Settings.
+- Functional Portfolio ledger with manual income and expense entries.
+- Automatic running balance from an editable initial balance.
+- Multiple Portfolio transactions on the same date.
+- Optional notes for Portfolio transactions.
+- Editable income, expense and shared Portfolio tags.
+- Lightweight Portfolio balance chart without an additional chart library.
+- Portfolio data support in Dexie, JSON backups and Supabase snapshots.
+- Windows project-archive script excluding generated and sensitive files.
+- Portfolio CSV preview and import with Polish and English headers.
+- Portfolio monthly income, monthly expenses and average daily expense statistics.
+- Portfolio category distribution bars.
+- Inline editing of Portfolio transaction rows.
+- Portfolio transaction filtering by type, tag and text.
 
 ### Changed
 
@@ -197,6 +210,9 @@ All notable changes to CHB will be documented in this file.
 - Message-rate threshold status now shows the percentage remaining to the next threshold.
 - Historical screenshot messages are stored as paid messages, while unavailable held and free message values default to zero.
 - Historical sessions preserve total duration without claiming exact source start and end times.
+- Portfolio transaction form now remembers the last selected tag.
+- EnterTalkPro is selected automatically for income when no remembered income tag exists.
+- Portfolio history uses a denser, scrollable table.
 
 ### Fixed
 
@@ -231,6 +247,12 @@ All notable changes to CHB will be documented in this file.
 - Fixed missing fixed 1,976-message goal presentation on Dashboard.
 - Fixed active-week daily data requiring excessive scrolling on the Work page.
 - Fixed long-term week history appearing before the active-week working area.
+- Fixed cloud comparison crashing when a legacy snapshot did not contain Portfolio arrays.
+- Fixed legacy cloud snapshots being fingerprinted before backward-compatible normalization.
+- Fixed Portfolio snapshot migration by treating missing accounts, tags and transactions as empty collections.
+- Fixed Portfolio CSV import result propagation through usePortfolio.
+- Removed an unused Portfolio transaction type import that blocked TypeScript builds.
+- Fixed React hook dependency warnings in Portfolio transaction form and history table.
 
 ## [0.3.0-beta.3] - 2026-07-25
 

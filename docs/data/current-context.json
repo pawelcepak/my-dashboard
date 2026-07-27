@@ -1,20 +1,17 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.5.6",
-  "currentSprint": "0.5.6",
-  "currentGoal": "Import the verified 2026 work history for ISO weeks 8–29 without overwriting existing weeks.",
+  "currentVersion": "0.6.1a",
+  "currentSprint": "0.6.1a",
+  "currentGoal": "Fix Portfolio UX TypeScript build errors and React hook dependency warnings.",
   "stableState": true,
   "lastCompleted": [
-    "Current-time defaults for new work sessions",
-    "Two-minute default duration for new work sessions",
-    "Remaining percentage for the next message-rate threshold"
+    "Portfolio UX A–D implementation"
   ],
   "nextTasks": [
-    "Import missing historical weeks 8–29 from Settings",
-    "Verify weekly message and beer totals after import",
-    "Allow cloud synchronization to upload the merged history",
-    "Review historical exchange rates separately when needed"
+    "Run release:prepare",
+    "Test transaction entry, inline editing and CSV import",
+    "Commit and push after all checks pass"
   ],
   "knownIssues": [
     {
