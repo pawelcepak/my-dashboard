@@ -1,0 +1,90 @@
+{
+  "$schema": "../schemas/decisions.schema.json",
+  "schemaVersion": 1,
+  "decisions": [
+    {
+      "id": "decision.data.local-first",
+      "date": "2026-07-27",
+      "title": "Use a local-first data model",
+      "status": "accepted",
+      "context": "CHB must remain usable without internet and on multiple devices.",
+      "decision": "Dexie is the primary local store; Supabase synchronizes snapshots without replacing local-first behavior.",
+      "consequences": [
+        "UI updates do not wait for the network",
+        "Conflicts require safe comparison and explicit resolution",
+        "Cloud synchronization is debounced for older hardware"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.work.day-source-of-truth",
+      "date": "2026-07-27",
+      "title": "Use WorkDay as the source of truth for daily work data",
+      "status": "accepted",
+      "context": "Dashboard, Work and future statistics must calculate from identical records.",
+      "decision": "Paid messages, held messages, beers, rating and sessions are stored on WorkDay.",
+      "consequences": [
+        "Weekly totals are derived from days",
+        "Dashboard edits the same records as the Work page",
+        "Legacy weekly heldMessages remains temporarily for compatibility"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.ui.tables-primary-interface",
+      "date": "2026-07-27",
+      "title": "Use tables as the primary daily work interface",
+      "status": "accepted",
+      "context": "The user works faster in spreadsheet-like interfaces than in detached forms.",
+      "decision": "Daily work values are edited inline with keyboard navigation; forms are reserved for complex configuration.",
+      "consequences": [
+        "Enter saves values",
+        "Table density is configurable",
+        "Future data-heavy modules should reuse the table system"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.settings.central-service",
+      "date": "2026-07-27",
+      "title": "Centralize application preferences",
+      "status": "accepted",
+      "context": "Preferences will expand to colors, tab order, layouts and future modules.",
+      "decision": "Components use appSettingsService and useAppSettings rather than reading Dexie directly.",
+      "consequences": [
+        "Preferences are synchronized and backed up automatically",
+        "UI reacts to preference changes",
+        "Future settings share one architecture"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.docs.json-source-of-truth",
+      "date": "2026-07-27",
+      "title": "Use machine-readable project data as documentation source",
+      "status": "accepted",
+      "context": "The roadmap and changelog are too large to maintain reliably by hand.",
+      "decision": "docs/data JSON is authoritative; Markdown and AI context files are generated outputs.",
+      "consequences": [
+        "Documentation can be validated",
+        "Multiple AI providers can consume the same project interface",
+        "Manual edits to generated files are overwritten"
+      ],
+      "relatedFeatures": []
+    },
+    {
+      "id": "decision.ai.vendor-neutral-interface",
+      "date": "2026-07-27",
+      "title": "Keep the AI Project Interface vendor-neutral",
+      "status": "accepted",
+      "context": "The project may later use Cursor, OpenAI, Anthropic, Copilot, Gemini, MCP or local models.",
+      "decision": "Use plain JSON, JSON Schema and generated Markdown without provider-specific requirements in the core.",
+      "consequences": [
+        "Provider adapters can be added later",
+        "Project context remains portable",
+        "Core project data does not require an AI SDK"
+      ],
+      "relatedFeatures": []
+    }
+  ]
+}

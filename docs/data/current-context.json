@@ -1,0 +1,43 @@
+{
+  "$schema": "../schemas/current-context.schema.json",
+  "schemaVersion": 1,
+  "currentVersion": "0.5.3",
+  "currentSprint": "0.5.4A-D",
+  "currentGoal": "Build the machine-readable documentation foundation, validation, generators and release commands.",
+  "stableState": true,
+  "lastCompleted": [
+    "Spreadsheet keyboard navigation",
+    "Live accent themes",
+    "Dashboard weekly goals for 945 PLN and 40 hours",
+    "Experimental CHB Intelligence"
+  ],
+  "nextTasks": [
+    "Validate all docs/data files",
+    "Generate CHANGELOG.md and ROADMAP.md",
+    "Generate AI_CONTEXT.md and PROJECT_STATE.json",
+    "Add release preparation scripts"
+  ],
+  "knownIssues": [
+    {
+      "id": "issue.intelligence.beer-comparison",
+      "severity": "low",
+      "status": "planned",
+      "description": "Experimental beer comparison may present confusing values and requires a later quality pass."
+    }
+  ],
+  "constraints": [
+    "Preserve local-first operation",
+    "Preserve Supabase snapshot and backup compatibility",
+    "Do not remove backward-compatible fields without a migration",
+    "Keep the application responsive on an older laptop",
+    "Do not make generated Markdown the source of truth"
+  ],
+  "importantFiles": [
+    "docs/data/project.json",
+    "docs/data/releases.json",
+    "docs/data/roadmap.json",
+    "docs/data/features.json",
+    "docs/data/decisions.json",
+    "docs/data/current-context.json"
+  ]
+}

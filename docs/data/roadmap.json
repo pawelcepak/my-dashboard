@@ -1,0 +1,6626 @@
+{
+  "$schema": "../schemas/roadmap.schema.json",
+  "schemaVersion": 1,
+  "documentTitle": "CHB Roadmap",
+  "blocks": [
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.product.direction",
+      "parentId": null,
+      "text": "Product direction"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "parentId": "section.product.direction",
+      "text": "CHB is a personal, offline-first application designed to record and manage the user's real life."
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "parentId": "section.product.direction",
+      "text": "The long-term product direction includes work, finances, debts, portfolio history, physical measurements, workouts, habits, personal goals, business activity and cross-module statistics."
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "parentId": "section.product.direction",
+      "text": "The Dashboard serves as the central daily interface. Detailed module pages provide editing, history and advanced analysis."
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.current.development.line",
+      "parentId": null,
+      "text": "Current development line"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "parentId": "section.current.development.line",
+      "text": "Current completed cloud milestone:"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "bullet",
+      "id": "note.v0.4.1f.automatic.cloud.sync",
+      "parentId": "section.current.development.line",
+      "text": "v0.4.1F — Automatic Cloud Sync"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "parentId": "section.current.development.line",
+      "text": "Current stable working state:"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "bullet",
+      "id": "note.offline.first.dexie.storage",
+      "parentId": "section.current.development.line",
+      "text": "Offline-first Dexie storage"
+    },
+    {
+      "type": "bullet",
+      "id": "note.private.supabase.authentication",
+      "parentId": "section.current.development.line",
+      "text": "Private Supabase authentication"
+    },
+    {
+      "type": "bullet",
+      "id": "note.automatic.pc.and.laptop.synchronization",
+      "parentId": "section.current.development.line",
+      "text": "Automatic PC and laptop synchronization"
+    },
+    {
+      "type": "bullet",
+      "id": "note.safe.startup.upload.and.download",
+      "parentId": "section.current.development.line",
+      "text": "Safe startup upload and download"
+    },
+    {
+      "type": "bullet",
+      "id": "note.conflict.detection.and.manual.conflict.resolution",
+      "parentId": "section.current.development.line",
+      "text": "Conflict detection and manual conflict resolution"
+    },
+    {
+      "type": "bullet",
+      "id": "note.manual.json.backup.and.restore",
+      "parentId": "section.current.development.line",
+      "text": "Manual JSON backup and restore"
+    },
+    {
+      "type": "bullet",
+      "id": "note.automated.github.pages.deployment",
+      "parentId": "section.current.development.line",
+      "text": "Automated GitHub Pages deployment"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "parentId": "section.current.development.line",
+      "text": "Next optional product sprint:"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "bullet",
+      "id": "note.v0.3.2d.dashboard.control.center",
+      "parentId": "section.current.development.line",
+      "text": "v0.3.2D — Dashboard Control Center"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "parentId": "section.current.development.line",
+      "text": "Following planned sprint:"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "bullet",
+      "id": "note.v0.3.3.google.sheets.migration",
+      "parentId": "section.current.development.line",
+      "text": "v0.3.3 — Google Sheets Migration"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "paragraph",
+      "parentId": "section.current.development.line",
+      "text": "Future quality and intelligence work remains planned but is not required for normal daily use."
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.1.x.foundation",
+      "parentId": null,
+      "text": "v0.1.x — Foundation"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.react",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "React",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.typescript",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "TypeScript",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.vite",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "Vite",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.git.repository",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "Git repository",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.github.remote",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "GitHub remote",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.oxlint",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "Oxlint",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.prettier",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "Prettier",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.tailwind.css",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "Tailwind CSS",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.react.router",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "React Router",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.import.aliases",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "Import aliases",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.initial.documentation",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "Initial documentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.correct.project.root.repository.structure",
+      "parentId": "section.v0.1.x.foundation",
+      "title": "Correct project-root repository structure",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.2.x.application.shell",
+      "parentId": null,
+      "text": "v0.2.x — Application Shell"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.desktop.layout",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Desktop layout",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.responsive.mobile.layout",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Responsive mobile layout",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.lucide.icons",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Lucide icons",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.overview",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Dashboard overview",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.page.header",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Shared page header",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.metric.card",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Shared metric card",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.section.card",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Shared section card",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.bottom.tab.navigation",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Bottom tab navigation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.compact.mobile.navigation",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Compact mobile navigation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.light.and.dark.themes",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Light and dark themes",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.theme.preference",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Persistent theme preference",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.theme.toggle",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Theme toggle",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.chb.branding",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "CHB branding",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.make.the.chb.header.label.navigate.to.the.dashboard",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Make the CHB header label navigate to the Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.align.desktop.bottom.navigation.tabs.to.the.left",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Align desktop bottom navigation tabs to the left",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.visual.refresh",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Dashboard visual refresh",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.light.theme.contrast.pass",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Light-theme contrast pass",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dark.theme.contrast.pass",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Dark-theme contrast pass",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.notice.styles",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Shared notice styles",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.panel.styles",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Shared panel styles",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.empty.state",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Shared empty state",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.button.system",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Shared button system",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.error.route",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Error route",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.not.found.page",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Not-found page",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.centralized.application.version.display",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Centralized application version display",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.additional.visual.refinements.based.on.long.term.usage",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Additional visual refinements based on long-term usage",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.production.bundle.code.splitting",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Production bundle code splitting",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.lazy.loading.for.application.modules",
+      "parentId": "section.v0.2.x.application.shell",
+      "title": "Lazy loading for application modules",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.3.x.work.module",
+      "parentId": null,
+      "text": "v0.3.x — Work Module"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.requirements.and.calculations",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Requirements and calculations"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.module.requirements",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Work module requirements",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.current.work.week.interface",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Current work-week interface",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.earnings.calculation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Weekly earnings calculation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.message.rate.thresholds",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Message-rate thresholds",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.held.message.earnings",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Held-message earnings",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.payout.fee.thresholds",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Payout-fee thresholds",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.eur.to.pln.calculation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "EUR-to-PLN calculation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.work.statistics",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Daily work statistics",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.financial.plan",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Weekly financial plan",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.rating.presentation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Work-rating presentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.alcohol.count.presentation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Alcohol-count presentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.work.goal.synchronization.engine",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Shared work-goal synchronization engine",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.to.weekly.goal.calculation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Daily-to-weekly goal calculation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.seven.day.to.daily.goal.calculation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Seven-day-to-daily goal calculation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.five.day.to.daily.goal.calculation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Five-day-to-daily goal calculation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.goal.value.rounding.to.two.decimal.places",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Goal-value rounding to two decimal places",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.full.message.rate.scale.from.0.to.1.976.messages",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Full message-rate scale from 0 to 1,976 messages",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.fixed.threshold.markers.for.776.1.576.and.1.976.messages",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Fixed threshold markers for 776, 1,576 and 1,976 messages",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.current.message.position.on.the.full.threshold.scale",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Current-message position on the full threshold scale",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.current.rate.presentation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Current-rate presentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.next.threshold.calculation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Next-threshold calculation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.messages.missing.calculation",
+      "parentId": "section.requirements.and.calculations",
+      "title": "Messages-missing calculation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.editing",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Editing"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.work.days",
+      "parentId": "section.editing",
+      "title": "Editable work days",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.message.counts",
+      "parentId": "section.editing",
+      "title": "Editable message counts",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.work.ratings",
+      "parentId": "section.editing",
+      "title": "Editable work ratings",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.beer.counts",
+      "parentId": "section.editing",
+      "title": "Editable beer counts",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.work.sessions",
+      "parentId": "section.editing",
+      "title": "Editable work sessions",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.adding.work.sessions",
+      "parentId": "section.editing",
+      "title": "Adding work sessions",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.removing.work.sessions",
+      "parentId": "section.editing",
+      "title": "Removing work sessions",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.held.message.count",
+      "parentId": "section.editing",
+      "title": "Editable held-message count",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.eur.pln.exchange.rate",
+      "parentId": "section.editing",
+      "title": "Editable EUR/PLN exchange rate",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.weekly.financial.plan",
+      "parentId": "section.editing",
+      "title": "Editable weekly financial plan",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.adding.financial.goals",
+      "parentId": "section.editing",
+      "title": "Adding financial goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.removing.financial.goals",
+      "parentId": "section.editing",
+      "title": "Removing financial goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editing.financial.goal.names",
+      "parentId": "section.editing",
+      "title": "Editing financial-goal names",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editing.financial.goal.amounts",
+      "parentId": "section.editing",
+      "title": "Editing financial-goal amounts",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.daily.message.target",
+      "parentId": "section.editing",
+      "title": "Editable daily message target",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.seven.day.message.target",
+      "parentId": "section.editing",
+      "title": "Editable seven-day message target",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.five.day.message.target",
+      "parentId": "section.editing",
+      "title": "Editable five-day message target",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.independent.daily.hours.target",
+      "parentId": "section.editing",
+      "title": "Editable independent daily-hours target",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.data.layer",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Data layer"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dexie.dependency",
+      "parentId": "section.data.layer",
+      "title": "Dexie dependency",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dexie.react.hooks",
+      "parentId": "section.data.layer",
+      "title": "Dexie React hooks",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.versioned.work.database.schema",
+      "parentId": "section.data.layer",
+      "title": "Versioned work database schema",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.work.weeks",
+      "parentId": "section.data.layer",
+      "title": "Persistent work weeks",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reactive.database.queries",
+      "parentId": "section.data.layer",
+      "title": "Reactive database queries",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.transaction.based.week.updates",
+      "parentId": "section.data.layer",
+      "title": "Transaction-based week updates",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.initial.data.seeding",
+      "parentId": "section.data.layer",
+      "title": "Automatic initial-data seeding",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.iso.creation.and.update.timestamps",
+      "parentId": "section.data.layer",
+      "title": "ISO creation and update timestamps",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.reactive.data.between.dashboard.and.work.module",
+      "parentId": "section.data.layer",
+      "title": "Shared reactive data between Dashboard and Work module",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dexie.schema.version.2",
+      "parentId": "section.data.layer",
+      "title": "Dexie schema version 2",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dexie.schema.version.3",
+      "parentId": "section.data.layer",
+      "title": "Dexie schema version 3",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dexie.schema.version.4",
+      "parentId": "section.data.layer",
+      "title": "Dexie schema version 4",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.application.settings.table",
+      "parentId": "section.data.layer",
+      "title": "Application settings table",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.work.week.persistence",
+      "parentId": "section.data.layer",
+      "title": "Active-work-week persistence",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.existing.data.migration",
+      "parentId": "section.data.layer",
+      "title": "Existing-data migration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.existing.financial.plan.priority.migration",
+      "parentId": "section.data.layer",
+      "title": "Existing financial-plan priority migration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.existing.work.goal.synchronization.migration",
+      "parentId": "section.data.layer",
+      "title": "Existing work-goal synchronization migration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.unique.iso.week.protection",
+      "parentId": "section.data.layer",
+      "title": "Unique ISO week protection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.full.data.integrity.validation",
+      "parentId": "section.data.layer",
+      "title": "Full data-integrity validation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.recovery.from.corrupted.work.records",
+      "parentId": "section.data.layer",
+      "title": "Recovery from corrupted work records",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.database.health.diagnostics",
+      "parentId": "section.data.layer",
+      "title": "Database health diagnostics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.goals.and.daily.workflow",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Goals and daily workflow"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.goal.data.model",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Weekly-goal data model",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.daily.message.target.2",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Editable daily message target",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.seven.day.message.target.2",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Editable seven-day message target",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.five.day.message.target.2",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Editable five-day message target",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.daily.hours.target",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Editable daily hours target",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.current.day.detection",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Automatic current-day detection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.current.day.summary",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Current-day summary",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.quick.message.editing.from.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Quick message editing from Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.quick.work.session.creation.from.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Quick work-session creation from Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.quick.rating.editing.from.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Quick rating editing from Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.quick.beer.count.editing.from.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Quick beer-count editing from Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.summary.on.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Weekly summary on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.goal.progress.on.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Goal progress on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.threshold.progress.on.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Work-threshold progress on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.message.goal.automatically.updates.both.weekly.goals",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Daily message goal automatically updates both weekly goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.seven.day.message.goal.automatically.updates.daily.and.five.day.goals",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Seven-day message goal automatically updates daily and five-day goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.five.day.message.goal.automatically.updates.daily.and.seven.day.goals",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Five-day message goal automatically updates daily and seven-day goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.hours.target.remains.independent",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Daily-hours target remains independent",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.immediate.synchronized.goal.preview.before.saving",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Immediate synchronized goal preview before saving",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.synchronized.goal.values.preserved.after.page.refresh",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Synchronized goal values preserved after page refresh",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.synchronized.goal.values.preserved.independently.for.every.week",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Synchronized goal values preserved independently for every week",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.separate.five.day.and.seven.day.progress.on.the.work.page",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Separate five-day and seven-day progress on the Work page",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.combined.goal.summary.on.the.work.page",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Combined goal summary on the Work page",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.five.day.goal.visible.on.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Five-day goal visible on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.seven.day.goal.visible.on.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Seven-day goal visible on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.fixed.1.976.message.target.visible.on.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Fixed 1,976-message target visible on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remaining.daily.message.target",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Remaining daily message target",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remaining.weekly.message.target",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Remaining weekly message target",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.required.daily.pace.based.on.remaining.days",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Required daily pace based on remaining days",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.quick.removal.of.work.sessions.from.dashboard",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Quick removal of work sessions from Dashboard",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.one.click.work.session.timer",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "One-click work-session timer",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.configurable.default.work.rating",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Configurable default work rating",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.configurable.default.exchange.rate",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Configurable default exchange rate",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.configurable.default.goals",
+      "parentId": "section.goals.and.daily.workflow",
+      "title": "Configurable default goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.work.rating.presentation",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Work-rating presentation"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.decimal.work.rating.values",
+      "parentId": "section.work.rating.presentation",
+      "title": "Decimal work-rating values",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.default.8.5.rating",
+      "parentId": "section.work.rating.presentation",
+      "title": "Default 8.5 rating",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.ratings.above.9.0",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for ratings above 9.0",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.rating.9.0",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for rating 9.0",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.rating.8.9",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for rating 8.9",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.rating.8.8",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for rating 8.8",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.rating.8.7",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for rating 8.7",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.rating.8.6",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for rating 8.6",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.blue.default.color.for.rating.8.5",
+      "parentId": "section.work.rating.presentation",
+      "title": "Blue default color for rating 8.5",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.rating.8.4",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for rating 8.4",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.rating.8.3",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for rating 8.3",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.rating.8.2",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for rating 8.2",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.color.for.ratings.below.8.2",
+      "parentId": "section.work.rating.presentation",
+      "title": "Dedicated color for ratings below 8.2",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.rating.colors.on.dashboard",
+      "parentId": "section.work.rating.presentation",
+      "title": "Consistent rating colors on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.rating.colors.in.daily.history",
+      "parentId": "section.work.rating.presentation",
+      "title": "Consistent rating colors in daily history",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.rating.colors.in.weekly.history",
+      "parentId": "section.work.rating.presentation",
+      "title": "Consistent rating colors in weekly history",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.rating.colors.on.mobile",
+      "parentId": "section.work.rating.presentation",
+      "title": "Consistent rating colors on mobile",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.average.rating.color",
+      "parentId": "section.work.rating.presentation",
+      "title": "Weekly-average rating color",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.financial.goals",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Financial goals"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.priority.based.financial.goals",
+      "parentId": "section.financial.goals",
+      "title": "Priority-based financial goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.sequential.financial.allocation",
+      "parentId": "section.financial.goals",
+      "title": "Sequential financial allocation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.individual.financial.goal.completion.percentage",
+      "parentId": "section.financial.goals",
+      "title": "Individual financial-goal completion percentage",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.completion.indicators",
+      "parentId": "section.financial.goals",
+      "title": "Financial-goal completion indicators",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.ordering.controls",
+      "parentId": "section.financial.goals",
+      "title": "Financial-goal ordering controls",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.locking",
+      "parentId": "section.financial.goals",
+      "title": "Financial-goal locking",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.unlocking",
+      "parentId": "section.financial.goals",
+      "title": "Financial-goal unlocking",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.safe.financial.goal.removal",
+      "parentId": "section.financial.goals",
+      "title": "Safe financial-goal removal",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.new.goals.added.at.the.end.of.the.priority.list",
+      "parentId": "section.financial.goals",
+      "title": "New goals added at the end of the priority list",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.priority.renumbering",
+      "parentId": "section.financial.goals",
+      "title": "Automatic priority renumbering",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.existing.plan.priority.migration",
+      "parentId": "section.financial.goals",
+      "title": "Existing-plan priority migration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.priorities.copied.to.new.weeks",
+      "parentId": "section.financial.goals",
+      "title": "Financial priorities copied to new weeks",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.lock.states.copied.to.new.weeks",
+      "parentId": "section.financial.goals",
+      "title": "Financial lock states copied to new weeks",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.progress.displayed.on.dashboard",
+      "parentId": "section.financial.goals",
+      "title": "Financial progress displayed on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.optional.drag.and.drop.ordering",
+      "parentId": "section.financial.goals",
+      "title": "Optional drag-and-drop ordering",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reusable.financial.allocation.engine.for.the.debts.module",
+      "parentId": "section.financial.goals",
+      "title": "Reusable financial-allocation engine for the Debts module",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.templates",
+      "parentId": "section.financial.goals",
+      "title": "Financial-goal templates",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.copy.selected.goals.between.weeks",
+      "parentId": "section.financial.goals",
+      "title": "Copy selected goals between weeks",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.archive.completed.financial.goals",
+      "parentId": "section.financial.goals",
+      "title": "Archive completed financial goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.week.management",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Week management"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.creating.new.weeks",
+      "parentId": "section.week.management",
+      "title": "Creating new weeks",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.iso.week.number.proposal",
+      "parentId": "section.week.management",
+      "title": "Automatic ISO week number proposal",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.monday.to.sunday.date.range",
+      "parentId": "section.week.management",
+      "title": "Automatic Monday-to-Sunday date range",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.selecting.an.active.week",
+      "parentId": "section.week.management",
+      "title": "Selecting an active week",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.active.week.selection",
+      "parentId": "section.week.management",
+      "title": "Persistent active-week selection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.protection.against.duplicate.iso.weeks",
+      "parentId": "section.week.management",
+      "title": "Protection against duplicate ISO weeks",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.copying.exchange.rate.from.selected.week",
+      "parentId": "section.week.management",
+      "title": "Copying exchange rate from selected week",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.copying.synchronized.goals.from.selected.week",
+      "parentId": "section.week.management",
+      "title": "Copying synchronized goals from selected week",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.copying.financial.plan.from.selected.week",
+      "parentId": "section.week.management",
+      "title": "Copying financial plan from selected week",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.empty.daily.records.for.new.weeks",
+      "parentId": "section.week.management",
+      "title": "Empty daily records for new weeks",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.history.view",
+      "parentId": "section.week.management",
+      "title": "Weekly-history view",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.grouping.history.by.year",
+      "parentId": "section.week.management",
+      "title": "Grouping history by year",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.newest.to.oldest.week.sorting",
+      "parentId": "section.week.management",
+      "title": "Newest-to-oldest week sorting",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.week.history.card.indicator",
+      "parentId": "section.week.management",
+      "title": "Active-week history-card indicator",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.summary.metrics.in.history",
+      "parentId": "section.week.management",
+      "title": "Weekly summary metrics in history",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reusable.shared.history.card.component",
+      "parentId": "section.week.management",
+      "title": "Reusable shared history-card component",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.deleting.weeks",
+      "parentId": "section.week.management",
+      "title": "Deleting weeks",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.strong.work.week.deletion.confirmation",
+      "parentId": "section.week.management",
+      "title": "Strong work-week deletion confirmation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.protection.against.deleting.the.last.week",
+      "parentId": "section.week.management",
+      "title": "Protection against deleting the last week",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.active.week.recovery.after.deletion",
+      "parentId": "section.week.management",
+      "title": "Automatic active-week recovery after deletion",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.history.block.count",
+      "parentId": "section.week.management",
+      "title": "Weekly-history block count",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.average.rating.presentation",
+      "parentId": "section.week.management",
+      "title": "Weekly-average rating presentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.redesigned.weekly.history.cards",
+      "parentId": "section.week.management",
+      "title": "Redesigned weekly-history cards",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.grouping.history.by.month",
+      "parentId": "section.week.management",
+      "title": "Grouping history by month",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.year.filter",
+      "parentId": "section.week.management",
+      "title": "Year filter",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.month.filter",
+      "parentId": "section.week.management",
+      "title": "Month filter",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.history.search",
+      "parentId": "section.week.management",
+      "title": "History search",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.week.close.workflow",
+      "parentId": "section.week.management",
+      "title": "Week-close workflow",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.next.week.creation",
+      "parentId": "section.week.management",
+      "title": "Automatic next-week creation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.importing.historical.weeks.from.google.sheets",
+      "parentId": "section.week.management",
+      "title": "Importing historical weeks from Google Sheets",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.work.page.usability",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Work-page usability"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.week.header",
+      "parentId": "section.work.page.usability",
+      "title": "Active-week header",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.integrated.local.save.status",
+      "parentId": "section.work.page.usability",
+      "title": "Integrated local-save status",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.week.daily.history.shown.near.the.top",
+      "parentId": "section.work.page.usability",
+      "title": "Active-week daily history shown near the top",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.week.daily.history.on.the.left.side",
+      "parentId": "section.work.page.usability",
+      "title": "Active-week daily history on the left side",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.week.summary.on.the.right.side",
+      "parentId": "section.work.page.usability",
+      "title": "Active-week summary on the right side",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.week.settings.grouped.with.active.week.summary",
+      "parentId": "section.work.page.usability",
+      "title": "Week settings grouped with active-week summary",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.responsive.single.column.layout.on.smaller.screens",
+      "parentId": "section.work.page.usability",
+      "title": "Responsive single-column layout on smaller screens",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.progress.below.the.active.week.working.area",
+      "parentId": "section.work.page.usability",
+      "title": "Weekly progress below the active-week working area",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.long.term.weekly.history.below.weekly.progress",
+      "parentId": "section.work.page.usability",
+      "title": "Long-term weekly history below weekly progress",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.plan.at.the.bottom",
+      "parentId": "section.work.page.usability",
+      "title": "Financial plan at the bottom",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reduced.scrolling.before.daily.editing",
+      "parentId": "section.work.page.usability",
+      "title": "Reduced scrolling before daily editing",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.compact.active.week.summary.cards",
+      "parentId": "section.work.page.usability",
+      "title": "Compact active-week summary cards",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.active.week.visual.hierarchy",
+      "parentId": "section.work.page.usability",
+      "title": "Improved active-week visual hierarchy",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.sticky.daily.history.header",
+      "parentId": "section.work.page.usability",
+      "title": "Sticky daily-history header",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.optional.compact.daily.history.density",
+      "parentId": "section.work.page.usability",
+      "title": "Optional compact daily-history density",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.keyboard.navigation.between.days",
+      "parentId": "section.work.page.usability",
+      "title": "Keyboard navigation between days",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.faster.inline.daily.editing",
+      "parentId": "section.work.page.usability",
+      "title": "Faster inline daily editing",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.statistics",
+      "parentId": "section.v0.3.x.work.module",
+      "text": "Statistics"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.work.statistics",
+      "parentId": "section.statistics",
+      "title": "Weekly work statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.monthly.work.statistics",
+      "parentId": "section.statistics",
+      "title": "Monthly work statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.yearly.work.statistics",
+      "parentId": "section.statistics",
+      "title": "Yearly work statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.message.charts",
+      "parentId": "section.statistics",
+      "title": "Message charts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.worked.hours.charts",
+      "parentId": "section.statistics",
+      "title": "Worked-hours charts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.hourly.performance.charts",
+      "parentId": "section.statistics",
+      "title": "Hourly-performance charts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.earnings.charts",
+      "parentId": "section.statistics",
+      "title": "Earnings charts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.rating.charts",
+      "parentId": "section.statistics",
+      "title": "Rating charts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.alcohol.count.statistics",
+      "parentId": "section.statistics",
+      "title": "Alcohol-count statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.goal.completion.statistics",
+      "parentId": "section.statistics",
+      "title": "Daily-goal completion statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.goal.completion.statistics",
+      "parentId": "section.statistics",
+      "title": "Weekly-goal completion statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.3.2a.ux.visual.refresh",
+      "parentId": null,
+      "text": "v0.3.2A — UX & Visual Refresh"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.clickable.chb.dashboard.link",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Clickable CHB Dashboard link",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.left.aligned.desktop.bottom.navigation",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Left-aligned desktop bottom navigation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.compact.application.header",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Compact application header",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.layout.redesign",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Dashboard layout redesign",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reduced.dashboard.scrolling",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Reduced Dashboard scrolling",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stronger.daily.metric.hierarchy",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Stronger daily-metric hierarchy",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.grouped.dashboard.quick.actions",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Grouped Dashboard quick actions",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.compact.weekly.summary",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Compact weekly summary",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.plan.visual.redesign",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Financial-plan visual redesign",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.light.theme.contrast",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Improved light-theme contrast",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.dark.theme.contrast",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Improved dark-theme contrast",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.notice.styles.2",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Shared notice styles",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.settings.backup.presentation",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Improved Settings backup presentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.theme.toggle",
+      "parentId": "section.v0.3.2a.ux.visual.refresh",
+      "title": "Improved theme toggle",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.3.2b.smart.financial.goals",
+      "parentId": null,
+      "text": "v0.3.2B — Smart Financial Goals"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.editable.financial.goals",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Editable financial goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.add.financial.goals",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Add financial goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remove.financial.goals",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Remove financial goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.priority.based.financial.goals.2",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Priority-based financial goals",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.sequential.financial.allocation.2",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Sequential financial allocation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.completion.percentage",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Financial-goal completion percentage",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.ordering.controls.2",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Financial-goal ordering controls",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.locking.2",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Financial-goal locking",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.goal.unlocking.2",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Financial-goal unlocking",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.priority.normalization",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Automatic priority normalization",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.existing.plan.priority.migration.2",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Existing-plan priority migration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.smart.financial.dashboard",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Smart financial Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.strong.work.week.deletion.confirmation.2",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Strong work-week deletion confirmation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.delete.work.week",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Delete work week",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.active.week.recovery",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Automatic active-week recovery",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.backward.compatible.financial.goal.backup.import",
+      "parentId": "section.v0.3.2b.smart.financial.goals",
+      "title": "Backward-compatible financial-goal backup import",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.3.2c.smart.goal.synchronization",
+      "parentId": null,
+      "text": "v0.3.2C — Smart Goal Synchronization"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.message.goal.updates.the.seven.day.goal.automatically",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Daily message goal updates the seven-day goal automatically",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.message.goal.updates.the.five.day.goal.automatically",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Daily message goal updates the five-day goal automatically",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.seven.day.goal.updates.the.daily.goal.automatically",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Seven-day goal updates the daily goal automatically",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.seven.day.goal.updates.the.five.day.goal.automatically",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Seven-day goal updates the five-day goal automatically",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.five.day.goal.updates.the.daily.goal.automatically",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Five-day goal updates the daily goal automatically",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.five.day.goal.updates.the.seven.day.goal.automatically",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Five-day goal updates the seven-day goal automatically",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.manual.daily.hours.target.remains.independent",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Manual daily-hours target remains independent",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.synchronization.rules.on.dashboard.and.work.page",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Shared synchronization rules on Dashboard and Work page",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.goal.recalculation.without.temporary.inconsistent.saved.states",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Goal recalculation without temporary inconsistent saved states",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.goal.synchronization.preserved.in.backup.and.restore",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Goal synchronization preserved in backup and restore",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.backward.compatible.import.of.older.goal.records",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Backward-compatible import of older goal records",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dexie.version.4.migration",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Dexie version 4 migration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.validation.for.empty.and.non.negative.values",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Validation for empty and non-negative values",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.decimal.goal.value.support",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Decimal goal-value support",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.mobile.friendly.goal.editing",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Mobile-friendly goal editing",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.separate.five.day.and.seven.day.progress.indicators",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Separate five-day and seven-day progress indicators",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.synchronized.goal.summary.on.work.page",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Synchronized goal summary on Work page",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.updated.tests.and.documentation",
+      "parentId": "section.v0.3.2c.smart.goal.synchronization",
+      "title": "Updated tests and documentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "parentId": null,
+      "text": "Post-v0.3.2C — Work and Dashboard Visual Refinement"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.exact.user.defined.work.rating.colors",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Exact user-defined work-rating colors",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.rating.colors.across.the.application",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Consistent rating colors across the application",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.full.message.rate.threshold.bar",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Shared full message-rate threshold bar",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.fixed.1.976.message.maximum.threshold",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Fixed 1,976-message maximum threshold",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.threshold.markers.for.776.1.576.and.1.976",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Threshold markers for 776, 1,576 and 1,976",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.current.message.position.indicator",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Current-message position indicator",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.current.rate.presentation.2",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Current-rate presentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.next.threshold.presentation",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Next-threshold presentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.message.rate.bar.on.work.page",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Message-rate bar on Work page",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.message.rate.bar.on.dashboard",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Message-rate bar on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.simultaneous.five.day.and.seven.day.goals.on.dashboard",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Simultaneous five-day and seven-day goals on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.fixed.1.976.message.target.on.dashboard",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Fixed 1,976-message target on Dashboard",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.week.daily.history.moved.near.the.top",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Active-week daily history moved near the top",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.week.summary.moved.next.to.daily.history",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Active-week summary moved next to daily history",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.progress.moved.below.active.week.content",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Weekly progress moved below active-week content",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.long.term.history.moved.below.weekly.progress",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Long-term history moved below weekly progress",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.plan.remains.last",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Financial plan remains last",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.redesigned.weekly.history.cards.2",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Redesigned weekly-history cards",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.block.count",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Weekly block count",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.average.rating.color.2",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Weekly-average rating color",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.mobile.history.layout",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Improved mobile history layout",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.light.theme.and.dark.theme.readability",
+      "parentId": "section.post.v0.3.2c.work.and.dashboard.visual.refinement",
+      "title": "Improved light-theme and dark-theme readability",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.3.2d.dashboard.control.center",
+      "parentId": null,
+      "text": "v0.3.2D — Dashboard Control Center"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remaining.messages.today",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Remaining messages today",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remaining.messages.for.the.five.day.target",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Remaining messages for the five-day target",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remaining.messages.for.the.seven.day.target",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Remaining messages for the seven-day target",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remaining.messages.for.the.fixed.1.976.message.threshold",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Remaining messages for the fixed 1,976-message threshold",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remaining.hours.today",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Remaining hours today",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.required.average.messages.per.remaining.hour",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Required average messages per remaining hour",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.required.daily.pace.based.on.remaining.calendar.days",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Required daily pace based on remaining calendar days",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.required.daily.pace.based.on.remaining.five.day.work.period",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Required daily pace based on remaining five-day work period",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ahead.of.plan.and.behind.plan.indicators",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Ahead-of-plan and behind-plan indicators",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.current.day.status.presentation",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Improved current-day status presentation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.weekly.status.presentation",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Improved weekly status presentation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.quick.editing.of.the.most.frequently.used.values",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Quick editing of the most frequently used values",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.compact.history.of.recent.work.blocks",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Compact history of recent work blocks",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.quick.removal.of.work.sessions.from.dashboard.2",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Quick removal of work sessions from Dashboard",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.further.reduction.of.unnecessary.scrolling",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Further reduction of unnecessary scrolling",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.goal.calculations.between.dashboard.and.work.page",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Consistent goal calculations between Dashboard and Work page",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.backup.status.indicator",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Dashboard backup-status indicator",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.active.database.status",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Dashboard active-database status",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.quick.access.to.weekly.settings",
+      "parentId": "section.v0.3.2d.dashboard.control.center",
+      "title": "Dashboard quick access to weekly settings",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.3.3.google.sheets.migration",
+      "parentId": null,
+      "text": "v0.3.3 — Google Sheets Migration"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.define.historical.import.format",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Define historical import format",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.import.work.history.from.week.8.of.2026",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Import work history from week 8 of 2026",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.import.preview",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Import preview",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.duplicate.detection",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Duplicate detection",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.iso.week.validation",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "ISO week validation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.date.validation",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Date validation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.numeric.value.validation",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Numeric-value validation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.financial.plan.validation",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Financial-plan validation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.goal.normalization.during.import",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Work-goal normalization during import",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.partial.import",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Partial import",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.batch.import",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Batch import",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.import.result.report",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Import result report",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.restore.point.before.import",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Restore point before import",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.verify.imported.weeks.against.the.original.spreadsheet",
+      "parentId": "section.v0.3.3.google.sheets.migration",
+      "title": "Verify imported weeks against the original spreadsheet",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.4.x.backup.and.data.safety",
+      "parentId": null,
+      "text": "v0.4.x — Backup and Data Safety"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.complete.json.export",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Complete JSON export",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.complete.json.import",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Complete JSON import",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.backup.file.validation",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Backup-file validation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.backup.preview",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Backup preview",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.confirmation.before.replacing.data",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Confirmation before replacing data",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.last.backup.timestamp",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Last-backup timestamp",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.transaction.based.database.replacement",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Transaction-based database replacement",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.active.week.recovery.during.import",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Active-week recovery during import",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.backward.compatible.financial.goal.backup.import.2",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Backward-compatible financial-goal backup import",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.backward.compatible.synchronized.goal.backup.import",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Backward-compatible synchronized-goal backup import",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.backup.reminders",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Automatic backup reminders",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.selective.module.export",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Selective module export",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.local.backup.history",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Local backup history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.data.reset.workflow",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Data-reset workflow",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.encrypted.backup.files",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Encrypted backup files",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.backup.schema.migration.framework",
+      "parentId": "section.v0.4.x.backup.and.data.safety",
+      "title": "Backup schema migration framework",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.4.1.private.cloud.and.cross.device.synchronization",
+      "parentId": null,
+      "text": "v0.4.1 — Private Cloud and Cross-device Synchronization"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.v0.4.1a.supabase.foundation",
+      "parentId": "section.v0.4.1.private.cloud.and.cross.device.synchronization",
+      "text": "v0.4.1A — Supabase Foundation"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.install.supabase.javascript.client",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Install Supabase JavaScript client",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.vite.environment.variable.configuration",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Vite environment-variable configuration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.private.single.user.authentication",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Private single-user authentication",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.login.session",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Persistent login session",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.login.screen",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Login screen",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.logout.control",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Logout control",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.protected.application.layout",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Protected application layout",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.disabled.public.account.registration",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Disabled public account registration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.github.actions.supabase.secrets",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "GitHub Actions Supabase secrets",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.production.authentication.on.github.pages",
+      "parentId": "section.v0.4.1a.supabase.foundation",
+      "title": "Production authentication on GitHub Pages",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.v0.4.1b.cloud.status",
+      "parentId": "section.v0.4.1.private.cloud.and.cross.device.synchronization",
+      "text": "v0.4.1B — Cloud Status"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.live.cloud.status.indicator.in.the.header",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Live cloud-status indicator in the header",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.online.and.offline.detection",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Online and offline detection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.supabase.connection.verification",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Supabase connection verification",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.expandable.cloud.status.panel",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Expandable cloud-status panel",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.account.information",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Account information",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.device.information",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Device information",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.last.connection.check.timestamp",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Last connection-check timestamp",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.last.synchronization.timestamp",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Last synchronization timestamp",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.manual.connection.check",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Manual connection check",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.local.database.status.presentation",
+      "parentId": "section.v0.4.1b.cloud.status",
+      "title": "Local-database status presentation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.v0.4.1c.cloud.snapshot.sync",
+      "parentId": "section.v0.4.1.private.cloud.and.cross.device.synchronization",
+      "text": "v0.4.1C — Cloud Snapshot Sync"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.complete.local.dexie.snapshot.generation",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Complete local Dexie snapshot generation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.private.supabase.snapshot.upload",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Private Supabase snapshot upload",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.private.supabase.snapshot.download",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Private Supabase snapshot download",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.one.snapshot.per.authenticated.user",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "One snapshot per authenticated user",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.rls.protected.cloud.record",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "RLS-protected cloud record",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cloud.snapshot.timestamp",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Cloud snapshot timestamp",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.manual.upload",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Manual upload",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.manual.download",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Manual download",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.strong.confirmation.before.replacement",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Strong confirmation before replacement",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.existing.chb.backup.validation.reused.for.cloud.restore",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Existing CHB backup validation reused for cloud restore",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.transaction.based.cloud.restore",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Transaction-based cloud restore",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.manual.recovery.controls.remain.available",
+      "parentId": "section.v0.4.1c.cloud.snapshot.sync",
+      "title": "Manual recovery controls remain available",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.v0.4.1d.safe.version.comparison",
+      "parentId": "section.v0.4.1.private.cloud.and.cross.device.synchronization",
+      "text": "v0.4.1D — Safe Version Comparison"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stable.local.data.fingerprint",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Stable local-data fingerprint",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stable.cloud.data.fingerprint",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Stable cloud-data fingerprint",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ignore.non.content.backup.timestamps.during.comparison",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Ignore non-content backup timestamps during comparison",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.detect.empty.cloud",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Detect empty cloud",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.detect.synchronized.versions",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Detect synchronized versions",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.detect.local.changes",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Detect local changes",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.detect.newer.cloud.data",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Detect newer cloud data",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.detect.two.sided.conflict",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Detect two-sided conflict",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.manual.local.version.selection",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Manual local-version selection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.manual.cloud.version.selection",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Manual cloud-version selection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.no.silent.overwrite.during.conflict",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "No silent overwrite during conflict",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.per.device.synchronization.baseline",
+      "parentId": "section.v0.4.1d.safe.version.comparison",
+      "title": "Per-device synchronization baseline",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.v0.4.1e.cloud.architecture.refactor",
+      "parentId": "section.v0.4.1.private.cloud.and.cross.device.synchronization",
+      "text": "v0.4.1E — Cloud Architecture Refactor"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cloudprovider.limited.primarily.to.react.state.orchestration",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "CloudProvider limited primarily to React state orchestration",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.cloud.snapshot.service",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Dedicated cloud snapshot service",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.cloud.comparison.service",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Dedicated cloud comparison service",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.cloud.metadata.service",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Dedicated cloud metadata service",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.cloud.synchronization.service",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Dedicated cloud synchronization service",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dedicated.cloud.fingerprint.utility",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Dedicated cloud fingerprint utility",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.synchronization.metadata.in.local.storage",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Persistent synchronization metadata in local storage",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.device.name.detection",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Device-name detection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.modular.foundation.for.future.application.modules",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Modular foundation for future application modules",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.safe.version.comparison.preserved.after.refactor",
+      "parentId": "section.v0.4.1e.cloud.architecture.refactor",
+      "title": "Safe version comparison preserved after refactor",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.v0.4.1f.automatic.cloud.sync",
+      "parentId": "section.v0.4.1.private.cloud.and.cross.device.synchronization",
+      "text": "v0.4.1F — Automatic Cloud Sync"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.dirty.state.tracker",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Persistent dirty-state tracker",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dirty.revision.counter",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Dirty revision counter",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dirty.timestamp",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Dirty timestamp",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dirty.tracking.after.successful.work.data.writes",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Dirty tracking after successful work-data writes",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dirty.tracking.for.week.creation",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Dirty tracking for week creation",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dirty.tracking.for.week.deletion",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Dirty tracking for week deletion",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dirty.tracking.for.week.reset",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Dirty tracking for week reset",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dirty.tracking.for.active.week.selection",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Dirty tracking for active-week selection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.revision.safe.dirty.state.clearing",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Revision-safe dirty-state clearing",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debounced.automatic.upload",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Debounced automatic upload",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.2.5.second.quiet.period.before.upload",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "2.5-second quiet period before upload",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.avoid.duplicate.uploads.during.rapid.edits",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Avoid duplicate uploads during rapid edits",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.preserve.edits.made.during.an.active.upload",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Preserve edits made during an active upload",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.retry.after.internet.recovery",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Automatic retry after internet recovery",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.startup.inspection",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Automatic startup inspection",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.upload.when.local.data.is.unambiguously.newer",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Automatic upload when local data is unambiguously newer",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.upload.when.the.cloud.is.empty",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Automatic upload when the cloud is empty",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automatic.download.when.cloud.data.is.unambiguously.newer",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Automatic download when cloud data is unambiguously newer",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.no.automatic.action.when.versions.are.equal",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "No automatic action when versions are equal",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.no.automatic.overwrite.during.conflict",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "No automatic overwrite during conflict",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.offline.local.work.remains.available",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Offline local work remains available",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.manual.upload.and.download.remain.available",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Manual upload and download remain available",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ready.for.normal.pc.and.linux.laptop.workflow",
+      "parentId": "section.v0.4.1f.automatic.cloud.sync",
+      "title": "Ready for normal PC and Linux-laptop workflow",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.future.cloud.improvements",
+      "parentId": "section.v0.4.1.private.cloud.and.cross.device.synchronization",
+      "text": "Future cloud improvements"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.synchronization.activity.history",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Synchronization activity history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.named.custom.devices",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Named custom devices",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.pending.change.counter",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Pending-change counter",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.record.level.change.queue",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Record-level change queue",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.changed.field.summary",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Changed-field summary",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.selective.module.synchronization",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Selective module synchronization",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cloud.snapshot.history",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Cloud snapshot history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.restore.a.previous.cloud.snapshot",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Restore a previous cloud snapshot",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.encrypted.cloud.payload",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Encrypted cloud payload",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.background.synchronization.for.an.installed.pwa",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Background synchronization for an installed PWA",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.additional.conflict.difference.preview",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Additional conflict-difference preview",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cloud.diagnostics.page",
+      "parentId": "section.future.cloud.improvements",
+      "title": "Cloud diagnostics page",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.5.x.expenses.module",
+      "parentId": null,
+      "text": "v0.5.x — Expenses Module"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.expense.model",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Expense model",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.expense.entries",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Expense entries",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.categories",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Categories",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.payment.methods",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Payment methods",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.recurring.expenses",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Recurring expenses",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.monthly.summaries",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Monthly summaries",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.expense.statistics",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Expense statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.expense.storage",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Persistent expense storage",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.expense.summary",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Dashboard expense summary",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.quick.expense.entry",
+      "parentId": "section.v0.5.x.expenses.module",
+      "title": "Dashboard quick expense entry",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.6.x.debts.module",
+      "parentId": null,
+      "text": "v0.6.x — Debts Module"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debt.model",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Debt model",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debt.entries",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Debt entries",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.repayment.history",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Repayment history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.payment.schedules",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Payment schedules",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remaining.balance.calculations",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Remaining-balance calculations",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debt.statistics",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Debt statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.debt.storage",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Persistent debt storage",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.debt.summary",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Dashboard debt summary",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.quick.repayment.entry",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Dashboard quick repayment entry",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reuse.financial.priority.allocation.logic.for.repayments",
+      "parentId": "section.v0.6.x.debts.module",
+      "title": "Reuse financial-priority allocation logic for repayments",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.7.x.portfolio.module",
+      "parentId": null,
+      "text": "v0.7.x — Portfolio Module"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.model",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Portfolio model",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.accounts",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Accounts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cash.balances",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Cash balances",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.currencies",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Currencies",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.assets",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Assets",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.snapshots",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Portfolio snapshots",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.history",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Portfolio history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.statistics",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Portfolio statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.persistent.portfolio.storage",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Persistent portfolio storage",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.portfolio.summary",
+      "parentId": "section.v0.7.x.portfolio.module",
+      "title": "Dashboard portfolio summary",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.8.x.health.and.training",
+      "parentId": null,
+      "text": "v0.8.x — Health and Training"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.body.weight.measurements",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Body-weight measurements",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.body.measurements",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Body measurements",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.measurement.history",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Measurement history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.workout.entries",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Workout entries",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.exercise.library",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Exercise library",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.training.plans",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Training plans",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.training.statistics",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Training statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weight.charts",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Weight charts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.measurement.charts",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Measurement charts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.hydration.tracking",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Hydration tracking",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.habit.tracking",
+      "parentId": "section.v0.8.x.health.and.training",
+      "title": "Habit tracking",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.future.quality.pass.visual.density.and.daily.usability",
+      "parentId": null,
+      "text": "Future Quality Pass — Visual Density and Daily Usability"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.general.quality",
+      "parentId": "section.future.quality.pass.visual.density.and.daily.usability",
+      "text": "General quality"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.empty.state.system",
+      "parentId": "section.general.quality",
+      "title": "Shared empty-state system",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.button.system.2",
+      "parentId": "section.general.quality",
+      "title": "Shared button system",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.error.route.2",
+      "parentId": "section.general.quality",
+      "title": "Error route",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.not.found.page.2",
+      "parentId": "section.general.quality",
+      "title": "Not-found page",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.centralized.application.version.display.2",
+      "parentId": "section.general.quality",
+      "title": "Centralized application version display",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.loading.states",
+      "parentId": "section.general.quality",
+      "title": "Consistent loading states",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.confirmation.dialogs",
+      "parentId": "section.general.quality",
+      "title": "Consistent confirmation dialogs",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.keyboard.accessibility.review",
+      "parentId": "section.general.quality",
+      "title": "Keyboard accessibility review",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.responsive.layout.review",
+      "parentId": "section.general.quality",
+      "title": "Responsive-layout review",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.light.theme.contrast.review",
+      "parentId": "section.general.quality",
+      "title": "Light-theme contrast review",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dark.theme.contrast.review",
+      "parentId": "section.general.quality",
+      "title": "Dark-theme contrast review",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.production.bundle.code.splitting.2",
+      "parentId": "section.general.quality",
+      "title": "Production bundle code splitting",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.lazy.loading.for.application.modules.2",
+      "parentId": "section.general.quality",
+      "title": "Lazy loading for application modules",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.animation.and.transition.consistency",
+      "parentId": "section.general.quality",
+      "title": "Animation and transition consistency",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.long.term.usability.review.based.on.real.daily.work",
+      "parentId": "section.general.quality",
+      "title": "Long-term usability review based on real daily work",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.work.performance.indicators",
+      "parentId": "section.future.quality.pass.visual.density.and.daily.usability",
+      "text": "Work performance indicators"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.green.upward.indicator.for.average.performance.at.or.above.43.0.messages.hour",
+      "parentId": "section.work.performance.indicators",
+      "title": "Green upward indicator for average performance at or above 43.0 messages/hour",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.yellow.neutral.indicator.for.average.performance.from.36.0.to.below.43.0.messages.hour",
+      "parentId": "section.work.performance.indicators",
+      "title": "Yellow neutral indicator for average performance from 36.0 to below 43.0 messages/hour",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.red.downward.indicator.for.average.performance.below.36.0.messages.hour",
+      "parentId": "section.work.performance.indicators",
+      "title": "Red downward indicator for average performance below 36.0 messages/hour",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.messages.per.hour.indicators.on.dashboard",
+      "parentId": "section.work.performance.indicators",
+      "title": "Consistent messages-per-hour indicators on Dashboard",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.messages.per.hour.indicators.on.work.page",
+      "parentId": "section.work.performance.indicators",
+      "title": "Consistent messages-per-hour indicators on Work page",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.messages.per.hour.indicators.in.daily.history",
+      "parentId": "section.work.performance.indicators",
+      "title": "Consistent messages-per-hour indicators in daily history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.messages.per.hour.indicators.in.weekly.history",
+      "parentId": "section.work.performance.indicators",
+      "title": "Consistent messages-per-hour indicators in weekly history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.consistent.messages.per.hour.indicators.in.future.statistics",
+      "parentId": "section.work.performance.indicators",
+      "title": "Consistent messages-per-hour indicators in future statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.work.page.layout.refinement",
+      "parentId": "section.future.quality.pass.visual.density.and.daily.usability",
+      "text": "Work-page layout refinement"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.three.column.wide.screen.work.layout",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Three-column wide-screen Work layout",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.approximately.40.active.week.daily.history",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Approximately 40% active-week daily history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.approximately.30.active.week.summary",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Approximately 30% active-week summary",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.approximately.30.long.term.week.history",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Approximately 30% long-term week history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.keep.all.three.areas.visible.on.1920.1080.displays",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Keep all three areas visible on 1920×1080 displays",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.compact.spreadsheet.like.daily.history.density",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Compact spreadsheet-like daily-history density",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.content.sized.columns.for.date.beers.rating.held.messages.messages.hours.average.and.blocks",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Content-sized columns for date, beers, rating, held messages, messages, hours, average and blocks",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reduced.unnecessary.horizontal.spacing",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Reduced unnecessary horizontal spacing",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.held.message.count.displayed.between.rating.and.regular.messages",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Held-message count displayed between rating and regular messages",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.individual.weekly.eur.pln.rate.retained",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Individual weekly EUR/PLN rate retained",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.eur.pln.rate.integrated.visually.into.the.active.week.panel",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Weekly EUR/PLN rate integrated visually into the active-week panel",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.improved.weekly.settings.panel.styling",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Improved weekly-settings panel styling",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.faster.daily.scanning.during.normal.work",
+      "parentId": "section.work.page.layout.refinement",
+      "title": "Faster daily scanning during normal work",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.future.daily.goals.and.reminder.system",
+      "parentId": null,
+      "text": "Future Daily Goals and Reminder System"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.goal.management",
+      "parentId": "section.future.daily.goals.and.reminder.system",
+      "text": "Goal management"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.goal.data.model",
+      "parentId": "section.goal.management",
+      "title": "Daily-goal data model",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.default.morning.goal",
+      "parentId": "section.goal.management",
+      "title": "Default morning goal",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.default.evening.goal",
+      "parentId": "section.goal.management",
+      "title": "Default evening goal",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.default.work.goal",
+      "parentId": "section.goal.management",
+      "title": "Default work goal",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.default.czech.study.goal",
+      "parentId": "section.goal.management",
+      "title": "Default Czech-study goal",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.default.training.goal",
+      "parentId": "section.goal.management",
+      "title": "Default training goal",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.add.custom.daily.goals",
+      "parentId": "section.goal.management",
+      "title": "Add custom daily goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.rename.daily.goals",
+      "parentId": "section.goal.management",
+      "title": "Rename daily goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reorder.daily.goals",
+      "parentId": "section.goal.management",
+      "title": "Reorder daily goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.lock.daily.goals",
+      "parentId": "section.goal.management",
+      "title": "Lock daily goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.unlock.daily.goals",
+      "parentId": "section.goal.management",
+      "title": "Unlock daily goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.remove.unlocked.daily.goals",
+      "parentId": "section.goal.management",
+      "title": "Remove unlocked daily goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.mark.goals.as.completed",
+      "parentId": "section.goal.management",
+      "title": "Mark goals as completed",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.completion.history",
+      "parentId": "section.goal.management",
+      "title": "Daily completion history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.per.day.notes",
+      "parentId": "section.goal.management",
+      "title": "Per-day notes",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.reminder.workflow",
+      "parentId": "section.future.daily.goals.and.reminder.system",
+      "text": "Reminder workflow"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.morning.reminder.around.10.00",
+      "parentId": "section.reminder.workflow",
+      "title": "Morning reminder around 10:00",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.evening.reminder.around.22.00",
+      "parentId": "section.reminder.workflow",
+      "title": "Evening reminder around 22:00",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.show.an.overdue.reminder.after.the.next.login",
+      "parentId": "section.reminder.workflow",
+      "title": "Show an overdue reminder after the next login",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.catch.up.missing.evening.entries",
+      "parentId": "section.reminder.workflow",
+      "title": "Catch up missing evening entries",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.catch.up.missing.weekend.entries",
+      "parentId": "section.reminder.workflow",
+      "title": "Catch up missing weekend entries",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.detect.a.long.period.without.opening.chb",
+      "parentId": "section.reminder.workflow",
+      "title": "Detect a long period without opening CHB",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.review.missed.days.after.returning",
+      "parentId": "section.reminder.workflow",
+      "title": "Review missed days after returning",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.configurable.reminder.behavior",
+      "parentId": "section.reminder.workflow",
+      "title": "Configurable reminder behavior",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.browser.notification.support",
+      "parentId": "section.reminder.workflow",
+      "title": "Browser notification support",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.installed.pwa.notification.support",
+      "parentId": "section.reminder.workflow",
+      "title": "Installed-PWA notification support",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.completion.statistics",
+      "parentId": "section.future.daily.goals.and.reminder.system",
+      "text": "Completion statistics"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.completed.versus.expected.presentation.such.as.3.10",
+      "parentId": "section.completion.statistics",
+      "title": "Completed-versus-expected presentation such as 3/10",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.red.completion.state.below.50",
+      "parentId": "section.completion.statistics",
+      "title": "Red completion state below 50%",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.yellow.completion.state.from.51.to.85",
+      "parentId": "section.completion.statistics",
+      "title": "Yellow completion state from 51% to 85%",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.green.completion.state.from.86.to.100",
+      "parentId": "section.completion.statistics",
+      "title": "Green completion state from 86% to 100%",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.goal.specific.completion.percentage",
+      "parentId": "section.completion.statistics",
+      "title": "Goal-specific completion percentage",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.morning.routine.statistics",
+      "parentId": "section.completion.statistics",
+      "title": "Morning-routine statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.evening.routine.statistics",
+      "parentId": "section.completion.statistics",
+      "title": "Evening-routine statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.goal.statistics",
+      "parentId": "section.completion.statistics",
+      "title": "Work-goal statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.czech.study.statistics",
+      "parentId": "section.completion.statistics",
+      "title": "Czech-study statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.training.statistics.2",
+      "parentId": "section.completion.statistics",
+      "title": "Training statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.and.monthly.consistency",
+      "parentId": "section.completion.statistics",
+      "title": "Weekly and monthly consistency",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.streak.tracking",
+      "parentId": "section.completion.statistics",
+      "title": "Streak tracking",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.9.x.chb.intelligence",
+      "parentId": null,
+      "text": "v0.9.x — CHB Intelligence"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.daily.and.weekly.insights",
+      "parentId": "section.v0.9.x.chb.intelligence",
+      "text": "Daily and weekly insights"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.insight",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Daily Insight",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.insight",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Weekly Insight",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.comparison.with.the.previous.week",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Comparison with the previous week",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.comparison.with.four.week.average",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Comparison with four-week average",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.comparison.with.eight.week.average",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Comparison with eight-week average",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.best.result.detection",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Best result detection",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.personal.record.detection",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Personal-record detection",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.streak.detection",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Streak detection",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.goal.arrival.estimate",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Goal-arrival estimate",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.fixed.threshold.arrival.estimate",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Fixed-threshold arrival estimate",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.predicted.weekly.earnings",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Predicted weekly earnings",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.predicted.weekly.result",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Predicted weekly result",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ahead.of.plan.and.behind.plan.explanation",
+      "parentId": "section.daily.and.weekly.insights",
+      "title": "Ahead-of-plan and behind-plan explanation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.chb.coach",
+      "parentId": "section.v0.9.x.chb.intelligence",
+      "text": "CHB Coach"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.data.driven.coaching.without.generic.motivational.quotes",
+      "parentId": "section.chb.coach",
+      "title": "Data-driven coaching without generic motivational quotes",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.best.working.hour.detection",
+      "parentId": "section.chb.coach",
+      "title": "Best working-hour detection",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.best.weekday.detection",
+      "parentId": "section.chb.coach",
+      "title": "Best weekday detection",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.relationship.between.work.duration.and.rating",
+      "parentId": "section.chb.coach",
+      "title": "Relationship between work duration and rating",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.relationship.between.working.hours.and.messages.per.hour",
+      "parentId": "section.chb.coach",
+      "title": "Relationship between working hours and messages per hour",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.relationship.between.alcohol.count.and.work.outcomes.when.supported.by.data",
+      "parentId": "section.chb.coach",
+      "title": "Relationship between alcohol count and work outcomes when supported by data",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.detection.of.sustainable.performance.ranges",
+      "parentId": "section.chb.coach",
+      "title": "Detection of sustainable performance ranges",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.calm.contextual.feedback.on.weaker.days",
+      "parentId": "section.chb.coach",
+      "title": "Calm contextual feedback on weaker days",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.positive.progress.framing.based.on.historical.evidence",
+      "parentId": "section.chb.coach",
+      "title": "Positive progress framing based on historical evidence",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.only.show.conclusions.supported.by.sufficient.personal.data",
+      "parentId": "section.chb.coach",
+      "title": "Only show conclusions supported by sufficient personal data",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.trends.and.predictions",
+      "parentId": "section.v0.9.x.chb.intelligence",
+      "text": "Trends and predictions"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.four.week.trends",
+      "parentId": "section.trends.and.predictions",
+      "title": "Four-week trends",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.eight.week.trends",
+      "parentId": "section.trends.and.predictions",
+      "title": "Eight-week trends",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.monthly.trends",
+      "parentId": "section.trends.and.predictions",
+      "title": "Monthly trends",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.yearly.trends",
+      "parentId": "section.trends.and.predictions",
+      "title": "Yearly trends",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.performance.growth.rate",
+      "parentId": "section.trends.and.predictions",
+      "title": "Performance-growth rate",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.performance.decline.rate",
+      "parentId": "section.trends.and.predictions",
+      "title": "Performance-decline rate",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.earnings.forecast",
+      "parentId": "section.trends.and.predictions",
+      "title": "Earnings forecast",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.goal.completion.forecast",
+      "parentId": "section.trends.and.predictions",
+      "title": "Goal-completion forecast",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.record.probability.estimate",
+      "parentId": "section.trends.and.predictions",
+      "title": "Record-probability estimate",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.confidence.indicators.for.predictions",
+      "parentId": "section.trends.and.predictions",
+      "title": "Confidence indicators for predictions",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.chb.timeline",
+      "parentId": "section.v0.9.x.chb.intelligence",
+      "text": "CHB Timeline"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.personal.achievement.timeline",
+      "parentId": "section.chb.timeline",
+      "title": "Personal achievement timeline",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.weekly.record.markers",
+      "parentId": "section.chb.timeline",
+      "title": "Weekly record markers",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.earnings.record.markers",
+      "parentId": "section.chb.timeline",
+      "title": "Earnings-record markers",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.rating.record.markers",
+      "parentId": "section.chb.timeline",
+      "title": "Rating-record markers",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.performance.record.markers",
+      "parentId": "section.chb.timeline",
+      "title": "Performance-record markers",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.longest.streak.markers",
+      "parentId": "section.chb.timeline",
+      "title": "Longest-streak markers",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.first.fixed.threshold.achievement",
+      "parentId": "section.chb.timeline",
+      "title": "First fixed-threshold achievement",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.major.debt.repayment.milestones",
+      "parentId": "section.chb.timeline",
+      "title": "Major debt-repayment milestones",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.milestones",
+      "parentId": "section.chb.timeline",
+      "title": "Portfolio milestones",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.health.and.training.milestones",
+      "parentId": "section.chb.timeline",
+      "title": "Health and training milestones",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.first.cloud.synchronization.milestone",
+      "parentId": "section.chb.timeline",
+      "title": "First cloud synchronization milestone",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.first.backup.milestone",
+      "parentId": "section.chb.timeline",
+      "title": "First backup milestone",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 3,
+      "id": "section.cross.module.intelligence",
+      "parentId": "section.v0.9.x.chb.intelligence",
+      "text": "Cross-module intelligence"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.expenses.intelligence",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Expenses Intelligence",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debts.intelligence",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Debts Intelligence",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.intelligence",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Portfolio Intelligence",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.health.intelligence",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Health Intelligence",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.daily.goal.consistency.insights",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Daily-goal consistency insights",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.and.health.relationships",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Work and health relationships",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.and.spending.relationships",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Work and spending relationships",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debt.repayment.forecasts",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Debt-repayment forecasts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.personal.recommendations.based.only.on.recorded.data",
+      "parentId": "section.cross.module.intelligence",
+      "title": "Personal recommendations based only on recorded data",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.future.cross.module.statistics",
+      "parentId": null,
+      "text": "Future Cross-module Statistics"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.shared.date.filters",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Shared date filters",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.and.finance.comparisons",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Work and finance comparisons",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.support.for.mother.statistics",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Support-for-mother statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.payment.day.statistics",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Payment-day statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debt.repayment.statistics",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Debt-repayment statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.portfolio.history.2",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Portfolio history",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.health.and.work.comparisons",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Health and work comparisons",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.dashboard.trend.cards",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Dashboard trend cards",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cross.module.charts",
+      "parentId": "section.future.cross.module.statistics",
+      "title": "Cross-module charts",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.future.business.module",
+      "parentId": null,
+      "text": "Future business module"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.esoteric.service.revenue",
+      "parentId": "section.future.business.module",
+      "title": "Esoteric-service revenue",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.clients",
+      "parentId": "section.future.business.module",
+      "title": "Clients",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.orders",
+      "parentId": "section.future.business.module",
+      "title": "Orders",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.service.costs",
+      "parentId": "section.future.business.module",
+      "title": "Service costs",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.business.goals",
+      "parentId": "section.future.business.module",
+      "title": "Business goals",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.business.statistics",
+      "parentId": "section.future.business.module",
+      "title": "Business statistics",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.business.dashboard.summary",
+      "parentId": "section.future.business.module",
+      "title": "Business Dashboard summary",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.future.synchronization.and.distribution",
+      "parentId": null,
+      "text": "Future synchronization and distribution"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.pwa.manifest",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "PWA manifest",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.service.worker",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Service worker",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.offline.application.shell",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Offline application shell",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.installable.android.application",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Installable Android application",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.installable.windows.application",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Installable Windows application",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.installable.linux.application",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Installable Linux application",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.github.pages.deployment",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "GitHub Pages deployment",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.automated.deployment",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Automated deployment",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.production.build.for.repository.subpath",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Production build for repository subpath",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.static.hosting.compatible.routing",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Static-hosting-compatible routing",
+      "status": "completed",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.synchronization.requirements",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Synchronization requirements",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.conflict.resolution.strategy",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Conflict-resolution strategy",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.optional.cloud.provider",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Optional cloud provider",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cross.device.authentication",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Cross-device authentication",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.encrypted.remote.backup",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Encrypted remote backup",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.private.deployment.strategy",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Private deployment strategy",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.access.control.for.future.sensitive.remote.data",
+      "parentId": "section.future.synchronization.and.distribution",
+      "title": "Access control for future sensitive remote data",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v1.0.0.stable.release",
+      "parentId": null,
+      "text": "v1.0.0 — Stable Release"
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stable.work.module",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Stable Work module",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stable.expenses.module",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Stable Expenses module",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stable.debts.module",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Stable Debts module",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stable.portfolio.module",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Stable Portfolio module",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stable.health.module",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Stable Health module",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.stable.statistics.module",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Stable Statistics module",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.reliable.backup.and.restore",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Reliable backup and restore",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.cross.device.installation",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Cross-device installation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.production.deployment",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Production deployment",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    },
+    {
+      "type": "task",
+      "id": "roadmap.production.documentation",
+      "parentId": "section.v1.0.0.stable.release",
+      "title": "Production documentation",
+      "status": "planned",
+      "priority": "normal",
+      "tags": []
+    }
+  ]
+}

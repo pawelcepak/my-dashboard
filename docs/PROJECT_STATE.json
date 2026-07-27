@@ -1,0 +1,93 @@
+{
+  "project": {
+    "$schema": "../schemas/project.schema.json",
+    "schemaVersion": 1,
+    "id": "chb",
+    "name": "CHB",
+    "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
+    "repository": "my-dashboard",
+    "currentVersion": "0.5.3",
+    "currentSprint": "0.5.4A-D",
+    "status": "active",
+    "architectureVersion": 1,
+    "documentationModel": "ai-project-interface",
+    "sourceOfTruth": "docs/data",
+    "generatedDocuments": [
+      "docs/CHANGELOG.md",
+      "docs/ROADMAP.md",
+      "docs/AI_CONTEXT.md",
+      "docs/PROJECT_STATE.json"
+    ],
+    "stack": [
+      "React 19",
+      "TypeScript 6",
+      "Vite 8",
+      "Tailwind CSS 4",
+      "Dexie 4",
+      "Supabase",
+      "React Router 7"
+    ],
+    "platforms": ["Windows 11", "Xubuntu", "Android browser", "GitHub Pages"],
+    "principles": [
+      "Local-first and offline-capable",
+      "Cloud synchronization must not silently overwrite conflicts",
+      "Daily WorkDay records are the source of truth for work data",
+      "Tables are the primary daily work interface",
+      "Preferences use the centralized app settings layer",
+      "Generated Markdown is output; docs/data JSON is the source of truth",
+      "AI integration must remain vendor-neutral",
+      "The application must remain usable on older hardware"
+    ]
+  },
+  "context": {
+    "$schema": "../schemas/current-context.schema.json",
+    "schemaVersion": 1,
+    "currentVersion": "0.5.3",
+    "currentSprint": "0.5.4A-D",
+    "currentGoal": "Build the machine-readable documentation foundation, validation, generators and release commands.",
+    "stableState": true,
+    "lastCompleted": [
+      "Spreadsheet keyboard navigation",
+      "Live accent themes",
+      "Dashboard weekly goals for 945 PLN and 40 hours",
+      "Experimental CHB Intelligence"
+    ],
+    "nextTasks": [
+      "Validate all docs/data files",
+      "Generate CHANGELOG.md and ROADMAP.md",
+      "Generate AI_CONTEXT.md and PROJECT_STATE.json",
+      "Add release preparation scripts"
+    ],
+    "knownIssues": [
+      {
+        "id": "issue.intelligence.beer-comparison",
+        "severity": "low",
+        "status": "planned",
+        "description": "Experimental beer comparison may present confusing values and requires a later quality pass."
+      }
+    ],
+    "constraints": [
+      "Preserve local-first operation",
+      "Preserve Supabase snapshot and backup compatibility",
+      "Do not remove backward-compatible fields without a migration",
+      "Keep the application responsive on an older laptop",
+      "Do not make generated Markdown the source of truth"
+    ],
+    "importantFiles": [
+      "docs/data/project.json",
+      "docs/data/releases.json",
+      "docs/data/roadmap.json",
+      "docs/data/features.json",
+      "docs/data/decisions.json",
+      "docs/data/current-context.json"
+    ]
+  },
+  "summary": {
+    "roadmapTasks": 649,
+    "completedRoadmapTasks": 345,
+    "plannedRoadmapTasks": 304,
+    "features": 649,
+    "acceptedDecisions": 6,
+    "releases": 6
+  }
+}

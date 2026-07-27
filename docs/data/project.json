@@ -1,0 +1,40 @@
+{
+  "$schema": "../schemas/project.schema.json",
+  "schemaVersion": 1,
+  "id": "chb",
+  "name": "CHB",
+  "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
+  "repository": "my-dashboard",
+  "currentVersion": "0.5.3",
+  "currentSprint": "0.5.4A-D",
+  "status": "active",
+  "architectureVersion": 1,
+  "documentationModel": "ai-project-interface",
+  "sourceOfTruth": "docs/data",
+  "generatedDocuments": [
+    "docs/CHANGELOG.md",
+    "docs/ROADMAP.md",
+    "docs/AI_CONTEXT.md",
+    "docs/PROJECT_STATE.json"
+  ],
+  "stack": [
+    "React 19",
+    "TypeScript 6",
+    "Vite 8",
+    "Tailwind CSS 4",
+    "Dexie 4",
+    "Supabase",
+    "React Router 7"
+  ],
+  "platforms": ["Windows 11", "Xubuntu", "Android browser", "GitHub Pages"],
+  "principles": [
+    "Local-first and offline-capable",
+    "Cloud synchronization must not silently overwrite conflicts",
+    "Daily WorkDay records are the source of truth for work data",
+    "Tables are the primary daily work interface",
+    "Preferences use the centralized app settings layer",
+    "Generated Markdown is output; docs/data JSON is the source of truth",
+    "AI integration must remain vendor-neutral",
+    "The application must remain usable on older hardware"
+  ]
+}
