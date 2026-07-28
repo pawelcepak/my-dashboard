@@ -58,12 +58,12 @@
       "title": "Portfolio CSV import result was discarded by the hook",
       "severity": "high",
       "status": "resolved",
-      "module": "portfolio",
       "description": "The generic action wrapper returned Promise<void>, while the CSV panel required the import summary.",
       "workaround": "Install v0.6.1a.",
       "plannedResolution": "Resolved in v0.6.1a.",
       "relatedFiles": ["src/modules/portfolio/hooks/usePortfolio.ts"],
-      "relatedFeatures": ["feature.portfolio.ux.hotfix.build"]
+      "relatedFeatures": ["feature.portfolio.ux.hotfix.build"],
+      "moduleId": "module.portfolio"
     }
   ]
 }

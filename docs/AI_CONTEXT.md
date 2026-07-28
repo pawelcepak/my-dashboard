@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.6.2`
-- Current sprint: `0.6.2`
+- Current version: `0.6.3A`
+- Current sprint: `0.6.3A`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Allow the bottom navigation to be reordered and individually colored without editing code.
+Remove duplicated active-week metadata and present local status, gross EUR and gross PLN in one ordered Work summary strip.
 
 ## Non-negotiable principles
 
@@ -44,9 +44,9 @@ Allow the bottom navigation to be reordered and individually colored without edi
 
 ## Next tasks
 
-- Test navigation order on desktop and mobile
-- Test per-tab colors
-- Verify preferences synchronize between devices
+- Verify Work week controls remain functional
+- Verify gross PLN uses the active week EUR/PLN rate
+- Confirm responsive layout on desktop and mobile
 
 ## Open and accepted issues
 

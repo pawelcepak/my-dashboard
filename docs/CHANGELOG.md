@@ -218,6 +218,9 @@ All notable changes to CHB will be documented in this file.
 - Portfolio history uses a denser, scrollable table.
 - Mobile navigation now uses the first four user-ordered tabs as primary items.
 - Desktop bottom navigation scrolls horizontally when more tabs are added.
+- Work active-week summary now presents data status, gross EUR and gross PLN in that order.
+- Work week management no longer repeats the active week label and date range already represented in the page header and active-week panel.
+- Gross PLN in the active-week summary is derived from gross EUR and the exchange rate assigned to the selected week.
 
 ### Fixed
 

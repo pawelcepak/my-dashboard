@@ -833,6 +833,7 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Project-data validation and consistency checks
 - [x] Deterministic CHANGELOG and ROADMAP generator
 - [x] Automated release preparation command
+
 ### v0.5.4E-F — AI Project Interface
 
 - [x] Machine-readable module registry
@@ -841,6 +842,7 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Generated AGENTS.md adapter
 - [x] Generated CLAUDE.md adapter
 - [x] Generated Cursor project rules
+
 ## v0.5.5 — Work UX Improvements
 
 - [x] Current-time defaults for new work sessions
@@ -887,3 +889,8 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Manage tab order and colors without code
 - [x] Reorder tabs by drag and touch-friendly controls
 - [x] Adapt desktop and mobile bars to the configured order
+
+## v0.6.3A — Work UX Cleanup
+
+- [x] Show Work data status, gross EUR and gross PLN in one ordered strip
+- [x] Remove duplicated active-week label and date range from the week manager

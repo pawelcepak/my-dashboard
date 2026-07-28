@@ -1,7 +1,7 @@
 {
   "interfaceVersion": 1,
-  "generatedFromVersion": "0.6.2",
-  "generatedFromSprint": "0.6.2",
+  "generatedFromVersion": "0.6.3A",
+  "generatedFromSprint": "0.6.3A",
   "project": {
     "$schema": "../schemas/project.schema.json",
     "schemaVersion": 1,
@@ -9,8 +9,8 @@
     "name": "CHB",
     "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
     "repository": "my-dashboard",
-    "currentVersion": "0.6.2",
-    "currentSprint": "0.6.2",
+    "currentVersion": "0.6.3A",
+    "currentSprint": "0.6.3A",
     "status": "active",
     "architectureVersion": 2,
     "documentationModel": "ai-project-interface",
@@ -30,12 +30,7 @@
       "Supabase",
       "React Router 7"
     ],
-    "platforms": [
-      "Windows 11",
-      "Xubuntu",
-      "Android browser",
-      "GitHub Pages"
-    ],
+    "platforms": ["Windows 11", "Xubuntu", "Android browser", "GitHub Pages"],
     "principles": [
       "Local-first and offline-capable",
       "Cloud synchronization must not silently overwrite conflicts",
@@ -57,18 +52,19 @@
   "context": {
     "$schema": "../schemas/current-context.schema.json",
     "schemaVersion": 1,
-    "currentVersion": "0.6.2",
-    "currentSprint": "0.6.2",
-    "currentGoal": "Allow the bottom navigation to be reordered and individually colored without editing code.",
+    "currentVersion": "0.6.3A",
+    "currentSprint": "0.6.3A",
+    "currentGoal": "Remove duplicated active-week metadata and present local status, gross EUR and gross PLN in one ordered Work summary strip.",
     "stableState": true,
     "lastCompleted": [
-      "Portfolio UX A-D",
-      "Portfolio UX hotfix"
+      "Customizable bottom navigation",
+      "Portfolio history verification",
+      "Portfolio UX stabilization"
     ],
     "nextTasks": [
-      "Test navigation order on desktop and mobile",
-      "Test per-tab colors",
-      "Verify preferences synchronize between devices"
+      "Verify Work week controls remain functional",
+      "Verify gross PLN uses the active week EUR/PLN rate",
+      "Confirm responsive layout on desktop and mobile"
     ],
     "knownIssues": [
       {
@@ -114,13 +110,9 @@
       "status": "active",
       "description": "Routing, layout, navigation, theme and global providers.",
       "rootPath": "src/app",
-      "entryFiles": [
-        "src/app/router.tsx"
-      ],
+      "entryFiles": ["src/app/router.tsx"],
       "dependsOn": [],
-      "aiNotes": [
-        "Preserve HashRouter compatibility for GitHub Pages."
-      ]
+      "aiNotes": ["Preserve HashRouter compatibility for GitHub Pages."]
     },
     {
       "id": "module.dashboard",
@@ -128,16 +120,9 @@
       "status": "active",
       "description": "Central daily interface and weekly overview.",
       "rootPath": "src/modules/dashboard",
-      "entryFiles": [
-        "src/modules/dashboard/index.tsx"
-      ],
-      "dependsOn": [
-        "module.work",
-        "module.settings"
-      ],
-      "aiNotes": [
-        "Dashboard edits the same WorkDay records as the Work module."
-      ]
+      "entryFiles": ["src/modules/dashboard/index.tsx"],
+      "dependsOn": ["module.work", "module.settings"],
+      "aiNotes": ["Dashboard edits the same WorkDay records as the Work module."]
     },
     {
       "id": "module.work",
@@ -145,14 +130,8 @@
       "status": "active",
       "description": "Work weeks, daily records, earnings, goals, tables and experimental intelligence.",
       "rootPath": "src/modules/work",
-      "entryFiles": [
-        "src/modules/work/pages/WorkPage.tsx"
-      ],
-      "dependsOn": [
-        "module.database",
-        "module.settings",
-        "module.cloud"
-      ],
+      "entryFiles": ["src/modules/work/pages/WorkPage.tsx"],
+      "dependsOn": ["module.database", "module.settings", "module.cloud"],
       "aiNotes": [
         "WorkDay is the source of truth for daily work values.",
         "Legacy WorkWeek.heldMessages remains for compatibility."
@@ -164,13 +143,8 @@
       "status": "active",
       "description": "Application preferences, backup and restore.",
       "rootPath": "src/modules/settings",
-      "entryFiles": [
-        "src/modules/settings/index.tsx"
-      ],
-      "dependsOn": [
-        "module.database",
-        "module.cloud"
-      ],
+      "entryFiles": ["src/modules/settings/index.tsx"],
+      "dependsOn": ["module.database", "module.cloud"],
       "aiNotes": [
         "Components must use appSettingsService/useAppSettings instead of direct Dexie reads for preferences."
       ]
@@ -181,15 +155,9 @@
       "status": "active",
       "description": "Private Supabase snapshot synchronization and conflict protection.",
       "rootPath": "src/app/cloud",
-      "entryFiles": [
-        "src/app/cloud/CloudProvider.tsx"
-      ],
-      "dependsOn": [
-        "module.database"
-      ],
-      "aiNotes": [
-        "Never silently overwrite a detected two-sided conflict."
-      ]
+      "entryFiles": ["src/app/cloud/CloudProvider.tsx"],
+      "dependsOn": ["module.database"],
+      "aiNotes": ["Never silently overwrite a detected two-sided conflict."]
     },
     {
       "id": "module.database",
@@ -197,13 +165,9 @@
       "status": "active",
       "description": "Dexie/IndexedDB schema, migrations and local-first persistence.",
       "rootPath": "src/database",
-      "entryFiles": [
-        "src/database/database.ts"
-      ],
+      "entryFiles": ["src/database/database.ts"],
       "dependsOn": [],
-      "aiNotes": [
-        "Schema changes require explicit migrations and backup compatibility review."
-      ]
+      "aiNotes": ["Schema changes require explicit migrations and backup compatibility review."]
     },
     {
       "id": "module.expenses",
@@ -212,9 +176,7 @@
       "description": "Future expenses module.",
       "rootPath": "src/modules/expenses",
       "entryFiles": [],
-      "dependsOn": [
-        "module.database"
-      ],
+      "dependsOn": ["module.database"],
       "aiNotes": []
     },
     {
@@ -224,9 +186,7 @@
       "description": "Future debts and repayment module.",
       "rootPath": "src/modules/debts",
       "entryFiles": [],
-      "dependsOn": [
-        "module.database"
-      ],
+      "dependsOn": ["module.database"],
       "aiNotes": []
     },
     {
@@ -235,13 +195,8 @@
       "status": "active",
       "description": "Income and expense ledger, balances, tags, statistics and CSV import.",
       "rootPath": "src/modules/portfolio",
-      "entryFiles": [
-        "src/modules/portfolio/index.tsx"
-      ],
-      "dependsOn": [
-        "module.database",
-        "module.cloud"
-      ],
+      "entryFiles": ["src/modules/portfolio/index.tsx"],
+      "dependsOn": ["module.database", "module.cloud"],
       "aiNotes": [
         "Portfolio balance is derived from the initial balance and chronologically ordered transactions.",
         "Transactions store positive amounts; type determines the signed ledger value."
@@ -254,9 +209,7 @@
       "description": "Future cross-module statistics and charts.",
       "rootPath": "src/modules/statistics",
       "entryFiles": [],
-      "dependsOn": [
-        "module.work"
-      ],
+      "dependsOn": ["module.work"],
       "aiNotes": []
     }
   ],
@@ -270,9 +223,7 @@
       "description": "The experimental comparison may present values that are easy to interpret as day counts or strong conclusions when the sample is small.",
       "workaround": "Treat CHB Intelligence as experimental and verify the sample-size labels.",
       "plannedResolution": "Dedicated CHB Intelligence quality pass with clearer units, minimum sample sizes and confidence indicators.",
-      "relatedFiles": [
-        "src/modules/work/components/WorkIntelligencePanel.tsx"
-      ]
+      "relatedFiles": ["src/modules/work/components/WorkIntelligencePanel.tsx"]
     },
     {
       "id": "issue.build.large-main-chunk",
@@ -283,10 +234,7 @@
       "description": "The production bundle currently emits a chunk-size warning after minification.",
       "workaround": "The warning does not block deployment.",
       "plannedResolution": "Add route-level lazy loading and production code splitting during a later quality pass.",
-      "relatedFiles": [
-        "src/app/router.tsx",
-        "vite.config.ts"
-      ]
+      "relatedFiles": ["src/app/router.tsx", "vite.config.ts"]
     },
     {
       "id": "issue.history.placeholder-session-times",
@@ -314,9 +262,7 @@
         "src/modules/settings/services/backupService.ts",
         "src/app/cloud/services/cloudSnapshotService.ts"
       ],
-      "relatedFeatures": [
-        "feature.cloud.legacy-portfolio-normalization"
-      ],
+      "relatedFeatures": ["feature.cloud.legacy-portfolio-normalization"],
       "moduleId": "module.cloud"
     },
     {
@@ -324,16 +270,12 @@
       "title": "Portfolio CSV import result was discarded by the hook",
       "severity": "high",
       "status": "resolved",
-      "module": "portfolio",
       "description": "The generic action wrapper returned Promise<void>, while the CSV panel required the import summary.",
       "workaround": "Install v0.6.1a.",
       "plannedResolution": "Resolved in v0.6.1a.",
-      "relatedFiles": [
-        "src/modules/portfolio/hooks/usePortfolio.ts"
-      ],
-      "relatedFeatures": [
-        "feature.portfolio.ux.hotfix.build"
-      ]
+      "relatedFiles": ["src/modules/portfolio/hooks/usePortfolio.ts"],
+      "relatedFeatures": ["feature.portfolio.ux.hotfix.build"],
+      "moduleId": "module.portfolio"
     }
   ],
   "acceptedDecisions": [
@@ -441,10 +383,10 @@
     }
   ],
   "summary": {
-    "roadmapTasks": 685,
-    "completedRoadmapTasks": 381,
+    "roadmapTasks": 687,
+    "completedRoadmapTasks": 383,
     "plannedRoadmapTasks": 304,
-    "features": 684,
+    "features": 686,
     "activeModules": 7,
     "openIssues": 3,
     "acceptedDecisions": 7,

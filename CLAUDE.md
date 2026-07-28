@@ -10,8 +10,8 @@
 
 ## Current state
 
-- Version: `0.6.2`
-- Sprint: `0.6.2`
+- Version: `0.6.3A`
+- Sprint: `0.6.3A`
 
 ## Mandatory rules
 

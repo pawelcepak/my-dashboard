@@ -7036,6 +7036,34 @@
       "status": "completed",
       "priority": "high",
       "tags": ["navigation", "settings", "ux"]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.6.3a.work.ux.cleanup",
+      "parentId": null,
+      "text": "v0.6.3A — Work UX Cleanup"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.active-week.status-eur-pln",
+      "parentId": "section.v0.6.3a.work.ux.cleanup",
+      "title": "Show Work data status, gross EUR and gross PLN in one ordered strip",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "ux", "finance"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.week-manager.remove-duplicate-metadata",
+      "parentId": "section.v0.6.3a.work.ux.cleanup",
+      "title": "Remove duplicated active-week label and date range from the week manager",
+      "status": "completed",
+      "priority": "normal",
+      "tags": ["work", "ux"]
     }
   ]
 }

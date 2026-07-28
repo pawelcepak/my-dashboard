@@ -9310,6 +9310,40 @@
       "acceptanceCriteria": [],
       "relatedFiles": [],
       "tags": ["navigation", "settings", "ux"]
+    },
+    {
+      "id": "feature.work.active-week.status-eur-pln",
+      "title": "Work status, gross EUR and gross PLN strip",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.active-week.status-eur-pln",
+      "roadmapPath": ["v0.6.3A — Work UX Cleanup"],
+      "introducedIn": "0.6.3A",
+      "description": "Displays local save status followed by gross earnings in EUR and PLN using the selected week exchange rate.",
+      "acceptanceCriteria": [
+        "Order is status, EUR, PLN",
+        "PLN is gross EUR multiplied by the active-week exchange rate",
+        "Saving state remains visible"
+      ],
+      "relatedFiles": ["src/modules/work/containers/WorkActiveWeekContainer.tsx"],
+      "tags": ["work", "ux", "finance"]
+    },
+    {
+      "id": "feature.work.week-manager.compact-controls",
+      "title": "Compact Work week manager controls",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.work.week-manager.remove-duplicate-metadata",
+      "roadmapPath": ["v0.6.3A — Work UX Cleanup"],
+      "introducedIn": "0.6.3A",
+      "description": "Keeps only the week selector, create button and delete button in the manager summary row.",
+      "acceptanceCriteria": [
+        "No duplicated active-week heading",
+        "No duplicated date range",
+        "Week creation and deletion remain unchanged"
+      ],
+      "relatedFiles": ["src/modules/work/components/WorkWeekManager.tsx"],
+      "tags": ["work", "ux"]
     }
   ]
 }

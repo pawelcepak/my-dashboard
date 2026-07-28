@@ -1,15 +1,19 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.6.2",
-  "currentSprint": "0.6.2",
-  "currentGoal": "Allow the bottom navigation to be reordered and individually colored without editing code.",
+  "currentVersion": "0.6.3A",
+  "currentSprint": "0.6.3A",
+  "currentGoal": "Remove duplicated active-week metadata and present local status, gross EUR and gross PLN in one ordered Work summary strip.",
   "stableState": true,
-  "lastCompleted": ["Portfolio UX A-D", "Portfolio UX hotfix"],
+  "lastCompleted": [
+    "Customizable bottom navigation",
+    "Portfolio history verification",
+    "Portfolio UX stabilization"
+  ],
   "nextTasks": [
-    "Test navigation order on desktop and mobile",
-    "Test per-tab colors",
-    "Verify preferences synchronize between devices"
+    "Verify Work week controls remain functional",
+    "Verify gross PLN uses the active week EUR/PLN rate",
+    "Confirm responsive layout on desktop and mobile"
   ],
   "knownIssues": [
     {

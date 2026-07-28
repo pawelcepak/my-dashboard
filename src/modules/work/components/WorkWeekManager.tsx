@@ -104,26 +104,8 @@ export default function WorkWeekManager({
 
   return (
     <section className="rounded-xl border border-zinc-700 bg-zinc-900/60">
-      <div className="flex flex-col gap-3 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
-        <div className="min-w-0">
-          <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">
-            Aktywny tydzień
-          </p>
-
-          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
-            <p className="text-base font-semibold text-zinc-100">
-              {formatWorkWeekLabel(activeWeek.year, activeWeek.weekNumber)}
-            </p>
-
-            <p className="text-sm text-zinc-500">
-              {formatIsoDate(activeWeek.startDate)}
-              {' – '}
-              {formatIsoDate(activeWeek.endDate)}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2 sm:flex-row">
+      <div className="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center">
+        <div className="flex flex-1 flex-col gap-2 sm:flex-row">
           <label className="relative min-w-56">
             <span className="sr-only">Wybierz tydzień</span>
 
