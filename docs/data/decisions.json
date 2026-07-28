@@ -110,11 +110,12 @@
       "status": "accepted",
       "date": "2026-07-28",
       "context": "The Alcohol module needs Work beer data and Portfolio expenses while preserving historical corrections.",
-      "decision": "Work owns beer counts, Portfolio owns financial transactions, and Alcohol stores only overrides, historical monthly costs and linkage settings.",
+      "decision": "Domain modules own their data. Analytical modules read source data and store only their own settings, corrections and metadata. Before implementing a feature, determine the data owner, verify whether existing data can be reused, and classify the module as a data owner or an analytical consumer.",
       "consequences": [
-        "Daily entries are not duplicated across modules.",
-        "Changes in Work and Portfolio update Alcohol automatically.",
-        "Historical data remains available before source modules existed."
+        "Every new feature identifies one owning module for each stored value.",
+        "Existing source data is reused instead of copied into parallel storage.",
+        "Analytical modules store only settings, corrections and metadata.",
+        "Backup, restore and cloud synchronization serialize the complete connected ecosystem."
       ],
       "relatedFeatures": [
         "feature.alcohol.work-link",

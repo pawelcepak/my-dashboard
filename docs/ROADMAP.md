@@ -833,7 +833,6 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Project-data validation and consistency checks
 - [x] Deterministic CHANGELOG and ROADMAP generator
 - [x] Automated release preparation command
-
 ### v0.5.4E-F — AI Project Interface
 
 - [x] Machine-readable module registry
@@ -842,7 +841,6 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Generated AGENTS.md adapter
 - [x] Generated CLAUDE.md adapter
 - [x] Generated Cursor project rules
-
 ## v0.5.5 — Work UX Improvements
 
 - [x] Current-time defaults for new work sessions
@@ -902,3 +900,24 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Import historical BrPW drinking days and monthly expenses
 - [x] Support manual day corrections without duplicating Work data
 - [x] Add calendar, monthly history and overview statistics
+
+## v0.7.1 — Alcohol Analytics Advanced
+
+- [ ] Add monthly drinking-day, beer-count and expense charts
+- [ ] Add month-to-month and year-to-year comparisons
+- [ ] Add average beers, cost per drinking day and estimated cost per beer
+- [ ] Add weekday distribution, longest drinking streak and longest break
+
+## v0.7.2 — Alcohol Intelligence
+
+- [ ] Analyze relationships between beer count and daily rating
+- [ ] Analyze relationships between beer count and messages or messages per hour
+- [ ] Analyze relationships between beer count and earnings
+- [ ] Add historical records, trends and change detection
+
+## v0.7.3 — Alcohol Dashboard Integration
+
+- [ ] Add an Alcohol widget to Dashboard
+- [ ] Show the last drinking day and days since it
+- [ ] Show current-month drinking days, beers and expenses
+- [ ] Add compact cross-module alcohol statistics

@@ -8,9 +8,13 @@
       "status": "active",
       "description": "Routing, layout, navigation, theme and global providers.",
       "rootPath": "src/app",
-      "entryFiles": ["src/app/router.tsx"],
+      "entryFiles": [
+        "src/app/router.tsx"
+      ],
       "dependsOn": [],
-      "aiNotes": ["Preserve HashRouter compatibility for GitHub Pages."]
+      "aiNotes": [
+        "Preserve HashRouter compatibility for GitHub Pages."
+      ]
     },
     {
       "id": "module.dashboard",
@@ -18,9 +22,16 @@
       "status": "active",
       "description": "Central daily interface and weekly overview.",
       "rootPath": "src/modules/dashboard",
-      "entryFiles": ["src/modules/dashboard/index.tsx"],
-      "dependsOn": ["module.work", "module.settings"],
-      "aiNotes": ["Dashboard edits the same WorkDay records as the Work module."]
+      "entryFiles": [
+        "src/modules/dashboard/index.tsx"
+      ],
+      "dependsOn": [
+        "module.work",
+        "module.settings"
+      ],
+      "aiNotes": [
+        "Dashboard edits the same WorkDay records as the Work module."
+      ]
     },
     {
       "id": "module.work",
@@ -28,8 +39,14 @@
       "status": "active",
       "description": "Work weeks, daily records, earnings, goals, tables and experimental intelligence.",
       "rootPath": "src/modules/work",
-      "entryFiles": ["src/modules/work/pages/WorkPage.tsx"],
-      "dependsOn": ["module.database", "module.settings", "module.cloud"],
+      "entryFiles": [
+        "src/modules/work/pages/WorkPage.tsx"
+      ],
+      "dependsOn": [
+        "module.database",
+        "module.settings",
+        "module.cloud"
+      ],
       "aiNotes": [
         "WorkDay is the source of truth for daily work values.",
         "Legacy WorkWeek.heldMessages remains for compatibility."
@@ -41,8 +58,13 @@
       "status": "active",
       "description": "Application preferences, backup and restore.",
       "rootPath": "src/modules/settings",
-      "entryFiles": ["src/modules/settings/index.tsx"],
-      "dependsOn": ["module.database", "module.cloud"],
+      "entryFiles": [
+        "src/modules/settings/index.tsx"
+      ],
+      "dependsOn": [
+        "module.database",
+        "module.cloud"
+      ],
       "aiNotes": [
         "Components must use appSettingsService/useAppSettings instead of direct Dexie reads for preferences."
       ]
@@ -53,9 +75,15 @@
       "status": "active",
       "description": "Private Supabase snapshot synchronization and conflict protection.",
       "rootPath": "src/app/cloud",
-      "entryFiles": ["src/app/cloud/CloudProvider.tsx"],
-      "dependsOn": ["module.database"],
-      "aiNotes": ["Never silently overwrite a detected two-sided conflict."]
+      "entryFiles": [
+        "src/app/cloud/CloudProvider.tsx"
+      ],
+      "dependsOn": [
+        "module.database"
+      ],
+      "aiNotes": [
+        "Never silently overwrite a detected two-sided conflict."
+      ]
     },
     {
       "id": "module.database",
@@ -63,9 +91,13 @@
       "status": "active",
       "description": "Dexie/IndexedDB schema, migrations and local-first persistence.",
       "rootPath": "src/database",
-      "entryFiles": ["src/database/database.ts"],
+      "entryFiles": [
+        "src/database/database.ts"
+      ],
       "dependsOn": [],
-      "aiNotes": ["Schema changes require explicit migrations and backup compatibility review."]
+      "aiNotes": [
+        "Schema changes require explicit migrations and backup compatibility review."
+      ]
     },
     {
       "id": "module.expenses",
@@ -74,7 +106,9 @@
       "description": "Future expenses module.",
       "rootPath": "src/modules/expenses",
       "entryFiles": [],
-      "dependsOn": ["module.database"],
+      "dependsOn": [
+        "module.database"
+      ],
       "aiNotes": []
     },
     {
@@ -84,7 +118,9 @@
       "description": "Future debts and repayment module.",
       "rootPath": "src/modules/debts",
       "entryFiles": [],
-      "dependsOn": ["module.database"],
+      "dependsOn": [
+        "module.database"
+      ],
       "aiNotes": []
     },
     {
@@ -93,8 +129,13 @@
       "status": "active",
       "description": "Income and expense ledger, balances, tags, statistics and CSV import.",
       "rootPath": "src/modules/portfolio",
-      "entryFiles": ["src/modules/portfolio/index.tsx"],
-      "dependsOn": ["module.database", "module.cloud"],
+      "entryFiles": [
+        "src/modules/portfolio/index.tsx"
+      ],
+      "dependsOn": [
+        "module.database",
+        "module.cloud"
+      ],
       "aiNotes": [
         "Portfolio balance is derived from the initial balance and chronologically ordered transactions.",
         "Transactions store positive amounts; type determines the signed ledger value."
@@ -107,7 +148,9 @@
       "description": "Future cross-module statistics and charts.",
       "rootPath": "src/modules/statistics",
       "entryFiles": [],
-      "dependsOn": ["module.work"],
+      "dependsOn": [
+        "module.work"
+      ],
       "aiNotes": []
     },
     {
@@ -116,12 +159,19 @@
       "status": "active",
       "description": "Cross-module alcohol analytics derived from Work beer counts and Portfolio expenses.",
       "rootPath": "src/modules/alcohol",
-      "entryFiles": ["src/modules/alcohol/index.tsx"],
-      "dependsOn": ["module.work", "module.portfolio", "module.database", "module.cloud"],
+      "entryFiles": [
+        "src/modules/alcohol/index.tsx"
+      ],
+      "dependsOn": [
+        "module.work",
+        "module.portfolio",
+        "module.database",
+        "module.cloud"
+      ],
       "aiNotes": [
-        "Work remains the source of truth for beer counts and automatic drinking days.",
-        "Portfolio remains the source of truth for alcohol expenses from June 2026.",
-        "The module stores only historical values, manual overrides and linkage settings."
+        "Alcohol is an analytical module, not the owner of beer counts or Portfolio transactions.",
+        "Work owns daily beer counts; Portfolio owns financial transactions.",
+        "Alcohol may store only manual day overrides, historical monthly costs and linkage settings."
       ]
     }
   ]

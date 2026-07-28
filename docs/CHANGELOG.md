@@ -266,6 +266,7 @@ All notable changes to CHB will be documented in this file.
 - Fixed Portfolio CSV import result propagation through usePortfolio.
 - Removed an unused Portfolio transaction type import that blocked TypeScript builds.
 - Fixed React hook dependency warnings in Portfolio transaction form and history table.
+- Fixed the Dexie restore transaction typing for the Alcohol backup tables by passing the table collection as an array.
 
 ## [0.3.0-beta.3] - 2026-07-25
 

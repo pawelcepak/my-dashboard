@@ -2,7 +2,9 @@
   "$schema": "../schemas/releases.schema.json",
   "schemaVersion": 1,
   "documentTitle": "Changelog",
-  "introduction": ["All notable changes to CHB will be documented in this file."],
+  "introduction": [
+    "All notable changes to CHB will be documented in this file."
+  ],
   "releases": [
     {
       "version": "Unreleased",
@@ -275,7 +277,8 @@
             "Fixed Portfolio snapshot migration by treating missing accounts, tags and transactions as empty collections.",
             "Fixed Portfolio CSV import result propagation through usePortfolio.",
             "Removed an unused Portfolio transaction type import that blocked TypeScript builds.",
-            "Fixed React hook dependency warnings in Portfolio transaction form and history table."
+            "Fixed React hook dependency warnings in Portfolio transaction form and history table.",
+            "Fixed the Dexie restore transaction typing for the Alcohol backup tables by passing the table collection as an array."
           ]
         }
       ]

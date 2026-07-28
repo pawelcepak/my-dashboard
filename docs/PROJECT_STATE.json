@@ -1,7 +1,7 @@
 {
   "interfaceVersion": 1,
-  "generatedFromVersion": "0.7.0",
-  "generatedFromSprint": "0.7.0",
+  "generatedFromVersion": "0.7.0a",
+  "generatedFromSprint": "0.7.0a",
   "project": {
     "$schema": "../schemas/project.schema.json",
     "schemaVersion": 1,
@@ -9,8 +9,8 @@
     "name": "CHB",
     "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
     "repository": "my-dashboard",
-    "currentVersion": "0.7.0",
-    "currentSprint": "0.7.0",
+    "currentVersion": "0.7.0a",
+    "currentSprint": "0.7.0a",
     "status": "active",
     "architectureVersion": 2,
     "documentationModel": "ai-project-interface",
@@ -30,7 +30,12 @@
       "Supabase",
       "React Router 7"
     ],
-    "platforms": ["Windows 11", "Xubuntu", "Android browser", "GitHub Pages"],
+    "platforms": [
+      "Windows 11",
+      "Xubuntu",
+      "Android browser",
+      "GitHub Pages"
+    ],
     "principles": [
       "Local-first and offline-capable",
       "Cloud synchronization must not silently overwrite conflicts",
@@ -52,20 +57,20 @@
   "context": {
     "$schema": "../schemas/current-context.schema.json",
     "schemaVersion": 1,
-    "currentVersion": "0.7.0",
-    "currentSprint": "0.7.0",
-    "currentGoal": "Create the Alcohol analytics module as a linked layer over Work and Portfolio without duplicating source data.",
+    "currentVersion": "0.7.0a",
+    "currentSprint": "0.7.0a",
+    "currentGoal": "Stabilize Alcohol Analytics and document the next analytical development line.",
     "stableState": true,
     "lastCompleted": [
-      "Work UX Cleanup",
-      "Portfolio verification against historical ledger",
-      "Customizable navigation from Settings"
+      "Alcohol Analytics foundation",
+      "Alcohol Build Hotfix",
+      "Single-source-of-truth integration between Work, Portfolio and Alcohol"
     ],
     "nextTasks": [
-      "Test calendar derivation from Work beers",
-      "Test manual day overrides and restoring AUTO",
-      "Verify Portfolio tag linkage from June 2026",
-      "Compare historical month totals with the BrPW workbook"
+      "Use the Alcohol module in normal daily operation",
+      "Plan v0.7.1 Alcohol Analytics Advanced",
+      "Plan v0.7.2 Alcohol Intelligence",
+      "Plan v0.7.3 Dashboard Integration"
     ],
     "knownIssues": [
       {
@@ -101,7 +106,8 @@
       "docs/AI_PROJECT_INTERFACE.json",
       "AGENTS.md",
       "CLAUDE.md",
-      ".cursor/rules/chb-project.mdc"
+      ".cursor/rules/chb-project.mdc",
+      "docs/ai/ARCHITECTURE_PRINCIPLES.md"
     ]
   },
   "modules": [
@@ -111,9 +117,13 @@
       "status": "active",
       "description": "Routing, layout, navigation, theme and global providers.",
       "rootPath": "src/app",
-      "entryFiles": ["src/app/router.tsx"],
+      "entryFiles": [
+        "src/app/router.tsx"
+      ],
       "dependsOn": [],
-      "aiNotes": ["Preserve HashRouter compatibility for GitHub Pages."]
+      "aiNotes": [
+        "Preserve HashRouter compatibility for GitHub Pages."
+      ]
     },
     {
       "id": "module.dashboard",
@@ -121,9 +131,16 @@
       "status": "active",
       "description": "Central daily interface and weekly overview.",
       "rootPath": "src/modules/dashboard",
-      "entryFiles": ["src/modules/dashboard/index.tsx"],
-      "dependsOn": ["module.work", "module.settings"],
-      "aiNotes": ["Dashboard edits the same WorkDay records as the Work module."]
+      "entryFiles": [
+        "src/modules/dashboard/index.tsx"
+      ],
+      "dependsOn": [
+        "module.work",
+        "module.settings"
+      ],
+      "aiNotes": [
+        "Dashboard edits the same WorkDay records as the Work module."
+      ]
     },
     {
       "id": "module.work",
@@ -131,8 +148,14 @@
       "status": "active",
       "description": "Work weeks, daily records, earnings, goals, tables and experimental intelligence.",
       "rootPath": "src/modules/work",
-      "entryFiles": ["src/modules/work/pages/WorkPage.tsx"],
-      "dependsOn": ["module.database", "module.settings", "module.cloud"],
+      "entryFiles": [
+        "src/modules/work/pages/WorkPage.tsx"
+      ],
+      "dependsOn": [
+        "module.database",
+        "module.settings",
+        "module.cloud"
+      ],
       "aiNotes": [
         "WorkDay is the source of truth for daily work values.",
         "Legacy WorkWeek.heldMessages remains for compatibility."
@@ -144,8 +167,13 @@
       "status": "active",
       "description": "Application preferences, backup and restore.",
       "rootPath": "src/modules/settings",
-      "entryFiles": ["src/modules/settings/index.tsx"],
-      "dependsOn": ["module.database", "module.cloud"],
+      "entryFiles": [
+        "src/modules/settings/index.tsx"
+      ],
+      "dependsOn": [
+        "module.database",
+        "module.cloud"
+      ],
       "aiNotes": [
         "Components must use appSettingsService/useAppSettings instead of direct Dexie reads for preferences."
       ]
@@ -156,9 +184,15 @@
       "status": "active",
       "description": "Private Supabase snapshot synchronization and conflict protection.",
       "rootPath": "src/app/cloud",
-      "entryFiles": ["src/app/cloud/CloudProvider.tsx"],
-      "dependsOn": ["module.database"],
-      "aiNotes": ["Never silently overwrite a detected two-sided conflict."]
+      "entryFiles": [
+        "src/app/cloud/CloudProvider.tsx"
+      ],
+      "dependsOn": [
+        "module.database"
+      ],
+      "aiNotes": [
+        "Never silently overwrite a detected two-sided conflict."
+      ]
     },
     {
       "id": "module.database",
@@ -166,9 +200,13 @@
       "status": "active",
       "description": "Dexie/IndexedDB schema, migrations and local-first persistence.",
       "rootPath": "src/database",
-      "entryFiles": ["src/database/database.ts"],
+      "entryFiles": [
+        "src/database/database.ts"
+      ],
       "dependsOn": [],
-      "aiNotes": ["Schema changes require explicit migrations and backup compatibility review."]
+      "aiNotes": [
+        "Schema changes require explicit migrations and backup compatibility review."
+      ]
     },
     {
       "id": "module.expenses",
@@ -177,7 +215,9 @@
       "description": "Future expenses module.",
       "rootPath": "src/modules/expenses",
       "entryFiles": [],
-      "dependsOn": ["module.database"],
+      "dependsOn": [
+        "module.database"
+      ],
       "aiNotes": []
     },
     {
@@ -187,7 +227,9 @@
       "description": "Future debts and repayment module.",
       "rootPath": "src/modules/debts",
       "entryFiles": [],
-      "dependsOn": ["module.database"],
+      "dependsOn": [
+        "module.database"
+      ],
       "aiNotes": []
     },
     {
@@ -196,8 +238,13 @@
       "status": "active",
       "description": "Income and expense ledger, balances, tags, statistics and CSV import.",
       "rootPath": "src/modules/portfolio",
-      "entryFiles": ["src/modules/portfolio/index.tsx"],
-      "dependsOn": ["module.database", "module.cloud"],
+      "entryFiles": [
+        "src/modules/portfolio/index.tsx"
+      ],
+      "dependsOn": [
+        "module.database",
+        "module.cloud"
+      ],
       "aiNotes": [
         "Portfolio balance is derived from the initial balance and chronologically ordered transactions.",
         "Transactions store positive amounts; type determines the signed ledger value."
@@ -210,7 +257,9 @@
       "description": "Future cross-module statistics and charts.",
       "rootPath": "src/modules/statistics",
       "entryFiles": [],
-      "dependsOn": ["module.work"],
+      "dependsOn": [
+        "module.work"
+      ],
       "aiNotes": []
     },
     {
@@ -219,12 +268,19 @@
       "status": "active",
       "description": "Cross-module alcohol analytics derived from Work beer counts and Portfolio expenses.",
       "rootPath": "src/modules/alcohol",
-      "entryFiles": ["src/modules/alcohol/index.tsx"],
-      "dependsOn": ["module.work", "module.portfolio", "module.database", "module.cloud"],
+      "entryFiles": [
+        "src/modules/alcohol/index.tsx"
+      ],
+      "dependsOn": [
+        "module.work",
+        "module.portfolio",
+        "module.database",
+        "module.cloud"
+      ],
       "aiNotes": [
-        "Work remains the source of truth for beer counts and automatic drinking days.",
-        "Portfolio remains the source of truth for alcohol expenses from June 2026.",
-        "The module stores only historical values, manual overrides and linkage settings."
+        "Alcohol is an analytical module, not the owner of beer counts or Portfolio transactions.",
+        "Work owns daily beer counts; Portfolio owns financial transactions.",
+        "Alcohol may store only manual day overrides, historical monthly costs and linkage settings."
       ]
     }
   ],
@@ -238,7 +294,9 @@
       "description": "The experimental comparison may present values that are easy to interpret as day counts or strong conclusions when the sample is small.",
       "workaround": "Treat CHB Intelligence as experimental and verify the sample-size labels.",
       "plannedResolution": "Dedicated CHB Intelligence quality pass with clearer units, minimum sample sizes and confidence indicators.",
-      "relatedFiles": ["src/modules/work/components/WorkIntelligencePanel.tsx"]
+      "relatedFiles": [
+        "src/modules/work/components/WorkIntelligencePanel.tsx"
+      ]
     },
     {
       "id": "issue.build.large-main-chunk",
@@ -249,7 +307,10 @@
       "description": "The production bundle currently emits a chunk-size warning after minification.",
       "workaround": "The warning does not block deployment.",
       "plannedResolution": "Add route-level lazy loading and production code splitting during a later quality pass.",
-      "relatedFiles": ["src/app/router.tsx", "vite.config.ts"]
+      "relatedFiles": [
+        "src/app/router.tsx",
+        "vite.config.ts"
+      ]
     },
     {
       "id": "issue.history.placeholder-session-times",
@@ -277,7 +338,9 @@
         "src/modules/settings/services/backupService.ts",
         "src/app/cloud/services/cloudSnapshotService.ts"
       ],
-      "relatedFeatures": ["feature.cloud.legacy-portfolio-normalization"],
+      "relatedFeatures": [
+        "feature.cloud.legacy-portfolio-normalization"
+      ],
       "moduleId": "module.cloud"
     },
     {
@@ -288,8 +351,12 @@
       "description": "The generic action wrapper returned Promise<void>, while the CSV panel required the import summary.",
       "workaround": "Install v0.6.1a.",
       "plannedResolution": "Resolved in v0.6.1a.",
-      "relatedFiles": ["src/modules/portfolio/hooks/usePortfolio.ts"],
-      "relatedFeatures": ["feature.portfolio.ux.hotfix.build"],
+      "relatedFiles": [
+        "src/modules/portfolio/hooks/usePortfolio.ts"
+      ],
+      "relatedFeatures": [
+        "feature.portfolio.ux.hotfix.build"
+      ],
       "moduleId": "module.portfolio"
     }
   ],
@@ -402,11 +469,12 @@
       "status": "accepted",
       "date": "2026-07-28",
       "context": "The Alcohol module needs Work beer data and Portfolio expenses while preserving historical corrections.",
-      "decision": "Work owns beer counts, Portfolio owns financial transactions, and Alcohol stores only overrides, historical monthly costs and linkage settings.",
+      "decision": "Domain modules own their data. Analytical modules read source data and store only their own settings, corrections and metadata. Before implementing a feature, determine the data owner, verify whether existing data can be reused, and classify the module as a data owner or an analytical consumer.",
       "consequences": [
-        "Daily entries are not duplicated across modules.",
-        "Changes in Work and Portfolio update Alcohol automatically.",
-        "Historical data remains available before source modules existed."
+        "Every new feature identifies one owning module for each stored value.",
+        "Existing source data is reused instead of copied into parallel storage.",
+        "Analytical modules store only settings, corrections and metadata.",
+        "Backup, restore and cloud synchronization serialize the complete connected ecosystem."
       ],
       "relatedFeatures": [
         "feature.alcohol.work-link",
@@ -421,10 +489,10 @@
     }
   ],
   "summary": {
-    "roadmapTasks": 692,
+    "roadmapTasks": 704,
     "completedRoadmapTasks": 388,
-    "plannedRoadmapTasks": 304,
-    "features": 691,
+    "plannedRoadmapTasks": 316,
+    "features": 703,
     "activeModules": 8,
     "openIssues": 3,
     "acceptedDecisions": 8,

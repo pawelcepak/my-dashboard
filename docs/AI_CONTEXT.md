@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.7.0`
-- Current sprint: `0.7.0`
+- Current version: `0.7.0a`
+- Current sprint: `0.7.0a`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Create the Alcohol analytics module as a linked layer over Work and Portfolio without duplicating source data.
+Stabilize Alcohol Analytics and document the next analytical development line.
 
 ## Non-negotiable principles
 
@@ -45,10 +45,10 @@ Create the Alcohol analytics module as a linked layer over Work and Portfolio wi
 
 ## Next tasks
 
-- Test calendar derivation from Work beers
-- Test manual day overrides and restoring AUTO
-- Verify Portfolio tag linkage from June 2026
-- Compare historical month totals with the BrPW workbook
+- Use the Alcohol module in normal daily operation
+- Plan v0.7.1 Alcohol Analytics Advanced
+- Plan v0.7.2 Alcohol Intelligence
+- Plan v0.7.3 Dashboard Integration
 
 ## Open and accepted issues
 
