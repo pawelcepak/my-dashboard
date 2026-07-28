@@ -1,20 +1,20 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.7.4",
-  "currentSprint": "0.7.4A-D",
-  "currentGoal": "Classify Work sessions into standard, additional and weekend time and calculate ratings from week 31 onward.",
+  "currentVersion": "0.7.5",
+  "currentSprint": "0.7.5",
+  "currentGoal": "Expand the Global Panel System across the most space-intensive Work panels and compact the week controls into the page header.",
   "stableState": true,
   "lastCompleted": [
+    "Work Time Analytics",
     "Alcohol Analytics foundation",
-    "Alcohol build hotfix",
-    "Architecture and AI documentation update"
+    "Single-source-of-truth architecture documentation"
   ],
   "nextTasks": [
-    "Verify sessions crossing 15:00 and 06:20",
-    "Verify Friday-to-Saturday and Sunday-to-Monday splits",
-    "Review the rating thresholds after regular use",
-    "Plan monthly and yearly Work time statistics"
+    "Verify all four Work panels remember their open state",
+    "Verify week controls align below the week badge",
+    "Review Work page height at laptop and Full HD widths",
+    "Choose the next pages for panel migration"
   ],
   "knownIssues": [
     {

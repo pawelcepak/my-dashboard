@@ -1,21 +1,66 @@
-CHB v0.7.4A-D — Work Time Analytics
+$ npm run docs:validate
+EXIT: 0
 
-Prepared from: my-dashboard(4).zip
+> my-dashboard@0.0.0 docs:validate
+> node scripts/validate-project-data.mjs
 
-Checks completed:
-- Project data validation: PASS
-- Documentation generation: PASS
-- Documentation drift check: PASS
-- TypeScript/TSX syntax parse: 105 files, 0 syntax errors
-- Boundary logic checks:
-  - weekday 14:00-16:00 => 60 standard + 60 additional
-  - weekday 05:30-07:00 => 50 additional + 40 standard
-  - Friday 23:00-Saturday 01:00 => 60 additional + 60 weekend
-  - Sunday 23:50-Monday 00:20 => 10 weekend in the old week + 20 additional in the new week
+Project data validation passed.
+Roadmap blocks: 922
+Features: 713
+Decisions: 10
+Modules: 11
+Issues: 5
+AI adapters: 3
+Releases: 6
 
-Run locally after copying:
-npm run docs:validate
-npm run docs:generate
-npm run docs:check
+
+
+$ npm run docs:generate
+EXIT: 0
+
+> my-dashboard@0.0.0 docs:generate
+> node scripts/project-docs.mjs
+
+GENERATED: docs/CHANGELOG.md
+GENERATED: docs/ROADMAP.md
+GENERATED: docs/AI_CONTEXT.md
+GENERATED: docs/PROJECT_STATE.json
+GENERATED: docs/AI_PROJECT_INTERFACE.json
+GENERATED: docs/ai/PROJECT_INTERFACE.md
+GENERATED: AGENTS.md
+GENERATED: CLAUDE.md
+GENERATED: .cursor/rules/chb-project.mdc
+
+
+
+$ npm run docs:check
+EXIT: 0
+
+> my-dashboard@0.0.0 docs:check
+> node scripts/validate-project-data.mjs && node scripts/project-docs.mjs --check
+
+Project data validation passed.
+Roadmap blocks: 922
+Features: 713
+Decisions: 10
+Modules: 11
+Issues: 5
+AI adapters: 3
+Releases: 6
+OK: docs/CHANGELOG.md
+OK: docs/ROADMAP.md
+OK: docs/AI_CONTEXT.md
+OK: docs/PROJECT_STATE.json
+OK: docs/AI_PROJECT_INTERFACE.json
+OK: docs/ai/PROJECT_INTERFACE.md
+OK: AGENTS.md
+OK: CLAUDE.md
+OK: .cursor/rules/chb-project.mdc
+
+
+
+Full local verification required:
 npm run release:prepare
 npm run dev
+
+DOCUMENTATION CHECKS: PASS

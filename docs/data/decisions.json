@@ -150,6 +150,28 @@
         "roadmap.work.standard-hours-rating",
         "roadmap.work.weekly-time-analytics"
       ]
+    },
+    {
+      "id": "decision.ui-panel-state-is-local",
+      "title": "Panel expansion state is local UI state",
+      "status": "accepted",
+      "date": "2026-07-28",
+      "context": "Collapsible panels need to remember the user's local layout without adding domain data or forcing the same open panels on every device.",
+      "decision": "Store panel open and closed state in localStorage. Do not include it in Dexie, backup or Supabase during the pilot.",
+      "consequences": [
+        "Panel state survives browser reloads on one device.",
+        "Panel layout can differ between desktop and mobile devices.",
+        "No database migration or cloud snapshot change is required."
+      ],
+      "relatedFeatures": [
+        "feature.ui.collapsible-panel-component",
+        "feature.ui.work-time-panel-pilot"
+      ],
+      "relatedRoadmapItems": [
+        "roadmap.ui.collapsible-panel-component",
+        "roadmap.ui.work-time-panel-pilot",
+        "roadmap.ui.panel-local-persistence"
+      ]
     }
   ]
 }

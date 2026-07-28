@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.7.4`
-- Current sprint: `0.7.4A-D`
+- Current version: `0.7.5`
+- Current sprint: `0.7.5`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Classify Work sessions into standard, additional and weekend time and calculate ratings from week 31 onward.
+Expand the Global Panel System across the most space-intensive Work panels and compact the week controls into the page header.
 
 ## Non-negotiable principles
 
@@ -45,10 +45,10 @@ Classify Work sessions into standard, additional and weekend time and calculate 
 
 ## Next tasks
 
-- Verify sessions crossing 15:00 and 06:20
-- Verify Friday-to-Saturday and Sunday-to-Monday splits
-- Review the rating thresholds after regular use
-- Plan monthly and yearly Work time statistics
+- Verify all four Work panels remember their open state
+- Verify week controls align below the week badge
+- Review Work page height at laptop and Full HD widths
+- Choose the next pages for panel migration
 
 ## Open and accepted issues
 
@@ -67,6 +67,7 @@ Classify Work sessions into standard, additional and weekend time and calculate 
 - `decision.ai.generated-provider-adapters`: Generate provider adapters from one AI Project Interface
 - `decision.single-source-of-truth.analytics`: Analytical modules do not duplicate domain data
 - `decision.work-derived-time-analytics`: Work time analytics are derived from session blocks
+- `decision.ui-panel-state-is-local`: Panel expansion state is local UI state
 
 ## Required agent behavior
 

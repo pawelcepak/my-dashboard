@@ -69,23 +69,25 @@ export default function WorkPage() {
         title="Praca"
         description="Rejestr wiadomości, czasu pracy, zarobków i tygodniowych celów."
         action={
-          <div className="flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-2.5 text-sm text-zinc-300">
-            <CalendarDays aria-hidden="true" className="size-4 text-zinc-500" />
+          <div className="w-full sm:w-[38rem]">
+            <div className="flex h-10 w-full items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-4 text-sm text-zinc-300">
+              <CalendarDays aria-hidden="true" className="size-4 text-zinc-500" />
 
-            <span>
-              Tydzień {activeWeek.weekNumber}, {activeWeek.year}
-            </span>
+              <span>
+                Tydzień {activeWeek.weekNumber}, {activeWeek.year}
+              </span>
+            </div>
+
+            <WorkWeekManager
+              activeWeek={activeWeek}
+              weeks={weeks}
+              isSaving={isSaving}
+              onSelectWeek={selectWeek}
+              onCreateWeek={createWeek}
+              onDeleteWeek={deleteWeek}
+            />
           </div>
         }
-      />
-
-      <WorkWeekManager
-        activeWeek={activeWeek}
-        weeks={weeks}
-        isSaving={isSaving}
-        onSelectWeek={selectWeek}
-        onCreateWeek={createWeek}
-        onDeleteWeek={deleteWeek}
       />
 
       {error && <div className="app-notice app-notice-error">{error}</div>}

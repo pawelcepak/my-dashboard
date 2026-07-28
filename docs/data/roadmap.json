@@ -7303,6 +7303,79 @@
       "status": "completed",
       "priority": "high",
       "tags": ["work", "analytics", "time"]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.7.5.global-panel-system",
+      "parentId": null,
+      "text": "v0.7.5 — Global Panel System Pilot"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ui.collapsible-panel-component",
+      "parentId": "section.v0.7.5.global-panel-system",
+      "title": "Create a reusable accessible CollapsiblePanel component",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ui", "ux", "panels"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ui.work-time-panel-pilot",
+      "parentId": "section.v0.7.5.global-panel-system",
+      "title": "Apply the panel system only to Work Time Analytics",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ui", "ux", "work"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ui.panel-local-persistence",
+      "parentId": "section.v0.7.5.global-panel-system",
+      "title": "Remember the pilot panel state locally across reloads",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ui", "ux", "preferences"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ui.work-week-settings-panel",
+      "parentId": "section.v0.7.5.global-panel-system",
+      "title": "Migrate Work week settings to the collapsible panel system",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ui", "ux", "work", "panels"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ui.work-history-panel",
+      "parentId": "section.v0.7.5.global-panel-system",
+      "title": "Migrate Work week history to the collapsible panel system",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ui", "ux", "work", "panels"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ui.financial-plan-panel",
+      "parentId": "section.v0.7.5.global-panel-system",
+      "title": "Migrate Work financial plan to the collapsible panel system",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ui", "ux", "work", "panels"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.ui.work-header-week-controls",
+      "parentId": "section.v0.7.5.global-panel-system",
+      "title": "Place week selector and actions below the week badge in the Work header",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["ui", "ux", "work", "panels"]
     }
   ]
 }

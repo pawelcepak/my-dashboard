@@ -11,6 +11,7 @@ import {
   formatShortIsoDate,
 } from '@/modules/work/utils/workCalculations';
 import { formatWorkRating, getWorkRatingPresentation } from '@/modules/work/utils/workPresentation';
+import CollapsiblePanel from '@/shared/components/CollapsiblePanel';
 import HistoryCard from '@/shared/components/history/HistoryCard';
 
 type WorkHistoryProps = {
@@ -79,34 +80,21 @@ export default function WorkHistory({
   const groupedWeeks = groupWeeksByYear(weeks);
 
   return (
-    <section
-      className={`overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900/50 ${
-        constrainedHeight ? '2xl:flex 2xl:max-h-[50rem] 2xl:flex-col' : ''
-      }`}
+    <CollapsiblePanel
+      storageKey="work-week-history"
+      title="Historia tygodni"
+      description="Najważniejsze wyniki i szybki wybór tygodnia"
+      icon={<CalendarDays aria-hidden="true" className="size-4" />}
+      summary={
+        <p className="text-xs font-semibold text-zinc-400">
+          {weeks.length}{' '}
+          {weeks.length === 1 ? 'tydzień' : weeks.length < 5 ? 'tygodnie' : 'tygodni'}
+        </p>
+      }
+      defaultOpen={false}
+      className={constrainedHeight ? '2xl:flex 2xl:max-h-[50rem] 2xl:flex-col' : ''}
+      contentClassName={constrainedHeight ? '2xl:min-h-0 2xl:flex-1 2xl:overflow-hidden' : ''}
     >
-      <div className="flex shrink-0 flex-col gap-3 border-b border-zinc-700 px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between 2xl:flex-col 2xl:items-stretch">
-        <div>
-          <h2 className="text-sm font-semibold text-zinc-100">Historia tygodni</h2>
-
-          <p className="mt-0.5 text-xs text-zinc-500">
-            Najważniejsze wyniki i szybki wybór tygodnia.
-          </p>
-        </div>
-
-        <div className="flex w-fit items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-950/50 px-3 py-2">
-          <CalendarDays aria-hidden="true" className="size-3.5 text-zinc-500" />
-
-          <p className="text-[11px] font-semibold text-zinc-400">
-            {weeks.length}{' '}
-            {weeks.length === 1
-              ? 'zapisany tydzień'
-              : weeks.length < 5
-                ? 'zapisane tygodnie'
-                : 'zapisanych tygodni'}
-          </p>
-        </div>
-      </div>
-
       <div
         className={`space-y-5 p-3.5 sm:p-4 ${
           constrainedHeight
@@ -221,6 +209,6 @@ export default function WorkHistory({
           </section>
         ))}
       </div>
-    </section>
+    </CollapsiblePanel>
   );
 }

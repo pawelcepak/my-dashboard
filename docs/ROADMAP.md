@@ -930,3 +930,13 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Calculate weekday standard-hours ratings from 2026-W31
 - [x] Show weekly time categories, average rating and best day
 - [x] Document the dynamic Work time analytics model
+
+## v0.7.5 — Global Panel System Pilot
+
+- [x] Create a reusable accessible CollapsiblePanel component
+- [x] Apply the panel system only to Work Time Analytics
+- [x] Remember the pilot panel state locally across reloads
+- [x] Migrate Work week settings to the collapsible panel system
+- [x] Migrate Work week history to the collapsible panel system
+- [x] Migrate Work financial plan to the collapsible panel system
+- [x] Place week selector and actions below the week badge in the Work header

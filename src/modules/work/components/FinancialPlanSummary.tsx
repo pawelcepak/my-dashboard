@@ -2,6 +2,7 @@ import { ArrowDown, ArrowUp, CircleDollarSign, Lock, LockOpen, Plus, Trash2 } fr
 
 import type { FinancialPlanItem, WorkWeekSummary } from '@/modules/work/types/work.types';
 import { formatCurrencyEur, formatCurrencyPln } from '@/modules/work/utils/workCalculations';
+import CollapsiblePanel from '@/shared/components/CollapsiblePanel';
 
 type FinancialPlanSummaryProps = {
   items: FinancialPlanItem[];
@@ -141,22 +142,31 @@ export default function FinancialPlanSummary({
   }
 
   return (
-    <section className="rounded-2xl border border-zinc-700 bg-zinc-900/50">
-      <div className="flex items-center justify-between gap-4 border-b border-zinc-700 px-5 py-4 sm:px-6">
+    <CollapsiblePanel
+      storageKey="work-financial-plan"
+      title="Plan finansowy"
+      description="Priorytety i rozdzielenie zarobionych środków"
+      icon={<CircleDollarSign aria-hidden="true" className="size-4" />}
+      summary={
         <div>
-          <h2 className="text-base font-semibold text-zinc-100">Plan finansowy</h2>
-
-          <p className="mt-1 text-sm text-zinc-500">
-            Kolejność określa sposób rozdzielania zarobionych środków.
+          <p className="text-[9px] font-semibold uppercase tracking-wide text-zinc-600">
+            Plan · bilans
+          </p>
+          <p
+            className={`mt-0.5 text-xs font-bold ${
+              hasSurplus ? 'text-emerald-400' : 'text-red-400'
+            }`}
+          >
+            {formatCurrencyPln(summary.financialPlanTotalPln)}
+            {' · '}
+            {hasSurplus ? '+' : '−'}
+            {formatCurrencyPln(Math.abs(summary.financialPlanBalancePln))}
           </p>
         </div>
-
-        <div className="flex size-10 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 text-zinc-400">
-          <CircleDollarSign aria-hidden="true" className="size-5" />
-        </div>
-      </div>
-
-      <div className="p-5 sm:p-6">
+      }
+      defaultOpen={false}
+    >
+      <div className="p-4">
         <div className="space-y-3">
           {orderedItems.map((item, index) => {
             const previousItem = orderedItems[index - 1];
@@ -305,7 +315,7 @@ export default function FinancialPlanSummary({
           Dodaj cel na końcu listy
         </button>
 
-        <div className="my-6 h-px bg-zinc-700" />
+        <div className="my-4 h-px bg-zinc-700" />
 
         <dl className="space-y-4">
           <div className="flex items-center justify-between gap-4">
@@ -337,7 +347,7 @@ export default function FinancialPlanSummary({
           </div>
         </dl>
 
-        <div className="mt-6 rounded-xl border border-zinc-700 bg-zinc-950/70 p-4">
+        <div className="mt-4 rounded-xl border border-zinc-700 bg-zinc-950/70 p-3">
           <p className="text-xs uppercase tracking-wide text-zinc-600">Szczegóły wypłaty</p>
 
           <dl className="mt-3 space-y-2 text-sm">
@@ -360,6 +370,6 @@ export default function FinancialPlanSummary({
           </dl>
         </div>
       </div>
-    </section>
+    </CollapsiblePanel>
   );
 }

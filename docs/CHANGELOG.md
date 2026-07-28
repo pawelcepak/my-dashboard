@@ -150,6 +150,8 @@ All notable changes to CHB will be documented in this file.
 - Daily standard-hours score from 1 to 6 for weekdays from 2026-W31 onward.
 - Weekly Work time analytics with category totals, average rating and best day.
 - Cross-midnight and cross-weekend session splitting at calendar boundaries.
+- Reusable accessible CollapsiblePanel component.
+- Local persistence of collapsible panel state across browser reloads.
 
 ### Changed
 
@@ -230,6 +232,10 @@ All notable changes to CHB will be documented in this file.
 - Work active-week summary now presents data status, gross EUR and gross PLN in that order.
 - Work week management no longer repeats the active week label and date range already represented in the page header and active-week panel.
 - Gross PLN in the active-week summary is derived from gross EUR and the exchange rate assigned to the selected week.
+- Work Time Analytics is the first and only panel migrated to the Global Panel System pilot.
+- Work week settings, week history and financial plan now use the Global Panel System.
+- Work week selector and create/delete actions are grouped under the week badge in the page header.
+- Work history moved below the primary grid to reduce vertical fragmentation and improve laptop-width readability.
 
 ### Fixed
 

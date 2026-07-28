@@ -103,56 +103,53 @@ export default function WorkWeekManager({
   }
 
   return (
-    <section className="rounded-xl border border-zinc-700 bg-zinc-900/60">
-      <div className="flex flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center">
-        <div className="flex flex-1 flex-col gap-2 sm:flex-row">
-          <label className="relative min-w-56">
-            <span className="sr-only">Wybierz tydzień</span>
+    <section className="mt-2 w-full">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_auto_auto]">
+        <label className="relative min-w-0">
+          <span className="sr-only">Wybierz tydzień</span>
 
-            <select
-              value={activeWeek.id}
-              disabled={isSaving}
-              onChange={(event) => {
-                void onSelectWeek(event.target.value);
-              }}
-              className={`${inputClasses} appearance-none pr-10`}
-            >
-              {weeks.map((week) => (
-                <option key={week.id} value={week.id}>
-                  {formatWorkWeekLabel(week.year, week.weekNumber)} ·{' '}
-                  {formatIsoDate(week.startDate)}
-                </option>
-              ))}
-            </select>
-
-            <ChevronDown
-              aria-hidden="true"
-              className="pointer-events-none absolute top-3 right-3 size-4 text-zinc-500"
-            />
-          </label>
-
-          <button
-            type="button"
+          <select
+            value={activeWeek.id}
             disabled={isSaving}
-            onClick={() => setIsCreationOpen((currentValue) => !currentValue)}
-            className="flex h-10 items-center justify-center gap-2 rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] px-4 text-sm font-medium text-[var(--app-accent)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <CalendarPlus aria-hidden="true" className="size-4" />
-            Nowy tydzień
-          </button>
-
-          <button
-            type="button"
-            disabled={isSaving || weeks.length <= 1}
-            onClick={() => {
-              void handleDeleteWeek();
+            onChange={(event) => {
+              void onSelectWeek(event.target.value);
             }}
-            className="flex h-10 items-center justify-center gap-2 rounded-lg border border-red-800 bg-red-950/30 px-4 text-sm font-semibold text-red-300 transition hover:bg-red-950/60 disabled:cursor-not-allowed disabled:opacity-40"
+            className={`${inputClasses} appearance-none pr-10`}
           >
-            <Trash2 aria-hidden="true" className="size-4" />
-            Usuń tydzień
-          </button>
-        </div>
+            {weeks.map((week) => (
+              <option key={week.id} value={week.id}>
+                {formatWorkWeekLabel(week.year, week.weekNumber)} · {formatIsoDate(week.startDate)}
+              </option>
+            ))}
+          </select>
+
+          <ChevronDown
+            aria-hidden="true"
+            className="pointer-events-none absolute top-3 right-3 size-4 text-zinc-500"
+          />
+        </label>
+
+        <button
+          type="button"
+          disabled={isSaving}
+          onClick={() => setIsCreationOpen((currentValue) => !currentValue)}
+          className="flex h-10 items-center justify-center gap-2 rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] px-4 text-sm font-medium text-[var(--app-accent)] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <CalendarPlus aria-hidden="true" className="size-4" />
+          Nowy tydzień
+        </button>
+
+        <button
+          type="button"
+          disabled={isSaving || weeks.length <= 1}
+          onClick={() => {
+            void handleDeleteWeek();
+          }}
+          className="flex h-10 items-center justify-center gap-2 rounded-lg border border-red-800 bg-red-950/30 px-4 text-sm font-semibold text-red-300 transition hover:bg-red-950/60 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          <Trash2 aria-hidden="true" className="size-4" />
+          Usuń tydzień
+        </button>
       </div>
 
       {isCreationOpen && (
@@ -160,7 +157,7 @@ export default function WorkWeekManager({
           onSubmit={(event) => {
             void handleCreateWeek(event);
           }}
-          className="border-t border-zinc-700 px-4 py-4"
+          className="mt-2 rounded-xl border border-zinc-700 bg-zinc-900/60 p-4"
         >
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[10rem_10rem_minmax(16rem,1fr)_auto] lg:items-end">
             <label>

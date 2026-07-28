@@ -1,7 +1,7 @@
 {
   "interfaceVersion": 1,
-  "generatedFromVersion": "0.7.4",
-  "generatedFromSprint": "0.7.4A-D",
+  "generatedFromVersion": "0.7.5",
+  "generatedFromSprint": "0.7.5",
   "project": {
     "$schema": "../schemas/project.schema.json",
     "schemaVersion": 1,
@@ -9,8 +9,8 @@
     "name": "CHB",
     "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
     "repository": "my-dashboard",
-    "currentVersion": "0.7.4",
-    "currentSprint": "0.7.4A-D",
+    "currentVersion": "0.7.5",
+    "currentSprint": "0.7.5",
     "status": "active",
     "architectureVersion": 2,
     "documentationModel": "ai-project-interface",
@@ -52,20 +52,20 @@
   "context": {
     "$schema": "../schemas/current-context.schema.json",
     "schemaVersion": 1,
-    "currentVersion": "0.7.4",
-    "currentSprint": "0.7.4A-D",
-    "currentGoal": "Classify Work sessions into standard, additional and weekend time and calculate ratings from week 31 onward.",
+    "currentVersion": "0.7.5",
+    "currentSprint": "0.7.5",
+    "currentGoal": "Expand the Global Panel System across the most space-intensive Work panels and compact the week controls into the page header.",
     "stableState": true,
     "lastCompleted": [
+      "Work Time Analytics",
       "Alcohol Analytics foundation",
-      "Alcohol build hotfix",
-      "Architecture and AI documentation update"
+      "Single-source-of-truth architecture documentation"
     ],
     "nextTasks": [
-      "Verify sessions crossing 15:00 and 06:20",
-      "Verify Friday-to-Saturday and Sunday-to-Monday splits",
-      "Review the rating thresholds after regular use",
-      "Plan monthly and yearly Work time statistics"
+      "Verify all four Work panels remember their open state",
+      "Verify week controls align below the week badge",
+      "Review Work page height at laptop and Full HD widths",
+      "Choose the next pages for panel migration"
     ],
     "knownIssues": [
       {
@@ -443,16 +443,38 @@
         "roadmap.work.standard-hours-rating",
         "roadmap.work.weekly-time-analytics"
       ]
+    },
+    {
+      "id": "decision.ui-panel-state-is-local",
+      "title": "Panel expansion state is local UI state",
+      "status": "accepted",
+      "date": "2026-07-28",
+      "context": "Collapsible panels need to remember the user's local layout without adding domain data or forcing the same open panels on every device.",
+      "decision": "Store panel open and closed state in localStorage. Do not include it in Dexie, backup or Supabase during the pilot.",
+      "consequences": [
+        "Panel state survives browser reloads on one device.",
+        "Panel layout can differ between desktop and mobile devices.",
+        "No database migration or cloud snapshot change is required."
+      ],
+      "relatedFeatures": [
+        "feature.ui.collapsible-panel-component",
+        "feature.ui.work-time-panel-pilot"
+      ],
+      "relatedRoadmapItems": [
+        "roadmap.ui.collapsible-panel-component",
+        "roadmap.ui.work-time-panel-pilot",
+        "roadmap.ui.panel-local-persistence"
+      ]
     }
   ],
   "summary": {
-    "roadmapTasks": 708,
-    "completedRoadmapTasks": 392,
+    "roadmapTasks": 715,
+    "completedRoadmapTasks": 399,
     "plannedRoadmapTasks": 316,
-    "features": 707,
+    "features": 713,
     "activeModules": 8,
     "openIssues": 3,
-    "acceptedDecisions": 9,
+    "acceptedDecisions": 10,
     "releases": 6
   }
 }

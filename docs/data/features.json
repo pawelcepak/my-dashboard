@@ -9629,6 +9629,95 @@
         "src/modules/work/components/WorkTimeAnalyticsPanel.tsx"
       ],
       "tags": ["work", "analytics", "time"]
+    },
+    {
+      "id": "feature.ui.collapsible-panel-component",
+      "title": "Reusable collapsible panel component",
+      "module": "shared",
+      "status": "completed",
+      "roadmapItemId": "roadmap.ui.collapsible-panel-component",
+      "roadmapPath": ["v0.7.5 — Global Panel System Pilot"],
+      "introducedIn": "0.7.5",
+      "description": "Accessible shared panel with a summary header, persisted open state and keyboard-operable toggle.",
+      "acceptanceCriteria": [
+        "The whole panel header toggles the panel",
+        "The panel exposes aria-expanded and aria-controls",
+        "The state survives a browser reload"
+      ],
+      "relatedFiles": ["src/shared/components/CollapsiblePanel.tsx"],
+      "tags": ["ui", "ux", "panels"]
+    },
+    {
+      "id": "feature.ui.work-time-panel-pilot",
+      "title": "Collapsible Work Time Analytics pilot",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.ui.work-time-panel-pilot",
+      "roadmapPath": ["v0.7.5 — Global Panel System Pilot"],
+      "introducedIn": "0.7.5",
+      "description": "Work Time Analytics is the only panel migrated during the pilot.",
+      "acceptanceCriteria": [
+        "The panel is collapsed by default",
+        "The closed header still shows standard time and average score",
+        "No other page panel changes in this sprint"
+      ],
+      "relatedFiles": [
+        "src/modules/work/components/WorkTimeAnalyticsPanel.tsx",
+        "src/shared/components/CollapsiblePanel.tsx"
+      ],
+      "tags": ["ui", "ux", "work"]
+    },
+    {
+      "id": "feature.ui.work-week-settings-panel",
+      "title": "Collapsible Work week settings",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.ui.work-week-settings-panel",
+      "roadmapPath": ["v0.7.5 — Global Panel System Pilot"],
+      "introducedIn": "0.7.5",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["ui", "ux", "work", "panels"]
+    },
+    {
+      "id": "feature.ui.work-history-panel",
+      "title": "Collapsible Work week history",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.ui.work-history-panel",
+      "roadmapPath": ["v0.7.5 — Global Panel System Pilot"],
+      "introducedIn": "0.7.5",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["ui", "ux", "work", "panels"]
+    },
+    {
+      "id": "feature.ui.financial-plan-panel",
+      "title": "Collapsible Work financial plan",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.ui.financial-plan-panel",
+      "roadmapPath": ["v0.7.5 — Global Panel System Pilot"],
+      "introducedIn": "0.7.5",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["ui", "ux", "work", "panels"]
+    },
+    {
+      "id": "feature.ui.work-header-week-controls",
+      "title": "Compact Work header week controls",
+      "module": "work",
+      "status": "completed",
+      "roadmapItemId": "roadmap.ui.work-header-week-controls",
+      "roadmapPath": ["v0.7.5 — Global Panel System Pilot"],
+      "introducedIn": "0.7.5",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["ui", "ux", "work", "panels"]
     }
   ]
 }

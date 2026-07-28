@@ -1,5 +1,7 @@
 import { CircleDollarSign, Trash2 } from 'lucide-react';
 
+import CollapsiblePanel from '@/shared/components/CollapsiblePanel';
+
 type WorkWeekSettingsProps = {
   exchangeRateEurPln: number;
   onExchangeRateChange: (value: number) => void;
@@ -7,11 +9,10 @@ type WorkWeekSettingsProps = {
 };
 
 const inputClasses =
-  'h-11 w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 text-sm text-zinc-100 outline-none transition focus:border-[var(--app-accent)] focus:ring-1 focus:ring-[var(--app-accent)]';
+  'h-10 w-full rounded-xl border border-zinc-700 bg-zinc-950 px-3 text-sm text-zinc-100 outline-none transition focus:border-[var(--app-accent)] focus:ring-1 focus:ring-[var(--app-accent)]';
 
 function parseNonNegativeNumber(value: string): number {
   const normalizedValue = value.replace(',', '.');
-
   const parsedValue = Number.parseFloat(normalizedValue);
 
   if (!Number.isFinite(parsedValue) || parsedValue < 0) {
@@ -27,22 +28,24 @@ export default function WorkWeekSettings({
   onReset,
 }: WorkWeekSettingsProps) {
   return (
-    <section className="rounded-2xl border border-zinc-700 bg-zinc-900/50">
-      <div className="flex items-center justify-between gap-4 border-b border-zinc-700 px-5 py-4 sm:px-6">
+    <CollapsiblePanel
+      storageKey="work-week-settings"
+      title="Ustawienia tygodnia"
+      description="Kurs waluty i operacje na aktywnym tygodniu"
+      icon={<CircleDollarSign aria-hidden="true" className="size-4" />}
+      summary={
         <div>
-          <h2 className="text-base font-semibold text-zinc-100">Ustawienia tygodnia</h2>
-
-          <p className="mt-1 text-sm text-zinc-500">Parametry wpływające na obliczenie wypłaty</p>
+          <p className="text-[9px] font-semibold uppercase tracking-wide text-zinc-600">EUR/PLN</p>
+          <p className="mt-0.5 text-xs font-bold text-zinc-300">
+            {exchangeRateEurPln.toFixed(2).replace('.', ',')}
+          </p>
         </div>
-
-        <div className="flex size-10 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 text-zinc-500">
-          <CircleDollarSign aria-hidden="true" className="size-5" />
-        </div>
-      </div>
-
-      <div className="space-y-5 p-5 sm:p-6">
-        <label>
-          <span className="mb-2 block text-sm font-medium text-zinc-400">Kurs EUR/PLN</span>
+      }
+      defaultOpen={false}
+    >
+      <div className="grid gap-3 p-4 lg:grid-cols-[minmax(12rem,0.7fr)_minmax(0,1.3fr)]">
+        <label className="rounded-xl border border-zinc-700 bg-zinc-950/35 p-3">
+          <span className="mb-1.5 block text-xs font-medium text-zinc-400">Kurs EUR/PLN</span>
 
           <input
             type="number"
@@ -53,29 +56,29 @@ export default function WorkWeekSettings({
             className={inputClasses}
           />
 
-          <span className="mt-2 block text-xs leading-5 text-zinc-500">
-            Kurs jest zapisywany osobno dla każdego tygodnia.
+          <span className="mt-1.5 block text-[10px] leading-4 text-zinc-500">
+            Zapisywany osobno dla każdego tygodnia.
           </span>
         </label>
 
-        <div className="rounded-xl border border-zinc-700 bg-zinc-950/40 px-4 py-3">
-          <p className="text-xs font-medium text-zinc-400">Zatrzymane wiadomości</p>
+        <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+          <div className="rounded-xl border border-zinc-700 bg-zinc-950/35 px-3 py-2.5">
+            <p className="text-xs font-medium text-zinc-400">Zatrzymane wiadomości</p>
+            <p className="mt-1 text-[10px] leading-4 text-zinc-500">
+              Są wpisywane przy dniach i sumowane automatycznie.
+            </p>
+          </div>
 
-          <p className="mt-1 text-xs leading-5 text-zinc-500">
-            Są wpisywane bezpośrednio przy odpowiednich dniach i automatycznie sumowane do wyniku
-            tygodnia.
-          </p>
+          <button
+            type="button"
+            onClick={onReset}
+            className="flex h-10 items-center justify-center gap-2 rounded-xl border border-red-800 bg-red-950/30 px-4 text-xs font-medium text-red-300 transition hover:bg-red-950/50"
+          >
+            <Trash2 aria-hidden="true" className="size-3.5" />
+            Wyczyść tydzień
+          </button>
         </div>
-
-        <button
-          type="button"
-          onClick={onReset}
-          className="flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-red-800 bg-red-950/30 px-4 text-sm font-medium text-red-300 transition hover:bg-red-950/50"
-        >
-          <Trash2 aria-hidden="true" className="size-4" />
-          Wyczyść dane aktywnego tygodnia
-        </button>
       </div>
-    </section>
+    </CollapsiblePanel>
   );
 }

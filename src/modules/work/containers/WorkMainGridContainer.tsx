@@ -79,7 +79,7 @@ export default function WorkMainGridContainer({
 
   return (
     <>
-      <div className="grid items-start gap-4 2xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,1fr)_minmax(18rem,1fr)]">
+      <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.75fr)]">
         <div className="min-w-0">
           <WorkDaysTable
             days={activeWeek.days}
@@ -106,17 +106,14 @@ export default function WorkMainGridContainer({
             onReset={handleReset}
           />
         </div>
-
-        <div className="min-w-0">
-          <WorkHistory
-            weeks={weeks}
-            activeWeekId={activeWeek.id}
-            isSaving={isSaving}
-            onSelectWeek={selectWeek}
-            constrainedHeight
-          />
-        </div>
       </div>
+
+      <WorkHistory
+        weeks={weeks}
+        activeWeekId={activeWeek.id}
+        isSaving={isSaving}
+        onSelectWeek={selectWeek}
+      />
 
       <WorkIntelligencePanel week={activeWeek} />
 
