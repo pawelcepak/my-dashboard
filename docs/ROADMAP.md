@@ -833,6 +833,7 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Project-data validation and consistency checks
 - [x] Deterministic CHANGELOG and ROADMAP generator
 - [x] Automated release preparation command
+
 ### v0.5.4E-F — AI Project Interface
 
 - [x] Machine-readable module registry
@@ -841,6 +842,7 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Generated AGENTS.md adapter
 - [x] Generated CLAUDE.md adapter
 - [x] Generated Cursor project rules
+
 ## v0.5.5 — Work UX Improvements
 
 - [x] Current-time defaults for new work sessions
@@ -921,3 +923,10 @@ Future quality and intelligence work remains planned but is not required for nor
 - [ ] Show the last drinking day and days since it
 - [ ] Show current-month drinking days, beers and expenses
 - [ ] Add compact cross-module alcohol statistics
+
+## v0.7.4A–D — Work Time Analytics
+
+- [x] Classify session time across standard, additional and weekend boundaries
+- [x] Calculate weekday standard-hours ratings from 2026-W31
+- [x] Show weekly time categories, average rating and best day
+- [x] Document the dynamic Work time analytics model

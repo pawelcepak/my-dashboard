@@ -1,17 +1,19 @@
-CHB v0.7.0 — Alcohol Analytics
+CHB v0.7.4A-D — Work Time Analytics
 
-Verification completed in the prepared merged project:
-- Project-data validation: PASS
+Prepared from: my-dashboard(4).zip
+
+Checks completed:
+- Project data validation: PASS
 - Documentation generation: PASS
 - Documentation drift check: PASS
-- TypeScript/TSX syntax parse: 104 files, 0 syntax errors
-- Historical BrPW import:
-  - 188 drinking-day overrides before native Work history
-  - 18 manual monthly expense records from 2024-12 through 2026-05
+- TypeScript/TSX syntax parse: 105 files, 0 syntax errors
+- Boundary logic checks:
+  - weekday 14:00-16:00 => 60 standard + 60 additional
+  - weekday 05:30-07:00 => 50 additional + 40 standard
+  - Friday 23:00-Saturday 01:00 => 60 additional + 60 weekend
+  - Sunday 23:50-Monday 00:20 => 10 weekend in the old week + 20 additional in the new week
 
-The full dependency-based release pipeline must be run in the user's local
-project after copying the overlay:
-
+Run locally after copying:
 npm run docs:validate
 npm run docs:generate
 npm run docs:check

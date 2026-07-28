@@ -145,6 +145,34 @@ export type WorkWeekSummary = {
   financialPlanBalancePln: number;
 };
 
+export type WorkTimeCategory = 'standard' | 'additional' | 'weekend';
+
+export type WorkTimeSegment = {
+  date: string;
+  category: WorkTimeCategory;
+  minutes: number;
+};
+
+export type WorkDayTimeAnalytics = {
+  date: string;
+  standardMinutes: number;
+  additionalMinutes: number;
+  weekendMinutes: number;
+  standardHoursScore: number | null;
+};
+
+export type WorkTimeAnalytics = {
+  days: WorkDayTimeAnalytics[];
+  totalStandardMinutes: number;
+  totalAdditionalMinutes: number;
+  totalWeekendMinutes: number;
+  averageStandardHoursScore: number | null;
+  ratedDayCount: number;
+  scoreFiveDayCount: number;
+  scoreSixDayCount: number;
+  bestDay: (WorkDayTimeAnalytics & { standardHoursScore: number }) | null;
+};
+
 export type WorkProgress = {
   currentThreshold: number;
   nextThreshold: number | null;

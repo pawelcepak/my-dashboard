@@ -146,6 +146,10 @@ All notable changes to CHB will be documented in this file.
 - Historical monthly alcohol expenses through May 2026.
 - Manual drinking-day overrides with one-click return to automatic Work data.
 - Monthly alcohol history and overview statistics.
+- Work time engine classifying session minutes as standard, additional or weekend time.
+- Daily standard-hours score from 1 to 6 for weekdays from 2026-W31 onward.
+- Weekly Work time analytics with category totals, average rating and best day.
+- Cross-midnight and cross-weekend session splitting at calendar boundaries.
 
 ### Changed
 

@@ -6,9 +6,11 @@ import WorkDaysTable from '@/modules/work/components/WorkDaysTable';
 import WorkHistory from '@/modules/work/components/WorkHistory';
 import WorkIntelligencePanel from '@/modules/work/components/WorkIntelligencePanel';
 import WorkSummaryGrid from '@/modules/work/components/WorkSummaryGrid';
+import WorkTimeAnalyticsPanel from '@/modules/work/components/WorkTimeAnalyticsPanel';
 import WorkWeekSettings from '@/modules/work/components/WorkWeekSettings';
 import type { WorkDay, WorkWeek, WorkWeekSummary } from '@/modules/work/types/work.types';
 import { getDailyHeldMessagesTotal } from '@/modules/work/utils/workCalculations';
+import { calculateWorkTimeAnalytics } from '@/modules/work/utils/workTimeAnalytics';
 
 type WorkWeekUpdater = (week: WorkWeek) => WorkWeek;
 
@@ -40,6 +42,8 @@ export default function WorkMainGridContainer({
   }, [activeWeek.id]);
 
   const selectedDay = activeWeek.days.find((day) => day.id === selectedDayId) ?? null;
+
+  const timeAnalytics = calculateWorkTimeAnalytics(activeWeek, weeks);
 
   function updateDay(updatedDay: WorkDay) {
     void updateWeek((currentWeek) => {
@@ -88,6 +92,8 @@ export default function WorkMainGridContainer({
 
         <div className="min-w-0 space-y-4">
           <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
+
+          <WorkTimeAnalyticsPanel analytics={timeAnalytics} weekStartDate={activeWeek.startDate} />
 
           <WorkWeekSettings
             exchangeRateEurPln={activeWeek.exchangeRateEurPln}

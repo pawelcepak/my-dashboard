@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.7.0a`
-- Current sprint: `0.7.0a`
+- Current version: `0.7.4`
+- Current sprint: `0.7.4A-D`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Stabilize Alcohol Analytics and document the next analytical development line.
+Classify Work sessions into standard, additional and weekend time and calculate ratings from week 31 onward.
 
 ## Non-negotiable principles
 
@@ -45,10 +45,10 @@ Stabilize Alcohol Analytics and document the next analytical development line.
 
 ## Next tasks
 
-- Use the Alcohol module in normal daily operation
-- Plan v0.7.1 Alcohol Analytics Advanced
-- Plan v0.7.2 Alcohol Intelligence
-- Plan v0.7.3 Dashboard Integration
+- Verify sessions crossing 15:00 and 06:20
+- Verify Friday-to-Saturday and Sunday-to-Monday splits
+- Review the rating thresholds after regular use
+- Plan monthly and yearly Work time statistics
 
 ## Open and accepted issues
 
@@ -66,6 +66,7 @@ Stabilize Alcohol Analytics and document the next analytical development line.
 - `decision.ai.vendor-neutral-interface`: Keep the AI Project Interface vendor-neutral
 - `decision.ai.generated-provider-adapters`: Generate provider adapters from one AI Project Interface
 - `decision.single-source-of-truth.analytics`: Analytical modules do not duplicate domain data
+- `decision.work-derived-time-analytics`: Work time analytics are derived from session blocks
 
 ## Required agent behavior
 

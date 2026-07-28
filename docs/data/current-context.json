@@ -1,20 +1,20 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.7.0a",
-  "currentSprint": "0.7.0a",
-  "currentGoal": "Stabilize Alcohol Analytics and document the next analytical development line.",
+  "currentVersion": "0.7.4",
+  "currentSprint": "0.7.4A-D",
+  "currentGoal": "Classify Work sessions into standard, additional and weekend time and calculate ratings from week 31 onward.",
   "stableState": true,
   "lastCompleted": [
     "Alcohol Analytics foundation",
-    "Alcohol Build Hotfix",
-    "Single-source-of-truth integration between Work, Portfolio and Alcohol"
+    "Alcohol build hotfix",
+    "Architecture and AI documentation update"
   ],
   "nextTasks": [
-    "Use the Alcohol module in normal daily operation",
-    "Plan v0.7.1 Alcohol Analytics Advanced",
-    "Plan v0.7.2 Alcohol Intelligence",
-    "Plan v0.7.3 Dashboard Integration"
+    "Verify sessions crossing 15:00 and 06:20",
+    "Verify Friday-to-Saturday and Sunday-to-Monday splits",
+    "Review the rating thresholds after regular use",
+    "Plan monthly and yearly Work time statistics"
   ],
   "knownIssues": [
     {

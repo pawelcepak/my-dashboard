@@ -127,6 +127,29 @@
         "roadmap.alcohol.portfolio-link",
         "roadmap.alcohol.manual-overrides"
       ]
+    },
+    {
+      "id": "decision.work-derived-time-analytics",
+      "title": "Work time analytics are derived from session blocks",
+      "status": "accepted",
+      "date": "2026-07-28",
+      "context": "Standard, additional and weekend time plus weekday ratings are needed without creating parallel stored totals.",
+      "decision": "Split absolute session intervals at time-of-day, midnight and weekend boundaries. Calculate all category totals, daily scores and weekly averages dynamically from Work sessions.",
+      "consequences": [
+        "Cross-midnight sessions are assigned according to the real calendar minute.",
+        "No derived rating or duration totals are persisted.",
+        "Future monthly and yearly analysis can reuse the same engine."
+      ],
+      "relatedFeatures": [
+        "feature.work.time-engine",
+        "feature.work.standard-hours-rating",
+        "feature.work.weekly-time-analytics"
+      ],
+      "relatedRoadmapItems": [
+        "roadmap.work.time-engine",
+        "roadmap.work.standard-hours-rating",
+        "roadmap.work.weekly-time-analytics"
+      ]
     }
   ]
 }

@@ -6646,9 +6646,7 @@
       "title": "Machine-readable project data foundation",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "developer-infrastructure"
-      ]
+      "tags": ["developer-infrastructure"]
     },
     {
       "type": "task",
@@ -6657,9 +6655,7 @@
       "title": "Project-data validation and consistency checks",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "developer-infrastructure"
-      ]
+      "tags": ["developer-infrastructure"]
     },
     {
       "type": "task",
@@ -6668,9 +6664,7 @@
       "title": "Deterministic CHANGELOG and ROADMAP generator",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "developer-infrastructure"
-      ]
+      "tags": ["developer-infrastructure"]
     },
     {
       "type": "task",
@@ -6679,9 +6673,7 @@
       "title": "Automated release preparation command",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "developer-infrastructure"
-      ]
+      "tags": ["developer-infrastructure"]
     },
     {
       "type": "heading",
@@ -6697,9 +6689,7 @@
       "title": "Machine-readable module registry",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6708,9 +6698,7 @@
       "title": "Machine-readable known-issue registry",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6719,9 +6707,7 @@
       "title": "Vendor-neutral AI Project Interface manifest",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6730,9 +6716,7 @@
       "title": "Generated AGENTS.md adapter",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6741,9 +6725,7 @@
       "title": "Generated CLAUDE.md adapter",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "task",
@@ -6752,9 +6734,7 @@
       "title": "Generated Cursor project rules",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "ai-project-interface"
-      ]
+      "tags": ["ai-project-interface"]
     },
     {
       "type": "heading",
@@ -6770,10 +6750,7 @@
       "title": "Current-time defaults for new work sessions",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "daily-ux"
-      ]
+      "tags": ["work", "daily-ux"]
     },
     {
       "type": "task",
@@ -6782,10 +6759,7 @@
       "title": "Two-minute default duration for new work sessions",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "daily-ux"
-      ]
+      "tags": ["work", "daily-ux"]
     },
     {
       "type": "task",
@@ -6794,10 +6768,7 @@
       "title": "Remaining percentage for the next message-rate threshold",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "progress"
-      ]
+      "tags": ["work", "progress"]
     },
     {
       "type": "blank"
@@ -6816,11 +6787,7 @@
       "title": "Import 2026 work history for ISO weeks 8–29",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "history",
-        "migration"
-      ]
+      "tags": ["work", "history", "migration"]
     },
     {
       "type": "task",
@@ -6829,11 +6796,7 @@
       "title": "Preserve existing weeks during historical import",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "history",
-        "data-safety"
-      ]
+      "tags": ["work", "history", "data-safety"]
     },
     {
       "type": "task",
@@ -6842,11 +6805,7 @@
       "title": "Validate imported weekly message and beer totals against source screenshots",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "history",
-        "validation"
-      ]
+      "tags": ["work", "history", "validation"]
     },
     {
       "type": "task",
@@ -6855,11 +6814,7 @@
       "title": "Preserve historical daily duration with identifiable placeholder sessions",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "history",
-        "compatibility"
-      ]
+      "tags": ["work", "history", "compatibility"]
     },
     {
       "type": "blank"
@@ -6878,9 +6833,7 @@
       "title": "Functional income and expense ledger",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6889,9 +6842,7 @@
       "title": "Automatic running balance",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6900,9 +6851,7 @@
       "title": "Editable Portfolio tags",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6911,9 +6860,7 @@
       "title": "Optional transaction notes",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6922,9 +6869,7 @@
       "title": "Multiple transactions on one date",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6933,9 +6878,7 @@
       "title": "Portfolio backup and cloud synchronization",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "task",
@@ -6944,9 +6887,7 @@
       "title": "Safe Windows project ZIP script",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio"
-      ]
+      "tags": ["portfolio"]
     },
     {
       "type": "blank"
@@ -6965,11 +6906,7 @@
       "title": "Normalize legacy cloud snapshots without Portfolio arrays",
       "status": "completed",
       "priority": "critical",
-      "tags": [
-        "cloud",
-        "portfolio",
-        "compatibility"
-      ]
+      "tags": ["cloud", "portfolio", "compatibility"]
     },
     {
       "type": "task",
@@ -6978,11 +6915,7 @@
       "title": "Make cloud fingerprint and timestamp comparison safe for legacy snapshots",
       "status": "completed",
       "priority": "critical",
-      "tags": [
-        "cloud",
-        "portfolio",
-        "compatibility"
-      ]
+      "tags": ["cloud", "portfolio", "compatibility"]
     },
     {
       "type": "blank"
@@ -7001,10 +6934,7 @@
       "title": "Fast Portfolio entry with remembered tags and Enter submission",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "ux"
-      ]
+      "tags": ["portfolio", "ux"]
     },
     {
       "type": "task",
@@ -7013,10 +6943,7 @@
       "title": "Compact filtered transaction table with inline editing",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "ux"
-      ]
+      "tags": ["portfolio", "ux"]
     },
     {
       "type": "task",
@@ -7025,10 +6952,7 @@
       "title": "Monthly and category Portfolio statistics",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "ux"
-      ]
+      "tags": ["portfolio", "ux"]
     },
     {
       "type": "task",
@@ -7037,10 +6961,7 @@
       "title": "Portfolio CSV preview and import",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "ux"
-      ]
+      "tags": ["portfolio", "ux"]
     },
     {
       "type": "blank"
@@ -7059,10 +6980,7 @@
       "title": "Fix Portfolio UX TypeScript build errors",
       "status": "completed",
       "priority": "critical",
-      "tags": [
-        "portfolio",
-        "hotfix"
-      ]
+      "tags": ["portfolio", "hotfix"]
     },
     {
       "type": "task",
@@ -7071,10 +6989,7 @@
       "title": "Remove Portfolio React hook dependency warnings",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "portfolio",
-        "hotfix"
-      ]
+      "tags": ["portfolio", "hotfix"]
     },
     {
       "type": "blank"
@@ -7093,11 +7008,7 @@
       "title": "Store navigation order and tab colors in application preferences",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "navigation",
-        "settings",
-        "ux"
-      ]
+      "tags": ["navigation", "settings", "ux"]
     },
     {
       "type": "task",
@@ -7106,11 +7017,7 @@
       "title": "Manage tab order and colors without code",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "navigation",
-        "settings",
-        "ux"
-      ]
+      "tags": ["navigation", "settings", "ux"]
     },
     {
       "type": "task",
@@ -7119,11 +7026,7 @@
       "title": "Reorder tabs by drag and touch-friendly controls",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "navigation",
-        "settings",
-        "ux"
-      ]
+      "tags": ["navigation", "settings", "ux"]
     },
     {
       "type": "task",
@@ -7132,11 +7035,7 @@
       "title": "Adapt desktop and mobile bars to the configured order",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "navigation",
-        "settings",
-        "ux"
-      ]
+      "tags": ["navigation", "settings", "ux"]
     },
     {
       "type": "blank"
@@ -7155,11 +7054,7 @@
       "title": "Show Work data status, gross EUR and gross PLN in one ordered strip",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "work",
-        "ux",
-        "finance"
-      ]
+      "tags": ["work", "ux", "finance"]
     },
     {
       "type": "task",
@@ -7168,10 +7063,7 @@
       "title": "Remove duplicated active-week label and date range from the week manager",
       "status": "completed",
       "priority": "normal",
-      "tags": [
-        "work",
-        "ux"
-      ]
+      "tags": ["work", "ux"]
     },
     {
       "type": "blank"
@@ -7190,11 +7082,7 @@
       "title": "Derive drinking days and beer totals from Work",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "alcohol",
-        "analytics",
-        "ecosystem"
-      ]
+      "tags": ["alcohol", "analytics", "ecosystem"]
     },
     {
       "type": "task",
@@ -7203,11 +7091,7 @@
       "title": "Derive alcohol expenses from selected Portfolio tags",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "alcohol",
-        "analytics",
-        "ecosystem"
-      ]
+      "tags": ["alcohol", "analytics", "ecosystem"]
     },
     {
       "type": "task",
@@ -7216,11 +7100,7 @@
       "title": "Import historical BrPW drinking days and monthly expenses",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "alcohol",
-        "analytics",
-        "ecosystem"
-      ]
+      "tags": ["alcohol", "analytics", "ecosystem"]
     },
     {
       "type": "task",
@@ -7229,11 +7109,7 @@
       "title": "Support manual day corrections without duplicating Work data",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "alcohol",
-        "analytics",
-        "ecosystem"
-      ]
+      "tags": ["alcohol", "analytics", "ecosystem"]
     },
     {
       "type": "task",
@@ -7242,11 +7118,7 @@
       "title": "Add calendar, monthly history and overview statistics",
       "status": "completed",
       "priority": "high",
-      "tags": [
-        "alcohol",
-        "analytics",
-        "ecosystem"
-      ]
+      "tags": ["alcohol", "analytics", "ecosystem"]
     },
     {
       "type": "blank"
@@ -7265,10 +7137,7 @@
       "title": "Add monthly drinking-day, beer-count and expense charts",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7277,10 +7146,7 @@
       "title": "Add month-to-month and year-to-year comparisons",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7289,10 +7155,7 @@
       "title": "Add average beers, cost per drinking day and estimated cost per beer",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7301,10 +7164,7 @@
       "title": "Add weekday distribution, longest drinking streak and longest break",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "blank"
@@ -7323,10 +7183,7 @@
       "title": "Analyze relationships between beer count and daily rating",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7335,10 +7192,7 @@
       "title": "Analyze relationships between beer count and messages or messages per hour",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7347,10 +7201,7 @@
       "title": "Analyze relationships between beer count and earnings",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7359,10 +7210,7 @@
       "title": "Add historical records, trends and change detection",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "blank"
@@ -7381,10 +7229,7 @@
       "title": "Add an Alcohol widget to Dashboard",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7393,10 +7238,7 @@
       "title": "Show the last drinking day and days since it",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7405,10 +7247,7 @@
       "title": "Show current-month drinking days, beers and expenses",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
     },
     {
       "type": "task",
@@ -7417,10 +7256,53 @@
       "title": "Add compact cross-module alcohol statistics",
       "status": "planned",
       "priority": "medium",
-      "tags": [
-        "alcohol",
-        "analytics"
-      ]
+      "tags": ["alcohol", "analytics"]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.7.4.work-time-analytics",
+      "parentId": null,
+      "text": "v0.7.4A–D — Work Time Analytics"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.time-engine",
+      "parentId": "section.v0.7.4.work-time-analytics",
+      "title": "Classify session time across standard, additional and weekend boundaries",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "analytics", "time"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.standard-hours-rating",
+      "parentId": "section.v0.7.4.work-time-analytics",
+      "title": "Calculate weekday standard-hours ratings from 2026-W31",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "analytics", "time"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.weekly-time-analytics",
+      "parentId": "section.v0.7.4.work-time-analytics",
+      "title": "Show weekly time categories, average rating and best day",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "analytics", "time"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.work.time-analytics-docs",
+      "parentId": "section.v0.7.4.work-time-analytics",
+      "title": "Document the dynamic Work time analytics model",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["work", "analytics", "time"]
     }
   ]
 }
