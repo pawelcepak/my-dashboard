@@ -1,12 +1,16 @@
-CHB v0.6.2 — Customizable Bottom Navigation
+CHB v0.7.0 — Alcohol Analytics
 
-Package preparation checks:
-- Overlay created from CHB_Project_2026-07-27_22-11.zip.
-- Navigation preference keys added to backup validation.
-- Existing preferences remain backward-compatible through defaults.
-- TypeScript source was statically reviewed.
+Verification completed in the prepared merged project:
+- Project-data validation: PASS
+- Documentation generation: PASS
+- Documentation drift check: PASS
+- TypeScript/TSX syntax parse: 104 files, 0 syntax errors
+- Historical BrPW import:
+  - 188 drinking-day overrides before native Work history
+  - 18 manual monthly expense records from 2024-12 through 2026-05
 
-The container did not contain a complete dependency installation, so run the full checks locally:
+The full dependency-based release pipeline must be run in the user's local
+project after copying the overlay:
 
 npm run docs:validate
 npm run docs:generate

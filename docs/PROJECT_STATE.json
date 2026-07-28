@@ -1,7 +1,7 @@
 {
   "interfaceVersion": 1,
-  "generatedFromVersion": "0.6.3A",
-  "generatedFromSprint": "0.6.3A",
+  "generatedFromVersion": "0.7.0",
+  "generatedFromSprint": "0.7.0",
   "project": {
     "$schema": "../schemas/project.schema.json",
     "schemaVersion": 1,
@@ -9,8 +9,8 @@
     "name": "CHB",
     "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
     "repository": "my-dashboard",
-    "currentVersion": "0.6.3A",
-    "currentSprint": "0.6.3A",
+    "currentVersion": "0.7.0",
+    "currentSprint": "0.7.0",
     "status": "active",
     "architectureVersion": 2,
     "documentationModel": "ai-project-interface",
@@ -52,19 +52,20 @@
   "context": {
     "$schema": "../schemas/current-context.schema.json",
     "schemaVersion": 1,
-    "currentVersion": "0.6.3A",
-    "currentSprint": "0.6.3A",
-    "currentGoal": "Remove duplicated active-week metadata and present local status, gross EUR and gross PLN in one ordered Work summary strip.",
+    "currentVersion": "0.7.0",
+    "currentSprint": "0.7.0",
+    "currentGoal": "Create the Alcohol analytics module as a linked layer over Work and Portfolio without duplicating source data.",
     "stableState": true,
     "lastCompleted": [
-      "Customizable bottom navigation",
-      "Portfolio history verification",
-      "Portfolio UX stabilization"
+      "Work UX Cleanup",
+      "Portfolio verification against historical ledger",
+      "Customizable navigation from Settings"
     ],
     "nextTasks": [
-      "Verify Work week controls remain functional",
-      "Verify gross PLN uses the active week EUR/PLN rate",
-      "Confirm responsive layout on desktop and mobile"
+      "Test calendar derivation from Work beers",
+      "Test manual day overrides and restoring AUTO",
+      "Verify Portfolio tag linkage from June 2026",
+      "Compare historical month totals with the BrPW workbook"
     ],
     "knownIssues": [
       {
@@ -211,6 +212,20 @@
       "entryFiles": [],
       "dependsOn": ["module.work"],
       "aiNotes": []
+    },
+    {
+      "id": "module.alcohol",
+      "name": "Alcohol",
+      "status": "active",
+      "description": "Cross-module alcohol analytics derived from Work beer counts and Portfolio expenses.",
+      "rootPath": "src/modules/alcohol",
+      "entryFiles": ["src/modules/alcohol/index.tsx"],
+      "dependsOn": ["module.work", "module.portfolio", "module.database", "module.cloud"],
+      "aiNotes": [
+        "Work remains the source of truth for beer counts and automatic drinking days.",
+        "Portfolio remains the source of truth for alcohol expenses from June 2026.",
+        "The module stores only historical values, manual overrides and linkage settings."
+      ]
     }
   ],
   "issues": [
@@ -380,16 +395,39 @@
         "feature.ai.interface.claude.adapter",
         "feature.ai.interface.cursor.adapter"
       ]
+    },
+    {
+      "id": "decision.single-source-of-truth.analytics",
+      "title": "Analytical modules do not duplicate domain data",
+      "status": "accepted",
+      "date": "2026-07-28",
+      "context": "The Alcohol module needs Work beer data and Portfolio expenses while preserving historical corrections.",
+      "decision": "Work owns beer counts, Portfolio owns financial transactions, and Alcohol stores only overrides, historical monthly costs and linkage settings.",
+      "consequences": [
+        "Daily entries are not duplicated across modules.",
+        "Changes in Work and Portfolio update Alcohol automatically.",
+        "Historical data remains available before source modules existed."
+      ],
+      "relatedFeatures": [
+        "feature.alcohol.work-link",
+        "feature.alcohol.portfolio-link",
+        "feature.alcohol.manual-overrides"
+      ],
+      "relatedRoadmapItems": [
+        "roadmap.alcohol.work-link",
+        "roadmap.alcohol.portfolio-link",
+        "roadmap.alcohol.manual-overrides"
+      ]
     }
   ],
   "summary": {
-    "roadmapTasks": 687,
-    "completedRoadmapTasks": 383,
+    "roadmapTasks": 692,
+    "completedRoadmapTasks": 388,
     "plannedRoadmapTasks": 304,
-    "features": 686,
-    "activeModules": 7,
+    "features": 691,
+    "activeModules": 8,
     "openIssues": 3,
-    "acceptedDecisions": 7,
+    "acceptedDecisions": 8,
     "releases": 6
   }
 }

@@ -1,6 +1,12 @@
 import Dexie, { type Table } from 'dexie';
 
 import type {
+  AlcoholDayOverride,
+  AlcoholMonthlyExpense,
+  AlcoholSettings,
+} from '@/modules/alcohol/types/alcohol.types';
+
+import type {
   PortfolioAccount,
   PortfolioTag,
   PortfolioTransaction,
@@ -13,7 +19,7 @@ import type {
   WorkWeekGoals,
 } from '@/modules/work/types/work.types';
 
-export const DATABASE_SCHEMA_VERSION = 6;
+export const DATABASE_SCHEMA_VERSION = 7;
 
 const DEFAULT_WEEKLY_MESSAGES_TARGET = 1576;
 const GOAL_PRECISION_MULTIPLIER = 100;
@@ -123,6 +129,9 @@ class MyDashboardDatabase extends Dexie {
   portfolioAccounts!: Table<PortfolioAccount, string>;
   portfolioTags!: Table<PortfolioTag, string>;
   portfolioTransactions!: Table<PortfolioTransaction, string>;
+  alcoholDayOverrides!: Table<AlcoholDayOverride, string>;
+  alcoholMonthlyExpenses!: Table<AlcoholMonthlyExpense, string>;
+  alcoholSettings!: Table<AlcoholSettings, string>;
 
   constructor() {
     super('my-dashboard');
@@ -228,6 +237,15 @@ class MyDashboardDatabase extends Dexie {
 
         await workWeeksTable.bulkPut(normalizedWeeks);
       });
+    this.version(6).stores({
+      workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
+      appSettings: 'key, updatedAt',
+      portfolioAccounts: 'id, updatedAt',
+      portfolioTags: 'id, name, kind, updatedAt',
+      portfolioTransactions:
+        'id, accountId, date, type, tagId, createdAt, updatedAt, [accountId+date]',
+    });
+
     this.version(DATABASE_SCHEMA_VERSION).stores({
       workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
       appSettings: 'key, updatedAt',
@@ -235,6 +253,9 @@ class MyDashboardDatabase extends Dexie {
       portfolioTags: 'id, name, kind, updatedAt',
       portfolioTransactions:
         'id, accountId, date, type, tagId, createdAt, updatedAt, [accountId+date]',
+      alcoholDayOverrides: 'date, state, source, updatedAt',
+      alcoholMonthlyExpenses: 'month, source, updatedAt',
+      alcoholSettings: 'id, updatedAt',
     });
   }
 }

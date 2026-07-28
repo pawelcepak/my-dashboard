@@ -103,6 +103,29 @@
         "feature.ai.interface.claude.adapter",
         "feature.ai.interface.cursor.adapter"
       ]
+    },
+    {
+      "id": "decision.single-source-of-truth.analytics",
+      "title": "Analytical modules do not duplicate domain data",
+      "status": "accepted",
+      "date": "2026-07-28",
+      "context": "The Alcohol module needs Work beer data and Portfolio expenses while preserving historical corrections.",
+      "decision": "Work owns beer counts, Portfolio owns financial transactions, and Alcohol stores only overrides, historical monthly costs and linkage settings.",
+      "consequences": [
+        "Daily entries are not duplicated across modules.",
+        "Changes in Work and Portfolio update Alcohol automatically.",
+        "Historical data remains available before source modules existed."
+      ],
+      "relatedFeatures": [
+        "feature.alcohol.work-link",
+        "feature.alcohol.portfolio-link",
+        "feature.alcohol.manual-overrides"
+      ],
+      "relatedRoadmapItems": [
+        "roadmap.alcohol.work-link",
+        "roadmap.alcohol.portfolio-link",
+        "roadmap.alcohol.manual-overrides"
+      ]
     }
   ]
 }

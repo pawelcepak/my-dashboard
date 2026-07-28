@@ -7064,6 +7064,61 @@
       "status": "completed",
       "priority": "normal",
       "tags": ["work", "ux"]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.7.0.alcohol.analytics",
+      "parentId": null,
+      "text": "v0.7.0 — Alcohol Analytics"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.alcohol.work-link",
+      "parentId": "section.v0.7.0.alcohol.analytics",
+      "title": "Derive drinking days and beer totals from Work",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["alcohol", "analytics", "ecosystem"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.alcohol.portfolio-link",
+      "parentId": "section.v0.7.0.alcohol.analytics",
+      "title": "Derive alcohol expenses from selected Portfolio tags",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["alcohol", "analytics", "ecosystem"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.alcohol.history-import",
+      "parentId": "section.v0.7.0.alcohol.analytics",
+      "title": "Import historical BrPW drinking days and monthly expenses",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["alcohol", "analytics", "ecosystem"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.alcohol.manual-overrides",
+      "parentId": "section.v0.7.0.alcohol.analytics",
+      "title": "Support manual day corrections without duplicating Work data",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["alcohol", "analytics", "ecosystem"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.alcohol.calendar-stats",
+      "parentId": "section.v0.7.0.alcohol.analytics",
+      "title": "Add calendar, monthly history and overview statistics",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["alcohol", "analytics", "ecosystem"]
     }
   ]
 }

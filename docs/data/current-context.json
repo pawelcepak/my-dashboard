@@ -1,19 +1,20 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.6.3A",
-  "currentSprint": "0.6.3A",
-  "currentGoal": "Remove duplicated active-week metadata and present local status, gross EUR and gross PLN in one ordered Work summary strip.",
+  "currentVersion": "0.7.0",
+  "currentSprint": "0.7.0",
+  "currentGoal": "Create the Alcohol analytics module as a linked layer over Work and Portfolio without duplicating source data.",
   "stableState": true,
   "lastCompleted": [
-    "Customizable bottom navigation",
-    "Portfolio history verification",
-    "Portfolio UX stabilization"
+    "Work UX Cleanup",
+    "Portfolio verification against historical ledger",
+    "Customizable navigation from Settings"
   ],
   "nextTasks": [
-    "Verify Work week controls remain functional",
-    "Verify gross PLN uses the active week EUR/PLN rate",
-    "Confirm responsive layout on desktop and mobile"
+    "Test calendar derivation from Work beers",
+    "Test manual day overrides and restoring AUTO",
+    "Verify Portfolio tag linkage from June 2026",
+    "Compare historical month totals with the BrPW workbook"
   ],
   "knownIssues": [
     {

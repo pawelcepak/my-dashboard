@@ -109,6 +109,20 @@
       "entryFiles": [],
       "dependsOn": ["module.work"],
       "aiNotes": []
+    },
+    {
+      "id": "module.alcohol",
+      "name": "Alcohol",
+      "status": "active",
+      "description": "Cross-module alcohol analytics derived from Work beer counts and Portfolio expenses.",
+      "rootPath": "src/modules/alcohol",
+      "entryFiles": ["src/modules/alcohol/index.tsx"],
+      "dependsOn": ["module.work", "module.portfolio", "module.database", "module.cloud"],
+      "aiNotes": [
+        "Work remains the source of truth for beer counts and automatic drinking days.",
+        "Portfolio remains the source of truth for alcohol expenses from June 2026.",
+        "The module stores only historical values, manual overrides and linkage settings."
+      ]
     }
   ]
 }

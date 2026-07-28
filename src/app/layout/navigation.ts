@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   BarChart3,
+  Beer,
   BriefcaseBusiness,
   CreditCard,
   HandCoins,
@@ -15,6 +16,7 @@ export const NAVIGATION_ITEM_IDS = [
   'expenses',
   'debts',
   'portfolio',
+  'alcohol',
   'statistics',
   'settings',
 ] as const;
@@ -64,6 +66,13 @@ export const navigationItems: NavigationItem[] = [
     shortLabel: 'Portfel',
     path: '/portfolio',
     icon: WalletCards,
+  },
+  {
+    id: 'alcohol',
+    label: 'Alkohol',
+    shortLabel: 'Alkohol',
+    path: '/alcohol',
+    icon: Beer,
   },
   {
     id: 'statistics',

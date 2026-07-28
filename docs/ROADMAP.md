@@ -894,3 +894,11 @@ Future quality and intelligence work remains planned but is not required for nor
 
 - [x] Show Work data status, gross EUR and gross PLN in one ordered strip
 - [x] Remove duplicated active-week label and date range from the week manager
+
+## v0.7.0 — Alcohol Analytics
+
+- [x] Derive drinking days and beer totals from Work
+- [x] Derive alcohol expenses from selected Portfolio tags
+- [x] Import historical BrPW drinking days and monthly expenses
+- [x] Support manual day corrections without duplicating Work data
+- [x] Add calendar, monthly history and overview statistics

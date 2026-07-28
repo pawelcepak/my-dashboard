@@ -141,6 +141,11 @@ All notable changes to CHB will be documented in this file.
 - Custom bottom-navigation ordering stored in application preferences.
 - Individual color selection for every bottom-navigation tab.
 - Drag-and-drop navigation editor with touch-friendly move controls.
+- Alcohol analytics module linked to Work beer counts and Portfolio expense tags.
+- Historical drinking-day migration from the BrPW workbook for dates before native Work history.
+- Historical monthly alcohol expenses through May 2026.
+- Manual drinking-day overrides with one-click return to automatic Work data.
+- Monthly alcohol history and overview statistics.
 
 ### Changed
 

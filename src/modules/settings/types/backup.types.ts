@@ -1,4 +1,9 @@
 import type {
+  AlcoholDayOverride,
+  AlcoholMonthlyExpense,
+  AlcoholSettings,
+} from '@/modules/alcohol/types/alcohol.types';
+import type {
   PortfolioAccount,
   PortfolioTag,
   PortfolioTransaction,
@@ -6,7 +11,7 @@ import type {
 import type { AppSetting, WorkWeek } from '@/modules/work/types/work.types';
 
 export const BACKUP_FORMAT_NAME = 'chb-backup';
-export const BACKUP_FORMAT_VERSION = 2;
+export const BACKUP_FORMAT_VERSION = 3;
 
 export type ChbBackupFile = {
   format: typeof BACKUP_FORMAT_NAME;
@@ -18,6 +23,9 @@ export type ChbBackupFile = {
     portfolioAccounts: PortfolioAccount[];
     portfolioTags: PortfolioTag[];
     portfolioTransactions: PortfolioTransaction[];
+    alcoholDayOverrides: AlcoholDayOverride[];
+    alcoholMonthlyExpenses: AlcoholMonthlyExpense[];
+    alcoholSettings: AlcoholSettings[];
   };
 };
 

@@ -1,5 +1,10 @@
 import { database } from '@/database/database';
 import type {
+  AlcoholDayOverride,
+  AlcoholMonthlyExpense,
+  AlcoholSettings,
+} from '@/modules/alcohol/types/alcohol.types';
+import type {
   PortfolioAccount,
   PortfolioTag,
   PortfolioTagKind,
@@ -408,6 +413,54 @@ function validateUniqueIds(values: Array<{ id: string }>, label: string): void {
   }
 }
 
+function parseAlcoholDayOverride(value: unknown): AlcoholDayOverride {
+  if (
+    !isRecord(value) ||
+    !isIsoDate(value.date) ||
+    (value.state !== 'drinking' && value.state !== 'sober') ||
+    (value.source !== 'manual' && value.source !== 'historical-import') ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  ) {
+    throw new Error('Kopia zawiera nieprawidłową korektę dnia alkoholu.');
+  }
+
+  return value as AlcoholDayOverride;
+}
+
+function parseAlcoholMonthlyExpense(value: unknown): AlcoholMonthlyExpense {
+  if (
+    !isRecord(value) ||
+    !isString(value.month) ||
+    !/^\d{4}-\d{2}$/.test(value.month) ||
+    !isFiniteNumber(value.amount) ||
+    value.amount < 0 ||
+    value.source !== 'manual' ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  ) {
+    throw new Error('Kopia zawiera nieprawidłowy miesięczny koszt alkoholu.');
+  }
+
+  return value as AlcoholMonthlyExpense;
+}
+
+function parseAlcoholSettings(value: unknown): AlcoholSettings {
+  if (
+    !isRecord(value) ||
+    value.id !== 'alcohol-settings' ||
+    !Array.isArray(value.expenseTagIds) ||
+    !value.expenseTagIds.every(isString) ||
+    !isString(value.portfolioExpenseStartMonth) ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  ) {
+    throw new Error('Kopia zawiera nieprawidłowe ustawienia modułu Alkohol.');
+  }
+
+  return value as AlcoholSettings;
+}
+
 function validateBackup(value: unknown): ChbBackupFile {
   if (!isRecord(value)) {
     throw new Error('Plik nie zawiera prawidłowego obiektu JSON.');
@@ -417,7 +470,7 @@ function validateBackup(value: unknown): ChbBackupFile {
     throw new Error('To nie jest plik kopii zapasowej CHB.');
   }
 
-  if (value.version !== 1 && value.version !== BACKUP_FORMAT_VERSION) {
+  if (value.version !== 1 && value.version !== 2 && value.version !== BACKUP_FORMAT_VERSION) {
     throw new Error(`Nieobsługiwana wersja kopii: ${String(value.version)}.`);
   }
 
@@ -455,6 +508,18 @@ function validateBackup(value: unknown): ChbBackupFile {
     ? value.data.portfolioTransactions.map(parsePortfolioTransaction)
     : [];
 
+  const normalizedAlcoholDayOverrides = Array.isArray(value.data.alcoholDayOverrides)
+    ? value.data.alcoholDayOverrides.map(parseAlcoholDayOverride)
+    : [];
+
+  const normalizedAlcoholMonthlyExpenses = Array.isArray(value.data.alcoholMonthlyExpenses)
+    ? value.data.alcoholMonthlyExpenses.map(parseAlcoholMonthlyExpense)
+    : [];
+
+  const normalizedAlcoholSettings = Array.isArray(value.data.alcoholSettings)
+    ? value.data.alcoholSettings.map(parseAlcoholSettings)
+    : [];
+
   const backup: ChbBackupFile = {
     format: BACKUP_FORMAT_NAME,
     version: BACKUP_FORMAT_VERSION,
@@ -465,6 +530,9 @@ function validateBackup(value: unknown): ChbBackupFile {
       portfolioAccounts: normalizedPortfolioAccounts,
       portfolioTags: normalizedPortfolioTags,
       portfolioTransactions: normalizedPortfolioTransactions,
+      alcoholDayOverrides: normalizedAlcoholDayOverrides,
+      alcoholMonthlyExpenses: normalizedAlcoholMonthlyExpenses,
+      alcoholSettings: normalizedAlcoholSettings,
     },
   };
 
@@ -474,6 +542,15 @@ function validateBackup(value: unknown): ChbBackupFile {
   validateUniqueIds(backup.data.portfolioAccounts, 'portfela');
   validateUniqueIds(backup.data.portfolioTags, 'tagu portfela');
   validateUniqueIds(backup.data.portfolioTransactions, 'transakcji portfela');
+  validateUniqueIds(
+    backup.data.alcoholDayOverrides.map((item) => ({ id: item.date })),
+    'korekty dnia alkoholu'
+  );
+  validateUniqueIds(
+    backup.data.alcoholMonthlyExpenses.map((item) => ({ id: item.month })),
+    'miesięcznego kosztu alkoholu'
+  );
+  validateUniqueIds(backup.data.alcoholSettings, 'ustawień alkoholu');
 
   return backup;
 }
@@ -530,14 +607,25 @@ async function exportBackup(): Promise<string> {
     updatedAt: createdAt,
   });
 
-  const [workWeeks, appSettings, portfolioAccounts, portfolioTags, portfolioTransactions] =
-    await Promise.all([
-      database.workWeeks.orderBy('startDate').toArray(),
-      database.appSettings.toArray(),
-      database.portfolioAccounts.toArray(),
-      database.portfolioTags.toArray(),
-      database.portfolioTransactions.toArray(),
-    ]);
+  const [
+    workWeeks,
+    appSettings,
+    portfolioAccounts,
+    portfolioTags,
+    portfolioTransactions,
+    alcoholDayOverrides,
+    alcoholMonthlyExpenses,
+    alcoholSettings,
+  ] = await Promise.all([
+    database.workWeeks.orderBy('startDate').toArray(),
+    database.appSettings.toArray(),
+    database.portfolioAccounts.toArray(),
+    database.portfolioTags.toArray(),
+    database.portfolioTransactions.toArray(),
+    database.alcoholDayOverrides.toArray(),
+    database.alcoholMonthlyExpenses.toArray(),
+    database.alcoholSettings.toArray(),
+  ]);
 
   if (workWeeks.length === 0) {
     throw new Error('Nie można utworzyć kopii bez tygodni pracy.');
@@ -553,6 +641,9 @@ async function exportBackup(): Promise<string> {
       portfolioAccounts,
       portfolioTags,
       portfolioTransactions,
+      alcoholDayOverrides,
+      alcoholMonthlyExpenses,
+      alcoholSettings,
     },
   };
 
@@ -617,17 +708,25 @@ async function restoreBackup(backup: ChbBackupFile): Promise<void> {
 
   await database.transaction(
     'rw',
-    database.workWeeks,
-    database.appSettings,
-    database.portfolioAccounts,
-    database.portfolioTags,
-    database.portfolioTransactions,
+    [
+      database.workWeeks,
+      database.appSettings,
+      database.portfolioAccounts,
+      database.portfolioTags,
+      database.portfolioTransactions,
+      database.alcoholDayOverrides,
+      database.alcoholMonthlyExpenses,
+      database.alcoholSettings,
+    ],
     async () => {
       await database.workWeeks.clear();
       await database.appSettings.clear();
       await database.portfolioAccounts.clear();
       await database.portfolioTags.clear();
       await database.portfolioTransactions.clear();
+      await database.alcoholDayOverrides.clear();
+      await database.alcoholMonthlyExpenses.clear();
+      await database.alcoholSettings.clear();
 
       await database.workWeeks.bulkPut(validatedBackup.data.workWeeks);
 
@@ -645,6 +744,18 @@ async function restoreBackup(backup: ChbBackupFile): Promise<void> {
 
       if (validatedBackup.data.portfolioTransactions.length > 0) {
         await database.portfolioTransactions.bulkPut(validatedBackup.data.portfolioTransactions);
+      }
+
+      if (validatedBackup.data.alcoholDayOverrides.length > 0) {
+        await database.alcoholDayOverrides.bulkPut(validatedBackup.data.alcoholDayOverrides);
+      }
+
+      if (validatedBackup.data.alcoholMonthlyExpenses.length > 0) {
+        await database.alcoholMonthlyExpenses.bulkPut(validatedBackup.data.alcoholMonthlyExpenses);
+      }
+
+      if (validatedBackup.data.alcoholSettings.length > 0) {
+        await database.alcoholSettings.bulkPut(validatedBackup.data.alcoholSettings);
       }
 
       const activeSetting = await database.appSettings.get('activeWorkWeekId');

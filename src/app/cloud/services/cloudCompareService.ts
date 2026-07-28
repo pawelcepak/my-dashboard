@@ -29,7 +29,18 @@ function getLocalDataTimestamp(backup: ChbBackupFile): string | null {
     ...(backup.data.portfolioTransactions ?? []).map((transaction) => transaction.updatedAt),
   ];
 
-  return getLatestTimestamp([...weekTimestamps, ...settingTimestamps, ...portfolioTimestamps]);
+  const alcoholTimestamps = [
+    ...(backup.data.alcoholDayOverrides ?? []).map((item) => item.updatedAt),
+    ...(backup.data.alcoholMonthlyExpenses ?? []).map((item) => item.updatedAt),
+    ...(backup.data.alcoholSettings ?? []).map((item) => item.updatedAt),
+  ];
+
+  return getLatestTimestamp([
+    ...weekTimestamps,
+    ...settingTimestamps,
+    ...portfolioTimestamps,
+    ...alcoholTimestamps,
+  ]);
 }
 
 async function inspect(userId: string): Promise<CloudInspectionResult> {

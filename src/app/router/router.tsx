@@ -1,6 +1,7 @@
 import { createHashRouter } from 'react-router-dom';
 
 import AppLayout from '@/app/layout/AppLayout';
+import AlcoholPage from '@/modules/alcohol';
 import DashboardPage from '@/modules/dashboard';
 import DebtsPage from '@/modules/debts';
 import ExpensesPage from '@/modules/expenses';
@@ -32,6 +33,10 @@ export const router = createHashRouter([
       {
         path: '/portfolio',
         element: <PortfolioPage />,
+      },
+      {
+        path: '/alcohol',
+        element: <AlcoholPage />,
       },
       {
         path: '/statistics',

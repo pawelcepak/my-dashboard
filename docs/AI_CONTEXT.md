@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.6.3A`
-- Current sprint: `0.6.3A`
+- Current version: `0.7.0`
+- Current sprint: `0.7.0`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Remove duplicated active-week metadata and present local status, gross EUR and gross PLN in one ordered Work summary strip.
+Create the Alcohol analytics module as a linked layer over Work and Portfolio without duplicating source data.
 
 ## Non-negotiable principles
 
@@ -41,12 +41,14 @@ Remove duplicated active-week metadata and present local status, gross EUR and g
 - `module.cloud` — Cloud Sync: Private Supabase snapshot synchronization and conflict protection.
 - `module.database` — Local Database: Dexie/IndexedDB schema, migrations and local-first persistence.
 - `module.portfolio` — Portfolio: Income and expense ledger, balances, tags, statistics and CSV import.
+- `module.alcohol` — Alcohol: Cross-module alcohol analytics derived from Work beer counts and Portfolio expenses.
 
 ## Next tasks
 
-- Verify Work week controls remain functional
-- Verify gross PLN uses the active week EUR/PLN rate
-- Confirm responsive layout on desktop and mobile
+- Test calendar derivation from Work beers
+- Test manual day overrides and restoring AUTO
+- Verify Portfolio tag linkage from June 2026
+- Compare historical month totals with the BrPW workbook
 
 ## Open and accepted issues
 
@@ -63,6 +65,7 @@ Remove duplicated active-week metadata and present local status, gross EUR and g
 - `decision.docs.json-source-of-truth`: Use machine-readable project data as documentation source
 - `decision.ai.vendor-neutral-interface`: Keep the AI Project Interface vendor-neutral
 - `decision.ai.generated-provider-adapters`: Generate provider adapters from one AI Project Interface
+- `decision.single-source-of-truth.analytics`: Analytical modules do not duplicate domain data
 
 ## Required agent behavior
 

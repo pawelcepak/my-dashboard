@@ -9344,6 +9344,71 @@
       ],
       "relatedFiles": ["src/modules/work/components/WorkWeekManager.tsx"],
       "tags": ["work", "ux"]
+    },
+    {
+      "id": "feature.alcohol.work-link",
+      "title": "Alcohol days derived from Work",
+      "module": "alcohol",
+      "status": "completed",
+      "roadmapItemId": "roadmap.alcohol.work-link",
+      "roadmapPath": ["v0.7.0 — Alcohol Analytics"],
+      "introducedIn": "0.7.0",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["alcohol", "analytics", "ecosystem"]
+    },
+    {
+      "id": "feature.alcohol.portfolio-link",
+      "title": "Alcohol expenses derived from Portfolio",
+      "module": "alcohol",
+      "status": "completed",
+      "roadmapItemId": "roadmap.alcohol.portfolio-link",
+      "roadmapPath": ["v0.7.0 — Alcohol Analytics"],
+      "introducedIn": "0.7.0",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["alcohol", "analytics", "ecosystem"]
+    },
+    {
+      "id": "feature.alcohol.history-import",
+      "title": "BrPW historical alcohol migration",
+      "module": "alcohol",
+      "status": "completed",
+      "roadmapItemId": "roadmap.alcohol.history-import",
+      "roadmapPath": ["v0.7.0 — Alcohol Analytics"],
+      "introducedIn": "0.7.0",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["alcohol", "analytics", "ecosystem"]
+    },
+    {
+      "id": "feature.alcohol.manual-overrides",
+      "title": "Manual alcohol day corrections",
+      "module": "alcohol",
+      "status": "completed",
+      "roadmapItemId": "roadmap.alcohol.manual-overrides",
+      "roadmapPath": ["v0.7.0 — Alcohol Analytics"],
+      "introducedIn": "0.7.0",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["alcohol", "analytics", "ecosystem"]
+    },
+    {
+      "id": "feature.alcohol.calendar-stats",
+      "title": "Alcohol calendar and statistics",
+      "module": "alcohol",
+      "status": "completed",
+      "roadmapItemId": "roadmap.alcohol.calendar-stats",
+      "roadmapPath": ["v0.7.0 — Alcohol Analytics"],
+      "introducedIn": "0.7.0",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": [],
+      "tags": ["alcohol", "analytics", "ecosystem"]
     }
   ]
 }
