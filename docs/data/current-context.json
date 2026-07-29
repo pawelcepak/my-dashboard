@@ -1,9 +1,9 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.7.5",
-  "currentSprint": "0.7.5",
-  "currentGoal": "Expand the Global Panel System across the most space-intensive Work panels and compact the week controls into the page header.",
+  "currentVersion": "0.7.6",
+  "currentSprint": "0.7.6",
+  "currentGoal": "Deliver the Debt Management Foundation with manually recorded payments and real-balance corrections.",
   "stableState": true,
   "lastCompleted": [
     "Work Time Analytics",
@@ -11,10 +11,10 @@
     "Single-source-of-truth architecture documentation"
   ],
   "nextTasks": [
-    "Verify all four Work panels remember their open state",
-    "Verify week controls align below the week badge",
-    "Review Work page height at laptop and Full HD widths",
-    "Choose the next pages for panel migration"
+    "Test debt seed migration",
+    "Test manual payment and balance update",
+    "Test backup and cloud round-trip for debt data",
+    "Review debt dashboard on light and dark themes"
   ],
   "knownIssues": [
     {

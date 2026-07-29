@@ -152,6 +152,9 @@ All notable changes to CHB will be documented in this file.
 - Cross-midnight and cross-weekend session splitting at calendar boundaries.
 - Reusable accessible CollapsiblePanel component.
 - Local persistence of collapsible panel state across browser reloads.
+- Debt Management Foundation with five debts imported from the Minusy worksheet.
+- Manual debt payments and current-balance updates with full event history.
+- Debt data in Dexie schema v8, backup format v4 and cloud snapshots.
 
 ### Changed
 

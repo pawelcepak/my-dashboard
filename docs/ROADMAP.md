@@ -940,3 +940,12 @@ Future quality and intelligence work remains planned but is not required for nor
 - [x] Migrate Work week history to the collapsible panel system
 - [x] Migrate Work financial plan to the collapsible panel system
 - [x] Place week selector and actions below the week badge in the Work header
+
+## v0.7.6 — Debt Management Foundation
+
+- [x] Create debt and debt event data model
+- [x] Import debts and historical payments from Minusy
+- [x] Add manual debt payments
+- [x] Add real-balance corrections
+- [x] Synchronize debts through backup and cloud
+- [x] Create debt summary, list, actions and history interface

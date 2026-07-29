@@ -172,6 +172,21 @@
         "roadmap.ui.work-time-panel-pilot",
         "roadmap.ui.panel-local-persistence"
       ]
+    },
+    {
+      "id": "decision.debts-manual-real-balance",
+      "title": "Debt balances use manual real-world corrections",
+      "status": "accepted",
+      "date": "2026-07-29",
+      "context": "Creditors may add costs after a payment, but detailed interest modelling would create unnecessary complexity.",
+      "decision": "Record payments manually and allow the user to replace the current balance with the value shown by the creditor. Save the difference as a balance-update event.",
+      "consequences": [
+        "Payments and balance corrections remain auditable.",
+        "No automatic interest model is required.",
+        "Portfolio transactions are not linked to debts in this release."
+      ],
+      "relatedFeatures": ["feature.debts.manual-payments", "feature.debts.balance-update"],
+      "relatedRoadmapItems": ["roadmap.debts.manual-payments", "roadmap.debts.balance-updates"]
     }
   ]
 }

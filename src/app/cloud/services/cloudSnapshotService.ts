@@ -45,6 +45,8 @@ export async function createLocalSnapshot(): Promise<ChbBackupFile> {
     alcoholDayOverrides,
     alcoholMonthlyExpenses,
     alcoholSettings,
+    debts,
+    debtEvents,
   ] = await Promise.all([
     database.workWeeks.orderBy('startDate').toArray(),
     database.appSettings.toArray(),
@@ -54,6 +56,8 @@ export async function createLocalSnapshot(): Promise<ChbBackupFile> {
     database.alcoholDayOverrides.toArray(),
     database.alcoholMonthlyExpenses.toArray(),
     database.alcoholSettings.toArray(),
+    database.debts.toArray(),
+    database.debtEvents.toArray(),
   ]);
 
   if (workWeeks.length === 0) {
@@ -73,6 +77,8 @@ export async function createLocalSnapshot(): Promise<ChbBackupFile> {
       alcoholDayOverrides,
       alcoholMonthlyExpenses,
       alcoholSettings,
+      debts,
+      debtEvents,
     },
   };
 }

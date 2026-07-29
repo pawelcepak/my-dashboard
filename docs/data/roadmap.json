@@ -7376,6 +7376,70 @@
       "status": "completed",
       "priority": "high",
       "tags": ["ui", "ux", "work", "panels"]
+    },
+    {
+      "type": "blank"
+    },
+    {
+      "type": "heading",
+      "level": 2,
+      "id": "section.v0.7.6.debt-management",
+      "parentId": null,
+      "text": "v0.7.6 — Debt Management Foundation"
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debts.data-model",
+      "parentId": "section.v0.7.6.debt-management",
+      "title": "Create debt and debt event data model",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["debts", "finance"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debts.minusy-import",
+      "parentId": "section.v0.7.6.debt-management",
+      "title": "Import debts and historical payments from Minusy",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["debts", "finance"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debts.manual-payments",
+      "parentId": "section.v0.7.6.debt-management",
+      "title": "Add manual debt payments",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["debts", "finance"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debts.balance-updates",
+      "parentId": "section.v0.7.6.debt-management",
+      "title": "Add real-balance corrections",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["debts", "finance"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debts.backup-cloud",
+      "parentId": "section.v0.7.6.debt-management",
+      "title": "Synchronize debts through backup and cloud",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["debts", "finance"]
+    },
+    {
+      "type": "task",
+      "id": "roadmap.debts.interface",
+      "parentId": "section.v0.7.6.debt-management",
+      "title": "Create debt summary, list, actions and history interface",
+      "status": "completed",
+      "priority": "high",
+      "tags": ["debts", "finance"]
     }
   ]
 }

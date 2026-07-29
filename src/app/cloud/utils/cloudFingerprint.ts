@@ -57,6 +57,12 @@ function createComparableData(backup: ChbBackupFile) {
     alcoholSettings: [...(backup.data.alcoholSettings ?? [])].sort((first, second) =>
       first.id.localeCompare(second.id)
     ),
+    debts: [...(backup.data.debts ?? [])].sort((first, second) =>
+      first.id.localeCompare(second.id)
+    ),
+    debtEvents: [...(backup.data.debtEvents ?? [])].sort((first, second) =>
+      first.id.localeCompare(second.id)
+    ),
   };
 }
 

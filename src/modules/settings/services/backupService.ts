@@ -4,6 +4,7 @@ import type {
   AlcoholMonthlyExpense,
   AlcoholSettings,
 } from '@/modules/alcohol/types/alcohol.types';
+import type { Debt, DebtEvent, DebtEventType, DebtStatus } from '@/modules/debts/types/debt.types';
 import type {
   PortfolioAccount,
   PortfolioTag,
@@ -34,6 +35,7 @@ const SUPPORTED_SETTING_KEYS = new Set([
   'accentTheme',
   'navigationOrder',
   'navigationTabColors',
+  'debt-seed-v1',
 ]);
 
 const GOAL_PRECISION_MULTIPLIER = 100;
@@ -413,6 +415,45 @@ function validateUniqueIds(values: Array<{ id: string }>, label: string): void {
   }
 }
 
+function isDebtStatus(value: unknown): value is DebtStatus {
+  return value === 'active' || value === 'paid';
+}
+function isDebtEventType(value: unknown): value is DebtEventType {
+  return value === 'payment' || value === 'balance-update';
+}
+function parseDebt(value: unknown): Debt {
+  if (
+    !isRecord(value) ||
+    !isString(value.id) ||
+    !isString(value.name) ||
+    !isFiniteNumber(value.initialAmount) ||
+    value.initialAmount <= 0 ||
+    !isString(value.note) ||
+    !isDebtStatus(value.status) ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  )
+    throw new Error('Kopia zawiera nieprawidłowy dług.');
+  return value as Debt;
+}
+function parseDebtEvent(value: unknown): DebtEvent {
+  if (
+    !isRecord(value) ||
+    !isString(value.id) ||
+    !isString(value.debtId) ||
+    !isIsoDate(value.date) ||
+    !isDebtEventType(value.type) ||
+    !isFiniteNumber(value.amount) ||
+    !isFiniteNumber(value.balanceAfter) ||
+    value.balanceAfter < 0 ||
+    !isString(value.note) ||
+    !isIsoDateTime(value.createdAt) ||
+    !isIsoDateTime(value.updatedAt)
+  )
+    throw new Error('Kopia zawiera nieprawidłowe zdarzenie długu.');
+  return value as DebtEvent;
+}
+
 function parseAlcoholDayOverride(value: unknown): AlcoholDayOverride {
   if (
     !isRecord(value) ||
@@ -470,7 +511,12 @@ function validateBackup(value: unknown): ChbBackupFile {
     throw new Error('To nie jest plik kopii zapasowej CHB.');
   }
 
-  if (value.version !== 1 && value.version !== 2 && value.version !== BACKUP_FORMAT_VERSION) {
+  if (
+    value.version !== 1 &&
+    value.version !== 2 &&
+    value.version !== 3 &&
+    value.version !== BACKUP_FORMAT_VERSION
+  ) {
     throw new Error(`Nieobsługiwana wersja kopii: ${String(value.version)}.`);
   }
 
@@ -520,6 +566,11 @@ function validateBackup(value: unknown): ChbBackupFile {
     ? value.data.alcoholSettings.map(parseAlcoholSettings)
     : [];
 
+  const normalizedDebts = Array.isArray(value.data.debts) ? value.data.debts.map(parseDebt) : [];
+  const normalizedDebtEvents = Array.isArray(value.data.debtEvents)
+    ? value.data.debtEvents.map(parseDebtEvent)
+    : [];
+
   const backup: ChbBackupFile = {
     format: BACKUP_FORMAT_NAME,
     version: BACKUP_FORMAT_VERSION,
@@ -533,6 +584,8 @@ function validateBackup(value: unknown): ChbBackupFile {
       alcoholDayOverrides: normalizedAlcoholDayOverrides,
       alcoholMonthlyExpenses: normalizedAlcoholMonthlyExpenses,
       alcoholSettings: normalizedAlcoholSettings,
+      debts: normalizedDebts,
+      debtEvents: normalizedDebtEvents,
     },
   };
 
@@ -551,6 +604,15 @@ function validateBackup(value: unknown): ChbBackupFile {
     'miesięcznego kosztu alkoholu'
   );
   validateUniqueIds(backup.data.alcoholSettings, 'ustawień alkoholu');
+  validateUniqueIds(backup.data.debts, 'długu');
+  validateUniqueIds(backup.data.debtEvents, 'zdarzenia długu');
+
+  const debtIds = new Set(backup.data.debts.map((debt) => debt.id));
+  for (const event of backup.data.debtEvents) {
+    if (!debtIds.has(event.debtId)) {
+      throw new Error(`Zdarzenie długu ${event.id} wskazuje na nieistniejący dług.`);
+    }
+  }
 
   return backup;
 }
@@ -616,6 +678,8 @@ async function exportBackup(): Promise<string> {
     alcoholDayOverrides,
     alcoholMonthlyExpenses,
     alcoholSettings,
+    debts,
+    debtEvents,
   ] = await Promise.all([
     database.workWeeks.orderBy('startDate').toArray(),
     database.appSettings.toArray(),
@@ -625,6 +689,8 @@ async function exportBackup(): Promise<string> {
     database.alcoholDayOverrides.toArray(),
     database.alcoholMonthlyExpenses.toArray(),
     database.alcoholSettings.toArray(),
+    database.debts.toArray(),
+    database.debtEvents.toArray(),
   ]);
 
   if (workWeeks.length === 0) {
@@ -644,6 +710,8 @@ async function exportBackup(): Promise<string> {
       alcoholDayOverrides,
       alcoholMonthlyExpenses,
       alcoholSettings,
+      debts,
+      debtEvents,
     },
   };
 
@@ -717,6 +785,8 @@ async function restoreBackup(backup: ChbBackupFile): Promise<void> {
       database.alcoholDayOverrides,
       database.alcoholMonthlyExpenses,
       database.alcoholSettings,
+      database.debts,
+      database.debtEvents,
     ],
     async () => {
       await database.workWeeks.clear();
@@ -727,6 +797,8 @@ async function restoreBackup(backup: ChbBackupFile): Promise<void> {
       await database.alcoholDayOverrides.clear();
       await database.alcoholMonthlyExpenses.clear();
       await database.alcoholSettings.clear();
+      await database.debts.clear();
+      await database.debtEvents.clear();
 
       await database.workWeeks.bulkPut(validatedBackup.data.workWeeks);
 
@@ -756,6 +828,14 @@ async function restoreBackup(backup: ChbBackupFile): Promise<void> {
 
       if (validatedBackup.data.alcoholSettings.length > 0) {
         await database.alcoholSettings.bulkPut(validatedBackup.data.alcoholSettings);
+      }
+
+      if (validatedBackup.data.debts.length > 0) {
+        await database.debts.bulkPut(validatedBackup.data.debts);
+      }
+
+      if (validatedBackup.data.debtEvents.length > 0) {
+        await database.debtEvents.bulkPut(validatedBackup.data.debtEvents);
       }
 
       const activeSetting = await database.appSettings.get('activeWorkWeekId');

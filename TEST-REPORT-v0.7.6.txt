@@ -1,0 +1,23 @@
+CHB v0.7.6 — Debt Management Foundation
+
+PASS: docs:validate
+PASS: docs:generate
+PASS: docs:check
+PASS: TypeScript/TSX syntax transpilation scan (global TypeScript 5.8.3)
+PASS: Source workbook values verified from CHB(2).xlsx / sheet Minusy
+
+Expected imported values:
+- Initial debt total: 20,341.44 PLN
+- Current debt total: 20,120.02 PLN
+- Historical payments: 221.42 PLN
+- Komornik payment: 200.00 PLN on 2026-07-09
+- Vectra Gliwice payment: 21.42 PLN on 2026-07-24
+
+Not run in this container:
+- npm run build / lint / format
+Reason: project dependencies are not installed and npm registry mirror returned 404 for vite 8.1.5.
+
+Required local final check:
+npm ci
+npm run release:prepare
+npm run dev

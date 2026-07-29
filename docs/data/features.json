@@ -9718,6 +9718,71 @@
       "acceptanceCriteria": [],
       "relatedFiles": [],
       "tags": ["ui", "ux", "work", "panels"]
+    },
+    {
+      "id": "feature.debts.foundation",
+      "title": "Debt Management Foundation",
+      "module": "debts",
+      "status": "completed",
+      "roadmapItemId": "roadmap.debts.data-model",
+      "roadmapPath": ["v0.7.6 — Debt Management Foundation"],
+      "introducedIn": "0.7.6",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": ["src/modules/debts/index.tsx"],
+      "tags": ["debts", "finance"]
+    },
+    {
+      "id": "feature.debts.manual-payments",
+      "title": "Manual debt payments",
+      "module": "debts",
+      "status": "completed",
+      "roadmapItemId": "roadmap.debts.manual-payments",
+      "roadmapPath": ["v0.7.6 — Debt Management Foundation"],
+      "introducedIn": "0.7.6",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": ["src/modules/debts/index.tsx"],
+      "tags": ["debts", "finance"]
+    },
+    {
+      "id": "feature.debts.balance-update",
+      "title": "Real-balance updates",
+      "module": "debts",
+      "status": "completed",
+      "roadmapItemId": "roadmap.debts.balance-updates",
+      "roadmapPath": ["v0.7.6 — Debt Management Foundation"],
+      "introducedIn": "0.7.6",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": ["src/modules/debts/index.tsx"],
+      "tags": ["debts", "finance"]
+    },
+    {
+      "id": "feature.debts.minusy-seed",
+      "title": "Minusy initial data seed",
+      "module": "debts",
+      "status": "completed",
+      "roadmapItemId": "roadmap.debts.minusy-import",
+      "roadmapPath": ["v0.7.6 — Debt Management Foundation"],
+      "introducedIn": "0.7.6",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": ["src/modules/debts/index.tsx"],
+      "tags": ["debts", "finance"]
+    },
+    {
+      "id": "feature.debts.cloud-backup",
+      "title": "Debt backup and cloud sync",
+      "module": "debts",
+      "status": "completed",
+      "roadmapItemId": "roadmap.debts.backup-cloud",
+      "roadmapPath": ["v0.7.6 — Debt Management Foundation"],
+      "introducedIn": "0.7.6",
+      "description": "",
+      "acceptanceCriteria": [],
+      "relatedFiles": ["src/modules/debts/index.tsx"],
+      "tags": ["debts", "finance"]
     }
   ]
 }

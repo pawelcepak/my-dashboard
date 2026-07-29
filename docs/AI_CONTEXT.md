@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.7.5`
-- Current sprint: `0.7.5`
+- Current version: `0.7.6`
+- Current sprint: `0.7.6`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Expand the Global Panel System across the most space-intensive Work panels and compact the week controls into the page header.
+Deliver the Debt Management Foundation with manually recorded payments and real-balance corrections.
 
 ## Non-negotiable principles
 
@@ -45,10 +45,10 @@ Expand the Global Panel System across the most space-intensive Work panels and c
 
 ## Next tasks
 
-- Verify all four Work panels remember their open state
-- Verify week controls align below the week badge
-- Review Work page height at laptop and Full HD widths
-- Choose the next pages for panel migration
+- Test debt seed migration
+- Test manual payment and balance update
+- Test backup and cloud round-trip for debt data
+- Review debt dashboard on light and dark themes
 
 ## Open and accepted issues
 
@@ -68,6 +68,7 @@ Expand the Global Panel System across the most space-intensive Work panels and c
 - `decision.single-source-of-truth.analytics`: Analytical modules do not duplicate domain data
 - `decision.work-derived-time-analytics`: Work time analytics are derived from session blocks
 - `decision.ui-panel-state-is-local`: Panel expansion state is local UI state
+- `decision.debts-manual-real-balance`: Debt balances use manual real-world corrections
 
 ## Required agent behavior
 
