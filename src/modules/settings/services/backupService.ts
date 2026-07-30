@@ -35,7 +35,6 @@ const SUPPORTED_SETTING_KEYS = new Set([
   'accentTheme',
   'navigationOrder',
   'navigationTabColors',
-  'debt-seed-v1',
 ]);
 
 const GOAL_PRECISION_MULTIPLIER = 100;

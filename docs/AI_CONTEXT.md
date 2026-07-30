@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.7.6`
-- Current sprint: `0.7.6`
+- Current version: `0.7.6b`
+- Current sprint: `0.7.6b`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Deliver the Debt Management Foundation with manually recorded payments and real-balance corrections.
+Make Debt seed initialization idempotent without storing a seed marker in app settings.
 
 ## Non-negotiable principles
 
@@ -45,10 +45,10 @@ Deliver the Debt Management Foundation with manually recorded payments and real-
 
 ## Next tasks
 
-- Test debt seed migration
-- Test manual payment and balance update
-- Test backup and cloud round-trip for debt data
-- Review debt dashboard on light and dark themes
+- Verify Debt page opens without ConstraintError
+- Verify build passes without debt-seed-v1 AppSettingKey
+- Verify existing debt data is preserved
+- Commit v0.7.6b after local release checks
 
 ## Open and accepted issues
 

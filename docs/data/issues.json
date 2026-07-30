@@ -64,6 +64,17 @@
       "relatedFiles": ["src/modules/portfolio/hooks/usePortfolio.ts"],
       "relatedFeatures": ["feature.portfolio.ux.hotfix.build"],
       "moduleId": "module.portfolio"
+    },
+    {
+      "id": "issue.debts.concurrent-seed-constraint",
+      "title": "Debt seed could run concurrently in React development mode",
+      "severity": "high",
+      "status": "resolved",
+      "description": "Two overlapping initialize calls could both observe a missing marker and an empty table before either transaction inserted the initial debts, causing debts.bulkAdd() to fail with ConstraintError.",
+      "workaround": "Install v0.7.6a.",
+      "plannedResolution": "Resolved in v0.7.6a by sharing one initialization promise and rechecking the marker and table inside the write transaction.",
+      "relatedFiles": ["src/modules/debts/services/debtService.ts"],
+      "moduleId": "module.debts"
     }
   ]
 }

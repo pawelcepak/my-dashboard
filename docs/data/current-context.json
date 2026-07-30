@@ -1,20 +1,20 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.7.6",
-  "currentSprint": "0.7.6",
-  "currentGoal": "Deliver the Debt Management Foundation with manually recorded payments and real-balance corrections.",
+  "currentVersion": "0.7.6b",
+  "currentSprint": "0.7.6b",
+  "currentGoal": "Make Debt seed initialization idempotent without storing a seed marker in app settings.",
   "stableState": true,
   "lastCompleted": [
-    "Work Time Analytics",
-    "Alcohol Analytics foundation",
-    "Single-source-of-truth architecture documentation"
+    "Debt Management Foundation",
+    "Idempotent Debt seed hotfix",
+    "Global Panel System pilot"
   ],
   "nextTasks": [
-    "Test debt seed migration",
-    "Test manual payment and balance update",
-    "Test backup and cloud round-trip for debt data",
-    "Review debt dashboard on light and dark themes"
+    "Verify Debt page opens without ConstraintError",
+    "Verify build passes without debt-seed-v1 AppSettingKey",
+    "Verify existing debt data is preserved",
+    "Commit v0.7.6b after local release checks"
   ],
   "knownIssues": [
     {

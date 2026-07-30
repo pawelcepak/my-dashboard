@@ -1,0 +1,66 @@
+$ npm run docs:validate
+EXIT: 0
+
+> my-dashboard@0.0.0 docs:validate
+> node scripts/validate-project-data.mjs
+
+Project data validation passed.
+Roadmap blocks: 930
+Features: 718
+Decisions: 11
+Modules: 11
+Issues: 6
+AI adapters: 3
+Releases: 6
+
+
+
+$ npm run docs:generate
+EXIT: 0
+
+> my-dashboard@0.0.0 docs:generate
+> node scripts/project-docs.mjs
+
+GENERATED: docs/CHANGELOG.md
+GENERATED: docs/ROADMAP.md
+GENERATED: docs/AI_CONTEXT.md
+GENERATED: docs/PROJECT_STATE.json
+GENERATED: docs/AI_PROJECT_INTERFACE.json
+GENERATED: docs/ai/PROJECT_INTERFACE.md
+GENERATED: AGENTS.md
+GENERATED: CLAUDE.md
+GENERATED: .cursor/rules/chb-project.mdc
+
+
+
+$ npm run docs:check
+EXIT: 0
+
+> my-dashboard@0.0.0 docs:check
+> node scripts/validate-project-data.mjs && node scripts/project-docs.mjs --check
+
+Project data validation passed.
+Roadmap blocks: 930
+Features: 718
+Decisions: 11
+Modules: 11
+Issues: 6
+AI adapters: 3
+Releases: 6
+OK: docs/CHANGELOG.md
+OK: docs/ROADMAP.md
+OK: docs/AI_CONTEXT.md
+OK: docs/PROJECT_STATE.json
+OK: docs/AI_PROJECT_INTERFACE.json
+OK: docs/ai/PROJECT_INTERFACE.md
+OK: AGENTS.md
+OK: CLAUDE.md
+OK: .cursor/rules/chb-project.mdc
+
+
+
+DOCUMENTATION CHECKS: PASS
+
+Run locally:
+npm run release:prepare
+npm run dev

@@ -9,8 +9,6 @@ import type {
 } from '@/modules/debts/types/debt.types';
 import { getCurrentDebtBalance, roundMoney } from '@/modules/debts/utils/debtCalculations';
 
-const SEED_MARKER = 'debt-seed-v1';
-
 const INITIAL_DEBTS: Array<Pick<Debt, 'id' | 'name' | 'initialAmount' | 'note'>> = [
   {
     id: 'debt-komornik',
@@ -49,59 +47,69 @@ function validatePositiveMoney(value: number, label: string): number {
   return amount;
 }
 
-async function initialize(): Promise<void> {
-  const marker = await database.appSettings.get(SEED_MARKER);
-  if (marker) return;
+let initializationPromise: Promise<void> | null = null;
 
-  const existingCount = await database.debts.count();
-  const timestamp = new Date().toISOString();
+async function initializeInternal(): Promise<void> {
+  await database.transaction('rw', database.debts, database.debtEvents, async () => {
+    const timestamp = new Date().toISOString();
+    const existingDebtIds = new Set(await database.debts.toCollection().primaryKeys());
 
-  await database.transaction(
-    'rw',
-    database.debts,
-    database.debtEvents,
-    database.appSettings,
-    async () => {
-      if (existingCount === 0) {
-        await database.debts.bulkAdd(
-          INITIAL_DEBTS.map((debt) => ({
-            ...debt,
-            status: 'active' as const,
-            createdAt: timestamp,
-            updatedAt: timestamp,
-          }))
-        );
+    const missingDebts: Debt[] = INITIAL_DEBTS.filter((debt) => !existingDebtIds.has(debt.id)).map(
+      (debt) => ({
+        ...debt,
+        status: 'active',
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      })
+    );
 
-        const seedEvents: DebtEvent[] = [
-          {
-            id: 'debt-event-komornik-2026-07-09',
-            debtId: 'debt-komornik',
-            date: '2026-07-09',
-            type: 'payment',
-            amount: -200,
-            balanceAfter: 14644.26,
-            note: 'Historyczna spłata z arkusza Minusy (eKruk).',
-            createdAt: timestamp,
-            updatedAt: timestamp,
-          },
-          {
-            id: 'debt-event-vectra-2026-07-24',
-            debtId: 'debt-vectra-gliwice',
-            date: '2026-07-24',
-            type: 'payment',
-            amount: -21.42,
-            balanceAfter: 547.96,
-            note: 'Historyczna spłata z arkusza Minusy.',
-            createdAt: timestamp,
-            updatedAt: timestamp,
-          },
-        ];
-        await database.debtEvents.bulkAdd(seedEvents);
-      }
-
-      await database.appSettings.put({ key: SEED_MARKER, value: 'done', updatedAt: timestamp });
+    if (missingDebts.length > 0) {
+      await database.debts.bulkAdd(missingDebts);
     }
-  );
+
+    const seedEvents: DebtEvent[] = [
+      {
+        id: 'debt-event-komornik-2026-07-09',
+        debtId: 'debt-komornik',
+        date: '2026-07-09',
+        type: 'payment',
+        amount: -200,
+        balanceAfter: 14644.26,
+        note: 'Historyczna spłata z arkusza Minusy (eKruk).',
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      },
+      {
+        id: 'debt-event-vectra-2026-07-24',
+        debtId: 'debt-vectra-gliwice',
+        date: '2026-07-24',
+        type: 'payment',
+        amount: -21.42,
+        balanceAfter: 547.96,
+        note: 'Historyczna spłata z arkusza Minusy.',
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      },
+    ];
+
+    const existingEventIds = new Set(await database.debtEvents.toCollection().primaryKeys());
+    const missingEvents = seedEvents.filter((event) => !existingEventIds.has(event.id));
+
+    if (missingEvents.length > 0) {
+      await database.debtEvents.bulkAdd(missingEvents);
+    }
+  });
+}
+
+async function initialize(): Promise<void> {
+  if (!initializationPromise) {
+    initializationPromise = initializeInternal().catch((error: unknown) => {
+      initializationPromise = null;
+      throw error;
+    });
+  }
+
+  return initializationPromise;
 }
 
 async function createDebt(input: DebtInput): Promise<Debt> {

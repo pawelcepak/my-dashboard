@@ -280,6 +280,11 @@ All notable changes to CHB will be documented in this file.
 - Removed an unused Portfolio transaction type import that blocked TypeScript builds.
 - Fixed React hook dependency warnings in Portfolio transaction form and history table.
 - Fixed the Dexie restore transaction typing for the Alcohol backup tables by passing the table collection as an array.
+- Concurrent Debt module initialization no longer attempts to insert the same five seed debts twice in React development mode.
+- Debt seed marker and table-state checks now execute inside one Dexie transaction, preserving existing debt data and preventing ConstraintError failures.
+- Debt initialization no longer stores a debt-seed-v1 marker in appSettings.
+- Debt and historical-event seed records are added only when their stable IDs are missing, making initialization safe after reloads, HMR and partial imports.
+- Removed debt-seed-v1 from AppSettingKey because it is no longer used.
 
 ## [0.3.0-beta.3] - 2026-07-25
 
