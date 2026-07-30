@@ -34,7 +34,6 @@ export default function WorkMainGridContainer({
   selectWeek,
 }: WorkMainGridContainerProps) {
   const { preferences } = useAppSettings();
-
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,7 +41,6 @@ export default function WorkMainGridContainer({
   }, [activeWeek.id]);
 
   const selectedDay = activeWeek.days.find((day) => day.id === selectedDayId) ?? null;
-
   const timeAnalytics = calculateWorkTimeAnalytics(activeWeek, weeks);
 
   function updateDay(updatedDay: WorkDay) {
@@ -50,16 +48,9 @@ export default function WorkMainGridContainer({
       const updatedDays = currentWeek.days.map((day) =>
         day.id === updatedDay.id ? updatedDay : day
       );
+      const updatedWeek: WorkWeek = { ...currentWeek, days: updatedDays };
 
-      const updatedWeek: WorkWeek = {
-        ...currentWeek,
-        days: updatedDays,
-      };
-
-      return {
-        ...updatedWeek,
-        heldMessages: getDailyHeldMessagesTotal(updatedWeek),
-      };
+      return { ...updatedWeek, heldMessages: getDailyHeldMessagesTotal(updatedWeek) };
     });
   }
 
@@ -68,29 +59,32 @@ export default function WorkMainGridContainer({
       `Czy wyczyścić dane tygodnia ${activeWeek.weekNumber} roku ${activeWeek.year}? Wiadomości, bloki, piwa, oceny i zatrzymane wiadomości zostaną usunięte.`
     );
 
-    if (!shouldReset) {
-      return;
-    }
+    if (!shouldReset) return;
 
     setSelectedDayId(null);
-
     void resetWeek();
   }
 
   return (
     <>
-      <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.75fr)]">
-        <div className="min-w-0">
-          <WorkDaysTable
-            days={activeWeek.days}
-            isSaving={isSaving}
-            tableDensity={preferences.tableDensity}
-            onUpdateDay={updateDay}
-            onEditSessions={setSelectedDayId}
-          />
+      <div className="work-dashboard-grid">
+        <div className="min-w-0 space-y-3">
+          <div id="work-days" className="page-section-anchor">
+            <WorkDaysTable
+              days={activeWeek.days}
+              isSaving={isSaving}
+              tableDensity={preferences.tableDensity}
+              onUpdateDay={updateDay}
+              onEditSessions={setSelectedDayId}
+            />
+          </div>
+
+          <div id="work-analysis" className="page-section-anchor">
+            <WorkIntelligencePanel week={activeWeek} />
+          </div>
         </div>
 
-        <div className="min-w-0 space-y-4">
+        <aside className="min-w-0 space-y-3">
           <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
 
           <WorkTimeAnalyticsPanel analytics={timeAnalytics} weekStartDate={activeWeek.startDate} />
@@ -98,24 +92,22 @@ export default function WorkMainGridContainer({
           <WorkWeekSettings
             exchangeRateEurPln={activeWeek.exchangeRateEurPln}
             onExchangeRateChange={(exchangeRateEurPln) => {
-              void updateWeek((currentWeek) => ({
-                ...currentWeek,
-                exchangeRateEurPln,
-              }));
+              void updateWeek((currentWeek) => ({ ...currentWeek, exchangeRateEurPln }));
             }}
             onReset={handleReset}
           />
-        </div>
+
+          <div id="work-history" className="page-section-anchor">
+            <WorkHistory
+              weeks={weeks}
+              activeWeekId={activeWeek.id}
+              isSaving={isSaving}
+              compact
+              onSelectWeek={selectWeek}
+            />
+          </div>
+        </aside>
       </div>
-
-      <WorkHistory
-        weeks={weeks}
-        activeWeekId={activeWeek.id}
-        isSaving={isSaving}
-        onSelectWeek={selectWeek}
-      />
-
-      <WorkIntelligencePanel week={activeWeek} />
 
       {selectedDay && (
         <WorkDayEditor

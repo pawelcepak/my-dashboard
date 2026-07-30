@@ -14,9 +14,7 @@ function AuthLoadingScreen() {
           aria-hidden="true"
           className="mx-auto size-8 animate-spin text-[var(--app-accent)]"
         />
-
         <p className="mt-4 text-sm font-semibold text-zinc-300">Sprawdzanie sesji</p>
-
         <p className="mt-1 text-xs text-zinc-500">Łączenie z prywatną chmurą CHB.</p>
       </div>
     </div>
@@ -26,25 +24,22 @@ function AuthLoadingScreen() {
 export default function AppLayout() {
   const { user, isLoading } = useAuth();
 
-  if (isLoading) {
-    return <AuthLoadingScreen />;
-  }
-
-  if (!user) {
-    return <LoginPage />;
-  }
+  if (isLoading) return <AuthLoadingScreen />;
+  if (!user) return <LoginPage />;
 
   return (
-    <div className="min-h-dvh bg-zinc-950 text-zinc-100">
-      <Header />
-
-      <main className="min-w-0 pb-24 md:pb-20">
-        <div className="mx-auto w-full max-w-[1920px] px-3 py-3 sm:px-5 sm:py-4 lg:px-6 xl:px-8">
-          <Outlet />
-        </div>
-      </main>
-
+    <div className="min-h-dvh bg-zinc-950 text-zinc-100 md:pl-[13.5rem]">
       <BottomNavigation />
+
+      <div className="min-w-0">
+        <Header />
+
+        <main className="min-w-0 pb-24 md:pb-8">
+          <div className="mx-auto w-full max-w-[1800px] px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 xl:px-6">
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

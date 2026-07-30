@@ -1,20 +1,20 @@
 {
   "$schema": "../schemas/current-context.schema.json",
   "schemaVersion": 1,
-  "currentVersion": "0.7.6b",
-  "currentSprint": "0.7.6b",
-  "currentGoal": "Make Debt seed initialization idempotent without storing a seed marker in app settings.",
-  "stableState": true,
+  "currentVersion": "0.8.0",
+  "currentSprint": "0.8.0",
+  "currentGoal": "Establish the CHB Design System and modern responsive application shell as the visual standard for every module.",
+  "stableState": false,
   "lastCompleted": [
     "Debt Management Foundation",
     "Idempotent Debt seed hotfix",
     "Global Panel System pilot"
   ],
   "nextTasks": [
-    "Verify Debt page opens without ConstraintError",
-    "Verify build passes without debt-seed-v1 AppSettingKey",
-    "Verify existing debt data is preserved",
-    "Commit v0.7.6b after local release checks"
+    "Verify the redesigned desktop sidebar and mobile navigation",
+    "Verify all modules in light and dark themes",
+    "Run local release checks and correct any module-specific visual regressions",
+    "Commit v0.8.0 after acceptance"
   ],
   "knownIssues": [
     {

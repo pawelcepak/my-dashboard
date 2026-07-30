@@ -1,7 +1,7 @@
 {
   "interfaceVersion": 1,
-  "generatedFromVersion": "0.7.6b",
-  "generatedFromSprint": "0.7.6b",
+  "generatedFromVersion": "0.8.0",
+  "generatedFromSprint": "0.8.0",
   "project": {
     "$schema": "../schemas/project.schema.json",
     "schemaVersion": 1,
@@ -9,8 +9,8 @@
     "name": "CHB",
     "description": "Personal, offline-first dashboard for work, finances, goals, health and cross-module statistics.",
     "repository": "my-dashboard",
-    "currentVersion": "0.7.6b",
-    "currentSprint": "0.7.6b",
+    "currentVersion": "0.8.0",
+    "currentSprint": "0.8.0",
     "status": "active",
     "architectureVersion": 2,
     "documentationModel": "ai-project-interface",
@@ -39,7 +39,8 @@
       "Preferences use the centralized app settings layer",
       "Generated Markdown is output; docs/data JSON is the source of truth",
       "AI integration must remain vendor-neutral",
-      "The application must remain usable on older hardware"
+      "The application must remain usable on older hardware",
+      "All modules must use the shared CHB Design System and responsive application shell"
     ],
     "aiProjectInterface": {
       "version": 1,
@@ -52,20 +53,20 @@
   "context": {
     "$schema": "../schemas/current-context.schema.json",
     "schemaVersion": 1,
-    "currentVersion": "0.7.6b",
-    "currentSprint": "0.7.6b",
-    "currentGoal": "Make Debt seed initialization idempotent without storing a seed marker in app settings.",
-    "stableState": true,
+    "currentVersion": "0.8.0",
+    "currentSprint": "0.8.0",
+    "currentGoal": "Establish the CHB Design System and modern responsive application shell as the visual standard for every module.",
+    "stableState": false,
     "lastCompleted": [
       "Debt Management Foundation",
       "Idempotent Debt seed hotfix",
       "Global Panel System pilot"
     ],
     "nextTasks": [
-      "Verify Debt page opens without ConstraintError",
-      "Verify build passes without debt-seed-v1 AppSettingKey",
-      "Verify existing debt data is preserved",
-      "Commit v0.7.6b after local release checks"
+      "Verify the redesigned desktop sidebar and mobile navigation",
+      "Verify all modules in light and dark themes",
+      "Run local release checks and correct any module-specific visual regressions",
+      "Commit v0.8.0 after acceptance"
     ],
     "knownIssues": [
       {
@@ -501,6 +502,6 @@
     "activeModules": 8,
     "openIssues": 3,
     "acceptedDecisions": 11,
-    "releases": 6
+    "releases": 7
   }
 }

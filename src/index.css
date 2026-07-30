@@ -5,74 +5,61 @@
 :root {
   color-scheme: light;
 
-  /*
-   * Główny akcent CHB.
-   */
-
-  --app-accent: #dc143c;
-  --app-accent-hover: #bc1032;
-  --app-accent-soft: rgb(220 20 60 / 10%);
-  --app-accent-border: rgb(220 20 60 / 48%);
-  --app-accent-shadow: rgb(220 20 60 / 14%);
+  --app-accent: #2563eb;
+  --app-accent-hover: #1d4ed8;
+  --app-accent-soft: rgb(37 99 235 / 10%);
+  --app-accent-border: rgb(37 99 235 / 34%);
+  --app-accent-shadow: rgb(37 99 235 / 14%);
 
   /*
-   * Jasny motyw — główny motyw użytkowy.
-   *
-   * Układ poziomów:
-   * zinc-950 — tło aplikacji,
-   * zinc-900 — karty,
-   * zinc-800 — mocniejsze powierzchnie,
-   * zinc-700 — obramowania,
-   * zinc-100 — tekst główny.
+   * CHB Design System v0.8.0
+   * Nazwy zinc pozostają zgodne z istniejącym kodem, ale pełnią role semantyczne:
+   * 950 — tło aplikacji, 900 — panel, 800 — powierzchnia mocna,
+   * 700 — obramowanie, 100 — tekst główny.
    */
-
-  --color-zinc-50: #0f1115;
-  --color-zinc-100: #17191e;
-  --color-zinc-200: #252931;
-  --color-zinc-300: #373c46;
-  --color-zinc-400: #4c5360;
-  --color-zinc-500: #5e6673;
-  --color-zinc-600: #747d8a;
-  --color-zinc-700: #959da8;
-  --color-zinc-800: #c2c7cf;
-  --color-zinc-900: #e2e5e9;
-  --color-zinc-950: #f2f3f5;
-
-  /*
-   * Komunikaty — jasny motyw.
-   */
+  --color-zinc-50: #07111f;
+  --color-zinc-100: #0f1b2d;
+  --color-zinc-200: #1e2d40;
+  --color-zinc-300: #33445a;
+  --color-zinc-400: #53657a;
+  --color-zinc-500: #718197;
+  --color-zinc-600: #98a6b7;
+  --color-zinc-700: #d5dee8;
+  --color-zinc-800: #e7edf3;
+  --color-zinc-900: #ffffff;
+  --color-zinc-950: #edf2f7;
 
   --color-amber-200: #704000;
   --color-amber-300: #704000;
   --color-amber-400: #875000;
-  --color-amber-700: #bb740f;
-  --color-amber-800: #a86408;
-  --color-amber-900: #915204;
-  --color-amber-950: #fff2d6;
+  --color-amber-700: #e2a53d;
+  --color-amber-800: #d18b18;
+  --color-amber-900: #a86408;
+  --color-amber-950: #fff7e5;
 
   --color-red-200: #82172d;
   --color-red-300: #921a33;
-  --color-red-400: #a51635;
-  --color-red-700: #bd2948;
-  --color-red-800: #a6203b;
-  --color-red-900: #8c1932;
-  --color-red-950: #ffe5ea;
+  --color-red-400: #b91c3b;
+  --color-red-700: #f0a5b4;
+  --color-red-800: #e87991;
+  --color-red-900: #c63352;
+  --color-red-950: #fff0f3;
 
   --color-emerald-200: #07573f;
   --color-emerald-300: #076147;
   --color-emerald-400: #087252;
-  --color-emerald-700: #178664;
-  --color-emerald-800: #127354;
-  --color-emerald-900: #0d6046;
-  --color-emerald-950: #daf7ec;
+  --color-emerald-700: #8ddbc1;
+  --color-emerald-800: #55c69f;
+  --color-emerald-900: #178664;
+  --color-emerald-950: #eafaf4;
 
   --color-blue-300: #174f9f;
   --color-blue-400: #155bb8;
   --color-blue-500: #1769cf;
-  --color-blue-700: #1558aa;
-  --color-blue-800: #13498c;
-  --color-blue-900: #103d76;
-  --color-blue-950: #e2edff;
+  --color-blue-700: #9cc1fb;
+  --color-blue-800: #6ca2f1;
+  --color-blue-900: #2563eb;
+  --color-blue-950: #edf4ff;
 
   font-family:
     Inter,
@@ -82,7 +69,6 @@
     BlinkMacSystemFont,
     'Segoe UI',
     sans-serif;
-
   color: var(--color-zinc-100);
   background: var(--color-zinc-950);
   font-synthesis: none;
@@ -92,59 +78,55 @@
 :root.dark {
   color-scheme: dark;
 
-  /*
-   * Ciemny motyw — ciemnoszary, ale nie czarny.
-   */
-
   --color-zinc-50: #ffffff;
-  --color-zinc-100: #f5f5f6;
-  --color-zinc-200: #e6e6e9;
-  --color-zinc-300: #d0d0d4;
-  --color-zinc-400: #adaeb5;
-  --color-zinc-500: #909198;
-  --color-zinc-600: #74757c;
-  --color-zinc-700: #56575e;
-  --color-zinc-800: #404147;
-  --color-zinc-900: #323338;
-  --color-zinc-950: #28292e;
+  --color-zinc-100: #f4f7fb;
+  --color-zinc-200: #dbe4ef;
+  --color-zinc-300: #bdcad9;
+  --color-zinc-400: #91a3b8;
+  --color-zinc-500: #6f8299;
+  --color-zinc-600: #50657d;
+  --color-zinc-700: #21364d;
+  --color-zinc-800: #162a40;
+  --color-zinc-900: #0d1c2d;
+  --color-zinc-950: #071321;
 
-  --app-accent: #ff315d;
-  --app-accent-hover: #ff5577;
-  --app-accent-soft: rgb(255 49 93 / 18%);
-  --app-accent-border: rgb(255 49 93 / 60%);
-  --app-accent-shadow: rgb(255 49 93 / 20%);
+  --app-accent: #60a5fa;
+  --app-accent-hover: #93c5fd;
+  --app-accent-soft: rgb(96 165 250 / 13%);
+  --app-accent-border: rgb(96 165 250 / 32%);
+  --app-accent-shadow: rgb(96 165 250 / 18%);
 
   --color-amber-200: #ffe6ad;
   --color-amber-300: #f7d17e;
   --color-amber-400: #efb846;
-  --color-amber-700: #ad6c13;
-  --color-amber-800: #85500d;
-  --color-amber-900: #613a0a;
-  --color-amber-950: #3d260a;
+  --color-amber-700: #73501f;
+  --color-amber-800: #5d3d14;
+  --color-amber-900: #49300f;
+  --color-amber-950: #2d210e;
 
   --color-red-200: #ffc1ce;
   --color-red-300: #f7a2b5;
   --color-red-400: #ff718e;
-  --color-red-700: #bc3452;
-  --color-red-800: #90253f;
-  --color-red-900: #671b30;
-  --color-red-950: #42101e;
+  --color-red-700: #753348;
+  --color-red-800: #5c2638;
+  --color-red-900: #481d2d;
+  --color-red-950: #2f1420;
 
   --color-emerald-200: #b1f2d9;
   --color-emerald-300: #88e5c1;
   --color-emerald-400: #43d39e;
-  --color-emerald-700: #1b8a65;
-  --color-emerald-800: #156c50;
-  --color-emerald-900: #104e3b;
-  --color-emerald-950: #0a3528;
+  --color-emerald-700: #285f50;
+  --color-emerald-800: #1d4c3f;
+  --color-emerald-900: #163c32;
+  --color-emerald-950: #102c25;
 
-  --color-blue-300: #a8caff;
-  --color-blue-400: #78aaff;
-  --color-blue-500: #4b8fff;
-  --color-blue-700: #2868c7;
-  --color-blue-800: #20519a;
-  --color-blue-900: #183c72;
-  --color-blue-950: #102745;
+  --color-blue-300: #b8d5ff;
+  --color-blue-400: #8dbbff;
+  --color-blue-500: #60a5fa;
+  --color-blue-700: #285c93;
+  --color-blue-800: #204a78;
+  --color-blue-900: #193b60;
+  --color-blue-950: #122b47;
 }
 
 * {
@@ -542,4 +524,304 @@ select {
 .work-spreadsheet-input:focus {
   border-bottom-color: var(--app-accent);
   background: color-mix(in srgb, var(--app-accent-soft) 58%, transparent);
+}
+
+/* CHB v0.8.0 — wspólny język wizualny modułów. */
+body {
+  background-image:
+    radial-gradient(
+      circle at 82% -20%,
+      color-mix(in srgb, var(--app-accent) 8%, transparent),
+      transparent 34rem
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-zinc-950) 96%, var(--color-zinc-900)),
+      var(--color-zinc-950)
+    );
+  background-attachment: fixed;
+}
+
+.app-panel {
+  border-color: color-mix(in srgb, var(--color-zinc-700) 86%, transparent);
+  border-radius: 0.625rem;
+  background: color-mix(in srgb, var(--color-zinc-900) 96%, transparent);
+  box-shadow: 0 8px 24px rgb(4 15 28 / 6%);
+}
+
+:root.dark .app-panel {
+  box-shadow: 0 10px 28px rgb(0 0 0 / 18%);
+}
+
+.app-panel-muted {
+  border-color: color-mix(in srgb, var(--color-zinc-700) 78%, transparent);
+  border-radius: 0.625rem;
+  background: color-mix(in srgb, var(--color-zinc-900) 74%, var(--color-zinc-950));
+}
+
+.app-icon-button {
+  display: flex;
+  width: 2.25rem;
+  height: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-zinc-700);
+  border-radius: 0.5rem;
+  color: var(--color-zinc-500);
+  background: var(--color-zinc-900);
+  transition: 150ms ease;
+}
+
+.app-icon-button:hover {
+  color: var(--color-zinc-200);
+  border-color: var(--app-accent-border);
+  background: var(--app-accent-soft);
+}
+
+.app-icon-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--app-accent);
+}
+
+/* Ujednolicenie kontrolek bez przebudowy każdego modułu. */
+input:not([type='checkbox']):not([type='radio']),
+select,
+textarea {
+  border-radius: 0.5rem;
+}
+
+table {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-position:
+      13.5rem 0,
+      13.5rem 0;
+  }
+}
+
+/* v0.8.1 — compact page navigation and work table refinement */
+html {
+  scroll-behavior: smooth;
+}
+
+.page-section-anchor {
+  scroll-margin-top: 7.5rem;
+}
+
+.page-header-shell {
+  position: sticky;
+  top: 3.5rem;
+  z-index: 20;
+  border: 1px solid color-mix(in srgb, var(--color-zinc-700) 76%, transparent);
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--color-zinc-950) 90%, transparent);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 8%);
+  backdrop-filter: blur(16px);
+}
+
+.page-header-main {
+  display: flex;
+  min-height: 3.35rem;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.65rem 0.8rem;
+}
+
+.page-header-description {
+  margin-top: 0.1rem;
+  max-width: 52rem;
+  font-size: 0.72rem;
+  line-height: 1.15rem;
+  color: var(--color-zinc-500);
+}
+
+.page-header-actions {
+  width: 100%;
+  min-width: 0;
+}
+
+.page-section-nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.55rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-zinc-700) 68%, transparent);
+  padding: 0.42rem 0.65rem;
+}
+
+.page-section-nav-label {
+  display: none;
+  flex: none;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-zinc-500);
+}
+
+.page-section-nav-links {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  gap: 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.page-section-nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+.page-section-nav-button {
+  display: inline-flex;
+  height: 1.75rem;
+  flex: none;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid var(--color-zinc-700);
+  border-radius: 0.45rem;
+  padding: 0 0.55rem;
+  color: var(--color-zinc-400);
+  background: color-mix(in srgb, var(--color-zinc-900) 72%, transparent);
+  font-size: 0.66rem;
+  font-weight: 700;
+  transition: 120ms ease;
+}
+
+.page-section-nav-button:hover {
+  border-color: var(--app-accent-border);
+  color: var(--app-accent);
+  background: var(--app-accent-soft);
+}
+
+.work-spreadsheet-table {
+  width: 100%;
+  min-width: 42rem;
+}
+
+.work-spreadsheet-table th {
+  height: 2rem;
+  color: var(--color-zinc-500);
+  background: color-mix(in srgb, var(--color-zinc-950) 52%, var(--color-zinc-900));
+}
+
+.work-spreadsheet-table td {
+  height: 2.35rem;
+}
+
+.work-spreadsheet-table tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--color-zinc-950) 24%, transparent);
+}
+
+.work-spreadsheet-table tbody tr:hover {
+  background: var(--app-accent-soft);
+}
+
+@media (min-width: 640px) {
+  .page-header-main {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .page-header-actions {
+    width: auto;
+    max-width: 34rem;
+  }
+
+  .page-section-nav-label {
+    display: inline;
+  }
+}
+
+/* v0.8.2 — dense layout pass */
+.page-section-anchor {
+  scroll-margin-top: 4.75rem;
+}
+
+.page-header-shell {
+  position: static;
+  z-index: auto;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-zinc-700) 72%, transparent);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.page-header-main {
+  min-height: 2.9rem;
+  gap: 0.5rem;
+  padding: 0 0 0.55rem;
+}
+
+.page-header-description {
+  margin-top: 0;
+  font-size: 0.68rem;
+  line-height: 1rem;
+}
+
+.page-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#page-section-nav-slot:empty {
+  display: none;
+}
+
+.page-section-nav {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+}
+
+.page-section-nav-label {
+  display: none;
+}
+
+.page-section-nav-links {
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.page-section-nav-button {
+  height: 1.7rem;
+  border-radius: 0.4rem;
+  padding: 0 0.5rem;
+  font-size: 0.64rem;
+  white-space: nowrap;
+}
+
+.work-dashboard-grid {
+  display: grid;
+  align-items: start;
+  gap: 0.75rem;
+}
+
+.app-panel {
+  border-radius: 0.65rem;
+}
+
+@media (min-width: 1280px) {
+  .work-dashboard-grid {
+    grid-template-columns: minmax(0, 1.48fr) minmax(19rem, 0.72fr);
+  }
+}
+
+@media (max-width: 1023px) {
+  #page-section-nav-slot {
+    order: 3;
+    width: 100%;
+    flex-basis: 100%;
+  }
+
+  #page-section-nav-slot .page-section-nav-links {
+    justify-content: flex-start;
+  }
 }

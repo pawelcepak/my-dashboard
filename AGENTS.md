@@ -10,8 +10,8 @@
 
 ## Current state
 
-- Version: `0.7.6b`
-- Sprint: `0.7.6b`
+- Version: `0.8.0`
+- Sprint: `0.8.0`
 
 ## Mandatory rules
 
@@ -32,6 +32,7 @@
 - Generated Markdown is output; docs/data JSON is the source of truth
 - AI integration must remain vendor-neutral
 - The application must remain usable on older hardware
+- All modules must use the shared CHB Design System and responsive application shell
 
 ## Verification
 

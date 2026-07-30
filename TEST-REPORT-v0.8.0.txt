@@ -1,0 +1,20 @@
+CHB v0.8.0 — TEST REPORT
+Date: 2026-07-30
+
+PASSED
+- Project data validation
+- Generated documentation consistency check
+- Changed TypeScript/TSX files parsed without TypeScript syntax diagnostics
+- Overlay contains no database schema, backup format or cloud snapshot changes
+
+NOT EXECUTED IN BUILD ENVIRONMENT
+- npm ci
+- npm run format:check
+- npm run lint
+- npm run build
+
+Reason:
+The package registry available in the execution environment returned HTTP 404 for vite 8.1.5. Run npm run release:prepare locally after applying the overlay.
+
+FILES REMOVED
+- None

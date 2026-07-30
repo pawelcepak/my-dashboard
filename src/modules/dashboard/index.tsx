@@ -1,4 +1,4 @@
-import { CreditCard, HandCoins, History, WalletCards } from 'lucide-react';
+import { HandCoins, History, WalletCards } from 'lucide-react';
 
 import CompactFinancialPlan from '@/modules/dashboard/components/CompactFinancialPlan';
 import DashboardLoading from '@/modules/dashboard/components/DashboardLoading';
@@ -25,23 +25,16 @@ import DashboardGoalProgress from '@/modules/dashboard/components/DashboardGoalP
 
 const otherModules = [
   {
-    title: 'Wydatki',
-    value: '0,00 zł',
-    description: 'Moduł w przygotowaniu',
-    icon: CreditCard,
-    to: '/expenses',
-  },
-  {
     title: 'Długi',
     value: '0,00 zł',
-    description: 'Moduł w przygotowaniu',
+    description: 'Zobacz aktualne saldo',
     icon: HandCoins,
     to: '/debts',
   },
   {
     title: 'Portfel',
     value: '0,00 zł',
-    description: 'Moduł w przygotowaniu',
+    description: 'Przejdź do portfela',
     icon: WalletCards,
     to: '/portfolio',
   },
@@ -126,6 +119,12 @@ export default function DashboardPage() {
       <PageHeader
         title="Dashboard"
         description="Bieżący dzień, szybkie wpisy i podsumowanie aktywnego tygodnia."
+        sections={[
+          { id: 'dashboard-today', label: 'Dzisiaj' },
+          { id: 'dashboard-week', label: 'Tydzień' },
+          { id: 'dashboard-goals', label: 'Cele' },
+          { id: 'dashboard-finances', label: 'Finanse' },
+        ]}
         action={
           <span
             className={`inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-semibold ${
@@ -145,7 +144,10 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <div className="grid items-start gap-4 xl:grid-cols-[minmax(22rem,0.8fr)_minmax(0,1.2fr)]">
+      <div
+        id="dashboard-today"
+        className="page-section-anchor grid items-start gap-4 xl:grid-cols-[minmax(22rem,0.8fr)_minmax(0,1.2fr)]"
+      >
         <TodayWorkSummary
           dateLabel={todayLabel}
           day={todayWorkDay}
@@ -165,14 +167,21 @@ export default function DashboardPage() {
         )}
       </div>
 
-      <WeeklyWorkOverview week={week} summary={summary} progress={progress} />
+      <div id="dashboard-week" className="page-section-anchor">
+        <WeeklyWorkOverview week={week} summary={summary} progress={progress} />
+      </div>
 
-      <DashboardGoalProgress
-        netEarningsPln={summary.netEarningsPln}
-        totalHours={summary.totalHours}
-      />
+      <div id="dashboard-goals" className="page-section-anchor">
+        <DashboardGoalProgress
+          netEarningsPln={summary.netEarningsPln}
+          totalHours={summary.totalHours}
+        />
+      </div>
 
-      <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)]">
+      <div
+        id="dashboard-finances"
+        className="page-section-anchor grid items-start gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)]"
+      >
         <CompactFinancialPlan items={week.financialPlan} summary={summary} />
 
         <section

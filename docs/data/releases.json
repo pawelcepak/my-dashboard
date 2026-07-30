@@ -5,6 +5,41 @@
   "introduction": ["All notable changes to CHB will be documented in this file."],
   "releases": [
     {
+      "version": "0.8.0",
+      "date": "2026-07-30",
+      "status": "released",
+      "sections": [
+        {
+          "title": "Added",
+          "items": [
+            "CHB Design System with shared semantic surface, border, typography, focus and accent tokens.",
+            "Permanent desktop sidebar with module navigation, CHB branding, account card and application version.",
+            "Modern responsive application shell prepared for future workspace-style panel layouts.",
+            "Dedicated light and dark palettes using the same component hierarchy.",
+            "Shared icon-button presentation for shell actions."
+          ]
+        },
+        {
+          "title": "Changed",
+          "items": [
+            "Desktop navigation moved from the bottom bar to a fixed left sidebar.",
+            "Mobile navigation remains a compact bottom bar with the additional More panel.",
+            "Application header is slimmer and focused on the active period, cloud state, theme and session actions.",
+            "Shared PageHeader, SectionCard, MetricCard and CollapsiblePanel components now follow the v0.8.0 visual standard.",
+            "All existing modules inherit denser panels, navy dark surfaces, professional light surfaces and unified control styling."
+          ]
+        },
+        {
+          "title": "Compatibility",
+          "items": [
+            "No database schema changes.",
+            "No backup or cloud snapshot format changes.",
+            "No module data or business logic changes."
+          ]
+        }
+      ]
+    },
+    {
       "version": "Unreleased",
       "date": null,
       "status": "unreleased",

@@ -85,6 +85,13 @@ export default function PortfolioPage() {
       <PageHeader
         title="Portfel"
         description="Przychody, wydatki, tagi, saldo i statystyki."
+        sections={[
+          { id: 'portfolio-summary', label: 'Podsumowanie' },
+          { id: 'portfolio-add', label: 'Nowa transakcja' },
+          { id: 'portfolio-history', label: 'Historia' },
+          { id: 'portfolio-analysis', label: 'Analiza' },
+          { id: 'portfolio-settings', label: 'Ustawienia' },
+        ]}
         action={
           <span
             className={`rounded-full border px-3 py-1.5 text-xs font-semibold ${
@@ -100,20 +107,33 @@ export default function PortfolioPage() {
 
       {error && <div className="app-notice app-notice-error">{error}</div>}
 
-      <PortfolioSummary summary={summary} />
+      <div id="portfolio-summary" className="page-section-anchor">
+        <PortfolioSummary summary={summary} />
+      </div>
 
-      <PortfolioTransactionForm tags={tags} isSaving={isSaving} onSave={handleCreateTransaction} />
+      <div id="portfolio-add" className="page-section-anchor">
+        <PortfolioTransactionForm
+          tags={tags}
+          isSaving={isSaving}
+          onSave={handleCreateTransaction}
+        />
+      </div>
 
-      <PortfolioTransactionsTable
-        account={account}
-        transactions={transactions}
-        tags={tags}
-        isSaving={isSaving}
-        onUpdate={updateTransaction}
-        onDelete={handleDeleteTransaction}
-      />
+      <div id="portfolio-history" className="page-section-anchor">
+        <PortfolioTransactionsTable
+          account={account}
+          transactions={transactions}
+          tags={tags}
+          isSaving={isSaving}
+          onUpdate={updateTransaction}
+          onDelete={handleDeleteTransaction}
+        />
+      </div>
 
-      <div className="grid items-start gap-4 2xl:grid-cols-[minmax(0,1.35fr)_minmax(21rem,0.65fr)]">
+      <div
+        id="portfolio-analysis"
+        className="page-section-anchor grid items-start gap-4 2xl:grid-cols-[minmax(0,1.35fr)_minmax(21rem,0.65fr)]"
+      >
         <PortfolioStatisticsPanel summary={summary} transactions={transactions} tags={tags} />
 
         <PortfolioCsvImportPanel isSaving={isSaving} onImport={importCsvRows} />
@@ -121,15 +141,17 @@ export default function PortfolioPage() {
 
       <PortfolioBalanceChart account={account} transactions={transactions} />
 
-      <PortfolioSettingsPanel
-        account={account}
-        tags={tags}
-        isSaving={isSaving}
-        onUpdateAccount={updateAccount}
-        onCreateTag={handleCreateTag}
-        onUpdateTag={updateTag}
-        onDeleteTag={handleDeleteTag}
-      />
+      <div id="portfolio-settings" className="page-section-anchor">
+        <PortfolioSettingsPanel
+          account={account}
+          tags={tags}
+          isSaving={isSaving}
+          onUpdateAccount={updateAccount}
+          onCreateTag={handleCreateTag}
+          onUpdateTag={updateTag}
+          onDeleteTag={handleDeleteTag}
+        />
+      </div>
     </div>
   );
 }

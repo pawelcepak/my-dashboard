@@ -34,11 +34,9 @@ export interface AppPreferences {
 export const DEFAULT_NAVIGATION_TAB_COLORS: NavigationTabColors = {
   dashboard: 'crimson',
   work: 'crimson',
-  expenses: 'crimson',
   debts: 'crimson',
   portfolio: 'crimson',
   alcohol: 'crimson',
-  statistics: 'crimson',
   settings: 'crimson',
 };
 

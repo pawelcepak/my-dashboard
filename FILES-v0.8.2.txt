@@ -1,0 +1,20 @@
+CHB v0.8.2 — Compact Layout Hotfix
+
+ZMIENIONE PLIKI:
+src/app/layout/Header.tsx
+src/app/layout/AppLayout.tsx
+src/shared/components/PageHeader.tsx
+src/shared/components/PageSectionNav.tsx
+src/modules/work/pages/WorkPage.tsx
+src/modules/work/containers/WorkMainGridContainer.tsx
+src/modules/work/components/WorkHistory.tsx
+src/modules/portfolio/components/PortfolioBalanceChart.tsx
+src/modules/alcohol/index.tsx
+src/index.css
+
+DODANE PLIKI:
+INSTALL-v0.8.2.md
+FILES-v0.8.2.txt
+
+USUNIĘTE PLIKI:
+Brak.

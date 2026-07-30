@@ -4,21 +4,33 @@ import HistoricalWorkImportPanel from '@/modules/settings/components/HistoricalW
 import NavigationPreferencesPanel from '@/modules/settings/components/NavigationPreferencesPanel';
 import PageHeader from '@/shared/components/PageHeader';
 
+const SETTINGS_SECTIONS = [
+  { id: 'settings-app', label: 'Wygląd' },
+  { id: 'settings-navigation', label: 'Nawigacja' },
+  { id: 'settings-import', label: 'Import' },
+  { id: 'settings-backup', label: 'Backup' },
+];
+
 export default function SettingsPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <PageHeader
         title="Ustawienia"
-        description="Preferencje aplikacji, układ zakładek, kopie bezpieczeństwa i zarządzanie lokalnymi danymi CHB."
+        description="Wygląd, nawigacja, import i bezpieczeństwo danych."
+        sections={SETTINGS_SECTIONS}
       />
-
-      <AppPreferencesPanel />
-
-      <NavigationPreferencesPanel />
-
-      <HistoricalWorkImportPanel />
-
-      <DataBackupPanel />
+      <div id="settings-app" className="page-section-anchor">
+        <AppPreferencesPanel />
+      </div>
+      <div id="settings-navigation" className="page-section-anchor">
+        <NavigationPreferencesPanel />
+      </div>
+      <div id="settings-import" className="page-section-anchor">
+        <HistoricalWorkImportPanel />
+      </div>
+      <div id="settings-backup" className="page-section-anchor">
+        <DataBackupPanel />
+      </div>
     </div>
   );
 }

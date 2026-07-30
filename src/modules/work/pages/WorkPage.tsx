@@ -1,4 +1,4 @@
-import { CalendarDays, LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from 'lucide-react';
 
 import WorkWeekManager from '@/modules/work/components/WorkWeekManager';
 import WorkActiveWeekContainer from '@/modules/work/containers/WorkActiveWeekContainer';
@@ -11,28 +11,27 @@ import {
 } from '@/modules/work/utils/workCalculations';
 import PageHeader from '@/shared/components/PageHeader';
 
+const WORK_SECTIONS = [
+  { id: 'work-overview', label: 'Podsumowanie' },
+  { id: 'work-days', label: 'Dni pracy' },
+  { id: 'work-history', label: 'Historia' },
+  { id: 'work-analysis', label: 'Analiza' },
+  { id: 'work-finances', label: 'Finanse' },
+];
+
 function WorkPageLoading() {
   return (
     <div className="flex min-h-[28rem] items-center justify-center">
       <div className="text-center">
-        <LoaderCircle aria-hidden="true" className="mx-auto size-8 animate-spin text-zinc-500" />
-
+        <LoaderCircle className="mx-auto size-8 animate-spin text-zinc-500" />
         <p className="mt-4 text-sm font-medium text-zinc-300">Wczytywanie danych pracy</p>
-
-        <p className="mt-1 text-sm text-zinc-500">Otwieranie lokalnej bazy danych.</p>
       </div>
     </div>
   );
 }
 
 function WorkPageError({ message }: { message: string }) {
-  return (
-    <div className="rounded-2xl border border-red-900/60 bg-red-950/30 p-6">
-      <h1 className="text-lg font-semibold text-red-200">Nie udało się wczytać danych</h1>
-
-      <p className="mt-2 text-sm leading-6 text-red-300/80">{message}</p>
-    </div>
-  );
+  return <div className="app-notice app-notice-error">{message}</div>;
 }
 
 export default function WorkPage() {
@@ -48,54 +47,36 @@ export default function WorkPage() {
     createWeek,
     deleteWeek,
   } = useCurrentWorkWeek();
-
-  if (isLoading) {
-    return <WorkPageLoading />;
-  }
-
-  if (!week) {
+  if (isLoading) return <WorkPageLoading />;
+  if (!week)
     return <WorkPageError message={error ?? 'W bazie danych nie znaleziono tygodnia pracy.'} />;
-  }
 
-  const activeWeek = week;
-
-  const summary = calculateWorkWeekSummary(activeWeek);
-
-  const progress = calculateWorkProgress(activeWeek, summary.totalMessages);
+  const summary = calculateWorkWeekSummary(week);
+  const progress = calculateWorkProgress(week, summary.totalMessages);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-3">
       <PageHeader
         title="Praca"
-        description="Rejestr wiadomości, czasu pracy, zarobków i tygodniowych celów."
+        description="Wiadomości, czas pracy, zarobki i cele tygodniowe."
+        sections={WORK_SECTIONS}
         action={
-          <div className="w-full sm:w-[38rem]">
-            <div className="flex h-10 w-full items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900 px-4 text-sm text-zinc-300">
-              <CalendarDays aria-hidden="true" className="size-4 text-zinc-500" />
-
-              <span>
-                Tydzień {activeWeek.weekNumber}, {activeWeek.year}
-              </span>
-            </div>
-
-            <WorkWeekManager
-              activeWeek={activeWeek}
-              weeks={weeks}
-              isSaving={isSaving}
-              onSelectWeek={selectWeek}
-              onCreateWeek={createWeek}
-              onDeleteWeek={deleteWeek}
-            />
-          </div>
+          <WorkWeekManager
+            activeWeek={week}
+            weeks={weeks}
+            isSaving={isSaving}
+            onSelectWeek={selectWeek}
+            onCreateWeek={createWeek}
+            onDeleteWeek={deleteWeek}
+          />
         }
       />
-
       {error && <div className="app-notice app-notice-error">{error}</div>}
-
-      <WorkActiveWeekContainer week={activeWeek} summary={summary} isSaving={isSaving} />
-
+      <div id="work-overview" className="page-section-anchor">
+        <WorkActiveWeekContainer week={week} summary={summary} isSaving={isSaving} />
+      </div>
       <WorkMainGridContainer
-        activeWeek={activeWeek}
+        activeWeek={week}
         weeks={weeks}
         summary={summary}
         isSaving={isSaving}
@@ -103,13 +84,14 @@ export default function WorkPage() {
         resetWeek={resetWeek}
         selectWeek={selectWeek}
       />
-
-      <WorkFinancialContainer
-        activeWeek={activeWeek}
-        summary={summary}
-        progress={progress}
-        updateWeek={updateWeek}
-      />
+      <div id="work-finances" className="page-section-anchor">
+        <WorkFinancialContainer
+          activeWeek={week}
+          summary={summary}
+          progress={progress}
+          updateWeek={updateWeek}
+        />
+      </div>
     </div>
   );
 }

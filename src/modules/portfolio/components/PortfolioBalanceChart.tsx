@@ -47,7 +47,7 @@ export default function PortfolioBalanceChart({
   const range = Math.max(1, maximum - minimum);
 
   const width = 720;
-  const height = 220;
+  const height = 140;
   const padding = 22;
 
   const chartPoints = points
@@ -62,7 +62,7 @@ export default function PortfolioBalanceChart({
 
   return (
     <section className="app-panel overflow-hidden">
-      <div className="border-b border-zinc-700 px-5 py-4">
+      <div className="border-b border-zinc-700 px-4 py-3">
         <h2 className="text-sm font-semibold text-zinc-100">Historia salda</h2>
 
         <p className="mt-0.5 text-xs text-zinc-500">
@@ -70,12 +70,12 @@ export default function PortfolioBalanceChart({
         </p>
       </div>
 
-      <div className="p-4">
+      <div className="p-3">
         <svg
           role="img"
           aria-label="Wykres historii salda portfela"
           viewBox={`0 0 ${width} ${height}`}
-          className="h-auto w-full"
+          className="mx-auto h-auto w-full max-w-5xl"
         >
           <line
             x1={padding}

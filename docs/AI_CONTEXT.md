@@ -12,14 +12,14 @@
 
 - ID: `chb`
 - Name: CHB
-- Current version: `0.7.6b`
-- Current sprint: `0.7.6b`
+- Current version: `0.8.0`
+- Current sprint: `0.8.0`
 - Status: active
 - Documentation source of truth: `docs/data`
 
 ## Current goal
 
-Make Debt seed initialization idempotent without storing a seed marker in app settings.
+Establish the CHB Design System and modern responsive application shell as the visual standard for every module.
 
 ## Non-negotiable principles
 
@@ -31,6 +31,7 @@ Make Debt seed initialization idempotent without storing a seed marker in app se
 - Generated Markdown is output; docs/data JSON is the source of truth
 - AI integration must remain vendor-neutral
 - The application must remain usable on older hardware
+- All modules must use the shared CHB Design System and responsive application shell
 
 ## Active modules
 
@@ -45,10 +46,10 @@ Make Debt seed initialization idempotent without storing a seed marker in app se
 
 ## Next tasks
 
-- Verify Debt page opens without ConstraintError
-- Verify build passes without debt-seed-v1 AppSettingKey
-- Verify existing debt data is preserved
-- Commit v0.7.6b after local release checks
+- Verify the redesigned desktop sidebar and mobile navigation
+- Verify all modules in light and dark themes
+- Run local release checks and correct any module-specific visual regressions
+- Commit v0.8.0 after acceptance
 
 ## Open and accepted issues
 

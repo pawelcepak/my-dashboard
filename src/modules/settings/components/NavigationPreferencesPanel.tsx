@@ -258,8 +258,7 @@ export default function NavigationPreferencesPanel() {
           <div>
             <p className="text-sm font-semibold text-zinc-300">Przywróć domyślny układ</p>
             <p className="mt-1 text-xs text-zinc-500">
-              Dashboard, Praca, Wydatki, Długi, Portfel, Statystyki i Ustawienia — wszystkie w
-              Crimson.
+              Dashboard, Praca, Długi, Portfel, Alkohol i Ustawienia — wszystkie w Crimson.
             </p>
           </div>
 

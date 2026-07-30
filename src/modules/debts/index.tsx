@@ -35,6 +35,12 @@ export default function DebtsPage() {
       <PageHeader
         title="Długi"
         description="Aktualne salda, ręczne spłaty i historia zmian zadłużenia."
+        sections={[
+          { id: 'debts-summary', label: 'Podsumowanie' },
+          { id: 'debts-list', label: 'Lista długów' },
+          { id: 'debts-actions', label: 'Dodaj / spłata' },
+          { id: 'debts-history', label: 'Historia' },
+        ]}
         action={
           <span
             className={`rounded-full border px-3 py-1.5 text-xs font-semibold ${api.isSaving ? 'border-amber-800 text-amber-300' : 'border-emerald-800 text-emerald-300'}`}
@@ -44,28 +50,36 @@ export default function DebtsPage() {
         }
       />
       {api.error && <div className="app-notice app-notice-error">{api.error}</div>}
-      <DebtsSummary summary={summary} />
-      <DebtsList
-        debts={rows}
-        events={api.events}
-        isSaving={api.isSaving}
-        onUpdate={api.updateDebt}
-        onDelete={api.deleteDebt}
-      />
-      <DebtActionsPanel
-        debts={api.debts}
-        events={api.events}
-        isSaving={api.isSaving}
-        onCreateDebt={api.createDebt}
-        onPayment={api.addPayment}
-        onBalanceUpdate={api.updateBalance}
-      />
-      <DebtHistory
-        debts={api.debts}
-        events={api.events}
-        isSaving={api.isSaving}
-        onDelete={api.deleteEvent}
-      />
+      <div id="debts-summary" className="page-section-anchor">
+        <DebtsSummary summary={summary} />
+      </div>
+      <div id="debts-list" className="page-section-anchor">
+        <DebtsList
+          debts={rows}
+          events={api.events}
+          isSaving={api.isSaving}
+          onUpdate={api.updateDebt}
+          onDelete={api.deleteDebt}
+        />
+      </div>
+      <div id="debts-actions" className="page-section-anchor">
+        <DebtActionsPanel
+          debts={api.debts}
+          events={api.events}
+          isSaving={api.isSaving}
+          onCreateDebt={api.createDebt}
+          onPayment={api.addPayment}
+          onBalanceUpdate={api.updateBalance}
+        />
+      </div>
+      <div id="debts-history" className="page-section-anchor">
+        <DebtHistory
+          debts={api.debts}
+          events={api.events}
+          isSaving={api.isSaving}
+          onDelete={api.deleteEvent}
+        />
+      </div>
     </div>
   );
 }

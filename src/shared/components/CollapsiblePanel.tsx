@@ -52,18 +52,16 @@ export default function CollapsiblePanel({
   }, [isOpen, storageKey]);
 
   return (
-    <section
-      className={`overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900/55 ${className}`}
-    >
+    <section className={`app-panel overflow-hidden ${className}`}>
       <button
         type="button"
         aria-expanded={isOpen}
         aria-controls={contentId}
         onClick={() => setIsOpen((current) => !current)}
-        className="flex w-full items-center gap-3 px-4 py-3.5 text-left transition hover:bg-zinc-950/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--app-accent)]"
+        className="flex w-full items-center gap-3 px-4 py-3 text-left transition hover:bg-zinc-950/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--app-accent)]"
       >
         {icon && (
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] text-[var(--app-accent)]">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-md border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] text-[var(--app-accent)]">
             {icon}
           </div>
         )}
@@ -87,7 +85,7 @@ export default function CollapsiblePanel({
       <div
         id={contentId}
         hidden={!isOpen}
-        className={`border-t border-zinc-700 ${contentClassName}`}
+        className={`border-t border-zinc-700/80 ${contentClassName}`}
       >
         {children}
       </div>
