@@ -34,7 +34,6 @@ export default function DebtsPage() {
     <div className="space-y-4">
       <PageHeader
         title="Długi"
-        description="Aktualne salda, ręczne spłaty i historia zmian zadłużenia."
         sections={[
           { id: 'debts-summary', label: 'Podsumowanie' },
           { id: 'debts-list', label: 'Lista długów' },

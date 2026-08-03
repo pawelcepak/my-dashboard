@@ -16,7 +16,6 @@ export default function SettingsPage() {
     <div className="space-y-4">
       <PageHeader
         title="Ustawienia"
-        description="Wygląd, nawigacja, import i bezpieczeństwo danych."
         sections={SETTINGS_SECTIONS}
       />
       <div id="settings-app" className="page-section-anchor">

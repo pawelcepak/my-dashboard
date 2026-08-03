@@ -118,7 +118,6 @@ export default function DashboardPage() {
     <div className="space-y-4">
       <PageHeader
         title="Dashboard"
-        description="Bieżący dzień, szybkie wpisy i podsumowanie aktywnego tygodnia."
         sections={[
           { id: 'dashboard-today', label: 'Dzisiaj' },
           { id: 'dashboard-week', label: 'Tydzień' },

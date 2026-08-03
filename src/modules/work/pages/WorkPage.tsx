@@ -58,7 +58,6 @@ export default function WorkPage() {
     <div className="space-y-3">
       <PageHeader
         title="Praca"
-        description="Wiadomości, czas pracy, zarobki i cele tygodniowe."
         sections={WORK_SECTIONS}
         action={
           <WorkWeekManager

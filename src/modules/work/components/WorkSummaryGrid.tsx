@@ -110,8 +110,6 @@ export default function WorkSummaryGrid({ summary, goals }: WorkSummaryGridProps
       <div className="flex items-center justify-between gap-4 border-b border-zinc-700 px-4 py-3.5">
         <div>
           <h2 className="text-sm font-semibold text-zinc-100">Podsumowanie aktywnego tygodnia</h2>
-
-          <p className="mt-0.5 text-xs text-zinc-500">Wyniki, zarobki i ustawione cele</p>
         </div>
 
         <div className="flex size-9 items-center justify-center rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] text-[var(--app-accent)]">

@@ -78,11 +78,6 @@ export default function WorkActiveWeekContainer({
           </div>
         </div>
       </div>
-
-      <div className="flex items-center gap-2 border-t border-zinc-700 bg-zinc-950/25 px-4 py-2.5 text-xs text-zinc-500 sm:px-5">
-        <Database aria-hidden="true" className="size-3.5 shrink-0" />
-        Dane wszystkich tygodni są zapisywane lokalnie i synchronizowane z prywatną chmurą.
-      </div>
     </section>
   );
 }

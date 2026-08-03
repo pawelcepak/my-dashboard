@@ -155,10 +155,6 @@ export default function DataBackupPanel() {
 
             <div>
               <h2 className="font-semibold text-zinc-100">Eksport danych</h2>
-
-              <p className="mt-1 text-sm leading-6 text-zinc-500">
-                Zapisz tygodnie, Portfel i ustawienia CHB w jednym pliku JSON.
-              </p>
             </div>
           </div>
 
@@ -214,10 +210,6 @@ export default function DataBackupPanel() {
 
             <div>
               <h2 className="font-semibold text-zinc-100">Import danych</h2>
-
-              <p className="mt-1 text-sm leading-6 text-zinc-500">
-                Sprawdź kopię, a następnie zastąp nią obecną lokalną bazę.
-              </p>
             </div>
           </div>
 

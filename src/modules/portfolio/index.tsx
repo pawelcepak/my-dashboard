@@ -84,7 +84,6 @@ export default function PortfolioPage() {
     <div className="space-y-4">
       <PageHeader
         title="Portfel"
-        description="Przychody, wydatki, tagi, saldo i statystyki."
         sections={[
           { id: 'portfolio-summary', label: 'Podsumowanie' },
           { id: 'portfolio-add', label: 'Nowa transakcja' },

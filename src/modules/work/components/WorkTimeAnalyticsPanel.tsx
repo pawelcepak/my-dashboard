@@ -57,7 +57,6 @@ export default function WorkTimeAnalyticsPanel({
     <CollapsiblePanel
       storageKey="work-time-analytics"
       title="Analiza godzin pracy"
-      description="Standardowe, dodatkowe i weekendowe bloki"
       icon={<CalendarClock className="size-4" />}
       summary={
         enabled ? (

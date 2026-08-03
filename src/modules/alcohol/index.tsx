@@ -53,7 +53,6 @@ export default function AlcoholPage() {
     <div className="space-y-3">
       <PageHeader
         title="Alkohol"
-        description="Dni picia z Work, koszty z Portfela i ręczne korekty historyczne."
         sections={[
           { id: 'alcohol-summary', label: 'Podsumowanie' },
           { id: 'alcohol-calendar', label: 'Kalendarz' },
