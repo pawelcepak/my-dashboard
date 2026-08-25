@@ -11,7 +11,6 @@ import {
   formatGoalValue,
   getDefaultWorkSessionTimes,
   synchronizeWorkGoals,
-  type WorkGoalSource,
 } from '@/modules/work/utils/workCalculations';
 
 type QuickWorkActionsProps = {
@@ -99,19 +98,9 @@ export default function QuickWorkActions({
     formatGoalValue(week.goals.dailyMessagesTarget)
   );
 
-  const [weeklyMessagesTarget, setWeeklyMessagesTarget] = useState(
-    formatGoalValue(week.goals.weeklyMessagesTarget)
-  );
-
-  const [weeklyMessagesTarget5Days, setWeeklyMessagesTarget5Days] = useState(
-    formatGoalValue(week.goals.weeklyMessagesTarget5Days)
-  );
-
   const [dailyHoursTarget, setDailyHoursTarget] = useState(
     formatGoalValue(week.goals.dailyHoursTarget)
   );
-
-  const [lastGoalSource, setLastGoalSource] = useState<WorkGoalSource>('weekly-7-days');
 
   useEffect(() => {
     setMessages(String(day.messages));
@@ -125,36 +114,8 @@ export default function QuickWorkActions({
 
   useEffect(() => {
     setDailyMessagesTarget(formatGoalValue(week.goals.dailyMessagesTarget));
-
-    setWeeklyMessagesTarget(formatGoalValue(week.goals.weeklyMessagesTarget));
-
-    setWeeklyMessagesTarget5Days(formatGoalValue(week.goals.weeklyMessagesTarget5Days));
-
     setDailyHoursTarget(formatGoalValue(week.goals.dailyHoursTarget));
-  }, [
-    week.goals.dailyHoursTarget,
-    week.goals.dailyMessagesTarget,
-    week.goals.weeklyMessagesTarget,
-    week.goals.weeklyMessagesTarget5Days,
-  ]);
-
-  function synchronizeGoalFields(source: WorkGoalSource, value: string) {
-    const sourceValue = parseNullableNumber(value);
-
-    const synchronizedGoals = synchronizeWorkGoals(
-      source,
-      sourceValue,
-      parseNullableNumber(dailyHoursTarget)
-    );
-
-    setDailyMessagesTarget(formatGoalValue(synchronizedGoals.dailyMessagesTarget));
-
-    setWeeklyMessagesTarget(formatGoalValue(synchronizedGoals.weeklyMessagesTarget));
-
-    setWeeklyMessagesTarget5Days(formatGoalValue(synchronizedGoals.weeklyMessagesTarget5Days));
-
-    setLastGoalSource(source);
-  }
+  }, [week.goals.dailyHoursTarget, week.goals.dailyMessagesTarget]);
 
   async function handleDaySubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -195,16 +156,9 @@ export default function QuickWorkActions({
   async function handleGoalsSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const sourceValue =
-      lastGoalSource === 'daily'
-        ? parseNullableNumber(dailyMessagesTarget)
-        : lastGoalSource === 'weekly-7-days'
-          ? parseNullableNumber(weeklyMessagesTarget)
-          : parseNullableNumber(weeklyMessagesTarget5Days);
-
     const synchronizedGoals = synchronizeWorkGoals(
-      lastGoalSource,
-      sourceValue,
+      'daily',
+      parseNullableNumber(dailyMessagesTarget),
       parseNullableNumber(dailyHoursTarget)
     );
 
@@ -422,9 +376,7 @@ export default function QuickWorkActions({
               <div>
                 <h3 className="text-xs font-semibold text-zinc-300">Cele pracy</h3>
 
-                <p className="mt-0.5 text-[10px] text-zinc-500">
-                  Zmiana jednego celu przelicza dwa pozostałe
-                </p>
+                <p className="mt-0.5 text-[10px] text-zinc-500">Dwa podstawowe cele dzienne</p>
               </div>
 
               <SlidersHorizontal aria-hidden="true" className="size-4 text-zinc-500" />
@@ -432,58 +384,14 @@ export default function QuickWorkActions({
 
             <div className="grid grid-cols-2 gap-2">
               <label>
-                <span className={labelClasses}>Dzienny</span>
+                <span className={labelClasses}>Wiadomości dziennie</span>
 
                 <input
                   type="text"
                   inputMode="decimal"
                   value={dailyMessagesTarget}
                   placeholder="—"
-                  onChange={(event) => {
-                    const value = event.target.value;
-
-                    setDailyMessagesTarget(value);
-
-                    synchronizeGoalFields('daily', value);
-                  }}
-                  className={inputClasses}
-                />
-              </label>
-
-              <label>
-                <span className={labelClasses}>Tydzień 7 dni</span>
-
-                <input
-                  type="text"
-                  inputMode="decimal"
-                  value={weeklyMessagesTarget}
-                  placeholder="—"
-                  onChange={(event) => {
-                    const value = event.target.value;
-
-                    setWeeklyMessagesTarget(value);
-
-                    synchronizeGoalFields('weekly-7-days', value);
-                  }}
-                  className={inputClasses}
-                />
-              </label>
-
-              <label>
-                <span className={labelClasses}>Tydzień 5 dni</span>
-
-                <input
-                  type="text"
-                  inputMode="decimal"
-                  value={weeklyMessagesTarget5Days}
-                  placeholder="—"
-                  onChange={(event) => {
-                    const value = event.target.value;
-
-                    setWeeklyMessagesTarget5Days(value);
-
-                    synchronizeGoalFields('weekly-5-days', value);
-                  }}
+                  onChange={(event) => setDailyMessagesTarget(event.target.value)}
                   className={inputClasses}
                 />
               </label>

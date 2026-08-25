@@ -379,13 +379,7 @@ export default function WorkDaysTable({
       className={`${densityClassName} overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/55`}
     >
       <div className="flex items-center justify-between gap-3 border-b border-zinc-700 px-3 py-2.5">
-        <div className="min-w-0">
-          <h2 className="text-xs font-semibold text-zinc-100">Historia aktywnego tygodnia</h2>
-
-          <p className="mt-0.5 truncate text-[10px] text-zinc-500">
-            Enter zapisuje, Tab i strzałki zmieniają komórkę
-          </p>
-        </div>
+        <h2 className="min-w-0 text-xs font-semibold text-zinc-100">Historia aktywnego tygodnia</h2>
 
         <span
           className={`shrink-0 text-[9px] font-semibold uppercase tracking-wide ${
@@ -398,15 +392,24 @@ export default function WorkDaysTable({
 
       <div className="overflow-x-auto">
         <table className="work-spreadsheet-table">
+          <colgroup>
+            <col className="work-col-date" />
+            <col className="work-col-beers" />
+            <col className="work-col-rating" />
+            <col className="work-col-held" />
+            <col className="work-col-messages" />
+            <col className="work-col-hours" />
+            <col className="work-col-average" />
+          </colgroup>
           <thead>
             <tr>
               <th className="text-left">Data</th>
               <th className="text-center">Piwa</th>
               <th className="text-center">Ocena</th>
-              <th className="text-right">Zatrzymane</th>
-              <th className="text-right">Płatne</th>
-              <th className="text-right">Godziny</th>
-              <th className="text-right">Średnia/h</th>
+              <th className="text-center">Zatrzymane</th>
+              <th className="text-center">Płatne</th>
+              <th className="text-center">Godziny</th>
+              <th className="text-center">Średnia/h</th>
             </tr>
           </thead>
 
@@ -490,11 +493,12 @@ export default function WorkDaysTable({
                     />
                   </td>
 
-                  <td className="text-right">
+                  <td className="text-center">
                     <EditableNumberCell
                       day={day}
                       field="heldMessages"
                       value={day.heldMessages}
+                      align="center"
                       position={heldPosition}
                       isEditing={
                         editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 2
@@ -507,11 +511,12 @@ export default function WorkDaysTable({
                     />
                   </td>
 
-                  <td className="text-right">
+                  <td className="text-center">
                     <EditableNumberCell
                       day={day}
                       field="messages"
                       value={day.messages}
+                      align="center"
                       position={messagesPosition}
                       isEditing={
                         editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 3
@@ -524,12 +529,12 @@ export default function WorkDaysTable({
                     />
                   </td>
 
-                  <td className="text-right">
+                  <td className="text-center">
                     <button
                       type="button"
                       title="Edytuj bloki czasu"
                       onClick={() => onEditSessions(day.id)}
-                      className="work-spreadsheet-hours"
+                      className="work-spreadsheet-hours justify-center text-center"
                     >
                       <Clock3 aria-hidden="true" className="size-3 text-zinc-500" />
 

@@ -4,8 +4,12 @@ import { useState } from 'react';
 import { useAuth } from '@/app/auth/useAuth';
 import CloudStatusIndicator from '@/app/cloud/CloudStatusIndicator';
 import ThemeToggle from '@/app/layout/ThemeToggle';
+import HeaderWeeklyProgress from '@/app/layout/HeaderWeeklyProgress';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
-import { formatShortIsoDate } from '@/modules/work/utils/workCalculations';
+import {
+  calculateWorkWeekSummary,
+  formatShortIsoDate,
+} from '@/modules/work/utils/workCalculations';
 
 function getFormattedDate(): string {
   return new Intl.DateTimeFormat('pl-PL', {
@@ -30,6 +34,8 @@ export default function Header() {
       ? `${formatShortIsoDate(week.startDate)}–${formatShortIsoDate(week.endDate)} (W${week.weekNumber})`
       : 'Wczytywanie okresu…';
 
+  const totalMessages = week ? calculateWorkWeekSummary(week).totalMessages : 0;
+
   async function handleSignOut() {
     setIsSigningOut(true);
     try {
@@ -43,7 +49,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-zinc-700/80 bg-zinc-950/92 backdrop-blur-xl">
-      <div className="mx-auto flex min-h-14 w-full max-w-[1800px] items-center gap-3 px-3 py-2 sm:px-4 lg:px-5 xl:px-6">
+      <div className="mx-auto flex min-h-14 w-full max-w-[1800px] flex-wrap items-center gap-3 px-3 py-2 sm:px-4 lg:flex-nowrap lg:px-5 xl:px-6">
         <div className="min-w-0 shrink-0">
           <p className="truncate text-xs font-semibold text-zinc-300 sm:text-sm">{weekLabel}</p>
           <p className="mt-0.5 hidden truncate text-[11px] text-zinc-500 lg:block">
@@ -51,7 +57,9 @@ export default function Header() {
           </p>
         </div>
 
-        <div id="page-section-nav-slot" className="min-w-0 flex-1" />
+        <div className="order-3 min-w-0 basis-full lg:order-none lg:flex-1 lg:basis-auto">
+          {!isLoading && week ? <HeaderWeeklyProgress totalMessages={totalMessages} /> : null}
+        </div>
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
           <CloudStatusIndicator />

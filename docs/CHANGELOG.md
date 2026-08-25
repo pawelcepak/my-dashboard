@@ -263,6 +263,10 @@ All notable changes to CHB will be documented in this file.
 - Work week settings, week history and financial plan now use the Global Panel System.
 - Work week selector and create/delete actions are grouped under the week badge in the page header.
 - Work history moved below the primary grid to reduce vertical fragmentation and improve laptop-width readability.
+- Work weekly message-threshold progress moved to the top of the Work page.
+- Work goal UI now shows only daily messages and daily hours; 5-day and 7-day goal cards were removed.
+- Work table numeric columns are centered and redistributed to reduce large visual gaps.
+- Week 35 and newer use daily goals of 283 messages and 7 hours.
 
 ### Fixed
 

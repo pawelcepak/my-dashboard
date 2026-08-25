@@ -14,10 +14,7 @@ const SETTINGS_SECTIONS = [
 export default function SettingsPage() {
   return (
     <div className="space-y-4">
-      <PageHeader
-        title="Ustawienia"
-        sections={SETTINGS_SECTIONS}
-      />
+      <PageHeader title="Ustawienia" sections={SETTINGS_SECTIONS} />
       <div id="settings-app" className="page-section-anchor">
         <AppPreferencesPanel />
       </div>

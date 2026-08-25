@@ -9,9 +9,8 @@ import { addDaysToIsoDate, getIsoWeekDateRange } from '@/modules/work/utils/work
 const DEFAULT_EXCHANGE_RATE_EUR_PLN = 4.2;
 const DEFAULT_WORK_RATING = 8.5;
 
-const DEFAULT_WEEKLY_MESSAGES_TARGET = 1576;
-const DEFAULT_DAILY_MESSAGES_TARGET = 225.14;
-const DEFAULT_WEEKLY_MESSAGES_TARGET_5_DAYS = 1125.71;
+const DEFAULT_DAILY_MESSAGES_TARGET = 283;
+const DEFAULT_DAILY_HOURS_TARGET = 7;
 
 function createFinancialPlanCopy(sourceItems: FinancialPlanItem[]): FinancialPlanItem[] {
   return sourceItems.map((item, index) => ({
@@ -60,9 +59,9 @@ export function createEmptyWorkWeek(
       ? structuredClone(sourceWeek.goals)
       : {
           dailyMessagesTarget: DEFAULT_DAILY_MESSAGES_TARGET,
-          weeklyMessagesTarget: DEFAULT_WEEKLY_MESSAGES_TARGET,
-          weeklyMessagesTarget5Days: DEFAULT_WEEKLY_MESSAGES_TARGET_5_DAYS,
-          dailyHoursTarget: null,
+          weeklyMessagesTarget: DEFAULT_DAILY_MESSAGES_TARGET * 7,
+          weeklyMessagesTarget5Days: DEFAULT_DAILY_MESSAGES_TARGET * 5,
+          dailyHoursTarget: DEFAULT_DAILY_HOURS_TARGET,
         },
     days: createEmptyWorkDays(startDate),
     financialPlan: sourceWeek ? createFinancialPlanCopy(sourceWeek.financialPlan) : [],

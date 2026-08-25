@@ -19,7 +19,7 @@ type WorkSummaryGridProps = {
 type SummaryMetricProps = {
   label: string;
   value: string;
-  description: string;
+  description?: string;
   icon: typeof Mail;
   accent?: boolean;
 };
@@ -53,7 +53,7 @@ function SummaryMetric({
             {value}
           </p>
 
-          <p className="mt-1 truncate text-[11px] text-zinc-500">{description}</p>
+          {description && <p className="mt-1 truncate text-[11px] text-zinc-500">{description}</p>}
         </div>
 
         <div
@@ -80,8 +80,6 @@ function AverageMetric({ value }: { value: number }) {
       <div className="mt-2">
         <MessagesPerHourIndicator value={value} showLabel />
       </div>
-
-      <p className="mt-2 truncate text-[11px] text-zinc-500">Z całego aktywnego tygodnia</p>
     </article>
   );
 }
@@ -108,9 +106,7 @@ export default function WorkSummaryGrid({ summary, goals }: WorkSummaryGridProps
   return (
     <section className="overflow-hidden rounded-2xl border border-zinc-700 bg-zinc-900/55">
       <div className="flex items-center justify-between gap-4 border-b border-zinc-700 px-4 py-3.5">
-        <div>
-          <h2 className="text-sm font-semibold text-zinc-100">Podsumowanie aktywnego tygodnia</h2>
-        </div>
+        <h2 className="text-sm font-semibold text-zinc-100">Podsumowanie aktywnego tygodnia</h2>
 
         <div className="flex size-9 items-center justify-center rounded-lg border border-[var(--app-accent-border)] bg-[var(--app-accent-soft)] text-[var(--app-accent)]">
           <Target aria-hidden="true" className="size-4" />
@@ -130,7 +126,6 @@ export default function WorkSummaryGrid({ summary, goals }: WorkSummaryGridProps
           <SummaryMetric
             label="Czas pracy"
             value={`${formatHours(summary.totalHours)} h`}
-            description={`${formatNumber(summary.totalMinutes)} minut`}
             icon={Clock3}
           />
 
@@ -139,21 +134,18 @@ export default function WorkSummaryGrid({ summary, goals }: WorkSummaryGridProps
           <SummaryMetric
             label="Wiadomości ÷ 40"
             value={formatDecimal(summary.messagesDividedByForty)}
-            description="Wartość pomocnicza"
             icon={Percent}
           />
 
           <SummaryMetric
             label="Netto EUR"
             value={formatCurrencyEur(summary.netEarningsEur)}
-            description={`Brutto ${formatCurrencyEur(summary.grossEarningsEur)}`}
             icon={MessageSquareMore}
           />
 
           <SummaryMetric
             label="Netto PLN"
             value={formatCurrencyPln(summary.netEarningsPln)}
-            description={`Opłata ${formatCurrencyEur(summary.payoutFeeEur)}`}
             icon={Banknote}
           />
         </div>
@@ -166,13 +158,9 @@ export default function WorkSummaryGrid({ summary, goals }: WorkSummaryGridProps
           </div>
 
           <div className="grid grid-cols-2 gap-2">
-            <GoalValue label="Dzienny" value={goals.dailyMessagesTarget} />
+            <GoalValue label="Wiadomości dziennie" value={goals.dailyMessagesTarget} />
 
             <GoalValue label="Godziny dziennie" value={goals.dailyHoursTarget} suffix=" h" />
-
-            <GoalValue label="Tydzień 7 dni" value={goals.weeklyMessagesTarget} />
-
-            <GoalValue label="Tydzień 5 dni" value={goals.weeklyMessagesTarget5Days} />
           </div>
         </div>
       </div>

@@ -1,23 +1,11 @@
 import { LoaderCircle } from 'lucide-react';
 
 import WorkWeekManager from '@/modules/work/components/WorkWeekManager';
-import WorkActiveWeekContainer from '@/modules/work/containers/WorkActiveWeekContainer';
 import WorkFinancialContainer from '@/modules/work/containers/WorkFinancialContainer';
 import WorkMainGridContainer from '@/modules/work/containers/WorkMainGridContainer';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
-import {
-  calculateWorkProgress,
-  calculateWorkWeekSummary,
-} from '@/modules/work/utils/workCalculations';
+import { calculateWorkWeekSummary } from '@/modules/work/utils/workCalculations';
 import PageHeader from '@/shared/components/PageHeader';
-
-const WORK_SECTIONS = [
-  { id: 'work-overview', label: 'Podsumowanie' },
-  { id: 'work-days', label: 'Dni pracy' },
-  { id: 'work-history', label: 'Historia' },
-  { id: 'work-analysis', label: 'Analiza' },
-  { id: 'work-finances', label: 'Finanse' },
-];
 
 function WorkPageLoading() {
   return (
@@ -52,13 +40,11 @@ export default function WorkPage() {
     return <WorkPageError message={error ?? 'W bazie danych nie znaleziono tygodnia pracy.'} />;
 
   const summary = calculateWorkWeekSummary(week);
-  const progress = calculateWorkProgress(week, summary.totalMessages);
 
   return (
     <div className="space-y-3">
       <PageHeader
         title="Praca"
-        sections={WORK_SECTIONS}
         action={
           <WorkWeekManager
             activeWeek={week}
@@ -71,9 +57,7 @@ export default function WorkPage() {
         }
       />
       {error && <div className="app-notice app-notice-error">{error}</div>}
-      <div id="work-overview" className="page-section-anchor">
-        <WorkActiveWeekContainer week={week} summary={summary} isSaving={isSaving} />
-      </div>
+
       <WorkMainGridContainer
         activeWeek={week}
         weeks={weeks}
@@ -84,12 +68,7 @@ export default function WorkPage() {
         selectWeek={selectWeek}
       />
       <div id="work-finances" className="page-section-anchor">
-        <WorkFinancialContainer
-          activeWeek={week}
-          summary={summary}
-          progress={progress}
-          updateWeek={updateWeek}
-        />
+        <WorkFinancialContainer activeWeek={week} summary={summary} updateWeek={updateWeek} />
       </div>
     </div>
   );

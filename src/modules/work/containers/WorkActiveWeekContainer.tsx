@@ -1,5 +1,3 @@
-import { Database } from 'lucide-react';
-
 import type { WorkWeek, WorkWeekSummary } from '@/modules/work/types/work.types';
 import {
   formatCurrencyEur,

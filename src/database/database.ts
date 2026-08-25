@@ -21,7 +21,7 @@ import type {
   WorkWeekGoals,
 } from '@/modules/work/types/work.types';
 
-export const DATABASE_SCHEMA_VERSION = 8;
+export const DATABASE_SCHEMA_VERSION = 9;
 
 const DEFAULT_WEEKLY_MESSAGES_TARGET = 1576;
 const GOAL_PRECISION_MULTIPLIER = 100;
@@ -262,7 +262,7 @@ class MyDashboardDatabase extends Dexie {
       alcoholSettings: 'id, updatedAt',
     });
 
-    this.version(DATABASE_SCHEMA_VERSION).stores({
+    this.version(8).stores({
       workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
       appSettings: 'key, updatedAt',
       portfolioAccounts: 'id, updatedAt',
@@ -275,6 +275,44 @@ class MyDashboardDatabase extends Dexie {
       debts: 'id, name, status, updatedAt',
       debtEvents: 'id, debtId, date, type, createdAt, updatedAt, [debtId+date]',
     });
+
+    this.version(DATABASE_SCHEMA_VERSION)
+      .stores({
+        workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
+        appSettings: 'key, updatedAt',
+        portfolioAccounts: 'id, updatedAt',
+        portfolioTags: 'id, name, kind, updatedAt',
+        portfolioTransactions:
+          'id, accountId, date, type, tagId, createdAt, updatedAt, [accountId+date]',
+        alcoholDayOverrides: 'date, state, source, updatedAt',
+        alcoholMonthlyExpenses: 'month, source, updatedAt',
+        alcoholSettings: 'id, updatedAt',
+        debts: 'id, name, status, updatedAt',
+        debtEvents: 'id, debtId, date, type, createdAt, updatedAt, [debtId+date]',
+      })
+      .upgrade(async (transaction) => {
+        const workWeeksTable = transaction.table<WorkWeek, string>('workWeeks');
+        const weeks = await workWeeksTable.toArray();
+        const timestamp = new Date().toISOString();
+
+        const updatedWeeks = weeks.map((week) =>
+          week.startDate < '2026-08-24'
+            ? week
+            : {
+                ...week,
+                goals: {
+                  ...week.goals,
+                  dailyMessagesTarget: 283,
+                  weeklyMessagesTarget: 1981,
+                  weeklyMessagesTarget5Days: 1415,
+                  dailyHoursTarget: 7,
+                },
+                updatedAt: timestamp,
+              }
+        );
+
+        await workWeeksTable.bulkPut(updatedWeeks);
+      });
   }
 }
 

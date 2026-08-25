@@ -64,7 +64,7 @@ async function initializeInternal(): Promise<void> {
     );
 
     if (missingDebts.length > 0) {
-      await database.debts.bulkAdd(missingDebts);
+      await database.debts.bulkPut(missingDebts);
     }
 
     const seedEvents: DebtEvent[] = [
@@ -96,7 +96,7 @@ async function initializeInternal(): Promise<void> {
     const missingEvents = seedEvents.filter((event) => !existingEventIds.has(event.id));
 
     if (missingEvents.length > 0) {
-      await database.debtEvents.bulkAdd(missingEvents);
+      await database.debtEvents.bulkPut(missingEvents);
     }
   });
 }
