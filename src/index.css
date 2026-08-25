@@ -941,3 +941,42 @@ html {
     max-width: none;
   }
 }
+
+.header-portfolio-chart {
+  width: 100%;
+  min-width: 0;
+  max-width: 46rem;
+  height: 4rem;
+  margin-inline: auto;
+  border: 1px solid color-mix(in srgb, var(--color-zinc-700) 78%, transparent);
+  border-radius: 0.55rem;
+  padding: 0.25rem 0.5rem 0.2rem;
+  background: color-mix(in srgb, var(--color-zinc-900) 72%, transparent);
+}
+.header-portfolio-chart-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: var(--color-zinc-400);
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+}
+.header-portfolio-chart-meta strong {
+  color: var(--app-accent);
+  font-size: 0.74rem;
+}
+.header-portfolio-chart svg {
+  display: block;
+  width: 100%;
+  height: 2.45rem;
+  margin-top: 0.05rem;
+}
+.header-portfolio-chart-empty {
+  opacity: 0.45;
+}
+@media (max-width: 1023px) {
+  .header-portfolio-chart {
+    max-width: none;
+  }
+}

@@ -1,9 +1,11 @@
 import { LoaderCircle, LogOut } from 'lucide-react';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { useAuth } from '@/app/auth/useAuth';
 import CloudStatusIndicator from '@/app/cloud/CloudStatusIndicator';
 import ThemeToggle from '@/app/layout/ThemeToggle';
+import HeaderPortfolioBalance from '@/app/layout/HeaderPortfolioBalance';
 import HeaderWeeklyProgress from '@/app/layout/HeaderWeeklyProgress';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
 import {
@@ -26,6 +28,7 @@ function capitalizeFirstLetter(value: string): string {
 
 export default function Header() {
   const { signOut } = useAuth();
+  const location = useLocation();
   const { week, isLoading } = useCurrentWorkWeek();
   const [isSigningOut, setIsSigningOut] = useState(false);
 
@@ -58,7 +61,11 @@ export default function Header() {
         </div>
 
         <div className="order-3 min-w-0 basis-full lg:order-none lg:flex-1 lg:basis-auto">
-          {!isLoading && week ? <HeaderWeeklyProgress totalMessages={totalMessages} /> : null}
+          {location.pathname.startsWith('/portfolio') ? (
+            <HeaderPortfolioBalance />
+          ) : !isLoading && week ? (
+            <HeaderWeeklyProgress totalMessages={totalMessages} />
+          ) : null}
         </div>
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
