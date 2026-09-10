@@ -13,7 +13,7 @@ import {
 } from '@/modules/work/utils/workCalculations';
 import { formatWorkRating, getWorkRatingPresentation } from '@/modules/work/utils/workPresentation';
 
-type EditableField = 'beers' | 'workRating' | 'heldMessages' | 'messages';
+type EditableField = 'beers' | 'workRating' | 'heldMessages' | 'messages' | 'responses';
 
 type WorkDaysTableProps = {
   days: WorkDay[];
@@ -48,7 +48,7 @@ type EditableNumberCellProps = {
   onNavigate: (position: CellPosition, direction: NavigationDirection) => void;
 };
 
-const EDITABLE_COLUMNS = 4;
+const EDITABLE_COLUMNS = 5;
 
 const TABLE_DENSITY_CLASSES: Record<TableDensity, string> = {
   standard: 'work-table-density-standard',
@@ -82,6 +82,16 @@ function parseWorkRating(value: string): number | null {
   }
 
   return Math.round(Math.min(10, Math.max(0, parsedValue)) * 10) / 10;
+}
+
+function getResponseRate(day: WorkDay): number | null {
+  const denominator = day.heldMessages + day.messages;
+
+  if (denominator <= 0) {
+    return null;
+  }
+
+  return (day.responses / denominator) * 100;
 }
 
 function getWeekendDateClass(date: string): string {
@@ -398,6 +408,8 @@ export default function WorkDaysTable({
             <col className="work-col-rating" />
             <col className="work-col-held" />
             <col className="work-col-messages" />
+            <col className="work-col-responses" />
+            <col className="work-col-response-rate" />
             <col className="work-col-hours" />
             <col className="work-col-average" />
           </colgroup>
@@ -408,6 +420,8 @@ export default function WorkDaysTable({
               <th className="text-center">Ocena</th>
               <th className="text-center">Zatrzymane</th>
               <th className="text-center">Płatne</th>
+              <th className="text-center">Odpowiedzi</th>
+              <th className="text-center">Odp. %</th>
               <th className="text-center">Godziny</th>
               <th className="text-center">Średnia/h</th>
             </tr>
@@ -419,6 +433,8 @@ export default function WorkDaysTable({
 
               const messagesPerHour = workedHours > 0 ? getDayMessagesPerHour(day) : null;
 
+              const responseRate = getResponseRate(day);
+
               const ratingPresentation = getWorkRatingPresentation(day.workRating);
 
               const ratingTextClass =
@@ -428,25 +444,11 @@ export default function WorkDaysTable({
                       .split(' ')
                       .find((className) => className.startsWith('text-')) ?? 'text-zinc-200');
 
-              const beersPosition = {
-                rowIndex,
-                columnIndex: 0,
-              };
-
-              const ratingPosition = {
-                rowIndex,
-                columnIndex: 1,
-              };
-
-              const heldPosition = {
-                rowIndex,
-                columnIndex: 2,
-              };
-
-              const messagesPosition = {
-                rowIndex,
-                columnIndex: 3,
-              };
+              const beersPosition = { rowIndex, columnIndex: 0 };
+              const ratingPosition = { rowIndex, columnIndex: 1 };
+              const heldPosition = { rowIndex, columnIndex: 2 };
+              const messagesPosition = { rowIndex, columnIndex: 3 };
+              const responsesPosition = { rowIndex, columnIndex: 4 };
 
               return (
                 <tr key={day.id}>
@@ -455,99 +457,67 @@ export default function WorkDaysTable({
                   </td>
 
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="beers"
-                      value={day.beers}
+                    <EditableNumberCell day={day} field="beers" value={day.beers}
                       position={beersPosition}
-                      isEditing={
-                        editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 0
-                      }
-                      align="center"
-                      valueClassName={day.beers === 0 ? 'text-emerald-400' : 'text-red-400'}
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 0}
+                      align="center" valueClassName={day.beers === 0 ? 'text-emerald-400' : 'text-red-400'}
+                      onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)}
+                      onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
 
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="workRating"
-                      value={day.workRating}
+                    <EditableNumberCell day={day} field="workRating" value={day.workRating}
                       position={ratingPosition}
-                      isEditing={
-                        editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 1
-                      }
-                      align="center"
-                      maximum={10}
-                      step={0.1}
-                      displayValue={formatWorkRating(day.workRating)}
-                      valueClassName={ratingTextClass}
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 1}
+                      align="center" maximum={10} step={0.1} displayValue={formatWorkRating(day.workRating)}
+                      valueClassName={ratingTextClass} onStartEditing={setEditingPosition}
+                      onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell}
+                      onNavigate={navigateFromCell} />
                   </td>
 
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="heldMessages"
-                      value={day.heldMessages}
-                      align="center"
-                      position={heldPosition}
-                      isEditing={
-                        editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 2
-                      }
-                      valueClassName="text-cyan-300"
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                    <EditableNumberCell day={day} field="heldMessages" value={day.heldMessages}
+                      align="center" position={heldPosition}
+                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 2}
+                      valueClassName="text-cyan-300" onStartEditing={setEditingPosition}
+                      onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell}
+                      onNavigate={navigateFromCell} />
                   </td>
 
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="messages"
-                      value={day.messages}
-                      align="center"
-                      position={messagesPosition}
-                      isEditing={
-                        editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 3
-                      }
-                      valueClassName="text-[var(--app-accent)]"
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                    <EditableNumberCell day={day} field="messages" value={day.messages}
+                      align="center" position={messagesPosition}
+                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 3}
+                      valueClassName="text-[var(--app-accent)]" onStartEditing={setEditingPosition}
+                      onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell}
+                      onNavigate={navigateFromCell} />
                   </td>
 
                   <td className="text-center">
-                    <button
-                      type="button"
-                      title="Edytuj bloki czasu"
+                    <EditableNumberCell day={day} field="responses" value={day.responses}
+                      align="center" position={responsesPosition}
+                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 4}
+                      valueClassName="text-violet-300" onStartEditing={setEditingPosition}
+                      onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell}
+                      onNavigate={navigateFromCell} />
+                  </td>
+
+                  <td className="text-center font-semibold text-zinc-300">
+                    {responseRate === null ? '—' : `${responseRate.toFixed(2)}%`}
+                  </td>
+
+                  <td className="text-center">
+                    <button type="button" title="Edytuj bloki czasu"
                       onClick={() => onEditSessions(day.id)}
-                      className="work-spreadsheet-hours justify-center text-center"
-                    >
+                      className="work-spreadsheet-hours justify-center text-center">
                       <Clock3 aria-hidden="true" className="size-3 text-zinc-500" />
-
                       <span>{workedHours > 0 ? formatHours(workedHours) : '—'}</span>
                     </button>
                   </td>
 
                   <td className="text-right">
-                    <MessagesPerHourIndicator
-                      value={messagesPerHour}
-                      compact
-                      className="justify-end whitespace-nowrap text-[10px]"
-                    />
+                    <MessagesPerHourIndicator value={messagesPerHour} compact
+                      className="justify-end whitespace-nowrap text-[10px]" />
                   </td>
                 </tr>
               );
