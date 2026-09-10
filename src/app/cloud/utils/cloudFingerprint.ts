@@ -1,17 +1,26 @@
 import type { ChbBackupFile } from '@/modules/settings/types/backup.types';
 
 function stableStringify(value: unknown): string {
+  if (value === undefined || typeof value === 'function' || typeof value === 'symbol') {
+    return 'null';
+  }
+
   if (value === null || typeof value !== 'object') {
     return JSON.stringify(value);
   }
 
   if (Array.isArray(value)) {
-    return `[${value.map(stableStringify).join(',')}]`;
+    return `[${value.map((item) => stableStringify(item)).join(',')}]`;
   }
 
   const record = value as Record<string, unknown>;
 
   const entries = Object.keys(record)
+    .filter((key) => {
+      const item = record[key];
+
+      return item !== undefined && typeof item !== 'function' && typeof item !== 'symbol';
+    })
     .sort()
     .map((key) => `${JSON.stringify(key)}:${stableStringify(record[key])}`);
 
