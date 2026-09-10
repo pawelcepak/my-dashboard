@@ -1,63 +1,73 @@
-.work-spreadsheet-table {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
+.work-days-table {
+  min-width: 0;
+}
+
+.work-days-table .work-days-table-scroll {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.work-days-table .work-spreadsheet-table {
+  min-width: 100% !important;
+  max-width: none !important;
   table-layout: fixed !important;
 }
 
-.work-spreadsheet-table th,
-.work-spreadsheet-table td {
-  min-width: 0 !important;
+.work-days-table .work-spreadsheet-table th,
+.work-days-table .work-spreadsheet-table td {
+  min-width: 0;
   overflow: hidden;
-  padding-left: 3px !important;
-  padding-right: 3px !important;
+  padding-left: 4px;
+  padding-right: 4px;
   text-overflow: clip;
   white-space: nowrap;
 }
 
-.work-spreadsheet-table th {
+.work-days-table .work-spreadsheet-table th {
   position: relative;
-  font-size: 0.52rem !important;
-  letter-spacing: 0.015em !important;
-  line-height: 1.05 !important;
+  font-size: 0.54rem;
+  letter-spacing: 0.015em;
+  line-height: 1.05;
 }
 
-.work-spreadsheet-table td {
-  font-size: 0.68rem !important;
+.work-days-table .work-spreadsheet-table td {
+  font-size: 0.7rem;
 }
 
-.work-spreadsheet-value,
-.work-spreadsheet-input,
-.work-spreadsheet-hours {
+.work-days-table .work-spreadsheet-value,
+.work-days-table .work-spreadsheet-input,
+.work-days-table .work-spreadsheet-hours {
   box-sizing: border-box;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  padding-left: 1px !important;
-  padding-right: 1px !important;
-  justify-content: center !important;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding-left: 1px;
+  padding-right: 1px;
+  justify-content: center;
 }
 
-.work-spreadsheet-input {
-  font-size: inherit !important;
+.work-days-table .work-spreadsheet-input {
+  font-size: inherit;
 }
 
-.work-spreadsheet-hours {
-  gap: 2px !important;
+.work-days-table .work-spreadsheet-hours {
+  gap: 2px;
 }
 
-.work-spreadsheet-hours svg {
-  width: 0.58rem !important;
-  height: 0.58rem !important;
+.work-days-table .work-spreadsheet-hours svg {
+  width: 0.62rem;
+  height: 0.62rem;
   flex: none;
 }
 
 .work-column-resizer {
   position: absolute;
   top: 0;
-  right: -4px;
-  z-index: 5;
-  width: 8px;
+  right: -5px;
+  z-index: 8;
+  width: 10px;
   height: 100%;
   cursor: col-resize;
   touch-action: none;
@@ -67,12 +77,14 @@
 .work-column-resizer::after {
   content: '';
   position: absolute;
-  top: 18%;
-  bottom: 18%;
-  left: 3px;
+  top: 14%;
+  bottom: 14%;
+  left: 4px;
   width: 1px;
-  background: color-mix(in srgb, var(--color-zinc-500) 42%, transparent);
-  transition: background-color 120ms ease, width 120ms ease;
+  background: color-mix(in srgb, var(--color-zinc-500) 50%, transparent);
+  transition:
+    background-color 120ms ease,
+    width 120ms ease;
 }
 
 .work-column-resizer:hover::after,
@@ -102,26 +114,30 @@
   color: var(--app-accent);
 }
 
-.work-spreadsheet-table td:last-child,
-.work-spreadsheet-table td:last-child > * {
-  min-width: 0 !important;
-  max-width: 100% !important;
-  gap: 1px !important;
-  font-size: 0.62rem !important;
+.work-days-table .work-spreadsheet-table td:last-child,
+.work-days-table .work-spreadsheet-table td:last-child > * {
+  min-width: 0;
+  max-width: 100%;
+  gap: 1px;
+  font-size: 0.64rem;
+}
+
+.work-days-table .work-days-table-scroll::-webkit-scrollbar {
+  height: 9px;
 }
 
 @media (min-width: 1536px) {
-  .work-spreadsheet-table th {
-    font-size: 0.56rem !important;
+  .work-days-table .work-spreadsheet-table th {
+    font-size: 0.58rem;
   }
 
-  .work-spreadsheet-table td,
-  .work-spreadsheet-input {
-    font-size: 0.72rem !important;
+  .work-days-table .work-spreadsheet-table td,
+  .work-days-table .work-spreadsheet-input {
+    font-size: 0.74rem;
   }
 
-  .work-spreadsheet-table td:last-child,
-  .work-spreadsheet-table td:last-child > * {
-    font-size: 0.66rem !important;
+  .work-days-table .work-spreadsheet-table td:last-child,
+  .work-days-table .work-spreadsheet-table td:last-child > * {
+    font-size: 0.68rem;
   }
 }
