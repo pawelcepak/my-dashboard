@@ -5,6 +5,7 @@ import WorkFinancialContainer from '@/modules/work/containers/WorkFinancialConta
 import WorkMainGridContainer from '@/modules/work/containers/WorkMainGridContainer';
 import { useCurrentWorkWeek } from '@/modules/work/hooks/useCurrentWorkWeek';
 import { calculateWorkWeekSummary } from '@/modules/work/utils/workCalculations';
+import '@/modules/work/workTableCompact.css';
 import PageHeader from '@/shared/components/PageHeader';
 
 function WorkPageLoading() {
