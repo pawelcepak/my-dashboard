@@ -354,8 +354,8 @@ export default function WorkDaysTable({
   }
 
   function startColumnResize(event: ReactPointerEvent<HTMLSpanElement>, index: number) {
-    const tableWidth = tableRef.current?.getBoundingClientRect().width;
-    if (!tableWidth || index >= columnWidths.length - 1) return;
+    const tableWidth = tableRef.current?.getBoundingClientRect().width ?? 0;
+    if (tableWidth <= 0 || index >= columnWidths.length - 1) return;
 
     event.preventDefault();
     event.stopPropagation();
