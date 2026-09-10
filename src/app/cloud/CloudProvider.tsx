@@ -59,15 +59,11 @@ export default function CloudProvider({ children }: CloudProviderProps) {
   const { user, isLoading: isAuthLoading } = useAuth();
 
   const [details, setDetails] = useState<CloudStatusDetails>(createInitialStatus);
-
   const [isChecking, setIsChecking] = useState(false);
-
   const [isSyncing, setIsSyncing] = useState(false);
-
   const [dirtyState, setDirtyState] = useState<CloudDirtyState>(() => cloudDirtyTracker.getState());
 
   const automaticUploadTimeoutRef = useRef<number | null>(null);
-
   const automaticStartupRef = useRef(false);
 
   const setOperationError = useCallback((error: unknown) => {
@@ -124,40 +120,14 @@ export default function CloudProvider({ children }: CloudProviderProps) {
 
       applyInspection(initialInspection);
 
-      if (initialInspection.state === 'cloud-empty') {
+      if (initialInspection.state === 'cloud-empty' || initialInspection.state === 'local-newer') {
         setIsSyncing(true);
         showSyncingStatus('upload');
 
         const synchronizedInspection = await cloudSyncService.upload(data.user.id);
 
         applyInspection(synchronizedInspection);
-
-        return;
       }
-
-      if (initialInspection.state === 'local-newer') {
-        setIsSyncing(true);
-        showSyncingStatus('upload');
-
-        const synchronizedInspection = await cloudSyncService.upload(data.user.id);
-
-        applyInspection(synchronizedInspection);
-
-        return;
-      }
-
-      if (initialInspection.state === 'cloud-newer') {
-        setIsSyncing(true);
-        showSyncingStatus('download');
-
-        const synchronizedInspection = await cloudSyncService.download(data.user.id);
-
-        applyInspection(synchronizedInspection);
-
-        return;
-      }
-
-      applyInspection(initialInspection);
     } catch (error) {
       setOperationError(error);
     } finally {
