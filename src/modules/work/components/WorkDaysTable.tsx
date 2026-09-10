@@ -26,6 +26,8 @@ import {
 } from '@/modules/work/utils/workCalculations';
 import { formatWorkRating, getWorkRatingPresentation } from '@/modules/work/utils/workPresentation';
 
+import './WorkDaysTable.css';
+
 type EditableField = 'beers' | 'workRating' | 'heldMessages' | 'messages' | 'responses';
 
 type WorkDaysTableProps = {
@@ -71,6 +73,7 @@ type HeaderCellProps = {
 
 const EDITABLE_COLUMNS = 5;
 const MIN_COLUMN_WIDTH = 4;
+const MAX_COLUMN_WIDTH = 40;
 
 const TABLE_DENSITY_CLASSES: Record<TableDensity, string> = {
   standard: 'work-table-density-standard',
@@ -111,15 +114,13 @@ function HeaderCell({ index, children, align = 'center', title, onResizeStart }:
   return (
     <th className={align === 'left' ? 'text-left' : 'text-center'} title={title}>
       {children}
-      {index < DEFAULT_WORK_TABLE_COLUMN_WIDTHS.length - 1 && (
-        <span
-          className="work-column-resizer"
-          role="separator"
-          aria-orientation="vertical"
-          aria-label={`Zmień szerokość kolumny ${String(children)}`}
-          onPointerDown={(event) => onResizeStart(event, index)}
-        />
-      )}
+      <span
+        className="work-column-resizer"
+        role="separator"
+        aria-orientation="vertical"
+        aria-label={`Zmień szerokość kolumny ${String(children)}`}
+        onPointerDown={(event) => onResizeStart(event, index)}
+      />
     </th>
   );
 }
@@ -326,13 +327,16 @@ export default function WorkDaysTable({
     preferences.workTableColumnWidths
   );
   const columnWidthsRef = useRef<WorkTableColumnWidths>(preferences.workTableColumnWidths);
-  const tableRef = useRef<HTMLTableElement>(null);
+  const tableViewportRef = useRef<HTMLDivElement>(null);
   const densityClassName = TABLE_DENSITY_CLASSES[tableDensity];
 
   useEffect(() => {
     setColumnWidths(preferences.workTableColumnWidths);
     columnWidthsRef.current = preferences.workTableColumnWidths;
   }, [preferences.workTableColumnWidths]);
+
+  const totalColumnWidth = columnWidths.reduce((sum, width) => sum + width, 0);
+  const tableWidthPercent = Math.max(100, totalColumnWidth);
 
   function focusCell(position: CellPosition) {
     window.requestAnimationFrame(() => document.getElementById(createCellId(position))?.focus());
@@ -354,28 +358,27 @@ export default function WorkDaysTable({
   }
 
   function startColumnResize(event: ReactPointerEvent<HTMLSpanElement>, index: number) {
-    const tableWidth = tableRef.current?.getBoundingClientRect().width ?? 0;
-    if (tableWidth <= 0 || index >= columnWidths.length - 1) return;
+    const viewportWidth = tableViewportRef.current?.getBoundingClientRect().width ?? 0;
+    if (viewportWidth <= 0) return;
 
     event.preventDefault();
     event.stopPropagation();
 
     const startX = event.clientX;
     const startWidths = [...columnWidthsRef.current] as WorkTableColumnWidths;
-    const pairTotal = startWidths[index] + startWidths[index + 1];
+    const startWidth = startWidths[index];
+    if (startWidth === undefined) return;
 
     document.body.classList.add('work-table-resizing');
 
     function handlePointerMove(pointerEvent: PointerEvent) {
-      const deltaPercent = ((pointerEvent.clientX - startX) / tableWidth) * 100;
-      const nextLeft = Math.min(
-        pairTotal - MIN_COLUMN_WIDTH,
-        Math.max(MIN_COLUMN_WIDTH, startWidths[index] + deltaPercent)
+      const deltaPercent = ((pointerEvent.clientX - startX) / viewportWidth) * 100;
+      const nextWidth = Math.min(
+        MAX_COLUMN_WIDTH,
+        Math.max(MIN_COLUMN_WIDTH, startWidth + deltaPercent)
       );
-      const nextRight = pairTotal - nextLeft;
       const nextWidths = [...startWidths] as WorkTableColumnWidths;
-      nextWidths[index] = Number(nextLeft.toFixed(3));
-      nextWidths[index + 1] = Number(nextRight.toFixed(3));
+      nextWidths[index] = Number(nextWidth.toFixed(3));
       columnWidthsRef.current = nextWidths;
       setColumnWidths(nextWidths);
     }
@@ -400,7 +403,7 @@ export default function WorkDaysTable({
 
   return (
     <section
-      className={`${densityClassName} overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/55`}
+      className={`work-days-table ${densityClassName} overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/55`}
     >
       <div className="flex items-center justify-between gap-3 border-b border-zinc-700 px-3 py-2.5">
         <h2 className="min-w-0 text-xs font-semibold text-zinc-100">
@@ -423,11 +426,14 @@ export default function WorkDaysTable({
         </div>
       </div>
 
-      <div className="overflow-x-hidden">
-        <table ref={tableRef} className="work-spreadsheet-table" style={{ minWidth: 0, width: '100%' }}>
+      <div ref={tableViewportRef} className="work-days-table-scroll">
+        <table
+          className="work-spreadsheet-table"
+          style={{ width: `${tableWidthPercent}%`, minWidth: '100%', maxWidth: 'none' }}
+        >
           <colgroup>
             {columnWidths.map((width, index) => (
-              <col key={index} style={{ width: `${width}%` }} />
+              <col key={index} style={{ width: `${(width / tableWidthPercent) * 100}%` }} />
             ))}
           </colgroup>
           <thead>
