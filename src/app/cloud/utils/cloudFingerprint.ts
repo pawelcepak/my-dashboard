@@ -23,15 +23,37 @@ function createHash(value: string): string {
 
   for (let index = 0; index < value.length; index += 1) {
     hash ^= value.charCodeAt(index);
-
     hash = Math.imul(hash, 16777619);
   }
 
   return (hash >>> 0).toString(16).padStart(8, '0');
 }
 
+function stripSyncTimestamps<T>(value: T): T {
+  if (Array.isArray(value)) {
+    return value.map((item) => stripSyncTimestamps(item)) as T;
+  }
+
+  if (value && typeof value === 'object') {
+    const record = value as Record<string, unknown>;
+    const normalized: Record<string, unknown> = {};
+
+    for (const [key, item] of Object.entries(record)) {
+      if (key === 'updatedAt' || key === 'createdAt') {
+        continue;
+      }
+
+      normalized[key] = stripSyncTimestamps(item);
+    }
+
+    return normalized as T;
+  }
+
+  return value;
+}
+
 function createComparableData(backup: ChbBackupFile) {
-  return {
+  return stripSyncTimestamps({
     workWeeks: [...backup.data.workWeeks].sort((firstWeek, secondWeek) =>
       firstWeek.startDate.localeCompare(secondWeek.startDate)
     ),
@@ -45,8 +67,7 @@ function createComparableData(backup: ChbBackupFile) {
       firstTag.id.localeCompare(secondTag.id)
     ),
     portfolioTransactions: [...(backup.data.portfolioTransactions ?? [])].sort(
-      (firstTransaction, secondTransaction) =>
-        firstTransaction.id.localeCompare(secondTransaction.id)
+      (firstTransaction, secondTransaction) => firstTransaction.id.localeCompare(secondTransaction.id)
     ),
     alcoholDayOverrides: [...(backup.data.alcoholDayOverrides ?? [])].sort((first, second) =>
       first.date.localeCompare(second.date)
@@ -57,13 +78,11 @@ function createComparableData(backup: ChbBackupFile) {
     alcoholSettings: [...(backup.data.alcoholSettings ?? [])].sort((first, second) =>
       first.id.localeCompare(second.id)
     ),
-    debts: [...(backup.data.debts ?? [])].sort((first, second) =>
-      first.id.localeCompare(second.id)
-    ),
+    debts: [...(backup.data.debts ?? [])].sort((first, second) => first.id.localeCompare(second.id)),
     debtEvents: [...(backup.data.debtEvents ?? [])].sort((first, second) =>
       first.id.localeCompare(second.id)
     ),
-  };
+  });
 }
 
 export function createCloudFingerprint(backup: ChbBackupFile): string {
