@@ -35,6 +35,7 @@ const SUPPORTED_SETTING_KEYS = new Set([
   'accentTheme',
   'navigationOrder',
   'navigationTabColors',
+  'workTableColumnWidths',
 ]);
 
 const GOAL_PRECISION_MULTIPLIER = 100;
