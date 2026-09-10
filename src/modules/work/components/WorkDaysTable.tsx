@@ -1,7 +1,20 @@
 import { Clock3 } from 'lucide-react';
-import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type KeyboardEvent,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+} from 'react';
 
-import type { TableDensity } from '@/modules/settings/types/appSettings.types';
+import { useAppSettings } from '@/modules/settings/hooks/useAppSettings';
+import {
+  DEFAULT_WORK_TABLE_COLUMN_WIDTHS,
+  type TableDensity,
+  type WorkTableColumnWidths,
+} from '@/modules/settings/types/appSettings.types';
 import MessagesPerHourIndicator from '@/modules/work/components/MessagesPerHourIndicator';
 import type { WorkDay } from '@/modules/work/types/work.types';
 import {
@@ -48,7 +61,16 @@ type EditableNumberCellProps = {
   onNavigate: (position: CellPosition, direction: NavigationDirection) => void;
 };
 
+type HeaderCellProps = {
+  index: number;
+  children: ReactNode;
+  align?: 'left' | 'center';
+  title?: string;
+  onResizeStart: (event: ReactPointerEvent<HTMLSpanElement>, index: number) => void;
+};
+
 const EDITABLE_COLUMNS = 5;
+const MIN_COLUMN_WIDTH = 4;
 
 const TABLE_DENSITY_CLASSES: Record<TableDensity, string> = {
   standard: 'work-table-density-standard',
@@ -83,6 +105,23 @@ function getWeekendDateClass(date: string): string {
   if (dayOfWeek === 0) return 'text-red-400';
   if (dayOfWeek === 6) return 'text-zinc-500';
   return 'text-zinc-200';
+}
+
+function HeaderCell({ index, children, align = 'center', title, onResizeStart }: HeaderCellProps) {
+  return (
+    <th className={align === 'left' ? 'text-left' : 'text-center'} title={title}>
+      {children}
+      {index < DEFAULT_WORK_TABLE_COLUMN_WIDTHS.length - 1 && (
+        <span
+          className="work-column-resizer"
+          role="separator"
+          aria-orientation="vertical"
+          aria-label={`Zmień szerokość kolumny ${String(children)}`}
+          onPointerDown={(event) => onResizeStart(event, index)}
+        />
+      )}
+    </th>
+  );
 }
 
 function EditableNumberCell({
@@ -282,7 +321,18 @@ export default function WorkDaysTable({
 }: WorkDaysTableProps) {
   const reversedDays = [...days].reverse();
   const [editingPosition, setEditingPosition] = useState<CellPosition | null>(null);
+  const { preferences, savePreference } = useAppSettings();
+  const [columnWidths, setColumnWidths] = useState<WorkTableColumnWidths>(
+    preferences.workTableColumnWidths
+  );
+  const columnWidthsRef = useRef<WorkTableColumnWidths>(preferences.workTableColumnWidths);
+  const tableRef = useRef<HTMLTableElement>(null);
   const densityClassName = TABLE_DENSITY_CLASSES[tableDensity];
+
+  useEffect(() => {
+    setColumnWidths(preferences.workTableColumnWidths);
+    columnWidthsRef.current = preferences.workTableColumnWidths;
+  }, [preferences.workTableColumnWidths]);
 
   function focusCell(position: CellPosition) {
     window.requestAnimationFrame(() => document.getElementById(createCellId(position))?.focus());
@@ -303,6 +353,51 @@ export default function WorkDaysTable({
     focusCell(direction ? getTargetPosition(position, direction, reversedDays.length) : position);
   }
 
+  function startColumnResize(event: ReactPointerEvent<HTMLSpanElement>, index: number) {
+    const tableWidth = tableRef.current?.getBoundingClientRect().width;
+    if (!tableWidth || index >= columnWidths.length - 1) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const startX = event.clientX;
+    const startWidths = [...columnWidthsRef.current] as WorkTableColumnWidths;
+    const pairTotal = startWidths[index] + startWidths[index + 1];
+
+    document.body.classList.add('work-table-resizing');
+
+    function handlePointerMove(pointerEvent: PointerEvent) {
+      const deltaPercent = ((pointerEvent.clientX - startX) / tableWidth) * 100;
+      const nextLeft = Math.min(
+        pairTotal - MIN_COLUMN_WIDTH,
+        Math.max(MIN_COLUMN_WIDTH, startWidths[index] + deltaPercent)
+      );
+      const nextRight = pairTotal - nextLeft;
+      const nextWidths = [...startWidths] as WorkTableColumnWidths;
+      nextWidths[index] = Number(nextLeft.toFixed(3));
+      nextWidths[index + 1] = Number(nextRight.toFixed(3));
+      columnWidthsRef.current = nextWidths;
+      setColumnWidths(nextWidths);
+    }
+
+    function handlePointerUp() {
+      document.body.classList.remove('work-table-resizing');
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      void savePreference('workTableColumnWidths', columnWidthsRef.current);
+    }
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp, { once: true });
+  }
+
+  function resetColumnWidths() {
+    const defaults = [...DEFAULT_WORK_TABLE_COLUMN_WIDTHS] as WorkTableColumnWidths;
+    columnWidthsRef.current = defaults;
+    setColumnWidths(defaults);
+    void savePreference('workTableColumnWidths', defaults);
+  }
+
   return (
     <section
       className={`${densityClassName} overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/55`}
@@ -311,45 +406,41 @@ export default function WorkDaysTable({
         <h2 className="min-w-0 text-xs font-semibold text-zinc-100">
           Historia aktywnego tygodnia
         </h2>
-        <span
-          className={`shrink-0 text-[9px] font-semibold uppercase tracking-wide ${isSaving ? 'text-amber-400' : 'text-zinc-600'}`}
-        >
-          {isSaving ? 'Zapisywanie…' : 'Tryb arkuszowy'}
-        </span>
+        <div className="flex shrink-0 items-center gap-3">
+          <button
+            type="button"
+            className="work-table-width-reset"
+            title="Przywróć domyślne szerokości kolumn"
+            onClick={resetColumnWidths}
+          >
+            Reset szer.
+          </button>
+          <span
+            className={`text-[9px] font-semibold uppercase tracking-wide ${isSaving ? 'text-amber-400' : 'text-zinc-600'}`}
+          >
+            {isSaving ? 'Zapisywanie…' : 'Tryb arkuszowy'}
+          </span>
+        </div>
       </div>
 
       <div className="overflow-x-hidden">
-        <table className="work-spreadsheet-table" style={{ minWidth: 0, width: '100%' }}>
+        <table ref={tableRef} className="work-spreadsheet-table" style={{ minWidth: 0, width: '100%' }}>
           <colgroup>
-            <col style={{ width: '11%' }} />
-            <col style={{ width: '8%' }} />
-            <col style={{ width: '9%' }} />
-            <col style={{ width: '13%' }} />
-            <col style={{ width: '11%' }} />
-            <col style={{ width: '13%' }} />
-            <col style={{ width: '11%' }} />
-            <col style={{ width: '11%' }} />
-            <col style={{ width: '13%' }} />
+            {columnWidths.map((width, index) => (
+              <col key={index} style={{ width: `${width}%` }} />
+            ))}
           </colgroup>
           <thead>
             <tr>
-              <th className="text-left">Data</th>
-              <th className="text-center">Piwa</th>
-              <th className="text-center">Ocena</th>
-              <th className="text-center" title="Zatrzymane">
-                Zatrz.
-              </th>
-              <th className="text-center">Płatne</th>
-              <th className="text-center" title="Odpowiedzi">
-                Odpow.
-              </th>
-              <th className="text-center">Odp. %</th>
-              <th className="text-center" title="Godziny">
-                Godz.
-              </th>
-              <th className="text-center" title="Średnia na godzinę">
-                Śr./h
-              </th>
+              <HeaderCell index={0} align="left" onResizeStart={startColumnResize}>Data</HeaderCell>
+              <HeaderCell index={1} onResizeStart={startColumnResize}>Piwa</HeaderCell>
+              <HeaderCell index={2} onResizeStart={startColumnResize}>Ocena</HeaderCell>
+              <HeaderCell index={3} title="Zatrzymane" onResizeStart={startColumnResize}>Zatrz.</HeaderCell>
+              <HeaderCell index={4} onResizeStart={startColumnResize}>Płatne</HeaderCell>
+              <HeaderCell index={5} title="Odpowiedzi" onResizeStart={startColumnResize}>Odpow.</HeaderCell>
+              <HeaderCell index={6} onResizeStart={startColumnResize}>Odp. %</HeaderCell>
+              <HeaderCell index={7} title="Godziny" onResizeStart={startColumnResize}>Godz.</HeaderCell>
+              <HeaderCell index={8} title="Średnia na godzinę" onResizeStart={startColumnResize}>Śr./h</HeaderCell>
             </tr>
           </thead>
           <tbody>
@@ -383,82 +474,19 @@ export default function WorkDaysTable({
                     {formatShortIsoDate(day.date)}
                   </td>
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="beers"
-                      value={day.beers}
-                      position={positions.beers}
-                      isEditing={isEditing(0)}
-                      align="center"
-                      valueClassName={day.beers === 0 ? 'text-emerald-400' : 'text-red-400'}
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                    <EditableNumberCell day={day} field="beers" value={day.beers} position={positions.beers} isEditing={isEditing(0)} align="center" valueClassName={day.beers === 0 ? 'text-emerald-400' : 'text-red-400'} onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="workRating"
-                      value={day.workRating}
-                      position={positions.rating}
-                      isEditing={isEditing(1)}
-                      align="center"
-                      maximum={10}
-                      step={0.1}
-                      displayValue={formatWorkRating(day.workRating)}
-                      valueClassName={ratingTextClass}
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                    <EditableNumberCell day={day} field="workRating" value={day.workRating} position={positions.rating} isEditing={isEditing(1)} align="center" maximum={10} step={0.1} displayValue={formatWorkRating(day.workRating)} valueClassName={ratingTextClass} onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="heldMessages"
-                      value={day.heldMessages}
-                      position={positions.held}
-                      isEditing={isEditing(2)}
-                      align="center"
-                      valueClassName="text-cyan-300"
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                    <EditableNumberCell day={day} field="heldMessages" value={day.heldMessages} position={positions.held} isEditing={isEditing(2)} align="center" valueClassName="text-cyan-300" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="messages"
-                      value={day.messages}
-                      position={positions.messages}
-                      isEditing={isEditing(3)}
-                      align="center"
-                      valueClassName="text-[var(--app-accent)]"
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                    <EditableNumberCell day={day} field="messages" value={day.messages} position={positions.messages} isEditing={isEditing(3)} align="center" valueClassName="text-[var(--app-accent)]" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
                   <td className="text-center">
-                    <EditableNumberCell
-                      day={day}
-                      field="responses"
-                      value={day.responses ?? 0}
-                      position={positions.responses}
-                      isEditing={isEditing(4)}
-                      align="center"
-                      valueClassName="text-violet-300"
-                      onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell}
-                      onNavigate={navigateFromCell}
-                    />
+                    <EditableNumberCell day={day} field="responses" value={day.responses ?? 0} position={positions.responses} isEditing={isEditing(4)} align="center" valueClassName="text-violet-300" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
                   <td className="text-center font-semibold text-zinc-300">
                     {responseRate === null ? '—' : `${responseRate.toFixed(2)}%`}
