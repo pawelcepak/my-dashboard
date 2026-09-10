@@ -1,3 +1,4 @@
+import { Target } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { useAppSettings } from '@/modules/settings/hooks/useAppSettings';
@@ -5,7 +6,7 @@ import WorkDayEditor from '@/modules/work/components/WorkDayEditor';
 import WorkDaysTable from '@/modules/work/components/WorkDaysTable';
 import WorkHistory from '@/modules/work/components/WorkHistory';
 import WorkIntelligencePanel from '@/modules/work/components/WorkIntelligencePanel';
-import WorkSummaryGrid from '@/modules/work/components/WorkSummaryGrid';
+import WorkSummaryGridBody from '@/modules/work/components/WorkSummaryGridBody';
 import WorkTimeAnalyticsPanel from '@/modules/work/components/WorkTimeAnalyticsPanel';
 import WorkWeekSettings from '@/modules/work/components/WorkWeekSettings';
 import type { WorkDay, WorkWeek, WorkWeekSummary } from '@/modules/work/types/work.types';
@@ -68,63 +69,71 @@ export default function WorkMainGridContainer({
 
   return (
     <>
-      <div className="work-dashboard-grid">
-        <div className="min-w-0 space-y-3">
-          <div
-            id="work-days"
-            className="page-section-anchor [&_.work-col-average]:!w-[17%] [&_.work-col-beers]:!w-[7%] [&_.work-col-date]:!w-[11%] [&_.work-col-held]:!w-[11%] [&_.work-col-hours]:!w-[15%] [&_.work-col-messages]:!w-[10%] [&_.work-col-rating]:!w-[8%] [&_.work-col-response-rate]:!w-[10%] [&_.work-col-responses]:!w-[11%] [&_.work-spreadsheet-table]:!min-w-[58rem]"
-          >
-            <WorkDaysTable
-              days={activeWeek.days}
-              isSaving={isSaving}
-              tableDensity={preferences.tableDensity}
-              onUpdateDay={updateDay}
-              onEditSessions={setSelectedDayId}
-            />
-          </div>
-
-          <div id="work-week-settings" className="page-section-anchor">
-            <WorkWeekSettings
-              exchangeRateEurPln={activeWeek.exchangeRateEurPln}
-              onExchangeRateChange={(exchangeRateEurPln) => {
-                void updateWeek((currentWeek) => ({ ...currentWeek, exchangeRateEurPln }));
-              }}
-              onReset={handleReset}
-            />
-          </div>
-
-          <div id="work-history" className="page-section-anchor">
-            <WorkHistory
-              weeks={weeks}
-              activeWeekId={activeWeek.id}
-              isSaving={isSaving}
-              compact
-              onSelectWeek={selectWeek}
-            />
-          </div>
-
-          <div id="work-analysis" className="page-section-anchor">
-            <CollapsiblePanel
-              storageKey="work-chb-intelligence"
-              title="CHB Intelligence"
-              description="Dodatkowe analizy danych pracy"
-              defaultOpen={false}
-              contentClassName="p-3"
-            >
-              <WorkIntelligencePanel week={activeWeek} />
-            </CollapsiblePanel>
-          </div>
+      <div className="space-y-3">
+        <div id="work-days" className="page-section-anchor min-w-0">
+          <WorkDaysTable
+            days={activeWeek.days}
+            isSaving={isSaving}
+            tableDensity={preferences.tableDensity}
+            onUpdateDay={updateDay}
+            onEditSessions={setSelectedDayId}
+          />
         </div>
 
-        <aside className="min-w-0 space-y-3">
-          <div id="work-summary" className="page-section-anchor">
-            <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
+        <div id="work-summary" className="page-section-anchor">
+          <CollapsiblePanel
+            storageKey="work-active-week-summary"
+            title="Podsumowanie aktywnego tygodnia"
+            description="Wiadomości, czas pracy, średnia, zarobki i cele"
+            icon={<Target aria-hidden="true" className="size-4" />}
+            defaultOpen
+            contentClassName="p-4"
+          >
+            <WorkSummaryGridBody summary={summary} goals={activeWeek.goals} />
+          </CollapsiblePanel>
+        </div>
+
+        <div className="work-dashboard-grid">
+          <div className="min-w-0 space-y-3">
+            <div id="work-week-settings" className="page-section-anchor">
+              <WorkWeekSettings
+                exchangeRateEurPln={activeWeek.exchangeRateEurPln}
+                onExchangeRateChange={(exchangeRateEurPln) => {
+                  void updateWeek((currentWeek) => ({ ...currentWeek, exchangeRateEurPln }));
+                }}
+                onReset={handleReset}
+              />
+            </div>
+
+            <div id="work-history" className="page-section-anchor">
+              <WorkHistory
+                weeks={weeks}
+                activeWeekId={activeWeek.id}
+                isSaving={isSaving}
+                compact
+                onSelectWeek={selectWeek}
+              />
+            </div>
+
+            <div id="work-analysis" className="page-section-anchor">
+              <CollapsiblePanel
+                storageKey="work-chb-intelligence"
+                title="CHB Intelligence"
+                description="Dodatkowe analizy danych pracy"
+                defaultOpen={false}
+                contentClassName="p-3"
+              >
+                <WorkIntelligencePanel week={activeWeek} />
+              </CollapsiblePanel>
+            </div>
           </div>
 
-          <div id="work-time-analysis" className="page-section-anchor">
-            <WorkTimeAnalyticsPanel analytics={timeAnalytics} weekStartDate={activeWeek.startDate} />
-          </div>
-        </aside>
+          <aside className="min-w-0">
+            <div id="work-time-analysis" className="page-section-anchor">
+              <WorkTimeAnalyticsPanel analytics={timeAnalytics} weekStartDate={activeWeek.startDate} />
+            </div>
+          </aside>
+        </div>
       </div>
 
       {selectedDay && (
