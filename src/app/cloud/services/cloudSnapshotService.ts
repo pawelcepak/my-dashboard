@@ -64,7 +64,7 @@ export async function createLocalSnapshot(): Promise<ChbBackupFile> {
     throw new Error('Lokalna baza nie zawiera żadnego tygodnia pracy.');
   }
 
-  return {
+  const snapshot: ChbBackupFile = {
     format: BACKUP_FORMAT_NAME,
     version: BACKUP_FORMAT_VERSION,
     createdAt: new Date().toISOString(),
@@ -81,6 +81,12 @@ export async function createLocalSnapshot(): Promise<ChbBackupFile> {
       debtEvents,
     },
   };
+
+  // Fingerprint i zapis do Supabase muszą korzystać z dokładnie tej samej,
+  // znormalizowanej reprezentacji danych. Dzięki temu wartości domyślne,
+  // kolejność i pola zgodności wstecznej nie tworzą fałszywej różnicy
+  // pomiędzy lokalną bazą a snapshotem odczytanym z JSONB.
+  return backupService.normalizeBackup(snapshot);
 }
 
 async function getSnapshotMetadata(userId: string): Promise<CloudSnapshotMetadata> {
