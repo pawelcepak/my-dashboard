@@ -10,7 +10,7 @@
 }
 
 .work-days-table .work-spreadsheet-table {
-  min-width: 100% !important;
+  min-width: 0 !important;
   max-width: none !important;
   table-layout: fixed !important;
 }
