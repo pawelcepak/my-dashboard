@@ -90,13 +90,8 @@ function normalizeWorkTableColumnWidths(value: unknown): WorkTableColumnWidths {
   const widths = value.map((item) =>
     typeof item === 'number' && Number.isFinite(item) ? Number(item.toFixed(3)) : 0
   );
-  const total = widths.reduce((sum, width) => sum + width, 0);
 
-  if (
-    total < 50 ||
-    total > 250 ||
-    widths.some((width) => width < 4 || width > 40)
-  ) {
+  if (widths.some((width) => width < 2 || width > 60)) {
     return [...DEFAULT_WORK_TABLE_COLUMN_WIDTHS];
   }
 
