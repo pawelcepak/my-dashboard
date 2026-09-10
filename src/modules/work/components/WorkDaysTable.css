@@ -1,0 +1,93 @@
+.work-days-table-fit {
+  min-width: 0;
+}
+
+.work-days-table-fit .work-days-table-scroll {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.work-days-table-fit .work-spreadsheet-table {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  table-layout: fixed;
+}
+
+.work-days-table-fit .work-spreadsheet-table col:nth-child(1) { width: 10%; }
+.work-days-table-fit .work-spreadsheet-table col:nth-child(2) { width: 7%; }
+.work-days-table-fit .work-spreadsheet-table col:nth-child(3) { width: 8%; }
+.work-days-table-fit .work-spreadsheet-table col:nth-child(4) { width: 12%; }
+.work-days-table-fit .work-spreadsheet-table col:nth-child(5) { width: 10%; }
+.work-days-table-fit .work-spreadsheet-table col:nth-child(6) { width: 12%; }
+.work-days-table-fit .work-spreadsheet-table col:nth-child(7) { width: 11%; }
+.work-days-table-fit .work-spreadsheet-table col:nth-child(8) { width: 13%; }
+.work-days-table-fit .work-spreadsheet-table col:nth-child(9) { width: 17%; }
+
+.work-days-table-fit .work-spreadsheet-table th,
+.work-days-table-fit .work-spreadsheet-table td {
+  min-width: 0;
+  overflow: hidden;
+  padding-left: 2px;
+  padding-right: 2px;
+  text-overflow: clip;
+}
+
+.work-days-table-fit .work-spreadsheet-table th {
+  font-size: 0.45rem;
+  letter-spacing: 0.015em;
+  white-space: nowrap;
+}
+
+.work-days-table-fit .work-spreadsheet-table td {
+  font-size: 0.625rem;
+  white-space: nowrap;
+}
+
+.work-days-table-fit .work-spreadsheet-value,
+.work-days-table-fit .work-spreadsheet-input,
+.work-days-table-fit .work-spreadsheet-hours {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding-left: 1px;
+  padding-right: 1px;
+  justify-content: center;
+}
+
+.work-days-table-fit .work-spreadsheet-input {
+  font-size: 0.625rem;
+}
+
+.work-days-table-fit .work-spreadsheet-hours {
+  gap: 1px;
+}
+
+.work-days-table-fit .work-spreadsheet-hours svg {
+  width: 0.55rem;
+  height: 0.55rem;
+  flex: none;
+}
+
+.work-days-table-fit .work-spreadsheet-table td:last-child > * {
+  max-width: 100%;
+}
+
+.work-days-table-fit .work-spreadsheet-table td:last-child {
+  padding-left: 1px;
+  padding-right: 1px;
+  font-size: 0.56rem;
+}
+
+@media (min-width: 1536px) {
+  .work-days-table-fit .work-spreadsheet-table th {
+    font-size: 0.49rem;
+  }
+
+  .work-days-table-fit .work-spreadsheet-table td,
+  .work-days-table-fit .work-spreadsheet-input {
+    font-size: 0.66rem;
+  }
+}
