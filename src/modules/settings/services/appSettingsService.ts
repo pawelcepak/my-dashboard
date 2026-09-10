@@ -87,20 +87,20 @@ function normalizeWorkTableColumnWidths(value: unknown): WorkTableColumnWidths {
     return [...DEFAULT_WORK_TABLE_COLUMN_WIDTHS];
   }
 
-  const widths = value.map((item) => (typeof item === 'number' && Number.isFinite(item) ? item : 0));
+  const widths = value.map((item) =>
+    typeof item === 'number' && Number.isFinite(item) ? Number(item.toFixed(3)) : 0
+  );
   const total = widths.reduce((sum, width) => sum + width, 0);
 
-  if (total <= 0 || widths.some((width) => width < 4 || width > 40)) {
+  if (
+    total < 50 ||
+    total > 250 ||
+    widths.some((width) => width < 4 || width > 40)
+  ) {
     return [...DEFAULT_WORK_TABLE_COLUMN_WIDTHS];
   }
 
-  const normalized = widths.map((width) => Number(((width / total) * 100).toFixed(3)));
-  const normalizedTotal = normalized.reduce((sum, width) => sum + width, 0);
-  normalized[normalized.length - 1] = Number(
-    (normalized[normalized.length - 1] + (100 - normalizedTotal)).toFixed(3)
-  );
-
-  return normalized as WorkTableColumnWidths;
+  return widths as WorkTableColumnWidths;
 }
 
 function normalizePreferenceValue<Key extends AppPreferenceKey>(
