@@ -11,6 +11,7 @@ import WorkWeekSettings from '@/modules/work/components/WorkWeekSettings';
 import type { WorkDay, WorkWeek, WorkWeekSummary } from '@/modules/work/types/work.types';
 import { getDailyHeldMessagesTotal } from '@/modules/work/utils/workCalculations';
 import { calculateWorkTimeAnalytics } from '@/modules/work/utils/workTimeAnalytics';
+import CollapsiblePanel from '@/shared/components/CollapsiblePanel';
 
 type WorkWeekUpdater = (week: WorkWeek) => WorkWeek;
 
@@ -56,7 +57,7 @@ export default function WorkMainGridContainer({
 
   function handleReset() {
     const shouldReset = window.confirm(
-      `Czy wyczyścić dane tygodnia ${activeWeek.weekNumber} roku ${activeWeek.year}? Wiadomości, bloki, piwa, oceny i zatrzymane wiadomości zostaną usunięte.`
+      `Czy wyczyścić dane tygodnia ${activeWeek.weekNumber} roku ${activeWeek.year}? Wiadomości, bloki, piwa, oceny, odpowiedzi i zatrzymane wiadomości zostaną usunięte.`
     );
 
     if (!shouldReset) return;
@@ -69,7 +70,10 @@ export default function WorkMainGridContainer({
     <>
       <div className="work-dashboard-grid">
         <div className="min-w-0 space-y-3">
-          <div id="work-days" className="page-section-anchor">
+          <div
+            id="work-days"
+            className="page-section-anchor [&_.work-spreadsheet-table]:!min-w-[58rem] [&_.work-col-date]:!w-[11%] [&_.work-col-beers]:!w-[7%] [&_.work-col-rating]:!w-[8%] [&_.work-col-held]:!w-[11%] [&_.work-col-messages]:!w-[10%] [&_.work-col-responses]:!w-[11%] [&_.work-col-response-rate]:!w-[10%] [&_.work-col-hours]:!w-[15%] [&_.work-col-average]:!w-[17%]"
+          >
             <WorkDaysTable
               days={activeWeek.days}
               isSaving={isSaving}
@@ -78,16 +82,6 @@ export default function WorkMainGridContainer({
               onEditSessions={setSelectedDayId}
             />
           </div>
-
-          <div id="work-analysis" className="page-section-anchor">
-            <WorkIntelligencePanel week={activeWeek} />
-          </div>
-        </div>
-
-        <aside className="min-w-0 space-y-3">
-          <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
-
-          <WorkTimeAnalyticsPanel analytics={timeAnalytics} weekStartDate={activeWeek.startDate} />
 
           <WorkWeekSettings
             exchangeRateEurPln={activeWeek.exchangeRateEurPln}
@@ -106,6 +100,24 @@ export default function WorkMainGridContainer({
               onSelectWeek={selectWeek}
             />
           </div>
+
+          <div id="work-analysis" className="page-section-anchor">
+            <CollapsiblePanel
+              storageKey="work-chb-intelligence"
+              title="CHB Intelligence"
+              description="Dodatkowe analizy danych pracy"
+              defaultOpen={false}
+              contentClassName="p-3"
+            >
+              <WorkIntelligencePanel week={activeWeek} />
+            </CollapsiblePanel>
+          </div>
+        </div>
+
+        <aside className="min-w-0 space-y-3">
+          <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
+
+          <WorkTimeAnalyticsPanel analytics={timeAnalytics} weekStartDate={activeWeek.startDate} />
         </aside>
       </div>
 
