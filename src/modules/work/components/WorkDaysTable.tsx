@@ -67,8 +67,8 @@ type HeaderCellProps = {
 };
 
 const EDITABLE_COLUMNS = 5;
-const MIN_COLUMN_WIDTH = 4;
-const MAX_COLUMN_WIDTH = 40;
+const MIN_COLUMN_WIDTH = 2;
+const MAX_COLUMN_WIDTH = 60;
 
 const TABLE_DENSITY_CLASSES: Record<TableDensity, string> = {
   standard: 'work-table-density-standard',
@@ -273,6 +273,7 @@ export default function WorkDaysTable({ days, isSaving, tableDensity, onUpdateDa
   }, [preferences.workTableColumnWidths]);
 
   const totalColumnWidth = columnWidths.reduce((sum, width) => sum + width, 0);
+  const safeTotalColumnWidth = Math.max(totalColumnWidth, 1);
 
   function focusCell(position: CellPosition) {
     window.requestAnimationFrame(() => document.getElementById(createCellId(position))?.focus());
@@ -340,9 +341,11 @@ export default function WorkDaysTable({ days, isSaving, tableDensity, onUpdateDa
       </div>
 
       <div ref={tableViewportRef} className="work-days-table-scroll">
-        <table className="work-spreadsheet-table" style={{ width: `${totalColumnWidth}%`, minWidth: 0, maxWidth: 'none' }}>
+        <table className="work-spreadsheet-table" style={{ width: `${safeTotalColumnWidth}%`, minWidth: 0, maxWidth: 'none' }}>
           <colgroup>
-            {columnWidths.map((width, index) => <col key={index} style={{ width: `${width}%` }} />)}
+            {columnWidths.map((width, index) => (
+              <col key={index} style={{ width: `${(width / safeTotalColumnWidth) * 100}%` }} />
+            ))}
           </colgroup>
           <thead>
             <tr>
