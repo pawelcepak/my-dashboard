@@ -5,35 +5,25 @@
   table-layout: fixed !important;
 }
 
-.work-spreadsheet-table col:nth-child(1) { width: 10% !important; }
-.work-spreadsheet-table col:nth-child(2) { width: 7% !important; }
-.work-spreadsheet-table col:nth-child(3) { width: 8% !important; }
-.work-spreadsheet-table col:nth-child(4) { width: 12% !important; }
-.work-spreadsheet-table col:nth-child(5) { width: 10% !important; }
-.work-spreadsheet-table col:nth-child(6) { width: 12% !important; }
-.work-spreadsheet-table col:nth-child(7) { width: 11% !important; }
-.work-spreadsheet-table col:nth-child(8) { width: 13% !important; }
-.work-spreadsheet-table col:nth-child(9) { width: 17% !important; }
-
 .work-spreadsheet-table th,
 .work-spreadsheet-table td {
   min-width: 0 !important;
-  max-width: 0;
   overflow: hidden;
-  padding-left: 2px !important;
-  padding-right: 2px !important;
+  padding-left: 3px !important;
+  padding-right: 3px !important;
   text-overflow: clip;
   white-space: nowrap;
 }
 
 .work-spreadsheet-table th {
-  font-size: 0.45rem !important;
-  letter-spacing: 0.01em !important;
+  position: relative;
+  font-size: 0.52rem !important;
+  letter-spacing: 0.015em !important;
   line-height: 1.05 !important;
 }
 
 .work-spreadsheet-table td {
-  font-size: 0.625rem !important;
+  font-size: 0.68rem !important;
 }
 
 .work-spreadsheet-value,
@@ -48,41 +38,90 @@
   justify-content: center !important;
 }
 
+.work-spreadsheet-input {
+  font-size: inherit !important;
+}
+
 .work-spreadsheet-hours {
-  gap: 1px !important;
+  gap: 2px !important;
 }
 
 .work-spreadsheet-hours svg {
-  width: 0.5rem !important;
-  height: 0.5rem !important;
+  width: 0.58rem !important;
+  height: 0.58rem !important;
   flex: none;
 }
 
-.work-spreadsheet-table td:last-child {
-  padding-left: 1px !important;
-  padding-right: 1px !important;
-  font-size: 0.55rem !important;
+.work-column-resizer {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  z-index: 5;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  touch-action: none;
+  user-select: none;
 }
 
+.work-column-resizer::after {
+  content: '';
+  position: absolute;
+  top: 18%;
+  bottom: 18%;
+  left: 3px;
+  width: 1px;
+  background: color-mix(in srgb, var(--color-zinc-500) 42%, transparent);
+  transition: background-color 120ms ease, width 120ms ease;
+}
+
+.work-column-resizer:hover::after,
+.work-column-resizer:active::after {
+  width: 2px;
+  background: var(--app-accent);
+}
+
+.work-table-resizing,
+.work-table-resizing * {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+.work-table-width-reset {
+  border: 0;
+  padding: 0;
+  color: var(--color-zinc-500);
+  background: transparent;
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.work-table-width-reset:hover {
+  color: var(--app-accent);
+}
+
+.work-spreadsheet-table td:last-child,
 .work-spreadsheet-table td:last-child > * {
   min-width: 0 !important;
   max-width: 100% !important;
   gap: 1px !important;
-  font-size: 0.55rem !important;
+  font-size: 0.62rem !important;
 }
 
 @media (min-width: 1536px) {
   .work-spreadsheet-table th {
-    font-size: 0.49rem !important;
+    font-size: 0.56rem !important;
   }
 
   .work-spreadsheet-table td,
   .work-spreadsheet-input {
-    font-size: 0.66rem !important;
+    font-size: 0.72rem !important;
   }
 
   .work-spreadsheet-table td:last-child,
   .work-spreadsheet-table td:last-child > * {
-    font-size: 0.6rem !important;
+    font-size: 0.66rem !important;
   }
 }
