@@ -24,11 +24,28 @@ export type NavigationTabColor = (typeof NAVIGATION_TAB_COLORS)[number];
 
 export type NavigationTabColors = Record<NavigationItemId, NavigationTabColor>;
 
+export type WorkTableColumnWidths = [
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+];
+
+export const DEFAULT_WORK_TABLE_COLUMN_WIDTHS: WorkTableColumnWidths = [
+  11, 8, 9, 13, 11, 13, 11, 11, 13,
+];
+
 export interface AppPreferences {
   tableDensity: TableDensity;
   accentTheme: AccentTheme;
   navigationOrder: NavigationItemId[];
   navigationTabColors: NavigationTabColors;
+  workTableColumnWidths: WorkTableColumnWidths;
 }
 
 export const DEFAULT_NAVIGATION_TAB_COLORS: NavigationTabColors = {
@@ -45,6 +62,7 @@ export const DEFAULT_APP_PREFERENCES: AppPreferences = {
   accentTheme: 'crimson',
   navigationOrder: [...NAVIGATION_ITEM_IDS],
   navigationTabColors: DEFAULT_NAVIGATION_TAB_COLORS,
+  workTableColumnWidths: [...DEFAULT_WORK_TABLE_COLUMN_WIDTHS],
 };
 
 export type AppPreferenceKey = keyof AppPreferences;
