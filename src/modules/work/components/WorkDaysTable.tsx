@@ -29,6 +29,8 @@ import { formatWorkRating, getWorkRatingPresentation } from '@/modules/work/util
 import './WorkDaysTable.css';
 
 type EditableField = 'beers' | 'workRating' | 'heldMessages' | 'messages' | 'responses';
+type CellPosition = { rowIndex: number; columnIndex: number };
+type NavigationDirection = 'next' | 'previous' | 'up' | 'down' | 'left' | 'right';
 
 type WorkDaysTableProps = {
   days: WorkDay[];
@@ -37,13 +39,6 @@ type WorkDaysTableProps = {
   onUpdateDay: (updatedDay: WorkDay) => void;
   onEditSessions: (dayId: string) => void;
 };
-
-type CellPosition = {
-  rowIndex: number;
-  columnIndex: number;
-};
-
-type NavigationDirection = 'next' | 'previous' | 'up' | 'down' | 'left' | 'right';
 
 type EditableNumberCellProps = {
   value: number | null;
@@ -99,8 +94,7 @@ function parseWorkRating(value: string): number | null {
 
 function getResponseRate(day: WorkDay): number | null {
   const denominator = day.heldMessages + day.messages;
-  if (denominator <= 0) return null;
-  return ((day.responses ?? 0) / denominator) * 100;
+  return denominator > 0 ? ((day.responses ?? 0) / denominator) * 100 : null;
 }
 
 function getWeekendDateClass(date: string): string {
@@ -157,10 +151,8 @@ function EditableNumberCell({
   }, [isEditing]);
 
   function getUpdatedDay(): WorkDay {
-    const nextValue =
-      field === 'workRating' ? parseWorkRating(draftValue) : parseNonNegativeInteger(draftValue);
-    if (nextValue === value) return day;
-    return { ...day, [field]: nextValue };
+    const nextValue = field === 'workRating' ? parseWorkRating(draftValue) : parseNonNegativeInteger(draftValue);
+    return nextValue === value ? day : { ...day, [field]: nextValue };
   }
 
   function commitEditing(direction?: NavigationDirection) {
@@ -168,27 +160,20 @@ function EditableNumberCell({
   }
 
   function handleInputKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    const directions: Partial<Record<string, NavigationDirection>> = {
-      Enter: 'down',
-      ArrowUp: 'up',
-      ArrowDown: 'down',
-      ArrowLeft: 'left',
-      ArrowRight: 'right',
-    };
-
     if (event.key === 'Tab') {
       event.preventDefault();
       commitEditing(event.shiftKey ? 'previous' : 'next');
       return;
     }
-
     if (event.key === 'Escape') {
       event.preventDefault();
       setDraftValue(value === null ? '' : String(value));
       onCancelEditing();
       return;
     }
-
+    const directions: Partial<Record<string, NavigationDirection>> = {
+      Enter: 'down', ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right',
+    };
     const direction = directions[event.key];
     if (direction) {
       event.preventDefault();
@@ -202,18 +187,13 @@ function EditableNumberCell({
       onStartEditing(position);
       return;
     }
-
     if (event.key === 'Tab') {
       event.preventDefault();
       onNavigate(position, event.shiftKey ? 'previous' : 'next');
       return;
     }
-
     const directions: Partial<Record<string, NavigationDirection>> = {
-      ArrowUp: 'up',
-      ArrowDown: 'down',
-      ArrowLeft: 'left',
-      ArrowRight: 'right',
+      ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right',
     };
     const direction = directions[event.key];
     if (direction) {
@@ -263,69 +243,26 @@ function EditableNumberCell({
   );
 }
 
-function getTargetPosition(
-  current: CellPosition,
-  direction: NavigationDirection,
-  rowCount: number
-): CellPosition {
+function getTargetPosition(current: CellPosition, direction: NavigationDirection, rowCount: number): CellPosition {
   const lastRowIndex = Math.max(0, rowCount - 1);
   const lastColumnIndex = EDITABLE_COLUMNS - 1;
-
-  if (direction === 'up') {
-    return {
-      rowIndex: current.rowIndex === 0 ? lastRowIndex : current.rowIndex - 1,
-      columnIndex: current.columnIndex,
-    };
-  }
-  if (direction === 'down') {
-    return {
-      rowIndex: current.rowIndex === lastRowIndex ? 0 : current.rowIndex + 1,
-      columnIndex: current.columnIndex,
-    };
-  }
-  if (direction === 'left') {
-    return {
-      rowIndex: current.rowIndex,
-      columnIndex: current.columnIndex === 0 ? lastColumnIndex : current.columnIndex - 1,
-    };
-  }
-  if (direction === 'right') {
-    return {
-      rowIndex: current.rowIndex,
-      columnIndex: current.columnIndex === lastColumnIndex ? 0 : current.columnIndex + 1,
-    };
-  }
-
+  if (direction === 'up') return { rowIndex: current.rowIndex === 0 ? lastRowIndex : current.rowIndex - 1, columnIndex: current.columnIndex };
+  if (direction === 'down') return { rowIndex: current.rowIndex === lastRowIndex ? 0 : current.rowIndex + 1, columnIndex: current.columnIndex };
+  if (direction === 'left') return { rowIndex: current.rowIndex, columnIndex: current.columnIndex === 0 ? lastColumnIndex : current.columnIndex - 1 };
+  if (direction === 'right') return { rowIndex: current.rowIndex, columnIndex: current.columnIndex === lastColumnIndex ? 0 : current.columnIndex + 1 };
   const linearIndex = current.rowIndex * EDITABLE_COLUMNS + current.columnIndex;
   const cellCount = rowCount * EDITABLE_COLUMNS;
-  const targetIndex =
-    direction === 'previous'
-      ? linearIndex === 0
-        ? cellCount - 1
-        : linearIndex - 1
-      : linearIndex === cellCount - 1
-        ? 0
-        : linearIndex + 1;
-
-  return {
-    rowIndex: Math.floor(targetIndex / EDITABLE_COLUMNS),
-    columnIndex: targetIndex % EDITABLE_COLUMNS,
-  };
+  const targetIndex = direction === 'previous'
+    ? (linearIndex === 0 ? cellCount - 1 : linearIndex - 1)
+    : (linearIndex === cellCount - 1 ? 0 : linearIndex + 1);
+  return { rowIndex: Math.floor(targetIndex / EDITABLE_COLUMNS), columnIndex: targetIndex % EDITABLE_COLUMNS };
 }
 
-export default function WorkDaysTable({
-  days,
-  isSaving,
-  tableDensity,
-  onUpdateDay,
-  onEditSessions,
-}: WorkDaysTableProps) {
+export default function WorkDaysTable({ days, isSaving, tableDensity, onUpdateDay, onEditSessions }: WorkDaysTableProps) {
   const reversedDays = [...days].reverse();
   const [editingPosition, setEditingPosition] = useState<CellPosition | null>(null);
   const { preferences, savePreference } = useAppSettings();
-  const [columnWidths, setColumnWidths] = useState<WorkTableColumnWidths>(
-    preferences.workTableColumnWidths
-  );
+  const [columnWidths, setColumnWidths] = useState<WorkTableColumnWidths>(preferences.workTableColumnWidths);
   const columnWidthsRef = useRef<WorkTableColumnWidths>(preferences.workTableColumnWidths);
   const tableViewportRef = useRef<HTMLDivElement>(null);
   const densityClassName = TABLE_DENSITY_CLASSES[tableDensity];
@@ -336,7 +273,6 @@ export default function WorkDaysTable({
   }, [preferences.workTableColumnWidths]);
 
   const totalColumnWidth = columnWidths.reduce((sum, width) => sum + width, 0);
-  const tableWidthPercent = Math.max(100, totalColumnWidth);
 
   function focusCell(position: CellPosition) {
     window.requestAnimationFrame(() => document.getElementById(createCellId(position))?.focus());
@@ -347,11 +283,7 @@ export default function WorkDaysTable({
     focusCell(getTargetPosition(position, direction, reversedDays.length));
   }
 
-  function commitCell(
-    updatedDay: WorkDay,
-    position: CellPosition,
-    direction?: NavigationDirection
-  ) {
+  function commitCell(updatedDay: WorkDay, position: CellPosition, direction?: NavigationDirection) {
     onUpdateDay(updatedDay);
     setEditingPosition(null);
     focusCell(direction ? getTargetPosition(position, direction, reversedDays.length) : position);
@@ -360,23 +292,17 @@ export default function WorkDaysTable({
   function startColumnResize(event: ReactPointerEvent<HTMLSpanElement>, index: number) {
     const viewportWidth = tableViewportRef.current?.getBoundingClientRect().width ?? 0;
     if (viewportWidth <= 0) return;
-
     event.preventDefault();
     event.stopPropagation();
-
     const startX = event.clientX;
     const startWidths = [...columnWidthsRef.current] as WorkTableColumnWidths;
     const startWidth = startWidths[index];
     if (startWidth === undefined) return;
-
     document.body.classList.add('work-table-resizing');
 
     function handlePointerMove(pointerEvent: PointerEvent) {
       const deltaPercent = ((pointerEvent.clientX - startX) / viewportWidth) * 100;
-      const nextWidth = Math.min(
-        MAX_COLUMN_WIDTH,
-        Math.max(MIN_COLUMN_WIDTH, startWidth + deltaPercent)
-      );
+      const nextWidth = Math.min(MAX_COLUMN_WIDTH, Math.max(MIN_COLUMN_WIDTH, startWidth + deltaPercent));
       const nextWidths = [...startWidths] as WorkTableColumnWidths;
       nextWidths[index] = Number(nextWidth.toFixed(3));
       columnWidthsRef.current = nextWidths;
@@ -402,39 +328,21 @@ export default function WorkDaysTable({
   }
 
   return (
-    <section
-      className={`work-days-table ${densityClassName} overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/55`}
-    >
+    <section className={`work-days-table ${densityClassName} overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/55`}>
       <div className="flex items-center justify-between gap-3 border-b border-zinc-700 px-3 py-2.5">
-        <h2 className="min-w-0 text-xs font-semibold text-zinc-100">
-          Historia aktywnego tygodnia
-        </h2>
+        <h2 className="min-w-0 text-xs font-semibold text-zinc-100">Historia aktywnego tygodnia</h2>
         <div className="flex shrink-0 items-center gap-3">
-          <button
-            type="button"
-            className="work-table-width-reset"
-            title="Przywróć domyślne szerokości kolumn"
-            onClick={resetColumnWidths}
-          >
-            Reset szer.
-          </button>
-          <span
-            className={`text-[9px] font-semibold uppercase tracking-wide ${isSaving ? 'text-amber-400' : 'text-zinc-600'}`}
-          >
+          <button type="button" className="work-table-width-reset" title="Przywróć domyślne szerokości kolumn" onClick={resetColumnWidths}>Reset szer.</button>
+          <span className={`text-[9px] font-semibold uppercase tracking-wide ${isSaving ? 'text-amber-400' : 'text-zinc-600'}`}>
             {isSaving ? 'Zapisywanie…' : 'Tryb arkuszowy'}
           </span>
         </div>
       </div>
 
       <div ref={tableViewportRef} className="work-days-table-scroll">
-        <table
-          className="work-spreadsheet-table"
-          style={{ width: `${tableWidthPercent}%`, minWidth: '100%', maxWidth: 'none' }}
-        >
+        <table className="work-spreadsheet-table" style={{ width: `${totalColumnWidth}%`, minWidth: 0, maxWidth: 'none' }}>
           <colgroup>
-            {columnWidths.map((width, index) => (
-              <col key={index} style={{ width: `${(width / tableWidthPercent) * 100}%` }} />
-            ))}
+            {columnWidths.map((width, index) => <col key={index} style={{ width: `${width}%` }} />)}
           </colgroup>
           <thead>
             <tr>
@@ -455,66 +363,24 @@ export default function WorkDaysTable({
               const messagesPerHour = workedHours > 0 ? getDayMessagesPerHour(day) : null;
               const responseRate = getResponseRate(day);
               const ratingPresentation = getWorkRatingPresentation(day.workRating);
-              const ratingTextClass =
-                day.workRating === null
-                  ? 'text-zinc-500'
-                  : (ratingPresentation.className
-                      .split(' ')
-                      .find((className) => className.startsWith('text-')) ?? 'text-zinc-200');
-
+              const ratingTextClass = day.workRating === null ? 'text-zinc-500' : (ratingPresentation.className.split(' ').find((className) => className.startsWith('text-')) ?? 'text-zinc-200');
               const positions = {
-                beers: { rowIndex, columnIndex: 0 },
-                rating: { rowIndex, columnIndex: 1 },
-                held: { rowIndex, columnIndex: 2 },
-                messages: { rowIndex, columnIndex: 3 },
-                responses: { rowIndex, columnIndex: 4 },
+                beers: { rowIndex, columnIndex: 0 }, rating: { rowIndex, columnIndex: 1 }, held: { rowIndex, columnIndex: 2 }, messages: { rowIndex, columnIndex: 3 }, responses: { rowIndex, columnIndex: 4 },
               };
-
-              const isEditing = (columnIndex: number) =>
-                editingPosition?.rowIndex === rowIndex &&
-                editingPosition.columnIndex === columnIndex;
+              const isEditing = (columnIndex: number) => editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === columnIndex;
+              const common = { onStartEditing: setEditingPosition, onCancelEditing: () => setEditingPosition(null), onCommit: commitCell, onNavigate: navigateFromCell };
 
               return (
                 <tr key={day.id}>
-                  <td className={`text-left font-bold ${getWeekendDateClass(day.date)}`}>
-                    {formatShortIsoDate(day.date)}
-                  </td>
-                  <td className="text-center">
-                    <EditableNumberCell day={day} field="beers" value={day.beers} position={positions.beers} isEditing={isEditing(0)} align="center" valueClassName={day.beers === 0 ? 'text-emerald-400' : 'text-red-400'} onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
-                  </td>
-                  <td className="text-center">
-                    <EditableNumberCell day={day} field="workRating" value={day.workRating} position={positions.rating} isEditing={isEditing(1)} align="center" maximum={10} step={0.1} displayValue={formatWorkRating(day.workRating)} valueClassName={ratingTextClass} onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
-                  </td>
-                  <td className="text-center">
-                    <EditableNumberCell day={day} field="heldMessages" value={day.heldMessages} position={positions.held} isEditing={isEditing(2)} align="center" valueClassName="text-cyan-300" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
-                  </td>
-                  <td className="text-center">
-                    <EditableNumberCell day={day} field="messages" value={day.messages} position={positions.messages} isEditing={isEditing(3)} align="center" valueClassName="text-[var(--app-accent)]" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
-                  </td>
-                  <td className="text-center">
-                    <EditableNumberCell day={day} field="responses" value={day.responses ?? 0} position={positions.responses} isEditing={isEditing(4)} align="center" valueClassName="text-violet-300" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
-                  </td>
-                  <td className="text-center font-semibold text-zinc-300">
-                    {responseRate === null ? '—' : `${responseRate.toFixed(2)}%`}
-                  </td>
-                  <td className="text-center">
-                    <button
-                      type="button"
-                      title="Edytuj bloki czasu"
-                      onClick={() => onEditSessions(day.id)}
-                      className="work-spreadsheet-hours justify-center text-center"
-                    >
-                      <Clock3 aria-hidden="true" className="size-3 text-zinc-500" />
-                      <span>{workedHours > 0 ? formatHours(workedHours) : '—'}</span>
-                    </button>
-                  </td>
-                  <td className="text-right">
-                    <MessagesPerHourIndicator
-                      value={messagesPerHour}
-                      compact
-                      className="justify-end whitespace-nowrap text-[10px]"
-                    />
-                  </td>
+                  <td className={`text-left font-bold ${getWeekendDateClass(day.date)}`}>{formatShortIsoDate(day.date)}</td>
+                  <td className="text-center"><EditableNumberCell day={day} field="beers" value={day.beers} position={positions.beers} isEditing={isEditing(0)} align="center" valueClassName={day.beers === 0 ? 'text-emerald-400' : 'text-red-400'} {...common} /></td>
+                  <td className="text-center"><EditableNumberCell day={day} field="workRating" value={day.workRating} position={positions.rating} isEditing={isEditing(1)} align="center" maximum={10} step={0.1} displayValue={formatWorkRating(day.workRating)} valueClassName={ratingTextClass} {...common} /></td>
+                  <td className="text-center"><EditableNumberCell day={day} field="heldMessages" value={day.heldMessages} position={positions.held} isEditing={isEditing(2)} align="center" valueClassName="text-cyan-300" {...common} /></td>
+                  <td className="text-center"><EditableNumberCell day={day} field="messages" value={day.messages} position={positions.messages} isEditing={isEditing(3)} align="center" valueClassName="text-[var(--app-accent)]" {...common} /></td>
+                  <td className="text-center"><EditableNumberCell day={day} field="responses" value={day.responses ?? 0} position={positions.responses} isEditing={isEditing(4)} align="center" valueClassName="text-violet-300" {...common} /></td>
+                  <td className="text-center font-semibold text-zinc-300">{responseRate === null ? '—' : `${responseRate.toFixed(2)}%`}</td>
+                  <td className="text-center"><button type="button" title="Edytuj bloki czasu" onClick={() => onEditSessions(day.id)} className="work-spreadsheet-hours justify-center text-center"><Clock3 aria-hidden="true" className="size-3 text-zinc-500" /><span>{workedHours > 0 ? formatHours(workedHours) : '—'}</span></button></td>
+                  <td className="text-right"><MessagesPerHourIndicator value={messagesPerHour} compact className="justify-end whitespace-nowrap text-[10px]" /></td>
                 </tr>
               );
             })}
