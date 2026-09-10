@@ -46,6 +46,7 @@ export const currentWorkWeek: WorkWeek = {
       messages: 188,
       freeMessages: 0,
       heldMessages: 0,
+      responses: 0,
       beers: 2,
       workRating: 8.5,
       sessions: [
@@ -62,6 +63,7 @@ export const currentWorkWeek: WorkWeek = {
       messages: 216,
       freeMessages: 0,
       heldMessages: 0,
+      responses: 0,
       beers: 0,
       workRating: 8.7,
       sessions: [
@@ -78,6 +80,7 @@ export const currentWorkWeek: WorkWeek = {
       messages: 155,
       freeMessages: 0,
       heldMessages: 0,
+      responses: 0,
       beers: 3,
       workRating: 8.6,
       sessions: [
@@ -94,6 +97,7 @@ export const currentWorkWeek: WorkWeek = {
       messages: 146,
       freeMessages: 0,
       heldMessages: 0,
+      responses: 0,
       beers: 1,
       workRating: 8.8,
       sessions: [
@@ -110,6 +114,7 @@ export const currentWorkWeek: WorkWeek = {
       messages: 138,
       freeMessages: 0,
       heldMessages: 0,
+      responses: 0,
       beers: 0,
       workRating: 9,
       sessions: [
@@ -161,6 +166,7 @@ export const currentWorkWeek: WorkWeek = {
       messages: 0,
       freeMessages: 0,
       heldMessages: 0,
+      responses: 0,
       beers: 0,
       workRating: 8.5,
       sessions: [],
@@ -171,6 +177,7 @@ export const currentWorkWeek: WorkWeek = {
       messages: 0,
       freeMessages: 0,
       heldMessages: 0,
+      responses: 0,
       beers: 0,
       workRating: 8.5,
       sessions: [],
