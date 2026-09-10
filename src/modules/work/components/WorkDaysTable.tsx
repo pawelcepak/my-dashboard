@@ -62,49 +62,26 @@ function createCellId(position: CellPosition): string {
 
 function parseNonNegativeInteger(value: string): number {
   const parsedValue = Number.parseInt(value, 10);
-
-  if (!Number.isFinite(parsedValue) || parsedValue < 0) {
-    return 0;
-  }
-
-  return parsedValue;
+  return Number.isFinite(parsedValue) && parsedValue >= 0 ? parsedValue : 0;
 }
 
 function parseWorkRating(value: string): number | null {
-  if (value.trim() === '') {
-    return null;
-  }
-
+  if (value.trim() === '') return null;
   const parsedValue = Number.parseFloat(value.replace(',', '.'));
-
-  if (!Number.isFinite(parsedValue)) {
-    return null;
-  }
-
+  if (!Number.isFinite(parsedValue)) return null;
   return Math.round(Math.min(10, Math.max(0, parsedValue)) * 10) / 10;
 }
 
 function getResponseRate(day: WorkDay): number | null {
   const denominator = day.heldMessages + day.messages;
-
-  if (denominator <= 0) {
-    return null;
-  }
-
-  return (day.responses / denominator) * 100;
+  if (denominator <= 0) return null;
+  return ((day.responses ?? 0) / denominator) * 100;
 }
 
 function getWeekendDateClass(date: string): string {
   const dayOfWeek = new Date(`${date}T00:00:00`).getDay();
-
-  if (dayOfWeek === 0) {
-    return 'text-red-400';
-  }
-
-  if (dayOfWeek === 6) {
-    return 'text-zinc-500';
-  }
-
+  if (dayOfWeek === 0) return 'text-red-400';
+  if (dayOfWeek === 6) return 'text-zinc-500';
   return 'text-zinc-200';
 }
 
@@ -126,36 +103,24 @@ function EditableNumberCell({
   onNavigate,
 }: EditableNumberCellProps) {
   const [draftValue, setDraftValue] = useState(value === null ? '' : String(value));
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (!isEditing) {
-      setDraftValue(value === null ? '' : String(value));
-    }
+    if (!isEditing) setDraftValue(value === null ? '' : String(value));
   }, [isEditing, value]);
 
   useEffect(() => {
-    if (!isEditing) {
-      return;
+    if (isEditing) {
+      inputRef.current?.focus();
+      inputRef.current?.select();
     }
-
-    inputRef.current?.focus();
-    inputRef.current?.select();
   }, [isEditing]);
 
   function getUpdatedDay(): WorkDay {
     const nextValue =
       field === 'workRating' ? parseWorkRating(draftValue) : parseNonNegativeInteger(draftValue);
-
-    if (nextValue === value) {
-      return day;
-    }
-
-    return {
-      ...day,
-      [field]: nextValue,
-    };
+    if (nextValue === value) return day;
+    return { ...day, [field]: nextValue };
   }
 
   function commitEditing(direction?: NavigationDirection) {
@@ -163,11 +128,13 @@ function EditableNumberCell({
   }
 
   function handleInputKeyDown(event: KeyboardEvent<HTMLInputElement>) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      commitEditing('down');
-      return;
-    }
+    const directions: Partial<Record<string, NavigationDirection>> = {
+      Enter: 'down',
+      ArrowUp: 'up',
+      ArrowDown: 'down',
+      ArrowLeft: 'left',
+      ArrowRight: 'right',
+    };
 
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -175,34 +142,17 @@ function EditableNumberCell({
       return;
     }
 
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      commitEditing('up');
-      return;
-    }
-
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      commitEditing('down');
-      return;
-    }
-
-    if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      commitEditing('left');
-      return;
-    }
-
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      commitEditing('right');
-      return;
-    }
-
     if (event.key === 'Escape') {
       event.preventDefault();
       setDraftValue(value === null ? '' : String(value));
       onCancelEditing();
+      return;
+    }
+
+    const direction = directions[event.key];
+    if (direction) {
+      event.preventDefault();
+      commitEditing(direction);
     }
   }
 
@@ -219,15 +169,13 @@ function EditableNumberCell({
       return;
     }
 
-    const directionByKey: Partial<Record<string, NavigationDirection>> = {
+    const directions: Partial<Record<string, NavigationDirection>> = {
       ArrowUp: 'up',
       ArrowDown: 'down',
       ArrowLeft: 'left',
       ArrowRight: 'right',
     };
-
-    const direction = directionByKey[event.key];
-
+    const direction = directions[event.key];
     if (direction) {
       event.preventDefault();
       onNavigate(position, direction);
@@ -235,12 +183,7 @@ function EditableNumberCell({
   }
 
   if (isEditing) {
-    const inputWidth = Math.max(3, draftValue.length + 1);
-
-    const inputStyle: CSSProperties = {
-      width: `${inputWidth}ch`,
-    };
-
+    const inputStyle: CSSProperties = { width: `${Math.max(3, draftValue.length + 1)}ch` };
     return (
       <input
         ref={inputRef}
@@ -257,9 +200,7 @@ function EditableNumberCell({
         style={inputStyle}
         onChange={(event) => setDraftValue(event.target.value)}
         onKeyDown={handleInputKeyDown}
-        onBlur={() => {
-          commitEditing();
-        }}
+        onBlur={() => commitEditing()}
         className={`work-spreadsheet-input ${align === 'center' ? 'text-center' : 'text-right'}`}
       />
     );
@@ -275,9 +216,7 @@ function EditableNumberCell({
       title="Kliknij lub naciśnij Enter, aby edytować"
       onClick={() => onStartEditing(position)}
       onKeyDown={handleButtonKeyDown}
-      className={`work-spreadsheet-value ${
-        align === 'center' ? 'text-center' : 'text-right'
-      } ${valueClassName}`}
+      className={`work-spreadsheet-value ${align === 'center' ? 'text-center' : 'text-right'} ${valueClassName}`}
     >
       {displayValue ?? (value === null ? '—' : formatNumber(value))}
     </button>
@@ -293,51 +232,28 @@ function getTargetPosition(
   const lastColumnIndex = EDITABLE_COLUMNS - 1;
 
   if (direction === 'up') {
-    return {
-      rowIndex: current.rowIndex === 0 ? lastRowIndex : current.rowIndex - 1,
-      columnIndex: current.columnIndex,
-    };
+    return { rowIndex: current.rowIndex === 0 ? lastRowIndex : current.rowIndex - 1, columnIndex: current.columnIndex };
   }
-
   if (direction === 'down') {
-    return {
-      rowIndex: current.rowIndex === lastRowIndex ? 0 : current.rowIndex + 1,
-      columnIndex: current.columnIndex,
-    };
+    return { rowIndex: current.rowIndex === lastRowIndex ? 0 : current.rowIndex + 1, columnIndex: current.columnIndex };
   }
-
   if (direction === 'left') {
-    return {
-      rowIndex: current.rowIndex,
-      columnIndex: current.columnIndex === 0 ? lastColumnIndex : current.columnIndex - 1,
-    };
+    return { rowIndex: current.rowIndex, columnIndex: current.columnIndex === 0 ? lastColumnIndex : current.columnIndex - 1 };
   }
-
   if (direction === 'right') {
-    return {
-      rowIndex: current.rowIndex,
-      columnIndex: current.columnIndex === lastColumnIndex ? 0 : current.columnIndex + 1,
-    };
+    return { rowIndex: current.rowIndex, columnIndex: current.columnIndex === lastColumnIndex ? 0 : current.columnIndex + 1 };
   }
 
   const linearIndex = current.rowIndex * EDITABLE_COLUMNS + current.columnIndex;
-
   const cellCount = rowCount * EDITABLE_COLUMNS;
-
-  if (direction === 'previous') {
-    const previousIndex = linearIndex === 0 ? cellCount - 1 : linearIndex - 1;
-
-    return {
-      rowIndex: Math.floor(previousIndex / EDITABLE_COLUMNS),
-      columnIndex: previousIndex % EDITABLE_COLUMNS,
-    };
-  }
-
-  const nextIndex = linearIndex === cellCount - 1 ? 0 : linearIndex + 1;
+  const targetIndex =
+    direction === 'previous'
+      ? linearIndex === 0 ? cellCount - 1 : linearIndex - 1
+      : linearIndex === cellCount - 1 ? 0 : linearIndex + 1;
 
   return {
-    rowIndex: Math.floor(nextIndex / EDITABLE_COLUMNS),
-    columnIndex: nextIndex % EDITABLE_COLUMNS,
+    rowIndex: Math.floor(targetIndex / EDITABLE_COLUMNS),
+    columnIndex: targetIndex % EDITABLE_COLUMNS,
   };
 }
 
@@ -349,53 +265,29 @@ export default function WorkDaysTable({
   onEditSessions,
 }: WorkDaysTableProps) {
   const reversedDays = [...days].reverse();
-
   const [editingPosition, setEditingPosition] = useState<CellPosition | null>(null);
-
   const densityClassName = TABLE_DENSITY_CLASSES[tableDensity];
 
   function focusCell(position: CellPosition) {
-    window.requestAnimationFrame(() => {
-      document.getElementById(createCellId(position))?.focus();
-    });
+    window.requestAnimationFrame(() => document.getElementById(createCellId(position))?.focus());
   }
 
   function navigateFromCell(position: CellPosition, direction: NavigationDirection) {
-    const targetPosition = getTargetPosition(position, direction, reversedDays.length);
-
     setEditingPosition(null);
-    focusCell(targetPosition);
+    focusCell(getTargetPosition(position, direction, reversedDays.length));
   }
 
-  function commitCell(
-    updatedDay: WorkDay,
-    position: CellPosition,
-    direction?: NavigationDirection
-  ) {
+  function commitCell(updatedDay: WorkDay, position: CellPosition, direction?: NavigationDirection) {
     onUpdateDay(updatedDay);
     setEditingPosition(null);
-
-    if (direction) {
-      const targetPosition = getTargetPosition(position, direction, reversedDays.length);
-
-      focusCell(targetPosition);
-    } else {
-      focusCell(position);
-    }
+    focusCell(direction ? getTargetPosition(position, direction, reversedDays.length) : position);
   }
 
   return (
-    <section
-      className={`${densityClassName} overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/55`}
-    >
+    <section className={`${densityClassName} overflow-hidden rounded-xl border border-zinc-700 bg-zinc-900/55`}>
       <div className="flex items-center justify-between gap-3 border-b border-zinc-700 px-3 py-2.5">
         <h2 className="min-w-0 text-xs font-semibold text-zinc-100">Historia aktywnego tygodnia</h2>
-
-        <span
-          className={`shrink-0 text-[9px] font-semibold uppercase tracking-wide ${
-            isSaving ? 'text-amber-400' : 'text-zinc-600'
-          }`}
-        >
+        <span className={`shrink-0 text-[9px] font-semibold uppercase tracking-wide ${isSaving ? 'text-amber-400' : 'text-zinc-600'}`}>
           {isSaving ? 'Zapisywanie…' : 'Tryb arkuszowy'}
         </span>
       </div>
@@ -426,98 +318,57 @@ export default function WorkDaysTable({
               <th className="text-center">Średnia/h</th>
             </tr>
           </thead>
-
           <tbody>
             {reversedDays.map((day, rowIndex) => {
               const workedHours = getDayWorkedHours(day);
-
               const messagesPerHour = workedHours > 0 ? getDayMessagesPerHour(day) : null;
-
               const responseRate = getResponseRate(day);
-
               const ratingPresentation = getWorkRatingPresentation(day.workRating);
-
               const ratingTextClass =
                 day.workRating === null
                   ? 'text-zinc-500'
-                  : (ratingPresentation.className
-                      .split(' ')
-                      .find((className) => className.startsWith('text-')) ?? 'text-zinc-200');
+                  : ratingPresentation.className.split(' ').find((className) => className.startsWith('text-')) ?? 'text-zinc-200';
 
-              const beersPosition = { rowIndex, columnIndex: 0 };
-              const ratingPosition = { rowIndex, columnIndex: 1 };
-              const heldPosition = { rowIndex, columnIndex: 2 };
-              const messagesPosition = { rowIndex, columnIndex: 3 };
-              const responsesPosition = { rowIndex, columnIndex: 4 };
+              const positions = {
+                beers: { rowIndex, columnIndex: 0 },
+                rating: { rowIndex, columnIndex: 1 },
+                held: { rowIndex, columnIndex: 2 },
+                messages: { rowIndex, columnIndex: 3 },
+                responses: { rowIndex, columnIndex: 4 },
+              };
+
+              const isEditing = (columnIndex: number) =>
+                editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === columnIndex;
 
               return (
                 <tr key={day.id}>
-                  <td className={`text-left font-bold ${getWeekendDateClass(day.date)}`}>
-                    {formatShortIsoDate(day.date)}
-                  </td>
-
+                  <td className={`text-left font-bold ${getWeekendDateClass(day.date)}`}>{formatShortIsoDate(day.date)}</td>
                   <td className="text-center">
-                    <EditableNumberCell day={day} field="beers" value={day.beers}
-                      position={beersPosition}
-                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 0}
-                      align="center" valueClassName={day.beers === 0 ? 'text-emerald-400' : 'text-red-400'}
-                      onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)}
-                      onCommit={commitCell} onNavigate={navigateFromCell} />
+                    <EditableNumberCell day={day} field="beers" value={day.beers} position={positions.beers} isEditing={isEditing(0)} align="center" valueClassName={day.beers === 0 ? 'text-emerald-400' : 'text-red-400'} onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
-
                   <td className="text-center">
-                    <EditableNumberCell day={day} field="workRating" value={day.workRating}
-                      position={ratingPosition}
-                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 1}
-                      align="center" maximum={10} step={0.1} displayValue={formatWorkRating(day.workRating)}
-                      valueClassName={ratingTextClass} onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell}
-                      onNavigate={navigateFromCell} />
+                    <EditableNumberCell day={day} field="workRating" value={day.workRating} position={positions.rating} isEditing={isEditing(1)} align="center" maximum={10} step={0.1} displayValue={formatWorkRating(day.workRating)} valueClassName={ratingTextClass} onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
-
                   <td className="text-center">
-                    <EditableNumberCell day={day} field="heldMessages" value={day.heldMessages}
-                      align="center" position={heldPosition}
-                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 2}
-                      valueClassName="text-cyan-300" onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell}
-                      onNavigate={navigateFromCell} />
+                    <EditableNumberCell day={day} field="heldMessages" value={day.heldMessages} position={positions.held} isEditing={isEditing(2)} align="center" valueClassName="text-cyan-300" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
-
                   <td className="text-center">
-                    <EditableNumberCell day={day} field="messages" value={day.messages}
-                      align="center" position={messagesPosition}
-                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 3}
-                      valueClassName="text-[var(--app-accent)]" onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell}
-                      onNavigate={navigateFromCell} />
+                    <EditableNumberCell day={day} field="messages" value={day.messages} position={positions.messages} isEditing={isEditing(3)} align="center" valueClassName="text-[var(--app-accent)]" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
-
                   <td className="text-center">
-                    <EditableNumberCell day={day} field="responses" value={day.responses}
-                      align="center" position={responsesPosition}
-                      isEditing={editingPosition?.rowIndex === rowIndex && editingPosition.columnIndex === 4}
-                      valueClassName="text-violet-300" onStartEditing={setEditingPosition}
-                      onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell}
-                      onNavigate={navigateFromCell} />
+                    <EditableNumberCell day={day} field="responses" value={day.responses ?? 0} position={positions.responses} isEditing={isEditing(4)} align="center" valueClassName="text-violet-300" onStartEditing={setEditingPosition} onCancelEditing={() => setEditingPosition(null)} onCommit={commitCell} onNavigate={navigateFromCell} />
                   </td>
-
                   <td className="text-center font-semibold text-zinc-300">
                     {responseRate === null ? '—' : `${responseRate.toFixed(2)}%`}
                   </td>
-
                   <td className="text-center">
-                    <button type="button" title="Edytuj bloki czasu"
-                      onClick={() => onEditSessions(day.id)}
-                      className="work-spreadsheet-hours justify-center text-center">
+                    <button type="button" title="Edytuj bloki czasu" onClick={() => onEditSessions(day.id)} className="work-spreadsheet-hours justify-center text-center">
                       <Clock3 aria-hidden="true" className="size-3 text-zinc-500" />
                       <span>{workedHours > 0 ? formatHours(workedHours) : '—'}</span>
                     </button>
                   </td>
-
                   <td className="text-right">
-                    <MessagesPerHourIndicator value={messagesPerHour} compact
-                      className="justify-end whitespace-nowrap text-[10px]" />
+                    <MessagesPerHourIndicator value={messagesPerHour} compact className="justify-end whitespace-nowrap text-[10px]" />
                   </td>
                 </tr>
               );
