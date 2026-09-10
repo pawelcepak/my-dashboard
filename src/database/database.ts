@@ -21,7 +21,7 @@ import type {
   WorkWeekGoals,
 } from '@/modules/work/types/work.types';
 
-export const DATABASE_SCHEMA_VERSION = 9;
+export const DATABASE_SCHEMA_VERSION = 10;
 
 const DEFAULT_WEEKLY_MESSAGES_TARGET = 1576;
 const GOAL_PRECISION_MULTIPLIER = 100;
@@ -57,6 +57,7 @@ function normalizeWorkDay(day: WorkDay): WorkDay {
     messages: getNonNegativeInteger(day.messages),
     freeMessages: getNonNegativeInteger(day.freeMessages),
     heldMessages: getNonNegativeInteger(day.heldMessages),
+    responses: getNonNegativeInteger(day.responses),
     beers: getNonNegativeInteger(day.beers),
     sessions: Array.isArray(day.sessions) ? day.sessions : [],
   };
@@ -276,7 +277,7 @@ class MyDashboardDatabase extends Dexie {
       debtEvents: 'id, debtId, date, type, createdAt, updatedAt, [debtId+date]',
     });
 
-    this.version(DATABASE_SCHEMA_VERSION)
+    this.version(9)
       .stores({
         workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
         appSettings: 'key, updatedAt',
@@ -310,6 +311,34 @@ class MyDashboardDatabase extends Dexie {
                 updatedAt: timestamp,
               }
         );
+
+        await workWeeksTable.bulkPut(updatedWeeks);
+      });
+
+    this.version(DATABASE_SCHEMA_VERSION)
+      .stores({
+        workWeeks: 'id, &[year+weekNumber], year, weekNumber, startDate, endDate, updatedAt',
+        appSettings: 'key, updatedAt',
+        portfolioAccounts: 'id, updatedAt',
+        portfolioTags: 'id, name, kind, updatedAt',
+        portfolioTransactions:
+          'id, accountId, date, type, tagId, createdAt, updatedAt, [accountId+date]',
+        alcoholDayOverrides: 'date, state, source, updatedAt',
+        alcoholMonthlyExpenses: 'month, source, updatedAt',
+        alcoholSettings: 'id, updatedAt',
+        debts: 'id, name, status, updatedAt',
+        debtEvents: 'id, debtId, date, type, createdAt, updatedAt, [debtId+date]',
+      })
+      .upgrade(async (transaction) => {
+        const workWeeksTable = transaction.table<WorkWeek, string>('workWeeks');
+        const weeks = await workWeeksTable.toArray();
+        const timestamp = new Date().toISOString();
+
+        const updatedWeeks = weeks.map((week) => ({
+          ...week,
+          days: week.days.map(normalizeWorkDay),
+          updatedAt: timestamp,
+        }));
 
         await workWeeksTable.bulkPut(updatedWeeks);
       });
