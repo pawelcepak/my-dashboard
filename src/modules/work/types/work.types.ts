@@ -31,6 +31,13 @@ export type WorkDay = {
    */
   heldMessages: number;
 
+  /*
+   * Liczba odpowiedzi przypisana do dnia pracy.
+   * Używana do obliczenia skuteczności odpowiedzi:
+   * responses / (heldMessages + messages) * 100.
+   */
+  responses: number;
+
   beers: number;
   workRating: number | null;
   sessions: WorkSession[];
