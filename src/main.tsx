@@ -8,6 +8,7 @@ import { router } from '@/app/router/router';
 import ThemeProvider from '@/app/theme/ThemeProvider';
 
 import '@/index.css';
+import '@/modules/work/components/WorkDaysTable.css';
 
 const rootElement = document.getElementById('root');
 
