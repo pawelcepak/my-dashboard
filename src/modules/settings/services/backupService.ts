@@ -125,6 +125,7 @@ function parseWorkDay(value: unknown): WorkDay {
     freeMessages: parseNonNegativeInteger(value.freeMessages),
     heldMessages: parseNonNegativeInteger(value.heldMessages),
     beers: parseNonNegativeInteger(value.beers),
+    responses: parseNonNegativeInteger(value.responses),
     workRating: value.workRating,
     sessions: value.sessions,
   };
