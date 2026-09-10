@@ -33,10 +33,10 @@ export type WorkDay = {
 
   /*
    * Liczba odpowiedzi przypisana do dnia pracy.
-   * Używana do obliczenia skuteczności odpowiedzi:
-   * responses / (heldMessages + messages) * 100.
+   * Pole jest opcjonalne wyłącznie dla zgodności ze starszymi backupami
+   * i historycznymi danymi. Migracja bazy uzupełnia brakującą wartość zerem.
    */
-  responses: number;
+  responses?: number;
 
   beers: number;
   workRating: number | null;
