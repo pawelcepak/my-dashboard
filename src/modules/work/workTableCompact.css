@@ -1,0 +1,55 @@
+/* Kompaktowe dopasowanie tabeli Praca bez zmiany proporcji lewej i prawej kolumny. */
+.work-dashboard-grid .work-spreadsheet-table {
+  min-width: 0;
+  width: 100%;
+}
+
+.work-dashboard-grid .work-spreadsheet-table .work-col-date { width: 12%; }
+.work-dashboard-grid .work-spreadsheet-table .work-col-beers { width: 7%; }
+.work-dashboard-grid .work-spreadsheet-table .work-col-rating { width: 9%; }
+.work-dashboard-grid .work-spreadsheet-table .work-col-held { width: 12%; }
+.work-dashboard-grid .work-spreadsheet-table .work-col-messages { width: 11%; }
+.work-dashboard-grid .work-spreadsheet-table .work-col-responses { width: 12%; }
+.work-dashboard-grid .work-spreadsheet-table .work-col-response-rate { width: 11%; }
+.work-dashboard-grid .work-spreadsheet-table .work-col-hours { width: 12%; }
+.work-dashboard-grid .work-spreadsheet-table .work-col-average { width: 14%; }
+
+.work-dashboard-grid .work-spreadsheet-table th {
+  height: 1.7rem;
+  overflow: hidden;
+  padding-inline: 0.18rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.025em;
+  text-overflow: ellipsis;
+}
+
+.work-dashboard-grid .work-spreadsheet-table td {
+  height: 2rem;
+  overflow: hidden;
+  padding-inline: 0.18rem;
+  font-size: 0.66rem;
+}
+
+.work-dashboard-grid .work-spreadsheet-value,
+.work-dashboard-grid .work-spreadsheet-hours {
+  max-width: 100%;
+  padding-inline: 1px;
+}
+
+.work-dashboard-grid .work-spreadsheet-hours {
+  gap: 1px;
+}
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .work-dashboard-grid .work-spreadsheet-table th {
+    font-size: 0.47rem;
+  }
+
+  .work-dashboard-grid .work-spreadsheet-table td {
+    font-size: 0.62rem;
+  }
+
+  .work-dashboard-grid .work-spreadsheet-hours svg {
+    display: none;
+  }
+}
