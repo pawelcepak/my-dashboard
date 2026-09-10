@@ -70,10 +70,7 @@ export default function WorkMainGridContainer({
     <>
       <div className="work-dashboard-grid">
         <div className="min-w-0 space-y-3">
-          <div
-            id="work-days"
-            className="page-section-anchor [&_.work-col-average]:!w-[17%] [&_.work-col-beers]:!w-[7%] [&_.work-col-date]:!w-[11%] [&_.work-col-held]:!w-[11%] [&_.work-col-hours]:!w-[15%] [&_.work-col-messages]:!w-[10%] [&_.work-col-rating]:!w-[8%] [&_.work-col-response-rate]:!w-[10%] [&_.work-col-responses]:!w-[11%] [&_.work-spreadsheet-table]:!min-w-[58rem]"
-          >
+          <div id="work-days" className="page-section-anchor work-days-fit-panel">
             <WorkDaysTable
               days={activeWeek.days}
               isSaving={isSaving}
