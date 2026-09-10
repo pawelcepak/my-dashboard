@@ -5,6 +5,7 @@ import {
   ACCENT_THEMES,
   DEFAULT_APP_PREFERENCES,
   DEFAULT_NAVIGATION_TAB_COLORS,
+  DEFAULT_WORK_TABLE_COLUMN_WIDTHS,
   NAVIGATION_TAB_COLORS,
   TABLE_DENSITIES,
   type AccentTheme,
@@ -13,6 +14,7 @@ import {
   type NavigationTabColor,
   type NavigationTabColors,
   type TableDensity,
+  type WorkTableColumnWidths,
 } from '@/modules/settings/types/appSettings.types';
 import type { AppSetting } from '@/modules/work/types/work.types';
 
@@ -80,6 +82,27 @@ function normalizeNavigationTabColors(value: unknown): NavigationTabColors {
   ) as NavigationTabColors;
 }
 
+function normalizeWorkTableColumnWidths(value: unknown): WorkTableColumnWidths {
+  if (!Array.isArray(value) || value.length !== DEFAULT_WORK_TABLE_COLUMN_WIDTHS.length) {
+    return [...DEFAULT_WORK_TABLE_COLUMN_WIDTHS];
+  }
+
+  const widths = value.map((item) => (typeof item === 'number' && Number.isFinite(item) ? item : 0));
+  const total = widths.reduce((sum, width) => sum + width, 0);
+
+  if (total <= 0 || widths.some((width) => width < 4 || width > 40)) {
+    return [...DEFAULT_WORK_TABLE_COLUMN_WIDTHS];
+  }
+
+  const normalized = widths.map((width) => Number(((width / total) * 100).toFixed(3)));
+  const normalizedTotal = normalized.reduce((sum, width) => sum + width, 0);
+  normalized[normalized.length - 1] = Number(
+    (normalized[normalized.length - 1] + (100 - normalizedTotal)).toFixed(3)
+  );
+
+  return normalized as WorkTableColumnWidths;
+}
+
 function normalizePreferenceValue<Key extends AppPreferenceKey>(
   key: Key,
   storedValue: string | undefined
@@ -104,6 +127,10 @@ function normalizePreferenceValue<Key extends AppPreferenceKey>(
     return normalizeNavigationTabColors(parseJson(storedValue)) as AppPreferences[Key];
   }
 
+  if (key === 'workTableColumnWidths') {
+    return normalizeWorkTableColumnWidths(parseJson(storedValue)) as AppPreferences[Key];
+  }
+
   throw new Error(`Nieobsługiwane ustawienie aplikacji: ${String(key)}.`);
 }
 
@@ -117,6 +144,10 @@ function serializePreferenceValue<Key extends AppPreferenceKey>(
 
   if (key === 'navigationTabColors') {
     return JSON.stringify(normalizeNavigationTabColors(value));
+  }
+
+  if (key === 'workTableColumnWidths') {
+    return JSON.stringify(normalizeWorkTableColumnWidths(value));
   }
 
   return String(value);
@@ -141,18 +172,21 @@ async function getPreference<Key extends AppPreferenceKey>(key: Key): Promise<Ap
 }
 
 async function getPreferences(): Promise<AppPreferences> {
-  const [tableDensity, accentTheme, navigationOrder, navigationTabColors] = await Promise.all([
-    getPreference('tableDensity'),
-    getPreference('accentTheme'),
-    getPreference('navigationOrder'),
-    getPreference('navigationTabColors'),
-  ]);
+  const [tableDensity, accentTheme, navigationOrder, navigationTabColors, workTableColumnWidths] =
+    await Promise.all([
+      getPreference('tableDensity'),
+      getPreference('accentTheme'),
+      getPreference('navigationOrder'),
+      getPreference('navigationTabColors'),
+      getPreference('workTableColumnWidths'),
+    ]);
 
   return {
     tableDensity,
     accentTheme,
     navigationOrder,
     navigationTabColors,
+    workTableColumnWidths,
   };
 }
 
@@ -193,6 +227,7 @@ async function savePreferences(nextPreferences: AppPreferences): Promise<AppPref
       : DEFAULT_APP_PREFERENCES.accentTheme,
     navigationOrder: normalizeNavigationOrder(nextPreferences.navigationOrder),
     navigationTabColors: normalizeNavigationTabColors(nextPreferences.navigationTabColors),
+    workTableColumnWidths: normalizeWorkTableColumnWidths(nextPreferences.workTableColumnWidths),
   };
 
   const timestamp = new Date().toISOString();
@@ -218,6 +253,14 @@ async function savePreferences(nextPreferences: AppPreferences): Promise<AppPref
       value: serializePreferenceValue(
         'navigationTabColors',
         normalizedPreferences.navigationTabColors
+      ),
+      updatedAt: timestamp,
+    },
+    {
+      key: 'workTableColumnWidths',
+      value: serializePreferenceValue(
+        'workTableColumnWidths',
+        normalizedPreferences.workTableColumnWidths
       ),
       updatedAt: timestamp,
     },
