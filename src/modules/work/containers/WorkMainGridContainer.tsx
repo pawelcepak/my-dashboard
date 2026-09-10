@@ -83,13 +83,15 @@ export default function WorkMainGridContainer({
             />
           </div>
 
-          <WorkWeekSettings
-            exchangeRateEurPln={activeWeek.exchangeRateEurPln}
-            onExchangeRateChange={(exchangeRateEurPln) => {
-              void updateWeek((currentWeek) => ({ ...currentWeek, exchangeRateEurPln }));
-            }}
-            onReset={handleReset}
-          />
+          <div id="work-week-settings" className="page-section-anchor">
+            <WorkWeekSettings
+              exchangeRateEurPln={activeWeek.exchangeRateEurPln}
+              onExchangeRateChange={(exchangeRateEurPln) => {
+                void updateWeek((currentWeek) => ({ ...currentWeek, exchangeRateEurPln }));
+              }}
+              onReset={handleReset}
+            />
+          </div>
 
           <div id="work-history" className="page-section-anchor">
             <WorkHistory
@@ -115,9 +117,13 @@ export default function WorkMainGridContainer({
         </div>
 
         <aside className="min-w-0 space-y-3">
-          <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
+          <div id="work-summary" className="page-section-anchor">
+            <WorkSummaryGrid summary={summary} goals={activeWeek.goals} />
+          </div>
 
-          <WorkTimeAnalyticsPanel analytics={timeAnalytics} weekStartDate={activeWeek.startDate} />
+          <div id="work-time-analysis" className="page-section-anchor">
+            <WorkTimeAnalyticsPanel analytics={timeAnalytics} weekStartDate={activeWeek.startDate} />
+          </div>
         </aside>
       </div>
 
