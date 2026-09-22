@@ -5,6 +5,7 @@ import {
   HandCoins,
   LayoutDashboard,
   Settings,
+  ShoppingBag,
   WalletCards,
 } from 'lucide-react';
 
@@ -14,6 +15,7 @@ export const NAVIGATION_ITEM_IDS = [
   'debts',
   'portfolio',
   'alcohol',
+  'shopping',
   'settings',
 ] as const;
 
@@ -62,6 +64,13 @@ export const navigationItems: NavigationItem[] = [
     shortLabel: 'Alkohol',
     path: '/alcohol',
     icon: Beer,
+  },
+  {
+    id: 'shopping',
+    label: 'Zakupy',
+    shortLabel: 'Zakupy',
+    path: '/shopping',
+    icon: ShoppingBag,
   },
   {
     id: 'settings',
