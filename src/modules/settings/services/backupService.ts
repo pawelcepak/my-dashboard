@@ -36,6 +36,7 @@ const SUPPORTED_SETTING_KEYS = new Set([
   'navigationOrder',
   'navigationTabColors',
   'workTableColumnWidths',
+  'shoppingPlans',
 ]);
 
 const GOAL_PRECISION_MULTIPLIER = 100;
@@ -182,11 +183,8 @@ function parseWorkWeekGoals(value: unknown): WorkWeekGoals {
   }
 
   const storedDailyMessagesTarget = parseNullableNonNegativeNumber(value.dailyMessagesTarget);
-
   const storedWeekly7DaysTarget = parseNullableNonNegativeNumber(value.weeklyMessagesTarget);
-
   const storedWeekly5DaysTarget = parseNullableNonNegativeNumber(value.weeklyMessagesTarget5Days);
-
   const dailyHoursTarget = parseNullableNonNegativeNumber(value.dailyHoursTarget);
 
   if (storedDailyMessagesTarget !== null) {
@@ -419,9 +417,11 @@ function validateUniqueIds(values: Array<{ id: string }>, label: string): void {
 function isDebtStatus(value: unknown): value is DebtStatus {
   return value === 'active' || value === 'paid';
 }
+
 function isDebtEventType(value: unknown): value is DebtEventType {
   return value === 'payment' || value === 'balance-update';
 }
+
 function parseDebt(value: unknown): Debt {
   if (
     !isRecord(value) ||
@@ -437,6 +437,7 @@ function parseDebt(value: unknown): Debt {
     throw new Error('Kopia zawiera nieprawidłowy dług.');
   return value as Debt;
 }
+
 function parseDebtEvent(value: unknown): DebtEvent {
   if (
     !isRecord(value) ||
@@ -591,7 +592,6 @@ function validateBackup(value: unknown): ChbBackupFile {
   };
 
   validateUniqueWeeks(backup.data.workWeeks);
-
   validateUniqueSettings(backup.data.appSettings);
   validateUniqueIds(backup.data.portfolioAccounts, 'portfela');
   validateUniqueIds(backup.data.portfolioTags, 'tagu portfela');
@@ -645,7 +645,6 @@ function downloadJsonFile(fileName: string, contents: string): void {
   });
 
   const objectUrl = URL.createObjectURL(blob);
-
   const link = document.createElement('a');
 
   link.href = objectUrl;
@@ -717,7 +716,6 @@ async function exportBackup(): Promise<string> {
   };
 
   const fileName = createFileName(createdAt);
-
   downloadJsonFile(fileName, JSON.stringify(backup, null, 2));
 
   return createdAt;
@@ -729,7 +727,6 @@ async function readBackupFile(file: File): Promise<BackupPreview> {
   }
 
   const text = await file.text();
-
   let parsedValue: unknown;
 
   try {
@@ -739,19 +736,14 @@ async function readBackupFile(file: File): Promise<BackupPreview> {
   }
 
   const backup = validateBackup(parsedValue);
-
   const sortedWeeks = [...backup.data.workWeeks].sort((firstWeek, secondWeek) =>
     firstWeek.startDate.localeCompare(secondWeek.startDate)
   );
-
   const firstWeek = sortedWeeks[0];
-
   const lastWeek = sortedWeeks[sortedWeeks.length - 1];
-
   const activeSetting = backup.data.appSettings.find(
     (setting) => setting.key === 'activeWorkWeekId'
   );
-
   const activeWeek = activeSetting
     ? backup.data.workWeeks.find((week) => week.id === activeSetting.value)
     : undefined;
@@ -840,7 +832,6 @@ async function restoreBackup(backup: ChbBackupFile): Promise<void> {
       }
 
       const activeSetting = await database.appSettings.get('activeWorkWeekId');
-
       const activeWeekExists = activeSetting
         ? await database.workWeeks.get(activeSetting.value)
         : undefined;
