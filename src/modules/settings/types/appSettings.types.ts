@@ -54,6 +54,7 @@ export const DEFAULT_NAVIGATION_TAB_COLORS: NavigationTabColors = {
   debts: 'crimson',
   portfolio: 'crimson',
   alcohol: 'crimson',
+  shopping: 'crimson',
   settings: 'crimson',
 };
 
